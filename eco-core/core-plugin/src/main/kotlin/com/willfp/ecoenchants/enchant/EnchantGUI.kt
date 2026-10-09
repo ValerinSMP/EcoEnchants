@@ -187,14 +187,7 @@ object EnchantGUI {
                         onLeftClick { event, _ ->
                             val groupGui = groupMenu ?: return@onLeftClick
                             val player = event.whoClicked as Player
-                            // Return captive items to the player before navigating back
-                            val captiveItems = menu.getCaptiveItems(player)
-                            if (captiveItems.isNotEmpty()) {
-                                DropQueue(player)
-                                    .addItems(captiveItems)
-                                    .forceTelekinesis()
-                                    .push()
-                            }
+                            returnCaptiveItems(player, menu.getCaptiveItems(player))
                             groupGui.open(player)
                         }
                     }
@@ -216,10 +209,7 @@ object EnchantGUI {
 
             onClose { event, menu ->
                 val player = event.player as Player
-                DropQueue(player)
-                    .addItems(menu.getCaptiveItems(player))
-                    .forceTelekinesis()
-                    .push()
+                returnCaptiveItems(player, menu.getCaptiveItems(player))
             }
 
             for (config in plugin.configYml.getSubsections("enchant-gui.custom-slots")) {
@@ -288,6 +278,18 @@ object EnchantGUI {
             }
         } else {
             groupMenu = null
+        }
+    }
+
+    private fun returnCaptiveItems(player: Player, items: List<ItemStack>) {
+        if (items.isEmpty()) return
+
+        val leftovers = player.inventory.addItem(*items.toTypedArray()).values
+        if (leftovers.isNotEmpty()) {
+            DropQueue(player)
+                .addItems(leftovers)
+                .forceTelekinesis()
+                .push()
         }
     }
 

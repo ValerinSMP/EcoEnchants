@@ -13,9 +13,11 @@ import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.libreforge.SilentViolationContext
 import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.Conditions
+import com.willfp.libreforge.getEnchantment
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
@@ -51,19 +53,15 @@ abstract class EcoEnchantBase(
         get() = conflictIds.containsIgnoreCase("all")
                 || conflictIds.containsIgnoreCase("everything")
 
-    override val conflicts = config.getStrings("conflicts")
-        .mapNotNull {
-            @Suppress("DEPRECATION")
-            Enchantment.getByKey(NamespacedKey.minecraft(it))
-        }
-        .toSet()
+    override val conflicts: Set<Enchantment>
+        get() = config.getStrings("conflicts")
+            .mapNotNull { resolveEnchantment(it) }
+            .toSet()
 
-    override val required = config.getStrings("required")
-        .mapNotNull {
-            @Suppress("DEPRECATION")
-            Enchantment.getByKey(NamespacedKey.minecraft(it))
-        }
-        .toSet()
+    override val required: Set<Enchantment>
+        get() = config.getStrings("required")
+            .mapNotNull { resolveEnchantment(it) }
+            .toSet()
 
     override val targets = config.getStrings("targets")
         .mapNotNull { EnchantmentTargets[it] }
@@ -161,4 +159,25 @@ abstract class EcoEnchantBase(
     final override fun hashCode(): Int {
         return this.enchantmentKey.hashCode()
     }
+}
+
+private fun resolveEnchantment(id: String): Enchantment? {
+    val cleanId = id.trim().lowercase()
+    val key = if (cleanId.contains(':')) {
+        val parts = cleanId.split(':', limit = 2)
+        NamespacedKey(parts[0], parts[1])
+    } else {
+        NamespacedKey.minecraft(cleanId)
+    }
+
+    EcoEnchants.getByID(key.key)?.enchantment?.let { return it }
+
+    runCatching { org.bukkit.Registry.ENCHANTMENT.get(key) }.getOrNull()?.let { return it }
+
+    @Suppress("DEPRECATION")
+    runCatching { Enchantment.getByKey(key) }.getOrNull()?.let { return it }
+
+    runCatching { getEnchantment(cleanId) }.getOrNull()?.let { return it }
+
+    return null
 }

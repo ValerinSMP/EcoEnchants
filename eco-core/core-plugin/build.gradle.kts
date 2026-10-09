@@ -2,6 +2,8 @@ group = "com.willfp"
 version = rootProject.version
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     compileOnly(fileTree("../../lib") {
         include("*.jar")
     }
@@ -13,6 +15,12 @@ dependencies {
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
+    compileTestKotlin {
+        compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+    }
     build {
         dependsOn(publishToMavenLocal)
     }
