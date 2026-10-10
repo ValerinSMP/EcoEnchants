@@ -2,6 +2,8 @@ group = "com.willfp"
 version = rootProject.version
 
 dependencies {
+    testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    testImplementation("com.willfp:eco:${rootProject.findProperty("eco-version")}")
     testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     compileOnly(fileTree("../../lib") {

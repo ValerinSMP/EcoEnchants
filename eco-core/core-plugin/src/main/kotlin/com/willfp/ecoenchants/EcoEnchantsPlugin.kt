@@ -1,5 +1,8 @@
 package com.willfp.ecoenchants
 
+import com.willfp.eco.core.dragdrop.DragAndDropHandlers
+import com.willfp.ecoenchants.dragdrop.EcoEnchantBookDragAndDropHandler
+
 import com.willfp.eco.core.bstats.EcoMetricsChart
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
@@ -72,6 +75,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleEnable() {
+        DragAndDropHandlers.register(EcoEnchantBookDragAndDropHandler)
         registerHolderProvider(EnchantFinder.toHolderProvider())
 
         registerSpecificRefreshFunction<LivingEntity> {
@@ -100,6 +104,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         EnchantSorter.reload()
         ExtraItemSupport.reload()
         EnchantGUI.reload()
+    }
+
+    override fun handleDisable() {
+        DragAndDropHandlers.unregisterAll("ecoenchants")
     }
 
     override fun loadListeners(): List<Listener> {

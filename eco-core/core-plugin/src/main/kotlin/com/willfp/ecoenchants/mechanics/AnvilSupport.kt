@@ -291,6 +291,7 @@ object AnvilSupport : Listener {
         }
 
         val baseRepairCost = event.view.repairCost
+        val priorWorkCost = (leftItem?.fast()?.repairCost ?: 0) + (rightItem?.fast()?.repairCost ?: 0)
 
         event.result = null
         event.inventory.setItem(2, null)
@@ -335,10 +336,8 @@ object AnvilSupport : Listener {
             var cost = if (plugin.configYml.getBool("anvil.vanilla-costs")) {
                 baseRepairCost
             } else {
-                var c = baseRepairCost + price
-                // Unbelievably specific edge case
-                if (baseRepairCost == -price) c = price
-                c
+                val renameCost = if (old?.fast()?.displayName != outItem.fast().displayName) 1 else 0
+                computeAnvilCost(priorWorkCost, renameCost, price)
             }
 
             // Cost could be less than zero at times, so I include that here.
@@ -417,6 +416,7 @@ object AnvilSupport : Listener {
         val rightMeta = right.itemMeta
 
         var unitRepairCost = 0
+        var combineRepairCost = 0
 
         // Unit repair
         if (left.type != right.type) {
@@ -477,6 +477,7 @@ object AnvilSupport : Listener {
             val damage = maxDamage - min(maxDamage, leftDurability + rightDurability)
 
             leftMeta.damage = damage.coerceAtLeast(0) // Prevent negative damage
+            combineRepairCost = COMBINE_REPAIR_COST
         }
 
         if (leftMeta is EnchantmentStorageMeta) {
@@ -501,7 +502,7 @@ object AnvilSupport : Listener {
 
         val enchantLevelDiff = abs(leftEnchants.values.sum() - outEnchants.values.sum())
         val xpCost =
-            enchantLevelDiff.toDouble().pow(plugin.configYml.getDouble("anvil.cost-exponent")) + unitRepairCost
+            enchantLevelDiff.toDouble().pow(plugin.configYml.getDouble("anvil.cost-exponent")) + unitRepairCost + combineRepairCost
 
         return AnvilResult(left, xpCost.roundToInt())
     }

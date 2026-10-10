@@ -85,6 +85,10 @@ display:
     word-wrap: 27 # Number of characters to have on each line
     format: "&8"
 
+  book-drag-and-drop-price:
+    enabled: false # If enchanted books should show the drag and drop cost under each enchantment that allows it
+    format: "&7Drag and drop cost: &e%price%"
+
   require-enchantable: true # If EcoEnchants should not display on non-enchantable items.
 
 # Options for the /enchantinfo GUI
