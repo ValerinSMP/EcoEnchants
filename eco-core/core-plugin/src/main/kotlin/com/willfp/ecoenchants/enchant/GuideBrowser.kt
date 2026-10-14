@@ -68,18 +68,8 @@ internal object GuideBrowser : Listener {
         menu.refresh(player)
     }
 
-    fun refreshTitle(player: Player, menu: Menu) {
-        if (menu.getState<Boolean>(player, "guideTitleQueued") == true) return
-        menu.setState(player, "guideTitleQueued", true)
-        val epoch = generation
-        plugin.server.scheduler.runTask(plugin, Runnable {
-            if (player.isOnline && plugin.isEnabled && generation == epoch && player.openMenu === menu) {
-                menu.setState(player, "guideTitleQueued", false)
-                val title = GuideQuery.title(GuideQuery.plain(plugin.configYml.getString("enchant-guide.title")), menu.getPage(player), menu.getMaxPage(player))
-                if (player.openInventory.title != title) player.openInventory.setTitle(title)
-            }
-        })
-    }
+    /** Kept for binary compatibility with earlier guide builds; titles now stay fixed. */
+    fun refreshTitle(player: Player, menu: Menu) = Unit
 
     fun acceptedTargets(index: Int): Set<String> = equipmentTargets.getOrNull(index) ?: emptySet()
     private fun filters() = plugin.configYml.getSubsections("enchant-guide.filters")
@@ -165,13 +155,14 @@ internal object GuideBrowser : Listener {
         val answer = AtomicReference<String?>()
         val prompt = plugin.configYml.getFormattedString("enchant-guide.search.prompt")
         lateinit var conversation: Conversation
+        lateinit var returnInventory: org.bukkit.inventory.Inventory
         conversation = ConversationFactory(plugin)
             .withLocalEcho(false).withModality(true).withTimeout(30).withEscapeSequence("cancelar")
             .withFirstPrompt(object : StringPrompt() {
                 override fun getPromptText(context: ConversationContext): String =
                     prompt
                 override fun acceptInput(context: ConversationContext, input: String?): Prompt? {
-                    answer.set(GuideQuery.input(input ?: ""))
+                    answer.set(GuideQuery.searchInput(input))
                     return Prompt.END_OF_CONVERSATION
                 }
             })
@@ -180,13 +171,14 @@ internal object GuideBrowser : Listener {
                 if (plugin.isEnabled) plugin.server.scheduler.runTask(plugin, Runnable {
                     if (searches[player.uniqueId] !== conversation) return@Runnable
                     searches.remove(player.uniqueId)
-                    if (generation == epoch && player.isOnline &&
-                        player.openInventory.type == org.bukkit.event.inventory.InventoryType.CRAFTING) {
-                        resume(player, state.copy(query = answer.get() ?: state.query, page = 1))
+                    if (GuideQuery.canResumeSearch(player.isOnline, generation == epoch,
+                            returnInventory, player.openInventory.topInventory)) {
+                        resume(player, GuideQuery.searchResult(state, answer.get()))
                     }
                 })
             }.buildConversation(player)
         player.closeInventory()
+        returnInventory = player.openInventory.topInventory
         searches[player.uniqueId] = conversation
         conversation.begin()
     }

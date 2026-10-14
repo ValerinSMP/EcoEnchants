@@ -49,4 +49,22 @@ class GuideQueryTest {
         assertTrue(GuideQuery.filterWindow(0, 0).isEmpty())
     }
 
+    @Test fun `cancel and timeout retain the exact query filter group and page`() {
+        val state = GuideState("Filo", 4, "normal", 3)
+        assertEquals(state, GuideQuery.searchResult(state, null))
+        assertNull(GuideQuery.searchInput("cancelar"))
+        assertNull(GuideQuery.searchInput("  CANCELAR  "))
+        assertEquals(state.copy(query = "Fortuna", page = 1), GuideQuery.searchResult(state, "Fortuna"))
+        assertEquals(state.copy(query = "", page = 1), GuideQuery.searchResult(state, ""))
+    }
+    @Test fun `search returns to default views independently of inventory type but never steals another view`() {
+        val survivalView = Any()
+        val creativeView = Any()
+        assertTrue(GuideQuery.canResumeSearch(true, true, survivalView, survivalView))
+        assertTrue(GuideQuery.canResumeSearch(true, true, creativeView, creativeView))
+        assertFalse(GuideQuery.canResumeSearch(true, true, creativeView, Any()))
+        assertFalse(GuideQuery.canResumeSearch(false, true, creativeView, creativeView))
+        assertFalse(GuideQuery.canResumeSearch(true, false, creativeView, creativeView))
+    }
+
 }

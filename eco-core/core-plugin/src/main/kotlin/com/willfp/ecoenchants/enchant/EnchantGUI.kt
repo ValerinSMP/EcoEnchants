@@ -72,7 +72,13 @@ object EnchantGUI {
                 slot {
                     setUpdater { viewer, current, _ ->
                         ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.info.item")))
-                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.info.lore"))
+                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.info.lore").flatMap { line ->
+                                if (line != "%pages%") listOf(line) else if (current.getMaxPage(viewer) > 1) listOf(
+                                    plugin.configYml.getString("enchant-guide.page-summary")
+                                        .replace("%page%", current.getPage(viewer).toString())
+                                        .replace("%max_page%", current.getMaxPage(viewer).toString())
+                                ) else emptyList()
+                            })
                             .build()
                     }
                     if (GuideBrowser.enabled) onLeftClick { event, _, current ->
@@ -322,7 +328,6 @@ object EnchantGUI {
         if (menu.getPage(player) > maxPage) {
             menu.setState(player, Page.PAGE_KEY, 1)
         }
-        if (GuideBrowser.enabled) GuideBrowser.refreshTitle(player, menu)
     }
 
     internal fun openBrowser(player: Player, state: GuideState) {
@@ -360,7 +365,7 @@ object EnchantGUI {
                     )
                 )
 
-                if (GuideBrowser.enabled) {
+                if (GuideBrowser.enabled && plugin.configYml.getBool("enchant-guide.levels.enabled")) {
                     fun button(key: String, delta: Int) {
                         val path = "enchant-guide.levels.$key"
                         setSlot(plugin.configYml.getInt("$path.row"), plugin.configYml.getInt("$path.column"), slot {
@@ -440,14 +445,8 @@ private class EnchantmentScrollPane : GUIComponent {
 
         val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
         val information = enchant.getInformationSlot(player, displayLevel)
-        if (!GuideBrowser.enabled) return information
-        return slot(information.getItemStack(player)) {
-            onLeftClick { event, _, current ->
-                val viewer = event.whoClicked as Player
-                val previous = GuideBrowser.state(current, viewer)
-                GuideBrowser.navigate(viewer) { EnchantGUI.openGuideInfo(viewer, enchant, displayLevel, previous) }
-            }
-        }
+        // A guide book is observational: hovering reads it; clicking never reopens the inventory.
+        return information
     }
 
     override fun getRows() = plugin.configYml.getInt("enchant-gui.enchant-area.height")
@@ -477,7 +476,7 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                     add("trading", plugin.configYml.getBool("villager.enabled") && isObtainableThroughTrading)
                     add("loot", plugin.configYml.getBool("loot.enabled") && isObtainableThroughDiscovery)
                     plugin.configYml.getFormattedStrings("enchant-guide.book-lore").map {
-                        it.replace("%level%", level.toString()).replace("%sources%", sources.joinToString(", ").ifEmpty {
+                        it.replace("%level%", level.toString()).replace("%max_level%", maximumLevel.toString()).replace("%sources%", sources.joinToString(", ").ifEmpty {
                             plugin.configYml.getFormattedString("enchant-guide.sources.other")
                         })
                     }

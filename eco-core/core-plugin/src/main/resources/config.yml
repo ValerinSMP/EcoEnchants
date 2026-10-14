@@ -277,6 +277,7 @@ enchant-guide:
     prompt: '&#5286FF✎ &fEscribe el nombre del encantamiento. &7Escribe cancelar para
       volver; tienes 30 segundos.'
     busy: '&#FF3300✘ &fTermina primero la entrada de texto que tienes abierta.'
+    mode: chat
   filter:
     row: 6
     column: 7
@@ -359,10 +360,11 @@ enchant-guide:
     - '&7Prueba otro nombre o restablece los filtros.'
   book-lore:
   - ''
+  - '&7Niveles disponibles: &f1–%max_level%'
+  - '&7Efecto mostrado al nivel &f%level%'
+  - ''
   - '&#FFDA29Obtención:'
   - '&7- &f%sources%'
-  - ''
-  - '&f &#FFDA29Clic para consultar sus niveles.'
   sources:
     table: Mesa de encantamientos
     trading: Aldeanos
@@ -389,6 +391,8 @@ enchant-guide:
       item: spectral_arrow
       name: '&f← Volver'
       lore: []
+    enabled: false
   title: Guía de encantamientos
   filler-item: black_stained_glass_pane name:""
   book-name-format: '&#00FB9A%name%'
+  page-summary: '&7Página &f%page%&7 de &f%max_page%'

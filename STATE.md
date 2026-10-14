@@ -1,5 +1,13 @@
 # EcoEnchants — estado
 
+## Guía de consulta estable y cancelar — 2026-10-14
+
+- Implementado: opción A sin abrir submenú al pulsar libros; niveles disponibles y efecto mostrado en lore. Título fijo y contador en libro informativo; GuideBrowser ya no llama setTitle. Retorno de cancelar/timeout conserva query/filtro/grupo/página y verifica identidad de vista posterior al cierre en lugar de exigir CRAFTING. Comando /enchantinfo y firmas existentes conservados.
+- SignGUI investigado por documentación/VersionMatcher: no soporte 26.2 verificado; sigue chat privado autorizado, sin nueva dependencia/NMS. Propuesta de desbloqueos/mesa en docs/ENCHANTING-PROGRESSION-NEXT.md, no implementada. No cambiar balance/XP/recompensas/puente de vPets.
+- Compilado en personal, ejecutor limitado/toolchains originales. 24 tests JVM pasaron, dependencias de 9 clases GUI verificadas, 693 entradas originales idénticas y ABI GUI conservada. Checks bytecode de no setTitle/no apertura por libro. Sin medición ni prueba en juego.
+- Instalado solo Test: JAR SHA256 76f479c25d2532d6beaf3a992195eb8c0dac5aea6993c240111eaa2becf6e2fa; YAML e775319fb9a9b1fcefae55d5fb5ebc949b184a0fea83721a72aeedb0fb96385d. Backup HDD /mnt/storage/backups/ai/survival-custom/ecoenchants-guide-simple-20261014T171434Z/. Custom/Sync JAR/YAML intactos.
+- Activo: pendiente reinicio del propietario; no lifecycle realizado. Pendiente arranque, cursor/tooltip al navegar y cancelar/timeout en supervivencia/creativo y tras abrir otra vista/desconectar/reload.
+
 ## Distribución y estilo de la guía — 2026-10-14
 
 - Implementado en personal: guía sin ranura cautiva, 28 libros (4×7), libro de ayuda/restablecer arriba, cerrar/buscar/filtro abajo como el video, relleno para flechas de página/nivel inactivas, lista de filtros con selección visible y contador solo para varias páginas. Colores/símbolos del estándar; glifos E179/E17A verificados en archivos reales de Test. No editar/publicar pack.

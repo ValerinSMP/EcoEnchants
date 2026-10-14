@@ -23,6 +23,13 @@ internal object GuideQuery {
         return start until start + width
     }
 
+    fun searchInput(value: String?): String? =
+        value?.let { if (it.trim().equals("cancelar", ignoreCase = true)) null else input(it) }
+    fun searchResult(state: GuideState, answer: String?): GuideState =
+        if (answer == null) state else state.copy(query = answer, page = 1)
+    fun canResumeSearch(online: Boolean, currentGeneration: Boolean, expectedInventory: Any, currentInventory: Any): Boolean =
+        online && currentGeneration && expectedInventory === currentInventory
+
     fun input(value: String): String = value.filterNot { it.isISOControl() }.trim().take(64)
     fun matches(name: String, query: String): Boolean = normalize(name).contains(normalize(query))
     fun next(current: Int, delta: Int, count: Int): Int = Math.floorMod(current + delta, count.coerceAtLeast(1))
