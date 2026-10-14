@@ -34,29 +34,42 @@ La wiki oficial cerró y hoy sus rutas redirigen al anuncio; no presentar esos e
 1. Interactuar con cualquier mesa válida abre el nuevo menú en vez de la interfaz vanilla. Respetar cancelación/protecciones, mano duplicada y mundos excluidos. También validar aperturas por otros plugins: no hacer bucle al abrir nuestro menú. Habilitar sustitución solo cuando addon/catálogo/proveedores estén listos; no poner una mesa inútil si falta dependencia. No activar bloqueo global ahora.
 2. Mesa con ranura de objeto a la izquierda, lista compatible a la derecha y botón de guía. La guía existente sigue sin ranura. Vanilla y Eco según registro y catálogo de mesa explícito. Libros/yunque/loot/especiales conservados; no fabricar tier extra ni saltar cap. Definir individualmente qué personalizados entran ahora, porque actualmente están desactivados globalmente en la mesa.
 3. Pulsar un enchant abre TODOS sus tiers juntos, incluyendo los 1–8 existentes en una cuadrícula con hasta dos filas; nunca un nivel por página. Muestra efecto, estado actual, requisito únicamente cuando falte y coste. Nivel ya aplicado identificado, inferior no se compra accidentalmente.
-4. Aplicar/mejorar por XP como vía normal. Gemas como alternativa opcional para la misma mejora, conservando Encantador/compatibilidad/cap. No tiers exclusivos gemas, no pagar para saltar requisitos, no beneficios VIP nuevos.
+4. Aplicar vanilla normal con XP; Eco/custom con shards o gemas; vanilla superior con XP más shards. Conservar Encantador/compatibilidad/cap. No tiers exclusivos gemas, no pagar para saltar requisitos, no beneficios VIP nuevos.
 5. No sustituir conflictos/downgrade/retirar enchants en primer incremento. Esa función exige política para enchants especiales y objetos con libro, confirmación y costes separados. No crear XP por retirada/reaplicación ni devolver el precio original de un enchant de origen desconocido.
 6. Potencia de estanterías es opcional configurable por tier, inicialmente sin añadir requisitos nuevos al balance. Si se adopta, área acotada y solo chunks cargados, cálculo al abrir/comprar y validación puntual; ninguna búsqueda global o por tick.
 
-## Costes candidatos, no aprobados
+## Modelo de pago corregido por el propietario
 
-Estos son presets iniciales para preparar un catálogo revisable POR ENCANTAMIENTO/NIVEL, no una fórmula que habilite todos los niveles máximos. Falta medir adquisición normal de XP y ofertas de libros para evitar devaluación. La rareza del YAML no basta para valorar daño, utilidad de minería o exclusividad.
+Esta decisión sustituye los presets anteriores de XP/gemas por rareza: vanilla hasta su límite normal cuesta solo XP de Survival; Eco/custom cuesta shards O gemas, sin añadir XP como tercer coste; vanilla superior al límite normal cuesta XP + una cantidad pequeña de shards. Gemas no permiten saltar Encantador, compatibilidad, niveles permitidos, conflictos ni caps. La alternativa shards mantiene accesible la misma funcionalidad sin pago premium. No imponer el nuevo precio a enchants ya aplicados ni cambiar vías de obtención externas.
 
-| Tier del enchant | Básico, niveles XP | Avanzado, niveles XP | Potente, niveles XP | Gemas candidato básico |
-|---|---:|---:|---:|---:|
-| I | 5 | 10 | 15 | 10 |
-| II | 10 | 20 | 30 | 20 |
-| III | 20 | 35 | 50 | 35 |
-| IV | 30 | 50 | 75 | 50 |
-| V | 45 | 70 | 100 | 75 |
+Referencia completa de shop: [ECOENCHANTS-MESA-PRECIOS-SHOP-20261014.csv](ECOENCHANTS-MESA-PRECIOS-SHOP-20261014.csv). Extraída de YAML reales de EconomyShopGUI-Premium (no defaults). 103 ofertas de libros por nodo; valores/precios/páginas/monedas equivalentes en Custom/Sync, aunque algunos hashes de archivos difieren. 96 ofertas Eco/custom y7 vanilla superiores. Moneda de libros: EXCELLENT_ECONOMY:shards. Los importes son precios configurados buy del libro, no cotizaciones efectivas con permisos/descuentos de un jugador ni precios de aplicación ya implementados. No usar sell como coste.
 
-Gemas equivalen nominalmente a 0,10/0,20/0,35/0,50/0,75 USD en la valoración del catálogo. Precio avanzado/potente y niveles VI–VIII pendientes por cada ID; no extrapolar. Comprar IV directamente paga precioIV; al mejorar III→IV se propone diferencia de una tarifa acumulada en puntos XP, no restar sin más niveles Minecraft. La retirada no produce reembolso que permita arbitraje. Gemas opcionales desactivadas hasta aprobar catálogo y validar entrega/pago durable.
+| Oferta de libro existente | Nivel | Buy shards |
+|---|---:|---:|
+| Abrasión | II | 5.000 |
+| Robo de vida (lifesteal) | V | 4.500 |
+| Apagón (blackout) | IV | 3.500 |
+| Eficiencia | VI | 500 |
+| Fortuna | IV | 500 |
+| Saqueo | IV | 500 |
+| Atracción | IV | 500 |
+| Suerte marina | IV | 500 |
+| Sigilo veloz | IV | 500 |
+| Irrompibilidad | VI | 5.000 |
 
-Modelo recomendado: almacenar tarifas XP en puntos con referencia visible equivalente a N niveles desde cero, y cobrar delta de puntos entre tiers. XP vanilla por niveles es no lineal; gastar N niveles del saldo actual tiene otro coste. Mostrar claramente puntos y equivalencia para que el menú no prometa un gasto diferente. Si se prefiere gasto literal de N niveles, explicitar esa modalidad y no mezclarla con la tabla de puntos ni usar player.totalExperience como autoridad suficiente. No cambiar XP de skill para arreglar tarifa de jugador.
+Vanilla normal permanece solo XP. Para los superiores +1 con oferta500, tomar500 shards como candidato adicional a XP; no hacer un precio único para todos los enchants. IrrompibilidadVI no es +1 sobre el máximo normalIII: conserva su oferta especial de5.000 como referencia, no habilitarVI ni inventar precioIV por extrapolación. XP exacta por tier aún debe proponerse y probarse con su política puntos/niveles; no reutilizar XP de skill como moneda.
+
+Para Eco/custom, el tier vendido en shop ancla su tarifa shards al buy existente. Otros tiers y coste incremental entre niveles necesitan un catálogo derivado explícito revisable, no copiar ese precio a todos ni habilitar máximos adicionales. El CSV identifica el tier de cada ancla. Obtener nombres/targets/condiciones de EcoEnchants registrado, no texto de la shop. No fabricar libros revendibles baratos: inicialmente aplicación directa al objeto, sin retirar y devolver libro ni reembolso del precio histórico. Conservar valor y obtención de libros especiales, no borrarlos.
+
+Gemas: propuestas con referencia explícita al catálogo actual de packs de shards de vStore. Valores inspeccionados:800shards/249gemas,1.350/499,2.200/899,3.500/1.299,5.000/1.899,7.500/2.499,11.000/3.499,14.000/3.999. No hay una tasa universal porque los paquetes difieren. Como candidato simple de aplicación directa, `ceil(shards × 249/800)` (pack800), calculado con decimal exacto y configurable; no implementado/aprobado como catálogo definitivo. Ejemplos:3.500shards→1.090gemas,4.500→1.401 y5.000→1.557. El nominal100gemas/USD continúa siendo solo valoración del catálogo. Revisar diferencias frente a todos los paquetes y descuentos antes de aprobar, no crear conversor bidireccional ni arbitrraje.
+
+La shop aún anuncia rumbleIII, cuya definición fue retirada por desactivación. Se incluye como evidencia CSV con definition_present:false, pero se excluye del catálogo candidato de compras. Esta revisión NO retiró esa oferta de la shop. Ocho definiciones sin ancla Eco en el inventario inspeccionado: bastion, carve, crimson_slayer, indestructible, one_for_all, repairing, soulbound, ultimate_wise. Precio no disponible: no inventar oferta. Registro efectivo, caps y permisos a verificar en el nuevo chat.
+
+Shards son autoridad de ExcellentEconomy; gemas de vCurrency. El addon necesita adapters separados, validación/cobro/reembolso seguro por sus APIs y journal durable/custodia del objeto. No usar vCurrency como autoridad de shards ni SQL directo por compartir BD. El resultado de compra debe ser coherente en Custom/Sync; doble click, resultado incierto o transferencia no justifican repetir el débito.
 
 ## Addon frente a fork
 
-Recomendación: addon de mesa separado, nombre de trabajo vEnchanting (no creado), con autoridad de EcoEnchants sobre definiciones/compatibilidad/efectos, EcoSkills sobre nivel/XP, vCurrency sobre gemas. Aísla transacciones y nueva UI del fork upstream, permite deshabilitar la mesa sin rehacer EcoSuite y facilita otro chat. Estándares Valerin aplican al addon; no imponerlos a repos EcoSuite.
+Recomendación: addon de mesa separado, nombre de trabajo vEnchanting (no creado), con autoridad de EcoEnchants sobre definiciones/compatibilidad/efectos, EcoSkills sobre nivel/XP, vCurrency sobre gemas y ExcellentEconomy sobre shards. Aísla transacciones y nueva UI del fork upstream, permite deshabilitar la mesa sin rehacer EcoSuite y facilita otro chat. Estándares Valerin aplican al addon; no imponerlos a repos EcoSuite.
 
 Antes de implementar, verificar APIs exportadas exactas del JAR, no inventar EcoEnchantsAPI que no existe en la ruta esperada. Interfaces nativas EcoEnchant/EcoEnchantLike/registry/targets y LibreForge refreshHolders son los puntos iniciales. Evitar comandos /enchant para comprar: bypass de compatibilidad/tiers y no asegura XP final. Si falta una operación pública segura o metadatos/requisitos tipados, ese chat entrega solicitud acotada al chat EcoSuite; parche mínimo aquí y ABI conservada. No alterar eco/LibreForge ni meter JDBC/pagos en EcoEnchants por conveniencia.
 
@@ -72,8 +85,8 @@ Antes de implementar, verificar APIs exportadas exactas del JAR, no inventar Eco
 
 ## Prompt para el otro chat
 
-Implementa por incrementos un addon de mesa de encantamientos para Survival Custom/Sync siguiendo este documento. Primero lee AGENTS general/de ámbito, estándar visual, flujo de desarrollo y este handoff, y contrasta fuentes canónicas/Git/JAR actuales. No delegues automáticamente. No modifiques EcoSuite, vCurrency, vStore, vPets o vNetwork desde ese chat: solicita al chat dueño los contratos/parches que falten.
+Implementa por incrementos un addon de mesa de encantamientos para Survival Custom/Sync siguiendo este documento. Primero lee AGENTS general/de ámbito, estándar visual, flujo de desarrollo y este handoff, y contrasta fuentes canónicas/Git/JAR actuales. No delegues automáticamente. No modifiques EcoSuite, ExcellentEconomy, vCurrency, vStore, vPets o vNetwork desde ese chat: solicita al chat dueño los contratos/parches que falten.
 
-Primero entrega diseño de UI, catálogo candidato completo por ID/tier y análisis de APIs/pagos/XP; precios aquí son propuestas no aprobadas. Primer incremento funcional solo XP y Test: mesa→objeto→enchant→todos los niveles en cuadrícula, guía separada, preservando requisitos, compatibilidad, libros especiales, eventos, callbacks y puente XP final. No generes XP de skill por acciones fallidas/duplicadas/retirada. Corrige o coordina diagnóstico de nivel No disponible antes de autorizar compras. No fabriques eventos nativos como atajo.
+Primero entrega diseño de UI, catálogo candidato completo por ID/tier y análisis de APIs/pagos/XP; precios aquí son propuestas no aprobadas. Primer incremento funcional en Test, vanilla normal solo XP, Eco/custom shards y superiores XP+shards: mesa→objeto→enchant→todos los niveles en cuadrícula, guía separada, preservando requisitos, compatibilidad, libros especiales, eventos, callbacks y puente XP final. No generes XP de skill por acciones fallidas/duplicadas/retirada. Corrige o coordina diagnóstico de nivel No disponible antes de autorizar compras. No fabriques eventos nativos como atajo.
 
-Preparar pago opcional gemas vía API durable operationId, mismos enchants/requisitos que XP y sin exclusividad/VIP nuevo; mantenerlo deshabilitado hasta aprobar costes y pasar pruebas de entrega/custodia/reconexión/transferencia. Construir catálogo estático una vez, sin polling/SQL en main ni refresco continuo. Verifica protección de mesas e inventario y fallos seguros. Builds solo personal/ejecutor limitado. Entrega Test con HDD backup/hashes; no producción ni lifecycle. El propietario reinicia. Entrega código/documentación/STATE, artefactos/hashes, pruebas unitarias y reales separadas y handoff de cualquier cambio requerido a EcoSuite.
+Preparar pago opcional gemas vía API durable operationId, solo como alternativa al coste shards de Eco/custom, mismos enchants/requisitos y sin exclusividad/VIP nuevo; mantenerlo deshabilitado hasta aprobar costes y pasar pruebas de entrega/custodia/reconexión/transferencia. Construir catálogo estático una vez, sin polling/SQL en main ni refresco continuo. Verifica protección de mesas e inventario y fallos seguros. Builds solo personal/ejecutor limitado. Entrega Test con HDD backup/hashes; no producción ni lifecycle. El propietario reinicia. Entrega código/documentación/STATE, artefactos/hashes, pruebas unitarias y reales separadas y handoff de cualquier cambio requerido a EcoSuite.
