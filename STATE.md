@@ -1,5 +1,12 @@
 # EcoEnchants — estado
 
+## Requisito único y retirada de desactivados — 2026-10-14
+
+- Implementado: sección amarilla única; línea roja «Requiere Encantador X (tu nivel)» solo si falta nivel; si cumple se oculta, y sin otros requisitos se oculta sección. Filtrado manual antes de wrapping, metadatos/descripción cacheados y estado personal por vista, sin tareas periódicas. Lore de ítems/mecánicas/callbacks intactos. Contrato actual docs/ENCHANT-GUIDE.md.
+- Compilado en personal/ejecutor limitado/toolchains nativos. 32 tests JVM sin fallos; 11 clases verificadas por dependencias, ABI GUI preservada y 693 entradas originales idénticas. Sin medición ni verificación real de menú.
+- Instalado solo Test: JAR 64213413c86fe6d247ea1e4081de50a654716326d935449a22c2549ab2a14c08; YAML 75655a24538eb754793c8b095fe910226ac29a3761ef2eecfe4d9588cb8391e0. Retirados 13 YAML de 11 IDs explícitamente desactivados (duplicados charge/rumble); wisdom/abrasion y otros YAML intactos. Defaults upstream conservados, carpeta enchants permanece.
+- Respaldo HDD /mnt/storage/backups/ai/survival-custom/ecoenchants-guide-compact-20261014T181009Z. Custom/Sync verificados sin cambios (JAR/config/todos enchants). No reinicio/reload. Activación y comprobación visual/registro/reconexión pendientes del propietario.
+
 ## Requisitos observacionales de Encantador — 2026-10-14
 
 - Implementado: umbral de condiciones nativas directas, nivel personal desde snapshot público de caché de EcoSkills, requerido/faltante/cumplido/ausencia y desactivación explícita 999. Fuera de la caché compartida de descripciones; no cambia niveles, balance, callbacks, lore de ítems ni progresión. Contrato/limitaciones en docs/ENCHANT-GUIDE.md.

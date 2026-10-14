@@ -31,4 +31,32 @@ class GuideRequirementsTest {
         assertNull(GuideRequirements.snapshotLevel(snapshot(10) + ("schemaVersion" to 2), uuid))
         assertNull(GuideRequirements.snapshotLevel(null, uuid))
     }
+    private val templates = mapOf(
+        "heading" to listOf("&#FFDA29Requisitos:"),
+        "missing" to listOf("&#FF3300Requiere Encantador %required_level% (%current_level%)"),
+        "unavailable" to listOf("&#FF9F0FRequiere Encantador %required_level% (No disponible)"),
+        "previous" to listOf("&7Encantamientos previos: &f%previous%")
+    )
+    @Test fun `met and no gate hide entire requirement section without preceding enchants`() {
+        val gate = GuideRequirements.parse(listOf("14"), false)
+        for (level in listOf(14, 50)) assertTrue(GuideRequirements.lines(gate, level, null) { templates[it] ?: emptyList() }.isEmpty())
+        assertTrue(GuideRequirements.lines(GuideRequirements.Gate(), null, "") { templates[it] ?: emptyList() }.isEmpty())
+    }
+    @Test fun `missing displays one colored line and independent viewer levels`() {
+        val gate = GuideRequirements.parse(listOf("14"), false)
+        val low = GuideRequirements.lines(gate, 10, null) { templates[it] ?: emptyList() }
+        assertEquals(listOf("", "&#FFDA29Requisitos:", "&#FF3300Requiere Encantador 14 (10)"), low)
+        assertTrue(GuideRequirements.lines(gate, 20, null) { templates[it] ?: emptyList() }.isEmpty())
+        assertEquals(low, GuideRequirements.lines(gate, 10, null) { templates[it] ?: emptyList() })
+    }
+    @Test fun `cold level and preceding enchant retain meaningful section without fabricated values`() {
+        val gate = GuideRequirements.parse(listOf("14"), false)
+        assertEquals("&#FF9F0FRequiere Encantador 14 (No disponible)", GuideRequirements.lines(gate, null, null) { templates[it] ?: emptyList() }.last())
+        assertEquals(listOf("", "&#FFDA29Requisitos:", "&7Encantamientos previos: &fFilo"), GuideRequirements.lines(gate, 20, "Filo") { templates[it] ?: emptyList() })
+    }
+    @Test fun `manual requirement removed before wrapping without removing unrelated prose or cost`() {
+        val raw = listOf("Da un bono", "&7Req: &cEncantador Nv14 ☄", "&7Requisito: Encantador Nv 14", "&7Costo: 25 mana", "Encantador mejora el arma")
+        assertEquals(listOf(raw[0], raw[3], raw[4]), GuideRequirements.stripManualRequirement(raw, true))
+        assertEquals(raw, GuideRequirements.stripManualRequirement(raw, false))
+    }
 }

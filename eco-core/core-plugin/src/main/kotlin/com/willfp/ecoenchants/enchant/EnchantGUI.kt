@@ -467,8 +467,7 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int, enchanting
                 .setDisplayName(if (GuideBrowser.enabled) {
                     plugin.configYml.getString("enchant-guide.book-name-format").replace("%name%", GuideQuery.plain(this.getFormattedName(level)))
                 } else this.getFormattedName(level))
-                .addLoreLines(this.getFormattedDescription(level, player).let { if (GuideBrowser.enabled) GuideRequirements.description(this, it) else it })
-                .addLoreLines(if (GuideBrowser.enabled) GuideRequirements.lore(this, enchantingLevel) else emptyList())
+                .addLoreLines(if (GuideBrowser.enabled) GuideRequirements.formattedDescription(this, level, player) else this.getFormattedDescription(level, player))
                 .addLoreLines(if (GuideBrowser.enabled) {
                     val sources = mutableListOf<String>()
                     fun add(id: String, available: Boolean) {
@@ -477,14 +476,15 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int, enchanting
                     add("table", plugin.configYml.getBool("enchanting-table.enabled") && isObtainableThroughEnchanting)
                     add("trading", plugin.configYml.getBool("villager.enabled") && isObtainableThroughTrading)
                     add("loot", plugin.configYml.getBool("loot.enabled") && isObtainableThroughDiscovery)
-                    plugin.configYml.getFormattedStrings("enchant-guide.book-lore").map {
-                        it.replace("%level%", level.toString()).replace("%max_level%", maximumLevel.toString()).replace("%sources%", sources.joinToString(", ").ifEmpty {
+                    plugin.configYml.getFormattedStrings("enchant-guide.book-lore").flatMap {
+                        if (it == "%requirements%") GuideRequirements.lore(this, enchantingLevel) else listOf(it.replace("%level%", level.toString()).replace("%max_level%", maximumLevel.toString()).replace("%sources%", sources.joinToString(", ").ifEmpty {
                             plugin.configYml.getFormattedString("enchant-guide.sources.other")
-                        })
+                        }))
                     }
                 } else emptyList())
                 .addLoreLines {
                     plugin.configYml.getStrings("enchantinfo.item.lore")
+                        .filterNot { GuideBrowser.enabled && it.contains("%required%") }
                         .map {
                             it.replace("%max_level%", enchantment.maxLevel.toString())
                                 .replace("%rarity%", this.enchantmentRarity.displayName)
