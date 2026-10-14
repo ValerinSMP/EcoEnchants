@@ -1,5 +1,11 @@
 # EcoEnchants — estado
 
+## Guía entregada a Custom/Sync y propuesta de mesa — 2026-10-14
+
+- Por autorización actual del propietario se instaló el mismo JAR de Test en Custom y Sync: SHA256 64213413c86fe6d247ea1e4081de50a654716326d935449a22c2549ab2a14c08. YAML de ambos 182f867a33111d3c2e901eebe0baef07bcedcfeac4abf75268f146f333079532; solo secciones GUI/guide/enchantinfo. 13 definiciones explícitamente desactivadas retiradas por nodo, otros enchants/config intactos. Respaldo HDD /mnt/storage/backups/ai/survival-custom/ecoenchants-guide-production-20261014T182127Z con manifiesto verificado.
+- No nueva build: artefacto previamente probado con 32 tests/ABI/dependencias. Sin lifecycle; activación/arranque/juego productivo pendientes del propietario. No disponible al consultar Encantador sigue pendiente de causa/corrección; no afirmar que se solucionó ni permitir compras con ausencia.
+- Propuesta investigada y documentada, sin implementar ni bloquear mesa: docs/ENCHANTING-TABLE-PROPOSAL-20261014.md. Recomienda addon separado, precios candidatos no aprobados, XP inicialmente/gemas opcionales deshabilitadas y autoridad nativa EcoSuite. Runtime Custom personalizado en mesa actualmente desactivado; XP solo enchant_item ×3. Entrega de mesa futura solo Test y chat separado, sin delegación automática.
+
 ## Requisito único y retirada de desactivados — 2026-10-14
 
 - Implementado: sección amarilla única; línea roja «Requiere Encantador X (tu nivel)» solo si falta nivel; si cumple se oculta, y sin otros requisitos se oculta sección. Filtrado manual antes de wrapping, metadatos/descripción cacheados y estado personal por vista, sin tareas periódicas. Lore de ítems/mecánicas/callbacks intactos. Contrato actual docs/ENCHANT-GUIDE.md.
