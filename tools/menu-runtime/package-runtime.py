@@ -1,6 +1,6 @@
 """Preserve the installed EcoEnchants runtime and overlay only approved guide classes."""
 from pathlib import Path
-import zipfile,hashlib,json,subprocess,re,sys
+import zipfile,hashlib,json,subprocess,re,sys,runpy
 baseline,fresh,output=map(Path,sys.argv[1:4])
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 assert sha(baseline)=='9f974541c99cdb6ef180be428dcd526472634c49434637612998f67b119de75e'
@@ -34,5 +34,6 @@ for cls in ['EnchantGUI','EnchantGUIKt','EnchantmentScrollPane']:
  name='com.willfp.ecoenchants.enchant.'+cls
  missing=public_signatures(baseline,name)-public_signatures(output,name)
  assert not missing,(cls,missing)
-report={'baselineSha256':sha(baseline),'candidateSha256':sha(output),'changedEntries':sorted(n for n in changes if n in old and old[n]!=changes[n]),'addedEntries':sorted(set(changes)-set(old)),'unchangedOriginalEntries':sum(n not in changes or old[n]==changes[n] for n in old),'removedEntries':0,'publicEntrypointsPreserved':True,'mechanicsAndNmsByteIdentical':True}
+checked=runpy.run_path(str(Path(__file__).with_name("check-guide-linkage.py")))["check"](output)
+report={"guideClassesLinkChecked":checked,"runtimeClassDependenciesVerified":True,'baselineSha256':sha(baseline),'candidateSha256':sha(output),'changedEntries':sorted(n for n in changes if n in old and old[n]!=changes[n]),'addedEntries':sorted(set(changes)-set(old)),'unchangedOriginalEntries':sum(n not in changes or old[n]==changes[n] for n in old),'removedEntries':0,'publicEntrypointsPreserved':True,'mechanicsAndNmsByteIdentical':True}
 output.with_suffix('.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

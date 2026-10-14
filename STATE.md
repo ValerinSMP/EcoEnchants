@@ -1,5 +1,12 @@
 # EcoEnchants — estado
 
+## Corrección de dependencia de la guía — 2026-10-14
+
+- Causa confirmada por ticket y JAR: la guía compilada invocaba DragAndDropPricingKt, ausente en el runtime conservado. Se retiraron únicamente importaciones/indicadores drag/drop de la guía; no se añadió esa mecánica.
+- Compilado en personal con ejecutor limitado y toolchains existentes; 20 tests JVM pasaron nuevamente. Nueva comprobación de dependencias de clases: rechaza el candidato fallido y verifica las 9 clases de guía del corregido. No sustituye prueba de integración/juego.
+- Instalado únicamente Test: SHA256 e744da64f39d093688bb9d773a78c0687221f41138f355bd1d6bdde2d88d10e0. YAML Test y JAR/YAML Custom/Sync sin cambios. Respaldo del fallido: /mnt/storage/backups/ai/survival-custom/ecoenchants-menu-linkage-fix-20261014T162357Z/.
+- Activo corregido: pendiente reinicio del propietario; no reinicio/reload realizado. Pendientes arranque y apertura/navegación real del menú. Guía y empaquetador actualizados; cambios ajenos preservados.
+
 ## Guía de encantamientos — 2026-10-14
 
 - Modificado en personal: EnchantGUI, GuideBrowser, GuideQuery, defaults opcionales, 6 tests de guía y empaquetador de runtime; sin editar mecánicas/NMS/eco/LibreForge ni cambios ajenos bajo target/DEVELOPMENT_HANDOFF.md.

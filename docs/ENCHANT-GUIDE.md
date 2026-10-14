@@ -18,7 +18,7 @@ Canonical source: personal `/root/development/projects/eco-suite/EcoEnchants`. K
 The installed runtime differs from source. `tools/menu-runtime/package-runtime.py BASELINE CORE-SHADOW OUTPUT` overlays only the guide classes and appends disabled optional defaults onto the original embedded config. It verifies all other original entries byte-for-byte, retains every entry and checks existing nonsynthetic public GUI signatures. It must run in the limited personal executor. Do not substitute an unrestricted full rebuild for this candidate.
 
 Baseline SHA256: `9f974541c99cdb6ef180be428dcd526472634c49434637612998f67b119de75e`.
-Candidate SHA256: `243bf0dad95769df9918184a95b911868da0b347da9a9bed93c38c20fc8b22f0`.
+Candidate SHA256: `e744da64f39d093688bb9d773a78c0687221f41138f355bd1d6bdde2d88d10e0`.
 Changed: 3 existing guide classes, embedded config, 5 added guide classes; 693 original entries unchanged, none removed. Mechanics, enchantment registrations, loader and NMS entries are byte-identical to the baseline.
 
 ## Validation and delivery — 2026-10-14
@@ -31,3 +31,11 @@ Backup: `/mnt/storage/backups/ai/survival-custom/ecoenchants-menu-20261014T16021
 Evidence/staging: `/home/mtyn/staging/survival-custom/enchants-menu-20261014/`.
 
 After owner restart, verify `/ecoenchants gui`: searching with/without accents; cancel/timeout; both filter directions; unknown query and page counts; clicking a book, all level boundaries and returning; placing/removing an item and checking it returns exactly once on search/detail/close; full inventory; independent player sessions; quit/reconnect/reload while entering search. Startup/linkage and these player tests remain pending. Production delivery requires separate authorization.
+
+## Runtime dependency correction — 2026-10-14
+
+The first Test candidate failed opening the GUI with NoClassDefFoundError: DragAndDropPricingKt. The source guide evaluated optional drag/drop display helpers although the preserved runtime has no drag/drop classes. Those two display calls/imports were removed; no drag/drop mechanics or classes were installed. The Test YAML stayed unchanged.
+
+Packaging now invokes check-guide-linkage.py to inspect constant-pool references/descriptors for all guide classes, including retained implementation classes, and reject absent EcoEnchants classes. Negative control: the exact failed candidate was rejected with the reported missing class. Positive control: all 9 guide classes in the corrected candidate passed. This is class-dependency verification within EcoEnchants, not proof of Bukkit integration, all external method signatures or gameplay.
+
+Build and all 20 JVM tests passed again. Corrected JAR installed only Test with verified SHA256 above. Failed candidate backed up on secondary disk: /mnt/storage/backups/ai/survival-custom/ecoenchants-menu-linkage-fix-20261014T162357Z/. No lifecycle; owner restart and live GUI validation still pending. Custom/Sync and Test YAML hashes remained unchanged.
