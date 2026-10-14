@@ -266,6 +266,7 @@ object EnchantGUI {
     }
 
     internal fun prepareGuideState(player: Player, menu: Menu) {
+        if (GuideBrowser.enabled) menu.setState(player, "guideEnchantingLevel", GuideRequirements.level(player) ?: -1)
         val captiveRow = plugin.configYml.getInt("enchant-gui.item-row")
         val captiveColumn = plugin.configYml.getInt("enchant-gui.item-column")
         val atCaptive = if (GuideBrowser.enabled) null else menu.getCaptiveItem(player, captiveRow, captiveColumn)
@@ -444,7 +445,7 @@ private class EnchantmentScrollPane : GUIComponent {
         val enchant = enchants.getOrNull(index + size * (page - 1))?.wrap() as? EcoEnchant ?: return defaultSlot
 
         val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
-        val information = enchant.getInformationSlot(player, displayLevel)
+        val information = enchant.getInformationSlot(player, displayLevel, menu.getState<Int>(player, "guideEnchantingLevel")?.takeIf { it >= 0 })
         // A guide book is observational: hovering reads it; clicking never reopens the inventory.
         return information
     }
@@ -458,7 +459,7 @@ private class EnchantmentScrollPane : GUIComponent {
 private val cachedEnchantmentSlots = Caffeine.newBuilder()
     .build<Pair<EcoEnchant, Int>, Slot>()
 
-private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
+private fun EcoEnchant.getInformationSlot(player: Player, level: Int, enchantingLevel: Int? = if (GuideBrowser.enabled) GuideRequirements.level(player) else null): Slot {
     fun build(): Slot = slot(
             EnchantedBookBuilder()
                 .addStoredEnchantment(enchantment, level)
@@ -466,7 +467,8 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                 .setDisplayName(if (GuideBrowser.enabled) {
                     plugin.configYml.getString("enchant-guide.book-name-format").replace("%name%", GuideQuery.plain(this.getFormattedName(level)))
                 } else this.getFormattedName(level))
-                .addLoreLines(this.getFormattedDescription(level, player))
+                .addLoreLines(this.getFormattedDescription(level, player).let { if (GuideBrowser.enabled) GuideRequirements.description(this, it) else it })
+                .addLoreLines(if (GuideBrowser.enabled) GuideRequirements.lore(this, enchantingLevel) else emptyList())
                 .addLoreLines(if (GuideBrowser.enabled) {
                     val sources = mutableListOf<String>()
                     fun add(id: String, available: Boolean) {

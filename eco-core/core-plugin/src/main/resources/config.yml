@@ -396,3 +396,20 @@ enchant-guide:
   filler-item: black_stained_glass_pane name:""
   book-name-format: '&#00FB9A%name%'
   page-summary: '&7Página &f%page%&7 de &f%max_page%'
+  requirements:
+    unknown-level: 'No disponible'
+    progress:
+    - '&7Encantador requerido: &f%required_level%'
+    - '&7Tu Encantador: &f%current_level%'
+    met:
+    - '&#00FB9A✔ Requisito de Encantador cumplido'
+    missing:
+    - '&#FF3300✘ Te faltan %missing_levels% niveles'
+    unavailable:
+    - '&7No se pudo consultar tu nivel.'
+    none:
+    - '&7Sin requisito de Encantador configurado'
+    disabled:
+    - '&#FF9F0F⚑ Temporalmente desactivado'
+    unsupported:
+    - '&7Requisito de Encantador dinámico; consulta su descripción.'

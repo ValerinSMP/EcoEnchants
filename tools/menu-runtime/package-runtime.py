@@ -5,7 +5,7 @@ baseline,fresh,output=map(Path,sys.argv[1:4])
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 assert sha(baseline)=='9f974541c99cdb6ef180be428dcd526472634c49434637612998f67b119de75e'
 package='com/willfp/ecoenchants/enchant/'
-prefixes=[package+x for x in ['EnchantGUI','EnchantmentScrollPane','GuideBrowser','GuideQuery','GuideState']]
+prefixes=[package+x for x in ['EnchantGUI','EnchantmentScrollPane','GuideBrowser','GuideQuery','GuideState','GuideRequirements']]
 def approved(n):return n.endswith('.class') and any(n.startswith(p+'.') or n.startswith(p+'$') or (p.endswith('EnchantGUI') and n.startswith(p+'Kt')) for p in prefixes)
 with zipfile.ZipFile(baseline) as z:old={n:z.read(n) for n in z.namelist()}
 with zipfile.ZipFile(fresh) as z:new={n:z.read(n) for n in z.namelist()}

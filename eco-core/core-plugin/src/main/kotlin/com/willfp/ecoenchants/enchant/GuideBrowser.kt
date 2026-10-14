@@ -33,6 +33,7 @@ internal object GuideBrowser : Listener {
 
     fun reload() {
         generation++
+        GuideRequirements.clear()
         val pending = searches.values.toList()
         searches.clear()
         pending.forEach { it.abandon() }

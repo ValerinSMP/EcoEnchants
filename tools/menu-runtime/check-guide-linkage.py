@@ -20,7 +20,7 @@ def check(path):
  with zipfile.ZipFile(path) as z:
   names=set(z.namelist());missing={};checked=0
   for name in names:
-   if name.endswith('.class') and any('/'+s in name for s in ['EnchantGUI','EnchantmentScrollPane','GuideBrowser','GuideQuery','GuideState']):
+   if name.endswith('.class') and any('/'+s in name for s in ['EnchantGUI','EnchantmentScrollPane','GuideBrowser','GuideQuery','GuideState','GuideRequirements']):
     checked+=1
     absent=sorted(ref for ref in references(z.read(name)) if ref+'.class' not in names)
     if absent:missing[name]=absent

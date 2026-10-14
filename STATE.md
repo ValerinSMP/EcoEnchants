@@ -1,5 +1,12 @@
 # EcoEnchants — estado
 
+## Requisitos observacionales de Encantador — 2026-10-14
+
+- Implementado: umbral de condiciones nativas directas, nivel personal desde snapshot público de caché de EcoSkills, requerido/faltante/cumplido/ausencia y desactivación explícita 999. Fuera de la caché compartida de descripciones; no cambia niveles, balance, callbacks, lore de ítems ni progresión. Contrato/limitaciones en docs/ENCHANT-GUIDE.md.
+- Compilado en personal con ejecutor limitado y toolchains existentes; 28 tests JVM pasaron (24 previos +4 requisitos). ABI pública GUI conservada, 11 clases verificadas por dependencias y 693 entradas originales idénticas. API getCachedSnapshot(UUID) confirmada en JAR Test; sin benchmark ni prueba en juego.
+- Instalado solo Test: JAR f7c200c4e48365058ea3438df830209ac80ed20003633a3c0089e9ec70d6efe0; YAML 502c3825c7a97772123583ab39b0462733bef60b88e7351e6135b490613e4bd4. Respaldo HDD /mnt/storage/backups/ai/survival-custom/ecoenchants-guide-requirements-20261014T173959Z. Custom/Sync JAR/YAML sin cambios.
+- Activo: pendiente reinicio del propietario, no lifecycle realizado. Pendientes apertura, valores personales/diferencias entre jugadores, caché fría, reconexión y validación visual de estados. No presentar como integración validada.
+
 ## Guía de consulta estable y cancelar — 2026-10-14
 
 - Implementado: opción A sin abrir submenú al pulsar libros; niveles disponibles y efecto mostrado en lore. Título fijo y contador en libro informativo; GuideBrowser ya no llama setTitle. Retorno de cancelar/timeout conserva query/filtro/grupo/página y verifica identidad de vista posterior al cierre en lugar de exigir CRAFTING. Comando /enchantinfo y firmas existentes conservados.
