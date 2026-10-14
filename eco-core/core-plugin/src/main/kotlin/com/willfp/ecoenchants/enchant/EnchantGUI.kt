@@ -53,7 +53,7 @@ object EnchantGUI {
         searchNames = allEnchantsSorted.associateWith { GuideQuery.normalize(it.wrap().getFormattedName(0) + " " + it.key.key) }
 
         menu = menu(plugin.configYml.getInt("enchant-gui.rows")) {
-            title = plugin.configYml.getFormattedString("enchant-gui.title")
+            title = if (GuideBrowser.enabled) GuideQuery.plain(plugin.configYml.getString("enchant-guide.title")) else plugin.configYml.getFormattedString("enchant-gui.title")
 
             allowChangingHeldItem()
 
@@ -69,83 +69,28 @@ object EnchantGUI {
             setSlot(
                 plugin.configYml.getInt("enchant-gui.info.row"),
                 plugin.configYml.getInt("enchant-gui.info.column"),
-                slot(
-                    ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.info.item")))
-                        .addLoreLines(plugin.configYml.getStrings("enchant-gui.info.lore"))
-                        .build()
-                )
+                slot {
+                    setUpdater { viewer, current, _ ->
+                        ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.info.item")))
+                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.info.lore"))
+                            .build()
+                    }
+                    if (GuideBrowser.enabled) onLeftClick { event, _, current ->
+                        GuideBrowser.restore(current, event.whoClicked as Player, GuideState())
+                    }
+                }
             )
 
             val captiveRow = plugin.configYml.getInt("enchant-gui.item-row")
             val captiveColumn = plugin.configYml.getInt("enchant-gui.item-column")
 
-            setSlot(
+            if (!GuideBrowser.enabled) setSlot(
                 captiveRow, captiveColumn, slot(ItemStack(Material.AIR)) {
                     setCaptive(true)
                 }
             )
 
-            onRender { player, menu ->
-                val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
-                val hasItem = !atCaptive.isEcoEmpty && atCaptive != null && atCaptive.type != Material.BOOK
-
-                val canSeeHidden = player.hasPermission("ecoenchants.seehidden")
-                val baseEnchants = if (!hasItem) {
-                    allEnchantsSorted.filter { (it.wrap() as? EcoEnchant)?.let { wrapped -> !wrapped.isHiddenFromGui || canSeeHidden } == true }
-                } else {
-                    atCaptive.applicableEnchantments.filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
-                        .subtract(atCaptive.fast().enchants.keys)
-                        .toList()
-                }
-
-                // Apply group filter if a groupId is set in menu state
-                val groupId = menu.getState<String>(player, "groupId")
-                val filteredEnchants = if (groupId != null) {
-                    val groupBy = plugin.configYml.getString("enchant-gui.group-by")
-                    baseEnchants.filter { enchantment ->
-                        val wrapped = enchantment.wrap()
-                        when (groupBy) {
-                            "type" -> wrapped.type.id == groupId
-                            "rarity" -> wrapped.enchantmentRarity.id == groupId
-                            "target" -> wrapped is EcoEnchant && wrapped.targets.any { it.id == groupId }
-                            else -> true
-                        }
-                    }
-                } else {
-                    baseEnchants
-                }
-
-                val visibleEnchants = if (GuideBrowser.enabled) {
-                    val state = GuideBrowser.state(menu, player)
-                    val query = GuideQuery.normalize(state.query)
-                    val targets = GuideBrowser.acceptedTargets(state.filter)
-                    filteredEnchants.filter { enchantment ->
-                        (searchNames[enchantment] ?: "").contains(query) &&
-                            GuideQuery.matchesTargets((enchantment.wrap() as? EcoEnchant)?.targets?.map { it.id }?.toSet() ?: emptySet(), targets)
-                    }
-                } else filteredEnchants
-                menu.setState(player, "enchants", visibleEnchants)
-
-                // Reset to page 1 when an item is placed or removed from the captive slot
-                val previousHasItem = menu.getState<Boolean>(player, "hasItem") ?: false
-                if (hasItem != previousHasItem) {
-                    menu.setState(player, Page.PAGE_KEY, 1)
-                }
-                menu.setState(player, "hasItem", hasItem)
-
-                // Safety net: also reset if the current page now exceeds the new max.
-                // Compute directly from filteredEnchants to avoid a stale getMaxPage() value
-                // (maxPages may be evaluated before onRender fires).
-                val perPage = plugin.configYml.getInt("enchant-gui.enchant-area.width") * plugin.configYml.getInt("enchant-gui.enchant-area.height")
-                val maxPage = if (visibleEnchants.isEmpty()) {
-                    1
-                } else {
-                    ceil(visibleEnchants.size.toDouble() / perPage).toInt()
-                }
-                if (menu.getPage(player) > maxPage) {
-                    menu.setState(player, Page.PAGE_KEY, 1)
-                }
-            }
+            onRender { player, current -> prepareGuideState(player, current) }
 
             GuideBrowser.controls(this, ::openBrowser)
 
@@ -314,6 +259,72 @@ object EnchantGUI {
         }
     }
 
+    internal fun prepareGuideState(player: Player, menu: Menu) {
+        val captiveRow = plugin.configYml.getInt("enchant-gui.item-row")
+        val captiveColumn = plugin.configYml.getInt("enchant-gui.item-column")
+        val atCaptive = if (GuideBrowser.enabled) null else menu.getCaptiveItem(player, captiveRow, captiveColumn)
+        val hasItem = !atCaptive.isEcoEmpty && atCaptive != null && atCaptive.type != Material.BOOK
+
+        val canSeeHidden = player.hasPermission("ecoenchants.seehidden")
+        val baseEnchants = if (!hasItem) {
+            allEnchantsSorted.filter { (it.wrap() as? EcoEnchant)?.let { wrapped -> !wrapped.isHiddenFromGui || canSeeHidden } == true }
+        } else {
+            atCaptive.applicableEnchantments.filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
+                .subtract(atCaptive.fast().enchants.keys)
+                .toList()
+        }
+
+        // Apply group filter if a groupId is set in menu state
+        val groupId = menu.getState<String>(player, "groupId")
+        val filteredEnchants = if (groupId != null) {
+            val groupBy = plugin.configYml.getString("enchant-gui.group-by")
+            baseEnchants.filter { enchantment ->
+                val wrapped = enchantment.wrap()
+                when (groupBy) {
+                    "type" -> wrapped.type.id == groupId
+                    "rarity" -> wrapped.enchantmentRarity.id == groupId
+                    "target" -> wrapped is EcoEnchant && wrapped.targets.any { it.id == groupId }
+                    else -> true
+                }
+            }
+        } else {
+            baseEnchants
+        }
+
+        val visibleEnchants = if (GuideBrowser.enabled) {
+            val state = GuideBrowser.state(menu, player)
+            val query = GuideQuery.normalize(state.query)
+            val targets = GuideBrowser.acceptedTargets(state.filter)
+            filteredEnchants.filter { enchantment ->
+                (searchNames[enchantment] ?: "").contains(query) &&
+                    GuideQuery.matchesTargets((enchantment.wrap() as? EcoEnchant)?.targets?.map { it.id }?.toSet() ?: emptySet(), targets)
+            }
+        } else filteredEnchants
+        menu.setState(player, "enchants", visibleEnchants)
+
+        // Reset to page 1 when an item is placed or removed from the captive slot
+        val previousHasItem = menu.getState<Boolean>(player, "hasItem") ?: false
+        if (hasItem != previousHasItem) {
+            menu.setState(player, Page.PAGE_KEY, 1)
+        }
+        menu.setState(player, "hasItem", hasItem)
+
+        // Safety net: also reset if the current page now exceeds the new max.
+        // Compute directly from filteredEnchants to avoid a stale getMaxPage() value
+        // (maxPages may be evaluated before onRender fires).
+        val perPage = plugin.configYml.getInt("enchant-gui.enchant-area.width") * plugin.configYml.getInt("enchant-gui.enchant-area.height")
+        val maxPage = if (visibleEnchants.isEmpty()) {
+            1
+        } else {
+            ceil(visibleEnchants.size.toDouble() / perPage).toInt()
+        }
+        menu.setState(player, Page.MAX_PAGE_KEY, maxPage)
+        if (menu.getPage(player) > maxPage) {
+            menu.setState(player, Page.PAGE_KEY, 1)
+        }
+        if (GuideBrowser.enabled) GuideBrowser.refreshTitle(player, menu)
+    }
+
     internal fun openBrowser(player: Player, state: GuideState) {
         menu.open(player)
         GuideBrowser.restore(menu, player, state)
@@ -332,7 +343,7 @@ object EnchantGUI {
 
         val infoMenu = enchantInfoMenus.get(enchant to effectiveLevel) {
             menu(plugin.configYml.getInt("enchantinfo.rows")) {
-                title = enchant.getFormattedName(effectiveLevel)
+                title = if (GuideBrowser.enabled) GuideQuery.plain(enchant.getFormattedName(effectiveLevel)) else enchant.getFormattedName(effectiveLevel)
 
                 setSlot(
                     plugin.configYml.getInt("enchantinfo.item.row"),
@@ -354,7 +365,9 @@ object EnchantGUI {
                         val path = "enchant-guide.levels.$key"
                         setSlot(plugin.configYml.getInt("$path.row"), plugin.configYml.getInt("$path.column"), slot {
                             setUpdater { _, _, _ ->
-                                ItemStackBuilder(Items.lookup(plugin.configYml.getString("$path.item")))
+                                if (GuideQuery.level(effectiveLevel, delta, enchant.maximumLevel) == effectiveLevel) {
+                                    Items.lookup(plugin.configYml.getString("enchant-guide.filler-item")).item
+                                } else ItemStackBuilder(Items.lookup(plugin.configYml.getString("$path.item")))
                                     .setDisplayName(plugin.configYml.getFormattedString("$path.name"))
                                     .addLoreLines(plugin.configYml.getFormattedStrings("$path.lore").map {
                                         it.replace("%level%", effectiveLevel.toString()).replace("%max_level%", enchant.maximumLevel.toString())
@@ -451,7 +464,9 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
             EnchantedBookBuilder()
                 .addStoredEnchantment(enchantment, level)
                 .addItemFlag(ItemFlag.HIDE_ENCHANTS)
-                .setDisplayName(this.getFormattedName(level))
+                .setDisplayName(if (GuideBrowser.enabled) {
+                    plugin.configYml.getString("enchant-guide.book-name-format").replace("%name%", GuideQuery.plain(this.getFormattedName(level)))
+                } else this.getFormattedName(level))
                 .addLoreLines(this.getFormattedDescription(level, player))
                 .addLoreLines(if (GuideBrowser.enabled) {
                     val sources = mutableListOf<String>()

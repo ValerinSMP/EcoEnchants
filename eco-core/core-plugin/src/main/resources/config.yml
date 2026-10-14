@@ -264,99 +264,131 @@ enchant-guide:
   enabled: false
   search:
     row: 6
-    column: 2
+    column: 6
     item: oak_sign
-    name: '&aBuscar encantamiento'
+    name: '&#5286FF✎ Buscar encantamiento'
     lore:
-      - '&7Búsqueda: &f%query%'
-      - '&7Resultados: &f%count%'
-      - ''
-      - '&eClic izquierdo para buscar.'
-      - '&eClic derecho para borrar la búsqueda.'
-    prompt: '&eEscribe el nombre del encantamiento. &7Escribe cancelar para volver; tienes 30 segundos.'
-    busy: '&cTermina primero la entrada de texto que tienes abierta.'
+    - '&7Encuentra un encantamiento por su nombre.'
+    - '&7Búsqueda: &f%query%'
+    - '&7Resultados: &#00FB9A%count%'
+    - ''
+    - '&f &#FFDA29Clic izquierdo para buscar.'
+    - '&f &#FFDA29Clic derecho para borrar.'
+    prompt: '&#5286FF✎ &fEscribe el nombre del encantamiento. &7Escribe cancelar para
+      volver; tienes 30 segundos.'
+    busy: '&#FF3300✘ &fTermina primero la entrada de texto que tienes abierta.'
   filter:
     row: 6
-    column: 8
-    item: hopper
-    name: '&aFiltrar por equipo'
+    column: 7
+    item: ender_eye
+    name: '&#5286FF◎ Filtrar por equipo'
     lore:
-      - '&7Filtro: &f%filter%'
-      - ''
-      - '&eClic izquierdo para avanzar.'
-      - '&eClic derecho para retroceder.'
+    - ''
+    - '%filters%'
+    - '%more%'
+    - ''
+    - '&f &#FFDA29Clic izquierdo para avanzar.'
+    - '&f &#FFDA29Clic derecho para retroceder.'
+    selected: '&#00FB9A⏵ %name%'
+    unselected: '&7  %name%'
+    more: '&#FF9F0FY %more% opciones más'
   clear:
     row: 6
     column: 7
     item: milk_bucket
-    name: '&aLimpiar filtros'
+    name: '&#5286FF⇄ Limpiar filtros'
     lore:
-      - '&7Muestra todos los encantamientos.'
-      - '&7El objeto de arriba sigue limitando la lista.'
+    - '&7Muestra todos los encantamientos.'
+    enabled: false
   filters:
-    - name: 'Todos'
-      targets: []
-    - name: 'Espadas'
-      targets: [sword]
-    - name: 'Armaduras'
-      targets: [armor, helmet, chestplate, leggings, boots]
-    - name: 'Picos'
-      targets: [pickaxe]
-    - name: 'Hachas'
-      targets: [axe]
-    - name: 'Palas'
-      targets: [shovel]
-    - name: 'Azadas'
-      targets: [hoe]
-    - name: 'Arcos'
-      targets: [bow]
-    - name: 'Ballestas'
-      targets: [crossbow]
-    - name: 'Tridentes'
-      targets: [trident]
-    - name: 'Mazos'
-      targets: [mace]
-    - name: 'Lanzas'
-      targets: [spear]
-    - name: 'Cañas de pescar'
-      targets: [fishing_rod]
-    - name: 'Escudos'
-      targets: [shield]
-    - name: 'Élitros'
-      targets: [elytra]
-    - name: 'Tijeras'
-      targets: [shears]
+  - name: Todos
+    targets: []
+  - name: Armaduras
+    targets:
+    - armor
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  - name: Espadas
+    targets:
+    - sword
+  - name: Picos
+    targets:
+    - pickaxe
+  - name: Hachas
+    targets:
+    - axe
+  - name: Palas
+    targets:
+    - shovel
+  - name: Azadas
+    targets:
+    - hoe
+  - name: Arcos
+    targets:
+    - bow
+  - name: Ballestas
+    targets:
+    - crossbow
+  - name: Tridentes
+    targets:
+    - trident
+  - name: Mazos
+    targets:
+    - mace
+  - name: Lanzas
+    targets:
+    - spear
+  - name: Cañas de pescar
+    targets:
+    - fishing_rod
+  - name: Escudos
+    targets:
+    - shield
+  - name: Élitros
+    targets:
+    - elytra
+  - name: Tijeras
+    targets:
+    - shears
   empty:
     item: paper
-    name: '&cSin resultados'
+    name: '&#FF3300✘ Sin resultados'
     lore:
-      - '&7Prueba otro nombre o limpia los filtros.'
+    - '&7Prueba otro nombre o restablece los filtros.'
   book-lore:
-    - ''
-    - '&7Nivel mostrado: &f%level%'
-    - '&7Obtención: &f%sources%'
-    - '&eSelecciona el libro para consultar sus niveles.'
+  - ''
+  - '&#FFDA29Obtención:'
+  - '&7- &f%sources%'
+  - ''
+  - '&f &#FFDA29Clic para consultar sus niveles.'
   sources:
-    table: 'Mesa de encantamientos'
-    trading: 'Aldeanos'
-    loot: 'Botín natural'
-    other: 'Consulta las formas de obtención del servidor'
+    table: Mesa de encantamientos
+    trading: Aldeanos
+    loot: Botín natural
+    other: Consulta las opciones del servidor
   levels:
     previous:
       row: 3
-      column: 3
+      column: 4
       item: arrow
-      name: '&aNivel anterior'
-      lore: ['&7Nivel mostrado: &f%level% / %max_level%']
+      name: '&#FFDA29⏴ Nivel anterior'
+      lore:
+      - '&7Nivel mostrado: &f%level% / %max_level%'
     next:
       row: 3
-      column: 7
+      column: 6
       item: arrow
-      name: '&aNivel siguiente'
-      lore: ['&7Nivel mostrado: &f%level% / %max_level%']
+      name: '&#FFDA29⏵ Nivel siguiente'
+      lore:
+      - '&7Nivel mostrado: &f%level% / %max_level%'
     back:
       row: 3
-      column: 5
-      item: barrier
-      name: '&cVolver a la guía'
-      lore: ['&7Conserva la búsqueda y el filtro por equipo.']
+      column: 1
+      item: spectral_arrow
+      name: '&f← Volver'
+      lore: []
+  title: Guía de encantamientos
+  filler-item: black_stained_glass_pane name:""
+  book-name-format: '&#00FB9A%name%'

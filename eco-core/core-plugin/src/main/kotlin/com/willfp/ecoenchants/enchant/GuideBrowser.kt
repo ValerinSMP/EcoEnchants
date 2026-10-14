@@ -7,6 +7,7 @@ import com.willfp.eco.core.gui.slot
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.ecoenchants.target.EnchantmentTargets
+import com.willfp.eco.util.openMenu
 import com.willfp.ecoenchants.plugin
 import org.bukkit.conversations.Conversation
 import org.bukkit.conversations.ConversationContext
@@ -61,7 +62,23 @@ internal object GuideBrowser : Listener {
         menu.setState(player, "guideFilter", state.filter)
         menu.setState(player, "groupId", state.group)
         menu.setState(player, Page.PAGE_KEY, state.page)
+        // Native render invokes onRender after drawing slots. Publish selection first
+        // so search/filter changes render their new books on the first refresh.
+        EnchantGUI.prepareGuideState(player, menu)
         menu.refresh(player)
+    }
+
+    fun refreshTitle(player: Player, menu: Menu) {
+        if (menu.getState<Boolean>(player, "guideTitleQueued") == true) return
+        menu.setState(player, "guideTitleQueued", true)
+        val epoch = generation
+        plugin.server.scheduler.runTask(plugin, Runnable {
+            if (player.isOnline && plugin.isEnabled && generation == epoch && player.openMenu === menu) {
+                menu.setState(player, "guideTitleQueued", false)
+                val title = GuideQuery.title(GuideQuery.plain(plugin.configYml.getString("enchant-guide.title")), menu.getPage(player), menu.getMaxPage(player))
+                if (player.openInventory.title != title) player.openInventory.setTitle(title)
+            }
+        })
     }
 
     fun acceptedTargets(index: Int): Set<String> = equipmentTargets.getOrNull(index) ?: emptySet()
@@ -90,11 +107,21 @@ internal object GuideBrowser : Listener {
                     val label = filters().getOrNull(state.filter)?.getFormattedString("name") ?: ""
                     ItemStackBuilder(Items.lookup(plugin.configYml.getString("$path.item")))
                         .setDisplayName(plugin.configYml.getFormattedString("$path.name"))
-                        .addLoreLines(plugin.configYml.getFormattedStrings("$path.lore").map {
-                            // Insert literal user input only AFTER formatting the configuration.
-                            it.replace("%query%", state.query.replace('§', ' ').replace('&', ' ').replace('<', ' ').replace('>', ' '))
-                                .replace("%filter%", label)
-                                .replace("%count%", (menu.getState<List<*>>(player, "enchants")?.size ?: 0).toString())
+                        .addLoreLines(plugin.configYml.getFormattedStrings("$path.lore").flatMap {
+                            val definitions = filters()
+                            val window = GuideQuery.filterWindow(state.filter, definitions.size)
+                            when (it) {
+                                "%filters%" -> window.map { index ->
+                                    val format = plugin.configYml.getFormattedString("enchant-guide.filter." + if (index == state.filter) "selected" else "unselected")
+                                    format.replace("%name%", definitions[index].getFormattedString("name"))
+                                }
+                                "%more%" -> if (definitions.size > window.count()) listOf(
+                                    plugin.configYml.getFormattedString("enchant-guide.filter.more").replace("%more%", (definitions.size - window.count()).toString())
+                                ) else emptyList()
+                                else -> listOf(it.replace("%query%", state.query.replace('§', ' ').replace('&', ' ').replace('<', ' ').replace('>', ' '))
+                                    .replace("%filter%", label)
+                                    .replace("%count%", (menu.getState<List<*>>(player, "enchants")?.size ?: 0).toString()))
+                            }
                         }).build()
                 }
                 init()
@@ -115,7 +142,7 @@ internal object GuideBrowser : Listener {
             onLeftClick { event, _, menu -> change(event.whoClicked as Player, menu, 1) }
             onRightClick { event, _, menu -> change(event.whoClicked as Player, menu, -1) }
         }
-        button("clear") {
+        if (plugin.configYml.getBoolOrNull("enchant-guide.clear.enabled") != false) button("clear") {
             onLeftClick { event, _, menu -> restore(menu, event.whoClicked as Player, GuideState()) }
         }
     }

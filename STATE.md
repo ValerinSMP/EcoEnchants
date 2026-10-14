@@ -1,5 +1,13 @@
 # EcoEnchants — estado
 
+## Distribución y estilo de la guía — 2026-10-14
+
+- Implementado en personal: guía sin ranura cautiva, 28 libros (4×7), libro de ayuda/restablecer arriba, cerrar/buscar/filtro abajo como el video, relleno para flechas de página/nivel inactivas, lista de filtros con selección visible y contador solo para varias páginas. Colores/símbolos del estándar; glifos E179/E17A verificados en archivos reales de Test. No editar/publicar pack.
+- Preparar selección antes del render evita mostrar la lista previa al buscar/filtrar. Títulos sin formato; actualización diferida/coalescida solo ante render, sin tarea periódica. Comandos, mecánicas y runtime ajeno conservados.
+- Compilado con ejecutor personal y toolchains originales. 22 tests JVM (8 guía +14 existentes) pasaron; 9 clases verificadas por dependencias, firmas GUI conservadas, 693 entradas originales idénticas. Sin benchmark ni validación visual/gameplay.
+- Instalado solo Test: JAR SHA256 30611b39a78de4f38bc4d7c6b315c6251d54c42bcfd67e2b54148a5b5c65f8de; YAML SHA256 f187299223f6bd97c942e8662e96c8b60fcc2fed72b617a4871f277fc8c62687. Backup HDD /mnt/storage/backups/ai/survival-custom/ecoenchants-guide-layout-20261014T164819Z/. Custom/Sync JAR/YAML intactos.
+- Activo nuevo código: pendiente reinicio del propietario, no lifecycle realizado. Pendientes apertura, páginas/niveles, primera actualización de búsquedas, imposibilidad de depositar objetos y glifos Java/Bedrock. Guía actual docs/ENCHANT-GUIDE.md; evidencia staging enchants-menu-layout-20261014.
+
 ## Corrección de dependencia de la guía — 2026-10-14
 
 - Causa confirmada por ticket y JAR: la guía compilada invocaba DragAndDropPricingKt, ausente en el runtime conservado. Se retiraron únicamente importaciones/indicadores drag/drop de la guía; no se añadió esa mecánica.

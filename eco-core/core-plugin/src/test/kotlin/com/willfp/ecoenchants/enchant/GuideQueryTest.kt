@@ -34,4 +34,19 @@ class GuideQueryTest {
         assertFalse(GuideQuery.matchesTargets(setOf("pickaxe"), setOf("bow")))
         assertTrue(GuideQuery.matchesTargets(setOf("pickaxe"), emptySet()))
     }
+    @Test fun `inventory title shows a counter only when there are multiple pages`() {
+        assertEquals("Guía de encantamientos", GuideQuery.title("Guía de encantamientos", 1, 1))
+        assertEquals("Guía de encantamientos (2/6)", GuideQuery.title("Guía de encantamientos", 2, 6))
+        assertEquals("Filo V", GuideQuery.plain("&#FFDA29<bold>Filo V</bold>"))
+    }
+    @Test fun `filter preview includes current selection and stays inside configured definitions`() {
+        for (size in listOf(1, 5, 16)) for (index in 0 until size) {
+            val window = GuideQuery.filterWindow(index, size)
+            assertTrue(index in window)
+            assertTrue(window.all { it in 0 until size })
+            assertTrue(window.count() <= 8)
+        }
+        assertTrue(GuideQuery.filterWindow(0, 0).isEmpty())
+    }
+
 }
