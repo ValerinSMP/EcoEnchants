@@ -1,5 +1,17 @@
 # EcoEnchants — estado
 
+## Guía de encantamientos — 2026-10-14
+
+- Modificado en personal: EnchantGUI, GuideBrowser, GuideQuery, defaults opcionales, 6 tests de guía y empaquetador de runtime; sin editar mecánicas/NMS/eco/LibreForge ni cambios ajenos bajo target/DEVELOPMENT_HANDOFF.md.
+- Compilado: ejecutor limitado 2 CPU/4 GiB, Gradle 9.3.1/Kotlin 2.3.0, toolchain 25 y JVM/release 21. Probado: 20 tests JVM, 0 fallos/errores/omitidos; 6 nuevos y 14 existentes. Sin benchmark de rendimiento.
+- Runtime conservado: candidato sobre JAR instalado 9f974541…, 693 entradas originales idénticas, 3 clases GUI y config modificados, 5 clases agregadas, ninguna retirada; firmas públicas GUI conservadas. Mecánicas/loader/NMS idénticos.
+- Instalado solo Test: EcoEnchants-2026.27-all.jar SHA256 243bf0dad95769df9918184a95b911868da0b347da9a9bed93c38c20fc8b22f0 y config guía habilitada. Custom/Sync JAR+YAML sin cambios.
+- Respaldo HDD: /mnt/storage/backups/ai/survival-custom/ecoenchants-menu-20261014T160210Z/. Staging: /home/mtyn/staging/survival-custom/enchants-menu-20261014/.
+- Activo nuevo código: pendiente reinicio del propietario; no lifecycle realizado. Arranque y gameplay pendientes. Pruebas manuales: búsqueda/cancelación/timeout, filtros, niveles, devolución única del objeto, inventario lleno, usuarios separados y desconexión/reload.
+- Contrato/guía y reproducibilidad: docs/ENCHANT-GUIDE.md, tools/menu-runtime/package-runtime.py.
+
+## Estado previo conservado como referencia
+
 - Fuente canónica: personal `/root/development/projects/eco-suite/EcoEnchants`. HomeSV conserva la referencia sin editar. Original comparado: `upstream-review/main`, SHA en `upstream-differences-final.json`; sin merge, checkout o actualización completa.
 - Tarea autorizada: las ocho prioridades pendientes (3–10) y las dos funciones de EcoArmor, solo Test.
 - Modificado: Guard de conversión de lore, corrección de doble coste/combinar durabilidad en su yunque actual y libros drag/drop con precio/GUI nativos. Se conserva Indestructible, costes vanilla y controles existentes. Drag/drop ausente = deshabilitado; no se habilitó en configuración viva.

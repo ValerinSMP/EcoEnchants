@@ -258,3 +258,105 @@ group-gui:
 lore-conversion:
   enabled: false # If lore conversion should be enabled
   aggressive: false # Will convert all items in all inventories when opened, likely to use a lot of performance
+
+# Optional browsing controls. This guide does not sell or apply enchantments.
+enchant-guide:
+  enabled: false
+  search:
+    row: 6
+    column: 2
+    item: oak_sign
+    name: '&aBuscar encantamiento'
+    lore:
+      - '&7Búsqueda: &f%query%'
+      - '&7Resultados: &f%count%'
+      - ''
+      - '&eClic izquierdo para buscar.'
+      - '&eClic derecho para borrar la búsqueda.'
+    prompt: '&eEscribe el nombre del encantamiento. &7Escribe cancelar para volver; tienes 30 segundos.'
+    busy: '&cTermina primero la entrada de texto que tienes abierta.'
+  filter:
+    row: 6
+    column: 8
+    item: hopper
+    name: '&aFiltrar por equipo'
+    lore:
+      - '&7Filtro: &f%filter%'
+      - ''
+      - '&eClic izquierdo para avanzar.'
+      - '&eClic derecho para retroceder.'
+  clear:
+    row: 6
+    column: 7
+    item: milk_bucket
+    name: '&aLimpiar filtros'
+    lore:
+      - '&7Muestra todos los encantamientos.'
+      - '&7El objeto de arriba sigue limitando la lista.'
+  filters:
+    - name: 'Todos'
+      targets: []
+    - name: 'Espadas'
+      targets: [sword]
+    - name: 'Armaduras'
+      targets: [armor, helmet, chestplate, leggings, boots]
+    - name: 'Picos'
+      targets: [pickaxe]
+    - name: 'Hachas'
+      targets: [axe]
+    - name: 'Palas'
+      targets: [shovel]
+    - name: 'Azadas'
+      targets: [hoe]
+    - name: 'Arcos'
+      targets: [bow]
+    - name: 'Ballestas'
+      targets: [crossbow]
+    - name: 'Tridentes'
+      targets: [trident]
+    - name: 'Mazos'
+      targets: [mace]
+    - name: 'Lanzas'
+      targets: [spear]
+    - name: 'Cañas de pescar'
+      targets: [fishing_rod]
+    - name: 'Escudos'
+      targets: [shield]
+    - name: 'Élitros'
+      targets: [elytra]
+    - name: 'Tijeras'
+      targets: [shears]
+  empty:
+    item: paper
+    name: '&cSin resultados'
+    lore:
+      - '&7Prueba otro nombre o limpia los filtros.'
+  book-lore:
+    - ''
+    - '&7Nivel mostrado: &f%level%'
+    - '&7Obtención: &f%sources%'
+    - '&eSelecciona el libro para consultar sus niveles.'
+  sources:
+    table: 'Mesa de encantamientos'
+    trading: 'Aldeanos'
+    loot: 'Botín natural'
+    other: 'Consulta las formas de obtención del servidor'
+  levels:
+    previous:
+      row: 3
+      column: 3
+      item: arrow
+      name: '&aNivel anterior'
+      lore: ['&7Nivel mostrado: &f%level% / %max_level%']
+    next:
+      row: 3
+      column: 7
+      item: arrow
+      name: '&aNivel siguiente'
+      lore: ['&7Nivel mostrado: &f%level% / %max_level%']
+    back:
+      row: 3
+      column: 5
+      item: barrier
+      name: '&cVolver a la guía'
+      lore: ['&7Conserva la búsqueda y el filtro por equipo.']

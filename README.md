@@ -44,3 +44,7 @@
     </a>
   <br>
 </h1>
+
+## Optional enchantment guide
+
+See [the browser contract and Test validation](docs/ENCHANT-GUIDE.md).

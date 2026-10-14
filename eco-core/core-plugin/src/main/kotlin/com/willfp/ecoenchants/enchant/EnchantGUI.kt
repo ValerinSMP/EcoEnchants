@@ -43,13 +43,16 @@ import kotlin.math.ceil
 object EnchantGUI {
     private lateinit var menu: Menu
     private var groupMenu: Menu? = null
-    private val enchantInfoMenus = Caffeine.newBuilder().build<Pair<EcoEnchant, Int>, Menu>()
+    private val enchantInfoMenus = Caffeine.newBuilder().maximumSize(256).build<Pair<EcoEnchant, Int>, Menu>()
     private var allEnchantsSorted: List<Enchantment> = emptyList()
+    private var searchNames: Map<Enchantment, String> = emptyMap()
 
     internal fun reload() {
+        GuideBrowser.reload()
         cachedEnchantmentSlots.invalidateAll()
         enchantInfoMenus.invalidateAll()
         allEnchantsSorted = EcoEnchants.values().map { it.enchantment }.sortForDisplay()
+        searchNames = allEnchantsSorted.associateWith { GuideQuery.normalize(it.wrap().getFormattedName(0) + " " + it.key.key) }
 
         menu = menu(plugin.configYml.getInt("enchant-gui.rows")) {
             title = plugin.configYml.getFormattedString("enchant-gui.title")
@@ -90,7 +93,7 @@ object EnchantGUI {
 
                 val canSeeHidden = player.hasPermission("ecoenchants.seehidden")
                 val baseEnchants = if (!hasItem) {
-                    EcoEnchants.values().filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
+                    allEnchantsSorted.filter { (it.wrap() as? EcoEnchant)?.let { wrapped -> !wrapped.isHiddenFromGui || canSeeHidden } == true }
                 } else {
                     atCaptive.applicableEnchantments.filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
                         .subtract(atCaptive.fast().enchants.keys)
@@ -114,7 +117,16 @@ object EnchantGUI {
                     baseEnchants
                 }
 
-                menu.setState(player, "enchants", filteredEnchants)
+                val visibleEnchants = if (GuideBrowser.enabled) {
+                    val state = GuideBrowser.state(menu, player)
+                    val query = GuideQuery.normalize(state.query)
+                    val targets = GuideBrowser.acceptedTargets(state.filter)
+                    filteredEnchants.filter { enchantment ->
+                        (searchNames[enchantment] ?: "").contains(query) &&
+                            GuideQuery.matchesTargets((enchantment.wrap() as? EcoEnchant)?.targets?.map { it.id }?.toSet() ?: emptySet(), targets)
+                    }
+                } else filteredEnchants
+                menu.setState(player, "enchants", visibleEnchants)
 
                 // Reset to page 1 when an item is placed or removed from the captive slot
                 val previousHasItem = menu.getState<Boolean>(player, "hasItem") ?: false
@@ -127,15 +139,17 @@ object EnchantGUI {
                 // Compute directly from filteredEnchants to avoid a stale getMaxPage() value
                 // (maxPages may be evaluated before onRender fires).
                 val perPage = plugin.configYml.getInt("enchant-gui.enchant-area.width") * plugin.configYml.getInt("enchant-gui.enchant-area.height")
-                val maxPage = if (filteredEnchants.isEmpty()) {
-                    0
+                val maxPage = if (visibleEnchants.isEmpty()) {
+                    1
                 } else {
-                    ceil(filteredEnchants.size.toDouble() / perPage).toInt()
+                    ceil(visibleEnchants.size.toDouble() / perPage).toInt()
                 }
                 if (menu.getPage(player) > maxPage) {
                     menu.setState(player, Page.PAGE_KEY, 1)
                 }
             }
+
+            GuideBrowser.controls(this, ::openBrowser)
 
             val pane = EnchantmentScrollPane()
 
@@ -189,20 +203,19 @@ object EnchantGUI {
                         onLeftClick { event, _ ->
                             val groupGui = groupMenu ?: return@onLeftClick
                             val player = event.whoClicked as Player
-                            returnCaptiveItems(player, menu.getCaptiveItems(player))
-                            groupGui.open(player)
+                            GuideBrowser.navigate(player) { groupGui.open(player) }
                         }
                     }
                 )
             }
 
             maxPages { player ->
-                val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: emptyList()
+                val enchants = menu.getState<List<Enchantment>>(player, "enchants") ?: emptyList()
                 val total = enchants.size
                 val perPage = pane.size
 
                 val pages = if (total == 0) {
-                    0
+                    1
                 } else {
                     ceil(total.toDouble() / perPage).toInt()
                 }
@@ -303,21 +316,32 @@ object EnchantGUI {
         }
     }
 
+    internal fun openBrowser(player: Player, state: GuideState) {
+        menu.open(player)
+        GuideBrowser.restore(menu, player, state)
+    }
+
     fun openInfoGUI(player: Player, enchant: EcoEnchant, level: Int = -1) {
+        openGuideInfo(player, enchant, level, null)
+    }
+
+    internal fun openGuideInfo(player: Player, enchant: EcoEnchant, level: Int, returnState: GuideState?) {
         val effectiveLevel = if (level == -1) {
             if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
         } else {
             level.coerceIn(1, enchant.maximumLevel)
         }
 
-        enchantInfoMenus.get(enchant to effectiveLevel) {
+        val infoMenu = enchantInfoMenus.get(enchant to effectiveLevel) {
             menu(plugin.configYml.getInt("enchantinfo.rows")) {
                 title = enchant.getFormattedName(effectiveLevel)
 
                 setSlot(
                     plugin.configYml.getInt("enchantinfo.item.row"),
                     plugin.configYml.getInt("enchantinfo.item.column"),
-                    enchant.getInformationSlot(player, effectiveLevel)
+                    slot {
+                        setUpdater { viewer, _, _ -> enchant.getInformationSlot(viewer, effectiveLevel).getItemStack(viewer) }
+                    }
                 )
 
                 setMask(
@@ -327,6 +351,43 @@ object EnchantGUI {
                     )
                 )
 
+                if (GuideBrowser.enabled) {
+                    fun button(key: String, delta: Int) {
+                        val path = "enchant-guide.levels.$key"
+                        setSlot(plugin.configYml.getInt("$path.row"), plugin.configYml.getInt("$path.column"), slot {
+                            setUpdater { _, _, _ ->
+                                ItemStackBuilder(Items.lookup(plugin.configYml.getString("$path.item")))
+                                    .setDisplayName(plugin.configYml.getFormattedString("$path.name"))
+                                    .addLoreLines(plugin.configYml.getFormattedStrings("$path.lore").map {
+                                        it.replace("%level%", effectiveLevel.toString()).replace("%max_level%", enchant.maximumLevel.toString())
+                                    }).build()
+                            }
+                            onLeftClick { event, _, current ->
+                                val viewer = event.whoClicked as Player
+                                val next = GuideQuery.level(effectiveLevel, delta, enchant.maximumLevel)
+                                if (next != effectiveLevel) {
+                                    val previous = current.getState<GuideState>(viewer, "guideReturn")
+                                    GuideBrowser.navigate(viewer) { openGuideInfo(viewer, enchant, next, previous) }
+                                }
+                            }
+                        })
+                    }
+                    button("previous", -1)
+                    button("next", 1)
+                    val path = "enchant-guide.levels.back"
+                    setSlot(plugin.configYml.getInt("$path.row"), plugin.configYml.getInt("$path.column"), slot(
+                        ItemStackBuilder(Items.lookup(plugin.configYml.getString("$path.item")))
+                            .setDisplayName(plugin.configYml.getFormattedString("$path.name"))
+                            .addLoreLines(plugin.configYml.getFormattedStrings("$path.lore")).build()
+                    ) {
+                        onLeftClick { event, _, current ->
+                            val viewer = event.whoClicked as Player
+                            val previous = current.getState<GuideState>(viewer, "guideReturn") ?: GuideState()
+                            GuideBrowser.navigate(viewer) { openBrowser(viewer, previous) }
+                        }
+                    })
+                }
+
                 for (config in plugin.configYml.getSubsections("enchantinfo.custom-slots")) {
                     setSlot(
                         config.getInt("row"),
@@ -335,7 +396,9 @@ object EnchantGUI {
                     )
                 }
             }
-        }.open(player)
+        }
+        infoMenu.open(player)
+        infoMenu.setState(player, "guideReturn", returnState)
     }
 
     private fun openGroupGUI(player: Player, groupId: String) {
@@ -352,15 +415,28 @@ private class EnchantmentScrollPane : GUIComponent {
         val index = column + ((row - 1) * columns) - 1
         val page = menu.getPage(player)
 
-        val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: return defaultSlot
+        val enchants = menu.getState<List<Enchantment>>(player, "enchants") ?: return defaultSlot
         if (enchants.isEmpty()) {
+            if (GuideBrowser.enabled && index == 0) return slot(
+                ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-guide.empty.item")))
+                    .setDisplayName(plugin.configYml.getFormattedString("enchant-guide.empty.name"))
+                    .addLoreLines(plugin.configYml.getFormattedStrings("enchant-guide.empty.lore")).build()
+            )
             return defaultSlot
         }
 
-        val enchant = enchants.getOrNull(index + size * (page - 1)) ?: return defaultSlot
+        val enchant = enchants.getOrNull(index + size * (page - 1))?.wrap() as? EcoEnchant ?: return defaultSlot
 
         val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
-        return enchant.getInformationSlot(player, displayLevel)
+        val information = enchant.getInformationSlot(player, displayLevel)
+        if (!GuideBrowser.enabled) return information
+        return slot(information.getItemStack(player)) {
+            onLeftClick { event, _, current ->
+                val viewer = event.whoClicked as Player
+                val previous = GuideBrowser.state(current, viewer)
+                GuideBrowser.navigate(viewer) { EnchantGUI.openGuideInfo(viewer, enchant, displayLevel, previous) }
+            }
+        }
     }
 
     override fun getRows() = plugin.configYml.getInt("enchant-gui.enchant-area.height")
@@ -373,13 +449,26 @@ private val cachedEnchantmentSlots = Caffeine.newBuilder()
     .build<Pair<EcoEnchant, Int>, Slot>()
 
 private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
-    return cachedEnchantmentSlots.get(this to level) {
-        slot(
+    fun build(): Slot = slot(
             EnchantedBookBuilder()
                 .addStoredEnchantment(enchantment, level)
                 .addItemFlag(ItemFlag.HIDE_ENCHANTS)
                 .setDisplayName(this.getFormattedName(level))
                 .addLoreLines(this.getFormattedDescription(level, player))
+                .addLoreLines(if (GuideBrowser.enabled) {
+                    val sources = mutableListOf<String>()
+                    fun add(id: String, available: Boolean) {
+                        if (available) sources += plugin.configYml.getFormattedString("enchant-guide.sources.$id")
+                    }
+                    add("table", plugin.configYml.getBool("enchanting-table.enabled") && isObtainableThroughEnchanting)
+                    add("trading", plugin.configYml.getBool("villager.enabled") && isObtainableThroughTrading)
+                    add("loot", plugin.configYml.getBool("loot.enabled") && isObtainableThroughDiscovery)
+                    plugin.configYml.getFormattedStrings("enchant-guide.book-lore").map {
+                        it.replace("%level%", level.toString()).replace("%sources%", sources.joinToString(", ").ifEmpty {
+                            plugin.configYml.getFormattedString("enchant-guide.sources.other")
+                        })
+                    }
+                } else emptyList())
                 .addLoreLines {
                     plugin.configYml.getStrings("enchantinfo.item.lore")
                         .map {
@@ -427,7 +516,7 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                 }
                 .unwrap()
         )
-    }
+    return if (GuideBrowser.enabled) build() else cachedEnchantmentSlots.get(this to level) { build() }
 }
 
 fun Boolean.parseYesOrNo(): String =
