@@ -48,3 +48,7 @@
 ## Optional enchantment guide
 
 See [the browser contract and Test validation](docs/ENCHANT-GUIDE.md).
+
+## Native enchant upgrade API
+
+See [ENCHANT-UPGRADE-API.md](docs/ENCHANT-UPGRADE-API.md). No payment custody or durable purchase receipt.

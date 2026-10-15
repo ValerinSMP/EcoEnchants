@@ -1,3 +1,9 @@
+# API nativa de mejoras — 2026-10-15
+
+- Personal canónico; validateUpgrade/applyUpgrade y eventos implementados. Contrato docs/ENCHANT-UPGRADE-API.md.
+- Compilado,38 tests JVM pasan; conjunto190. Runtime/SDK en runtime-20261015. No instalado/activo/gameplay ni lifecycle.
+- Pendientes integración externa y Test real de inventario/holders. Cambios ajenos preservados.
+
 # EcoEnchants — estado
 
 ## Guía entregada a Custom/Sync y propuesta de mesa — 2026-10-14
