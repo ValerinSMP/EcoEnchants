@@ -1,0 +1,308 @@
+{
+  "increment": 6,
+  "changes": [
+    {
+      "id": "boss_hunter",
+      "enchanting": 30,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "formula": "1 + 0.1 * %level%",
+      "sourceTestSha256": "fca152d8a92be27c211f0e3fbc92687ef683162a36b91cc27dedabe569a9928d",
+      "candidateSha256": "55eb692913e2c0dfb38f18d162368057ba95165befe805fc5babec492a81da87",
+      "definitionPath": "boss_hunter.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "end_affinity",
+      "enchanting": 12,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "nether_affinity"
+      ],
+      "type": "normal",
+      "formula": "1.2 + %level% * 0.1",
+      "sourceTestSha256": "975ea53cbf6099db486d5ca0af6eacab034ba0b24c57a8c230cbc00c70ab6376",
+      "candidateSha256": "ad34d6dac28c888ea8bf0995d3c2882a2189677790b7272666c0f697d0e5d892",
+      "definitionPath": "end_affinity.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "nether_affinity",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "end_affinity"
+      ],
+      "type": "normal",
+      "formula": "1.2 + %level% * 0.1",
+      "sourceTestSha256": "32a9f7860327349b93c1cac8b8ad420129db934a66dfe60f91ba0216294fec0a",
+      "candidateSha256": "30bfa64b92ac6620ddb9776d4053fc02f6811249e6e99e860a43742a357abc10",
+      "definitionPath": "nether_affinity.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "finishing",
+      "enchanting": 14,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "prosecute"
+      ],
+      "type": "normal",
+      "formula": "1 + ((1 - %victim_health% / %victim_max_health%) * 0.1 * %level%)",
+      "sourceTestSha256": "12dff9f7e8598c1f3707772d68f17e1058cdd044627dcd5c0253cc294f3b44d4",
+      "candidateSha256": "5ed6ee327c5dee86df14ee161042d4c32e7d85de689a6f61b7ae55946294bb72",
+      "definitionPath": "finishing.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": "https://hypixelskyblock.minecraft.wiki/w/Execute",
+      "referenceNormal": "I–V",
+      "referenceChecked": "2026-10-20",
+      "difference": "0.2/0.4/0.6/0.8/1% por cada punto porcentual de salud faltante; local máximo10/20/30/40/50% con salud faltante completa, la mitad del coeficiente normal de referencia."
+    },
+    {
+      "id": "first_strike",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "formula": "1.2 + 0.12 * %level%",
+      "sourceTestSha256": "0f1da10ab6095b4ecceb7edcf39214e1cc25480c99c51cca17808dd8a9d6c810",
+      "candidateSha256": "436a06334cb84237d3177f20e0c491d0505e83bc62771084aeeab2fe9d29cc7c",
+      "definitionPath": "first_strike.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": "https://hypixelskyblock.minecraft.wiki/w/First_Strike",
+      "referenceNormal": "I–IV",
+      "referenceChecked": "2026-10-20",
+      "difference": "25/50/75/100% normal; V125 especial. LocalI–V32/44/56/68/80% a salud completa; no mismo contador y no copia tier especial."
+    },
+    {
+      "id": "fortitude",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "armor"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "formula": "1 + %level% * 0.02",
+      "sourceTestSha256": "3fbddb74f02b1758da9395cff52f8f2543b60d0516b3328fbf2eb8a4f49b9412",
+      "candidateSha256": "73a9f0257f9b70322c0b516f812e4ca5aa70fb4296a245a8e9e0492ad039bafd",
+      "definitionPath": "fortitude.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "sculk_slayer",
+      "enchanting": 5,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee",
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [
+        "ender_slayer",
+        "crimson_slayer"
+      ],
+      "type": "normal",
+      "formula": "1 + (0.2 + (%level% * 0.1))",
+      "sourceTestSha256": "8f640b875aba026c880d7227a940981670e662452a551ed7b230107c0c81a9cf",
+      "candidateSha256": "e43138053e944c05df73ed0f7c5c315efcea58f82d6e98ae5dbccfc99d2292ad",
+      "definitionPath": "sculk_slayer.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "skull_puncture",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow",
+        "crossbow",
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "formula": "1 + 0.1 * %level%",
+      "sourceTestSha256": "67d1d301a7e8557624a693db2008e71165eb0ed591a0240bbf176044a7e02820",
+      "candidateSha256": "7c505a298bc3e3f8967b08141e5061132033054bca95c54f44c028f8c522cc90",
+      "definitionPath": "skull_puncture.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "snipe",
+      "enchanting": 6,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "formula": "1 + (%distance% / (11 - ceil(%level% / 2))) * 0.01 * %level%",
+      "sourceTestSha256": "5264c26afdc8aa6c558cd2c6c410f44d73e20ba870e4b435c80ccc2cb15bfb55",
+      "candidateSha256": "5ebdc553b7ca8efbcbf8ddef8c242abd352bdfaf9e53d2da903ed416358c5624",
+      "definitionPath": "snipe.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "wyvern",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "elytra"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "formula": "1 + (0.15 * %level%)",
+      "sourceTestSha256": "b76c6e423ab6c1e676654d898ca6348f62a8587761d3da5334cd5c5faa3a43e2",
+      "candidateSha256": "bbeff38f91ce27ec588c7219e31dbf973f235c0ebefbb3cb774a77d5de1f5511",
+      "definitionPath": "wyvern.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": null,
+      "difference": "Mecánica local, sin equivalencia Hypixel verificada; fórmula preservada, solo suma aditiva y lore fiel. No afirmar un tier Hypixel inventado."
+    },
+    {
+      "id": "prosecute",
+      "enchanting": 25,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "finishing"
+      ],
+      "type": "normal",
+      "formula": "1 + ((%victim_health% / %victim_max_health%) * 0.05 * %level%)",
+      "sourceTestSha256": "9198c36f6fe37360562763230421a9e5dd992eff2ef7e84e8f30a7cbc55c398a",
+      "candidateSha256": "179d84831f93d8e81e3df2469accac55177fb34402806cc2a7fa947ce5a9aa7b",
+      "definitionPath": "prosecute.yml",
+      "validation": "native effect/condition/filter/placeholder registration source reviewed; YAML parsed; actual Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "reference": "https://hypixelskyblock.minecraft.wiki/w/Prosecute",
+      "referenceNormal": "I–V",
+      "referenceChecked": "2026-10-20",
+      "difference": "0.1/0.2/0.3/0.4/0.7% por punto porcentual de salud restante; local máximo5/10/15/20/25%, coeficiente menor con misma fracción."
+    }
+  ],
+  "requires": "increment-5 coordinated runtime; no new JAR",
+  "installed": false
+}
