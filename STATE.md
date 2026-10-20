@@ -1,3 +1,8 @@
+# Lore de requisitos — 2026-10-20
+
+- Entrega implementada/compilada y validada estáticamente; sin instalación/lifecycle ni prueba visual. Detalle y límites: docs/REQUIREMENT-LORE-STATE.md y docs/REQUIREMENT-LORE.md.
+- Cuatro candidatos coordinados: eco/LibreForge/EcoSkills/EcoEnchants. Compras/XP/YAML/SDK conservados; cambios ajenos excluidos.
+
 # Elegibilidad de originales — entrega sin instalar, 2026-10-20
 
 - Incremento sobre 29c25061, fuente personal. ProcGuards permite NATURAL, COMMAND (/summon), SPAWNER_EGG y DISPENSE_EGG. Continúan fuera SPAWNER/TRIAL_SPAWNER, CUSTOM/desconocidos y todas las exclusiones nativas por jefe/Mythic/NPC/mascota/aliado/PDC/tag/nombre/invulnerabilidad/protección. Sin bypass de owner ni excepciones en vEnchanting.
