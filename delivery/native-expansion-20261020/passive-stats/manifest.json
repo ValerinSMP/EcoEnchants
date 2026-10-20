@@ -1,0 +1,380 @@
+{
+  "increment": 7,
+  "changes": [
+    {
+      "id": "crit_luck",
+      "enchanting": 9,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_chance",
+            "amount": "4 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "c517c2bbfce780d2228aca21c6a2dac62f11484ec660c55651c026fc4337258f",
+      "candidateSha256": "8c126b2640e060ac3ce855d96c4a1bb3ea41df3df2f837c219e49c5b3fbf8e9d",
+      "definitionPath": "crit_luck.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "criticals",
+      "enchanting": 14,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_chance",
+            "amount": "5 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "e358caac28d0cb67f1caeb0be8edbac11de3ff67b0c5ac182c305b3a2517d390",
+      "candidateSha256": "5aa3152389fab0f7a21418d6ad58ef63237f2debe039b745e2db020cb63378ac",
+      "definitionPath": "criticals.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "forceful_crit",
+      "enchanting": 20,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_damage",
+            "amount": "3 + 2 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "b650127a98d9ea14b8d26d74002ace0bac5b0544eb2bb28d94cba6a4868e9685",
+      "candidateSha256": "9d759a9f604ecee6d64497df38a02f083e9cbd24db279d6f79a6b0ca94993438",
+      "definitionPath": "forceful_crit.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "might",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "strength",
+            "amount": "-1 + 4 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "802ba8c4e93d36b0523e677a9af3e66afbe2ceb2e55d36dd8da863959ca10452",
+      "candidateSha256": "e38d0eaf3d54cf61f4b7173f65bc9ba39be3d4e803ac131589d78759ffe1d426",
+      "definitionPath": "might.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "overload",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_chance",
+            "amount": "1 * %level%"
+          }
+        },
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_damage",
+            "amount": "1 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "3dd074c75366061f4b5f96b2c4598bf94c5d55f33c7631aac4965f8bca1af6b8",
+      "candidateSha256": "b34c59e03b3f522a20fcb0f3b84612a95aa0f879267b4968cafce0a915e9570a",
+      "definitionPath": "overload.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "steel_string",
+      "enchanting": 17,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "strength",
+            "amount": "3 + 2 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "aa0fb67dfa0c470df1d58c354d0614318f34121034b36fcfaf5ccec564d2056d",
+      "candidateSha256": "fdb40fdc4557591c01f9eddbb1714538216fd1ab8968244fffb255ac4a4943d9",
+      "definitionPath": "steel_string.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "strongarm",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "strength",
+            "amount": "2 + 4 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "87007f4f363b851cad2895a61fb87d055f117dd9b8cac829296eed2654fe9bbe",
+      "candidateSha256": "4ec3c12281a4f5218b4b5ad2ff7fbafb54840352cf3c4c889bb622247531b129",
+      "definitionPath": "strongarm.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vicious",
+      "enchanting": 26,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "ferocity",
+            "amount": "5 + 5 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "19e9008eb609f9db3ae1c9c00e679a7ab40c8e977484da9615b84d4feb367ca2",
+      "candidateSha256": "ee3d7dfaa58e2c7f51412941d4ac380ae45a0451b18a509f5925a1dec4a4b9a4",
+      "definitionPath": "vicious.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "dexterity",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "attack_speed_multiplier",
+          "args": {
+            "multiplier": "1 + 0.1 * %level%"
+          }
+        }
+      ],
+      "sourceTestSha256": "205d5d6cc927bf8eaadab4cc3c56ab257a92919c0789f9e6be573d7ca055fd63",
+      "candidateSha256": "593b83b63d75357eb89ac583efe5f8356038a4104623f65dbae16b609e6807ce",
+      "definitionPath": "dexterity.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "wisdom",
+      "enchanting": 27,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword",
+        "axe",
+        "pickaxe",
+        "shovel",
+        "hoe",
+        "bow",
+        "crossbow",
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "xp_multiplier",
+          "args": {
+            "multiplier": "1.0 + (%level% * 0.2)"
+          }
+        }
+      ],
+      "sourceTestSha256": "f5965e463d5023c4833a86faf77be68ce46d859a86582fc1f415d7223b46eea7",
+      "candidateSha256": "ca7270627e60f25446809b6db16578cb8bc777d463389f5b5f3c25a41d2eb0dd",
+      "definitionPath": "wisdom.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "caffeinated",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "effects": [
+        {
+          "id": "attack_speed_multiplier",
+          "args": {
+            "multiplier": "1 + %level% * 0.05"
+          },
+          "triggers": []
+        }
+      ],
+      "sourceTestSha256": "1340ff64c0133b381237713afac503981e52547163beecf4634466542c07f754",
+      "candidateSha256": "40fbc94126ea46ef43ed7a1bc745f67376d06f6a9a84dd6978235ee10431b78a",
+      "definitionPath": "caffeinated.yml",
+      "reference": null,
+      "difference": "Efecto local conservado; sin equivalencia Hypixel normal verificada, no se atribuye una mecánica distinta por el nombre.",
+      "validation": "native source registration/argument/holder path reviewed; YAML structural/hash validation; runtime Test pending",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    }
+  ],
+  "requires": "increment-5 runtime and unchanged EcoSkills requirement-views; no new JAR"
+}

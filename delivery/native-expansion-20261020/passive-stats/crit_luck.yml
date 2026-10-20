@@ -1,0 +1,27 @@
+display-name: Suerte Crítica
+description: Da &a+%placeholder%&r de %ecoskills_crit_chance_name%
+placeholder: 4 * %level%
+type: normal
+targets:
+- melee
+conflicts: []
+rarity: uncommon
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: add_stat
+  args:
+    stat: crit_chance
+    amount: 4 * %level%
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 9
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lIX'
+dependencies:
+- EcoSkills
+enabled: true
