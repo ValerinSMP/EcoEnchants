@@ -1,0 +1,27 @@
+enabled: true
+display-name: Paso de ceniza
+description: '&7Al salir de la lava, reduce un &a%placeholder%%&7 el daño de fuego durante 3 s (20 s).'
+placeholder: 3 + 2 * %level%
+type: normal
+targets:
+- boots
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_reactive
+  args:
+    family: paso_ceniza
+    percent: 3 + 2 * %level%
+  triggers:
+  - native_reactive_action
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 35
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXXV'

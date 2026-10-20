@@ -1,0 +1,225 @@
+{
+  "increment": 9,
+  "changes": [
+    {
+      "id": "ancla",
+      "enchanting": 22,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        5,
+        8,
+        10
+      ],
+      "cooldownSeconds": 15,
+      "definitionPath": "ancla.yml",
+      "candidateSha256": "7b29e1529634b6db4c9a0884a7550ebc5671c25226697c662afdc560cf67bcce",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    },
+    {
+      "id": "marca_celeste",
+      "enchanting": 21,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        4,
+        6,
+        8
+      ],
+      "cooldownSeconds": 10,
+      "definitionPath": "marca_celeste.yml",
+      "candidateSha256": "fd24762290bb0462e64a9885bad190b45d59f2a8412530e0f9ae6b3464246498",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    },
+    {
+      "id": "guardia_cristal",
+      "enchanting": 25,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "chestplate"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        8,
+        10,
+        12
+      ],
+      "cooldownSeconds": 20,
+      "definitionPath": "guardia_cristal.yml",
+      "candidateSha256": "cf696c07432f13ee4919bd844c14fe583727d3a08fbb8d58987cf903fd2a2755",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    },
+    {
+      "id": "velo_lunar",
+      "enchanting": 32,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "helmet"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        5,
+        7,
+        9
+      ],
+      "cooldownSeconds": 20,
+      "definitionPath": "velo_lunar.yml",
+      "candidateSha256": "16683620370cc3d928643ce5465726ed97d359a237f9f4bf43da1cdc36847470",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    },
+    {
+      "id": "vigilia",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "leggings"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        5,
+        7,
+        9
+      ],
+      "cooldownSeconds": 20,
+      "definitionPath": "vigilia.yml",
+      "candidateSha256": "0df30e0d7f2149378e0f44580d9b0d7ca0841af115c2fe014b34d79404486f7d",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    },
+    {
+      "id": "aguja_aurora",
+      "enchanting": 30,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        4,
+        6,
+        8
+      ],
+      "cooldownSeconds": 12,
+      "definitionPath": "aguja_aurora.yml",
+      "candidateSha256": "77d87e40925223f1b3a8224140cd5b6334175cd40e61e3c4820c8e1d0062c02e",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    },
+    {
+      "id": "paso_ceniza",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        5,
+        7,
+        9
+      ],
+      "cooldownSeconds": 20,
+      "definitionPath": "paso_ceniza.yml",
+      "candidateSha256": "8fc038763563ca82c635e0bcf719c5e22df7f3719f45b6579abfab0223590f3e",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    },
+    {
+      "id": "eclipse",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "combo"
+      ],
+      "type": "normal",
+      "values": [
+        6,
+        8,
+        10
+      ],
+      "cooldownSeconds": 25,
+      "definitionPath": "eclipse.yml",
+      "candidateSha256": "69b0ea762497719d96d0c862b9a08547e489f7a2a01b90805166ad5d5452f143",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE114 JVM/mocks plus closure/smoke composed runtime; actual registration/effect/server tests pending"
+    }
+  ],
+  "requires": "coordinated eco utility/LF bursts/EE reactive + unchanged EcoSkills requirement-views",
+  "reference": "Originales Valerin; plan mecánico histórico y niveles actuales levels.json"
+}

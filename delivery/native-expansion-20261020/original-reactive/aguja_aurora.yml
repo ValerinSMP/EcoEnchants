@@ -1,0 +1,27 @@
+enabled: true
+display-name: Aguja de aurora
+description: '&7Acertar a un monstruo a más de 15 bloques aumenta un &a%placeholder%%&7 el daño de ese disparo completamente cargado (12 s).'
+placeholder: 2 + 2 * %level%
+type: normal
+targets:
+- crossbow
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_reactive
+  args:
+    family: aguja_aurora
+    percent: 2 + 2 * %level%
+  triggers:
+  - native_reactive_action
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 30
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXX'

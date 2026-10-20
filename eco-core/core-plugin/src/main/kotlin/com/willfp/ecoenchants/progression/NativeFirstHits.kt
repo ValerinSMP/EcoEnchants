@@ -26,7 +26,7 @@ internal object NativeFirstHits {
  fun retire(uuid:UUID){ledger.retire(uuid)}
  fun finish(attempt:UUID,damage:Double,event:EntityDamageEvent){
   ledger.resolve(attempt,when{
-   event.isCancelled||!event.finalDamage.isFinite()||event.finalDamage<=0->FirstHitResolution.REJECTED
+   explicitlyRejectedDamage(event)->FirstHitResolution.REJECTED
    damage>0->FirstHitResolution.CONFIRMED
    else->FirstHitResolution.UNCERTAIN
   })

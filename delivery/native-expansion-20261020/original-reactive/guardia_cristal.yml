@@ -1,0 +1,27 @@
+enabled: true
+display-name: Guardia de cristal
+description: '&7Tras recibir tres golpes de monstruos en 4 s, reduce un &a%placeholder%%&7 el daño del siguiente golpe durante 3 s (20 s).'
+placeholder: 6 + 2 * %level%
+type: normal
+targets:
+- chestplate
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_reactive
+  args:
+    family: guardia_cristal
+    percent: 6 + 2 * %level%
+  triggers:
+  - native_reactive_action
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 25
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXV'

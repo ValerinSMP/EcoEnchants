@@ -39,7 +39,7 @@ internal object OriginalRuntime : Listener {
                               val itemId: UUID,val item: ItemStack,val tier: Int)
     private var shots = ShotLedger<Source>(4096,30_000) { now() }
     private data class Pending(val event: EntityDamageEvent,val source: Source?,val combat: NativeCombatProgression.Capture?,val victim: LivingEntity,
-                               val before: Double,val eventId: UUID,val arrow: UUID?,val burst:NativeBurstProgression.Capture?=null,var task: BukkitTask? = null)
+                               val before: Double,val eventId: UUID,val arrow: UUID?,val burst:NativeBurstProgression.Capture?=null,val reactive:NativeReactiveProgression.Capture?=null,var task: BukkitTask? = null)
     private val pending = IdentityHashMap<EntityDamageEvent,Pending>()
     private data class Proof(val pending: Pending,val damage: Double)
     private var proof: Proof? = null
@@ -129,9 +129,10 @@ internal object OriginalRuntime : Listener {
         val original=if(secondary==0&&DamageMultiplierBypass.current==null&&event is EntityDamageByEntityEvent) originalSource(event,victim) else null
         val combat=NativeCombatProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
         val burst=NativeBurstProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
-        if(original==null&&combat==null&&burst==null)return
+        val reactive=NativeReactiveProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
+        if(original==null&&combat==null&&burst==null&&reactive==null)return
         if(pending.size>=limit("max-pending-hits",512,1024)){combat?.let{NativeCombatProgression.uncertain(it,victim)};return}
-        val candidate=Pending(event,original?.first,combat,victim,victim.health,UUID.randomUUID(),original?.second,burst)
+        val candidate=Pending(event,original?.first,combat,victim,victim.health,UUID.randomUUID(),original?.second,burst,reactive)
         pending[event]=candidate
         candidate.task=Bukkit.getScheduler().runTask(owner,Runnable { confirm(candidate) })
     }
@@ -162,7 +163,8 @@ internal object OriginalRuntime : Listener {
     internal fun age(player: Player): Long = sessions[player.uniqueId]?.let { now()-it.arrived } ?: -1
     internal fun sameSession(id: UUID,expected: UUID): Boolean = sessions[id]?.token==expected
     private fun confirm(candidate: Pending) {
-        if(pending.remove(candidate.event)!==candidate)return
+        if(pending[candidate.event]!==candidate)return
+        pending.remove(candidate.event)
         candidate.task?.cancel()
         var observedDamage=0.0
         try {
@@ -171,6 +173,7 @@ internal object OriginalRuntime : Listener {
         observedDamage=damage
         if(damage<=0)return
         candidate.combat?.let { NativeCombatProgression.confirm(it,candidate.event,victim,candidate.before,damage) }
+        candidate.reactive?.let{NativeReactiveProgression.confirm(it,candidate.event,victim,damage,candidate.eventId)}
         candidate.burst?.let{NativeBurstProgression.confirm(it,candidate.event,victim,damage,candidate.eventId)}
         val source=candidate.source ?: return
         val player=Bukkit.getPlayer(source.player) ?: return
@@ -185,7 +188,7 @@ internal object OriginalRuntime : Listener {
             ConfirmedOriginalHit.dispatch(player.toDispatcher(),TriggerData(player=player,victim=victim,item=itemCopy,
                 location=victim.location,event=candidate.event,value=damage),listOf(holder))
         } finally { proof=previous }
-        } finally { NativeFirstHits.finish(candidate.eventId,observedDamage,candidate.event) }
+        } finally { NativeFirstHits.finish(candidate.eventId,observedDamage,candidate.event);NativeReactiveProgression.finish(candidate.event) }
     }
     fun execute(family: OriginalProcEngine.Family,amount: Double,data: TriggerData): Boolean {
         val confirmed=proof ?: return false
@@ -218,6 +221,8 @@ internal object OriginalRuntime : Listener {
         return true
     }
     internal fun recordNative(family:OriginalProcEngine.Family,hit:OriginalProcEngine.Hit)=engine.record(family,hit)
+    internal fun reserveNative(family:OriginalProcEngine.Family,player:UUID,attempt:UUID)=engine.reserve(family,player,attempt)
+    internal fun rollbackNative(family:OriginalProcEngine.Family,player:UUID,lease:OriginalProcEngine.Lease)=engine.rollback(family,player,lease)
     internal fun procVisual(player:Player,origin:Location,requested:Int)=visual(player,origin,OriginalProcEngine.Family.ECO_RESONANTE,requested)
     private fun applySlow(player: Player,target: LivingEntity,fraction: Double) {
         if(!target.isValid||target.isDead)return
@@ -263,17 +268,18 @@ internal object OriginalRuntime : Listener {
         if(secondary>0&&event.trigger.trigger.id in setOf("melee_attack","bow_attack","trident_attack","headshot"))event.isCancelled=true
     }
     private fun retire(id: UUID) {
+        NativeReactiveProgression.retire(id)
         NativeBurstProgression.retire(id)
         NativeCombatProgression.retire(id)
         sessions.remove(id);engine.clearEntity(id)
-        pending.values.filter { it.source?.player==id||it.victim.uniqueId==id||it.combat?.actor==id }.toList().forEach { pending.remove(it.event);it.task?.cancel() }
+        pending.values.filter { it.source?.player==id||it.victim.uniqueId==id||it.combat?.actor==id||it.reactive?.player==id }.toList().forEach { pending.remove(it.event);it.task?.cancel() }
         shots.removeOwner(id)
         slows.filter { it.value.source==id||it.key==id }.keys.toList().forEach { removeSlow(it) }
     }
-    @EventHandler fun join(event: PlayerJoinEvent){token(event.player);NativeCombatProgression.arrival(event.player)}
-    @EventHandler fun respawn(event: PlayerRespawnEvent){token(event.player);NativeCombatProgression.arrival(event.player)}
+    @EventHandler fun join(event: PlayerJoinEvent){token(event.player);NativeCombatProgression.arrival(event.player);NativeReactiveProgression.arrival(event.player)}
+    @EventHandler fun respawn(event: PlayerRespawnEvent){token(event.player);NativeCombatProgression.arrival(event.player);NativeReactiveProgression.arrival(event.player)}
     @EventHandler fun quit(event: PlayerQuitEvent){retire(event.player.uniqueId)}
-    @EventHandler fun world(event: PlayerChangedWorldEvent){retire(event.player.uniqueId);token(event.player);NativeCombatProgression.arrival(event.player)}
+    @EventHandler fun world(event: PlayerChangedWorldEvent){retire(event.player.uniqueId);token(event.player);NativeCombatProgression.arrival(event.player);NativeReactiveProgression.arrival(event.player)}
     @EventHandler(priority=EventPriority.MONITOR)
     fun death(event: EntityDeathEvent) {
         // Death is a real post-damage boundary and may confirm the third hit immediately.

@@ -1,0 +1,27 @@
+enabled: true
+display-name: Ancla
+description: '&7Reduce un &a%placeholder%%&7 el empuje recibido de monstruos mientras permaneces en el suelo (15 s).'
+placeholder: min(5 + 3 * (%level% - 1), 10)
+type: normal
+targets:
+- boots
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_reactive
+  args:
+    family: ancla
+    percent: min(5 + 3 * (%level% - 1), 10)
+  triggers:
+  - native_reactive_action
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 22
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXII'

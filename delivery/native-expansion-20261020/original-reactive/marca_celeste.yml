@@ -1,0 +1,33 @@
+enabled: true
+display-name: Marca celeste
+description: '&7Una flecha completamente cargada marca al monstruo durante 3 s para que tu siguiente golpe directo inflija un &a%placeholder%%&7 más de daño (10 s).'
+placeholder: 2 + 2 * %level%
+type: normal
+targets:
+- bow
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_reactive
+  args:
+    family: marca_celeste
+    percent: 2 + 2 * %level%
+  triggers:
+  - native_reactive_action
+- id: native_burst
+  args:
+    family: marca_celeste
+    percent: 2 + 2 * %level%
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 21
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXI'

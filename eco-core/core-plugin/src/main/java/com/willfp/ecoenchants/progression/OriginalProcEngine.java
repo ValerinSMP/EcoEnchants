@@ -20,7 +20,15 @@ public final class OriginalProcEngine {
         TORMENTA_ENCADENADA(5,7_000,18_000,new double[]{6,8,10}),
         COMETA(3,8_000,20_000,new double[]{10,12,15}),
         CONSTELACION(3,8_000,25_000,new double[]{8,10,12}),
-        LEGADO_VALERIN(8,10_000,30_000,new double[]{15});
+        LEGADO_VALERIN(8,10_000,30_000,new double[]{15}),
+        ANCLA(1,1_000,15_000,new double[]{5,8,10}),
+        MARCA_CELESTE(1,1_000,10_000,new double[]{4,6,8}),
+        GUARDIA_CRISTAL(3,4_000,20_000,new double[]{8,10,12}),
+        VELO_LUNAR(1,1_000,20_000,new double[]{5,7,9}),
+        VIGILIA(1,1_000,20_000,new double[]{5,7,9}),
+        AGUJA_AURORA(1,1_000,12_000,new double[]{4,6,8}),
+        PASO_CENIZA(1,1_000,20_000,new double[]{5,7,9}),
+        ECLIPSE(6,8_000,25_000,new double[]{6,8,10});
         final int hits;final long window,cooldown;final double[] values;
         Family(int hits,long window,long cooldown,double[]values){this.hits=hits;this.window=window;this.cooldown=cooldown;this.values=values;}
     }
@@ -34,11 +42,12 @@ public final class OriginalProcEngine {
                              double radius,int durationTicks,int maxParticles) {}
     private record Key(UUID player,UUID item,UUID target,UUID world) {}
     private record Window(int hits,long expires) {}
+    record Lease(UUID id,long until) {}
     private final Thread owner=Thread.currentThread();
     private final LongSupplier millis;
     private final int capacity;
     private final EnumMap<Family,LinkedHashMap<Key,Window>> windows=new EnumMap<>(Family.class);
-    private final EnumMap<Family,LinkedHashMap<UUID,Long>> cooldowns=new EnumMap<>(Family.class);
+    private final EnumMap<Family,LinkedHashMap<UUID,Lease>> cooldowns=new EnumMap<>(Family.class);
     private record EventKey(Family family,UUID event) {}
     private final LinkedHashMap<EventKey,Long> events=new LinkedHashMap<>();
     public OriginalProcEngine(int capacity,LongSupplier millis){
@@ -70,17 +79,28 @@ public final class OriginalProcEngine {
         if(hits<family.hits){map.put(key,new Window(hits,old==null?now+family.window:old.expires()));return Optional.empty();}
         // At capacity, deny instead of evicting an active cooldown and permitting a bypass.
         if(cd.size()>=capacity)return Optional.empty();
-        map.remove(key);cd.put(h.player(),now+family.cooldown);
+        map.remove(key);cd.put(h.player(),new Lease(h.event(),now+family.cooldown));
         return Optional.of(new Activation(family,family.values[h.tier()-1],h.finalDamage(),
             switch(family){case ECO_RESONANTE,PULSO_ABISAL,CONSTELACION->2;case RUPTURA_SONICA,TORMENTA_ENCADENADA->3;default->1;},
             switch(family){case ECO_RESONANTE,PULSO_ABISAL->2;case BRASA_ERRANTE,REBOTE_PRISMATICO,RUPTURA_SONICA,TORMENTA_ENCADENADA,CONSTELACION->3;default->0;},
             switch(family){case SELLO_GLACIAL->40;case ESTELA_CAZADOR,CICATRIZ_IGNEA->60;default->0;},family==Family.ECO_RESONANTE||family==Family.LEGADO_VALERIN?16:12));
     }
+    /** Explicit reversible cooldown reservation for a native pre-damage/impulse boundary. No confirmed hit is fabricated. */
+    Optional<Lease> reserve(Family family,UUID player,UUID attempt){
+        main();Objects.requireNonNull(family);Objects.requireNonNull(player);Objects.requireNonNull(attempt);
+        long now=millis.getAsLong();expire(now);var map=cooldowns.get(family);
+        if(map.containsKey(player)||map.size()>=capacity)return Optional.empty();
+        var lease=new Lease(attempt,now+family.cooldown);map.put(player,lease);return Optional.of(lease);
+    }
+    boolean rollback(Family family,UUID player,Lease lease){
+        main();return cooldowns.get(Objects.requireNonNull(family)).remove(player,Objects.requireNonNull(lease));
+    }
     /** No timer. Fixed deadlines keep insertion order, so expiry only visits expired heads. */
     public void expire(long now){
         main();expireLong(events,now);
         for(var f:Family.values()){
-            expireLong(cooldowns.get(f),now);
+            var cds=cooldowns.get(f).entrySet().iterator();
+            while(cds.hasNext()){if(cds.next().getValue().until()>now)break;cds.remove();}
             var it=windows.get(f).entrySet().iterator();
             while(it.hasNext()){if(it.next().getValue().expires()>now)break;it.remove();}
         }

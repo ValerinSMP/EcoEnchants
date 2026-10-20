@@ -48,8 +48,14 @@ internal object NativeBurstProgression : Listener {
  private lateinit var owner:EcoEnchantsPlugin
  private var enabled=false
  private val itemKey=NamespacedKey("ecoenchants","original_item_id")
- private val families=setOf("brasa_errante","estela_cazador","pulso_abisal","rebote_prismatico","cicatriz_ignea","ruptura_sonica","tormenta_encadenada","cometa","constelacion","legado_valerin")
- internal data class Context(val player:UUID,val token:UUID,val world:UUID,val item:ItemStack,val itemId:UUID,val tiers:Map<String,Int>,val kind:String,val charged:Boolean,val submerged:Boolean)
+ private val familiesByKind=mapOf(
+  "melee" to setOf("brasa_errante","cicatriz_ignea","ruptura_sonica","tormenta_encadenada","legado_valerin","eclipse"),
+  "arrow" to setOf("rebote_prismatico","cometa","marca_celeste","aguja_aurora"),
+  "trident" to setOf("pulso_abisal","constelacion"),
+  "ranged_kill" to setOf("estela_cazador"),
+  "protection" to setOf("ancla","guardia_cristal","velo_lunar","vigilia","paso_ceniza")
+ )
+ internal data class Context(val player:UUID,val token:UUID,val world:UUID,val item:ItemStack,val itemId:UUID,val tiers:Map<String,Int>,val kind:String,val charged:Boolean,val submerged:Boolean,val origin:Location)
  internal data class Capture(val sources:List<Context>,val projectile:UUID?)
  private data class Shot(val sources:List<Context>)
  private val shots=ShotLedger<Shot>(4096,30_000){now()}
@@ -69,16 +75,22 @@ internal object NativeBurstProgression : Listener {
  fun close(){reset();enabled=false;HandlerList.unregisterAll(this)}
  fun retire(uuid:UUID){shots.removeOwner(uuid);removeTrail(uuid);dots.filter{it.value.source.player==uuid||it.value.target.uniqueId==uuid}.keys.toList().forEach{dots.remove(it)?.task?.cancel()}}
  private fun refresh(player:Player){player.clearEnchantmentCache();val d=player.toDispatcher();d.forceRefreshHolders();d.flushHolders()}
- private fun context(player:Player,item:ItemStack,kind:String,charged:Boolean,slot:EquipmentSlot?,projectile:Trident?=null):Context? {
-  val tiers=EnchantFinder.find(item).filter{it.enchant.id in families&&it.level in 1..(if(it.enchant.id=="legado_valerin")1 else 3)&&it.enchant.targets.any{target->target.matches(item)}}.associate{it.enchant.id to it.level}
+ internal fun itemContext(player:Player,item:ItemStack,kind:String,charged:Boolean,slot:EquipmentSlot?,projectile:Trident?=null):Context? {
+  val allowed=familiesByKind[kind]?:return null
+  val tiers=EnchantFinder.find(item).filter{it.enchant.id in allowed&&it.level in 1..(if(it.enchant.id=="legado_valerin")1 else 3)&&it.enchant.targets.any{target->target.matches(item)}}.associate{it.enchant.id to it.level}
   if(tiers.isEmpty())return null
   val token=OriginalRuntime.session(player)?:return null
   val frozen=NativeProcAdapters.capture(item,itemKey)?:return null
   if(frozen.stamped){
-   when(slot){EquipmentSlot.HAND->player.inventory.setItemInMainHand(frozen.item);EquipmentSlot.OFF_HAND->player.inventory.setItemInOffHand(frozen.item);EquipmentSlot.FEET->player.inventory.boots=frozen.item;else->if(projectile!=null)projectile.itemStack=frozen.item else return null}
+   when(slot){EquipmentSlot.HAND->player.inventory.setItemInMainHand(frozen.item);EquipmentSlot.OFF_HAND->player.inventory.setItemInOffHand(frozen.item);EquipmentSlot.FEET->player.inventory.boots=frozen.item;EquipmentSlot.HEAD->player.inventory.helmet=frozen.item;EquipmentSlot.CHEST->player.inventory.chestplate=frozen.item;EquipmentSlot.LEGS->player.inventory.leggings=frozen.item;else->if(projectile!=null)projectile.itemStack=frozen.item else return null}
    refresh(player)
   }
-  return Context(player.uniqueId,token,player.world.uid,frozen.item,frozen.id,tiers,kind,charged,player.isInWater)
+  return Context(player.uniqueId,token,player.world.uid,frozen.item,frozen.id,tiers,kind,charged,player.isInWater,player.location.clone())
+ }
+ private fun trailContext(player:Player):Context? {
+  val boots=player.inventory.boots?:return null;val enchant=EcoEnchants.getByID("estela_cazador")?:return null
+  if(boots.getEnchantmentLevel(enchant.enchantment) !in 1..3)return null
+  return itemContext(player,boots,"ranged_kill",true,EquipmentSlot.FEET)
  }
  fun shoot(event:EntityShootBowEvent){
   if(!enabled)return
@@ -88,23 +100,27 @@ internal object NativeBurstProgression : Listener {
   val live=if(event.hand==EquipmentSlot.HAND)player.inventory.itemInMainHand else player.inventory.itemInOffHand
   if(live!=bow)return
   val sources=mutableListOf<Context>()
-  context(player,live,"arrow",event.force>=.99f,event.hand)?.let{sources.add(it)}
-  player.inventory.boots?.let{context(player,it,"ranged_kill",true,EquipmentSlot.FEET)}?.let{sources.add(it)}
+  itemContext(player,live,"arrow",event.force>=.99f,event.hand)?.let{sources.add(it)}
+  trailContext(player)?.let{sources.add(it)}
   if(sources.isNotEmpty())shots.remember(event.projectile.uniqueId,player.uniqueId,Shot(sources))
+ }
+ internal fun projectileSource(projectile:Projectile,player:Player,family:String):Context? {
+  if(projectile.shooter!==player)return null
+  return shots.source(projectile.uniqueId)?.sources?.firstOrNull{family in it.tiers&&it.player==player.uniqueId&&it.world==player.world.uid&&OriginalRuntime.sameSession(it.player,it.token)}
  }
  @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
  fun launch(event:ProjectileLaunchEvent){
   if(!enabled)return
   val trident=event.entity as? Trident?:return;val player=trident.shooter as? Player?:return
   val sources=mutableListOf<Context>()
-  context(player,trident.itemStack,"trident",true,null,trident)?.let{sources.add(it)}
-  player.inventory.boots?.let{context(player,it,"ranged_kill",true,EquipmentSlot.FEET)}?.let{sources.add(it)}
+  itemContext(player,trident.itemStack,"trident",true,null,trident)?.let{sources.add(it)}
+  trailContext(player)?.let{sources.add(it)}
   if(sources.isNotEmpty())shots.remember(trident.uniqueId,player.uniqueId,Shot(sources))
  }
  fun capture(event:EntityDamageEvent,victim:LivingEntity,primary:Boolean):Capture? {
   if(!enabled||!primary||!NativeCombatProgression.gameplay()||event !is EntityDamageByEntityEvent)return null
   val sources=when(val damager=event.damager){
-   is Player->{if(event.cause!=EntityDamageEvent.DamageCause.ENTITY_ATTACK)return null;val item=damager.inventory.itemInMainHand;context(damager,item,"melee",true,EquipmentSlot.HAND)?.let{listOf(it)}?:return null}
+   is Player->{if(event.cause!=EntityDamageEvent.DamageCause.ENTITY_ATTACK)return null;val item=damager.inventory.itemInMainHand;itemContext(damager,item,"melee",true,EquipmentSlot.HAND)?.let{listOf(it)}?:return null}
    is Projectile->{if(event.cause!=EntityDamageEvent.DamageCause.PROJECTILE)return null;val shot=shots.source(damager.uniqueId)?:return null;val shooter=damager.shooter as? Player?:return null;if(shot.sources.any{it.player!=shooter.uniqueId})return null;shot.sources.map{if(it.kind=="trident")it.copy(submerged=shooter.isInWater)else it}}
    else->return null
   }
@@ -132,7 +148,8 @@ internal object NativeBurstProgression : Listener {
   "pulso_abisal"->kind=="trident"&&submerged
   "constelacion"->kind=="trident"
   "rebote_prismatico","cometa"->kind=="arrow"&&charged
-  "cicatriz_ignea","ruptura_sonica","tormenta_encadenada","legado_valerin"->kind=="melee"
+  "cicatriz_ignea","ruptura_sonica","tormenta_encadenada","legado_valerin","eclipse"->kind=="melee"
+  "marca_celeste"->kind=="arrow"&&charged&&!killed
   else->false
  }
  private fun current(source:Context):Player?=Bukkit.getPlayer(source.player)?.takeIf{it.isOnline&&!it.isDead&&it.world.uid==source.world&&OriginalRuntime.sameSession(source.player,source.token)}
@@ -144,9 +161,11 @@ internal object NativeBurstProgression : Listener {
   if(!percent.isFinite()||percent<=0||!ProcGuards.arrivalReady(descriptor,OriginalRuntime.age(data.player!!)))return false
   if(family=="estela_cazador"&&(trails.size>=limit()&&source.player !in trails||id(data.player!!.inventory.boots?:return false)!=source.itemId))return false
   if(family=="cicatriz_ignea"&&(dots.size>=limit()||!p.victim.isValid||p.victim.isDead))return false
+  if(family in setOf("marca_celeste","eclipse")&&!NativeReactiveProgression.canArm(source,family))return false
   val activation=OriginalRuntime.recordNative(descriptor,OriginalProcEngine.Hit(p.eventId,source.player,source.itemId,p.victim.uniqueId,source.world,tier,p.damage,true,true,true,false,false,false,false,false,true,false,false,false)).orElse(null)?:return false
   val player=current(source)?:return false
   when(family){
+   "marca_celeste","eclipse"->NativeReactiveProgression.arm(source,family,tier,percent,if(family=="marca_celeste")p.victim.uniqueId else null)
    "estela_cazador"->trail(player,source,tier)
    "cicatriz_ignea"->{val key=UUID.randomUUID();val dot=Dot(source,p.victim,p.damage*percent/100);dots[key]=dot;scheduleDot(key,dot)}
    "cometa","legado_valerin"->damage(source,p.victim,p.damage*percent/100,true)
@@ -159,7 +178,7 @@ internal object NativeBurstProgression : Listener {
    }
    else->{targets(player,p.victim,activation.radius(),activation.maxTargets()).forEach{damage(source,it,p.damage*percent/100)}}
   }
-  if(family !in setOf("cicatriz_ignea","estela_cazador"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
+  if(family !in setOf("cicatriz_ignea","estela_cazador","marca_celeste","eclipse"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
   return true
  }
  private fun damage(source:Context,target:LivingEntity,amount:Double,fresh:Boolean=false){
