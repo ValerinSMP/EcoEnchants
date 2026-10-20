@@ -1,3 +1,10 @@
+# Progresión Encantador — primer incremento parcial 2026-10-20
+
+- Fuente personal. PescadorIV/ToqueInfernalV configurados según Test y efectos auditados. Núcleo puro Eco resonante/Sello glacial agregado; NO efectos ejecutables, originales excluidos mediante archivos_ nativos y diagnóstico. Bloqueos y pendientes en docs/ENCHANTING-PROGRESSION-FIRST.md.
+-52 tests JVM sin fallos,14 nuevos; personal limitado/JDK25/release21. No pruebas Paper/MySQL/transferencia/partículas/gameplay.
+- Candidato/JAR/YAML/manifiesto/hashes en enchanting-first-20261020. No instalado, activo ni lifecycle; producción intacta. API/SDK y compras/XP sin cambios.
+- Pendiente adaptar confirmación de daño, clasificación de jefes propios e identidad de disparo;21 originales todavía sin ejecución. No anunciar ni vender los bloqueados. STATE y target/ ajenos preservados; no editar vEnchanting/vPets.
+
 # API nativa de mejoras — 2026-10-15
 
 - Personal canónico; validateUpgrade/applyUpgrade y eventos implementados. Contrato docs/ENCHANT-UPGRADE-API.md.

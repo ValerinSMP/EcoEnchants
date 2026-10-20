@@ -1,26 +1,28 @@
-display-name: "Angler"
-description: "Gives a &a%placeholder%%&r boost to Fishing experience"
-placeholder: "8 * %level%"
+display-name: Pescador
+description: '&7Otorga &a%placeholder%% &7más XP de Pesca.'
+placeholder: 15 * %level%
 type: normal
-
 targets:
-  - fishing_rod
-conflicts: [ ]
+- fishing_rod
+conflicts: []
 rarity: uncommon
 max-level: 2
-
 tradeable: true
 discoverable: true
 enchantable: true
-
 effects:
-  - id: skill_xp_multiplier
-    args:
-      multiplier: "1 + 0.05 * %level%"
-      skills:
-        - fishing
-
-conditions: [ ]
-
+- id: skill_xp_multiplier
+  args:
+    multiplier: 1 + 0.15 * %level%
+    skills:
+    - fishing
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 4
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lIV'
 dependencies:
-  - EcoSkills
+- EcoSkills
+enabled: true

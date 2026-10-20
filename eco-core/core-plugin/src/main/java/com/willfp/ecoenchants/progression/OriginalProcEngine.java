@@ -1,0 +1,84 @@
+package com.willfp.ecoenchants.progression;
+
+import java.util.*;
+import java.util.function.LongSupplier;
+
+/**
+ * MAIN-only, bounded mechanic core. The adapter must supply a confirmed, final direct hit,
+ * stable item identity and authoritative exclusions. This class never damages entities.
+ */
+public final class OriginalProcEngine {
+    public enum Family {
+        ECO_RESONANTE(3,5_000,8_000,new double[]{4,6,8}),
+        SELLO_GLACIAL(2,4_000,10_000,new double[]{10,15,20});
+        final int hits;final long window,cooldown;final double[] values;
+        Family(int hits,long window,long cooldown,double[]values){this.hits=hits;this.window=window;this.cooldown=cooldown;this.values=values;}
+    }
+    public record Hit(UUID event,UUID player,UUID item,UUID target,UUID world,int tier,
+                      double finalDamage,boolean damageConfirmed,boolean direct,
+                      boolean monster,boolean cancelled,boolean protectedTarget,boolean npc,
+                      boolean pet,boolean ally,boolean bossExcluded,boolean spawner,
+                      boolean invulnerable,boolean secondary) {}
+    /** Pure mechanic intent; not evidence that an in-game effect was applied. */
+    public record Activation(Family family,double value,double sourceFinalDamage,int maxTargets,
+                             double radius,int durationTicks,int maxParticles) {}
+    private record Key(UUID player,UUID item,UUID target,UUID world) {}
+    private record Window(int hits,long expires) {}
+    private final Thread owner=Thread.currentThread();
+    private final LongSupplier millis;
+    private final int capacity;
+    private final EnumMap<Family,LinkedHashMap<Key,Window>> windows=new EnumMap<>(Family.class);
+    private final EnumMap<Family,LinkedHashMap<UUID,Long>> cooldowns=new EnumMap<>(Family.class);
+    private final LinkedHashMap<UUID,Long> events=new LinkedHashMap<>();
+    public OriginalProcEngine(int capacity,LongSupplier millis){
+        if(capacity<1||capacity>4096)throw new IllegalArgumentException("capacity must be 1..4096");
+        this.capacity=capacity;this.millis=Objects.requireNonNull(millis);
+        for(var f:Family.values()){windows.put(f,new LinkedHashMap<>());cooldowns.put(f,new LinkedHashMap<>());}
+    }
+    private void main(){if(Thread.currentThread()!=owner)throw new IllegalStateException("MAIN required");}
+    private boolean valid(Hit h){
+        return h!=null&&h.event()!=null&&h.player()!=null&&h.item()!=null&&h.target()!=null&&h.world()!=null
+            &&h.tier()>=1&&h.tier()<=3&&Double.isFinite(h.finalDamage())&&h.finalDamage()>0
+            &&h.damageConfirmed()&&h.direct()&&h.monster()&&!h.cancelled()&&!h.protectedTarget()
+            &&!h.npc()&&!h.pet()&&!h.ally()&&h.bossExcluded()&&!h.spawner()&&!h.invulnerable()&&!h.secondary();
+    }
+    public Optional<Activation> record(Family family,Hit h){
+        main();Objects.requireNonNull(family);if(!valid(h))return Optional.empty();
+        long now=millis.getAsLong();expire(now);
+        if(events.containsKey(h.event())||events.size()>=capacity)return Optional.empty();
+        // Current families have disjoint weapon types; one confirmed event counts once.
+        // Rejected events never enter the bounded deduplication map.
+        var cd=cooldowns.get(family);
+        if(cd.containsKey(h.player()))return Optional.empty();
+        var map=windows.get(family);var key=new Key(h.player(),h.item(),h.target(),h.world());
+        var old=map.get(key);
+        if(old==null&&(map.size()>=capacity||cd.size()>=capacity))return Optional.empty();
+        events.put(h.event(),now+1000);
+        int hits=old==null?1:old.hits()+1;
+        if(hits<family.hits){map.put(key,new Window(hits,old==null?now+family.window:old.expires()));return Optional.empty();}
+        // At capacity, deny instead of evicting an active cooldown and permitting a bypass.
+        if(cd.size()>=capacity)return Optional.empty();
+        map.remove(key);cd.put(h.player(),now+family.cooldown);
+        return Optional.of(new Activation(family,family.values[h.tier()-1],h.finalDamage(),
+            family==Family.ECO_RESONANTE?2:1,family==Family.ECO_RESONANTE?2:0,
+            family==Family.SELLO_GLACIAL?40:0,family==Family.ECO_RESONANTE?16:12));
+    }
+    /** No timer. Fixed deadlines keep insertion order, so expiry only visits expired heads. */
+    public void expire(long now){
+        main();expireLong(events,now);
+        for(var f:Family.values()){
+            expireLong(cooldowns.get(f),now);
+            var it=windows.get(f).entrySet().iterator();
+            while(it.hasNext()){if(it.next().getValue().expires()>now)break;it.remove();}
+        }
+    }
+    private static <K>void expireLong(LinkedHashMap<K,Long>map,long now){
+        var it=map.entrySet().iterator();while(it.hasNext()){if(it.next().getValue()>now)break;it.remove();}
+    }
+    /** Called on quit/death/world change/transfer; local cooldown remains until its bounded TTL. */
+    public void clearEntity(UUID id){
+        main();for(var map:windows.values())map.keySet().removeIf(k->k.player().equals(id)||k.target().equals(id));
+    }
+    public int retainedEntries(){main();return events.size()+windows.values().stream().mapToInt(Map::size).sum()+cooldowns.values().stream().mapToInt(Map::size).sum();}
+    public void clear(){main();events.clear();windows.values().forEach(Map::clear);cooldowns.values().forEach(Map::clear);}
+}

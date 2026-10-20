@@ -1,0 +1,24 @@
+# BLOQUEADO: núcleo probado; faltan adaptadores seguros. Sin efecto ejecutable ni registro ficticio.
+enabled: false
+display-name: Sello glacial
+description: '&7Tras dos flechas válidas, ralentiza &a%placeholder%% &7durante 2 s
+  &8(10 s).'
+placeholder: 5 + 5 * %level%
+type: normal
+targets:
+- bow
+conflicts:
+- frost
+rarity: rare
+max-level: 3
+tradeable: false
+discoverable: false
+enchantable: false
+effects: []
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 18
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXVIII'

@@ -75,6 +75,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleEnable() {
+        com.willfp.ecoenchants.progression.OriginalProgression.diagnose(this)
         DragAndDropHandlers.register(EcoEnchantBookDragAndDropHandler)
         registerHolderProvider(EnchantFinder.toHolderProvider())
 

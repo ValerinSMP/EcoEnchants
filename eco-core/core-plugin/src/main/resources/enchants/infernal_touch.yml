@@ -1,23 +1,26 @@
-display-name: "Infernal Touch"
-description: "Automatically smelts mined blocks"
+display-name: Toque Infernal
+description: '&7Funde automáticamente los bloques minados.'
 type: normal
-
 targets:
-  - pickaxe
+- pickaxe
 conflicts:
-  - silk_touch
+- silk_touch
 rarity: legendary
 max-level: 1
-
 tradeable: true
 discoverable: true
 enchantable: true
-
 effects:
-  - id: autosmelt
-    args:
-      drop_xp: true
-    triggers:
-      - block_item_drop
-
-conditions: [ ]
+- id: autosmelt
+  args:
+    drop_xp: true
+  triggers:
+  - block_item_drop
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 5
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lV'
+enabled: true
