@@ -99,6 +99,15 @@ internal object OriginalRuntime : Listener {
     }
     internal fun eligible(player: Player,victim: LivingEntity,allowDead: Boolean=false): Boolean {
         if(victim !is Enemy||(!allowDead&&(!victim.isValid||victim.isDead))||victim.world!=player.world||!ProcGuards.mayAct(player.isOnline,player.isDead))return false
+        val reason=victim.entitySpawnReason.name
+        val boss=victim is Boss||victim.type in setOf(EntityType.WARDEN,EntityType.ELDER_GUARDIAN)
+        val marked=victim.persistentDataContainer.keys.isNotEmpty()||victim.scoreboardTags.isNotEmpty()||victim.hasMetadata("NPC")||victim.customName()!=null||victim is Tameable
+        val allied=sequenceOf(player.scoreboard,Bukkit.getScoreboardManager()?.mainScoreboard).filterNotNull().any { board ->
+            val team=board.getEntryTeam(player.name)
+            team!=null&&team==board.getEntryTeam(victim.uniqueId.toString())
+        }
+        // Reject known cheap exclusions before Mythic/protection integrations, including swarm scans.
+        if(!ProcGuards.eligible(true,reason,boss,false,marked,allied,victim.isInvulnerable,false))return false
         val mythic=Bukkit.getPluginManager().getPlugin("MythicMobs")
         if(mythicBroken||(mythic!=null&&!mythic.isEnabled))return false
         val managed=if(mythic==null)false else try { MythicExclusion.isManaged(victim) } catch(problem: LinkageError) {
@@ -106,15 +115,7 @@ internal object OriginalRuntime : Listener {
         } catch(problem: RuntimeException) {
             mythicBroken=true;owner.logger.log(java.util.logging.Level.SEVERE,"Original procs blocked: MythicMobs identity query failed",problem);return false
         }
-        val allied=sequenceOf(player.scoreboard,Bukkit.getScoreboardManager()?.mainScoreboard).filterNotNull().any { board ->
-            val team=board.getEntryTeam(player.name)
-            team!=null&&team==board.getEntryTeam(victim.uniqueId.toString())
-        }
-        return ProcGuards.eligible(victim is Enemy,victim.entitySpawnReason.name,
-            victim is Boss||victim.type in setOf(EntityType.WARDEN,EntityType.ELDER_GUARDIAN),managed,
-            victim.persistentDataContainer.keys.isNotEmpty()||victim.scoreboardTags.isNotEmpty()||victim.hasMetadata("NPC")||
-                victim.customName()!=null||victim is Tameable,
-            allied,victim.isInvulnerable,!AntigriefManager.canInjure(player,victim))
+        return !managed&&AntigriefManager.canInjure(player,victim)
     }
     // Preserve the old entry point while using one confirmation queue for all native combat.
     fun hit(event: EntityDamageByEntityEvent) = observe(event)
@@ -149,14 +150,21 @@ internal object OriginalRuntime : Listener {
         val player=Bukkit.getPlayer(context.player) ?: return null
         return if(eligible(player,victim))Pair(context,arrowId) else null
     }
+    internal fun track(event: EntityDamageByEntityEvent): UUID? {
+        observe(event)
+        return pending[event]?.eventId
+    }
     internal fun session(player: Player): UUID? = token(player)
     internal fun age(player: Player): Long = sessions[player.uniqueId]?.let { now()-it.arrived } ?: -1
     internal fun sameSession(id: UUID,expected: UUID): Boolean = sessions[id]?.token==expected
     private fun confirm(candidate: Pending) {
         if(pending.remove(candidate.event)!==candidate)return
         candidate.task?.cancel()
+        var observedDamage=0.0
+        try {
         val victim=candidate.victim
         val damage=NativeProcAdapters.confirmed(candidate.event,victim,candidate.before)
+        observedDamage=damage
         if(damage<=0)return
         candidate.combat?.let { NativeCombatProgression.confirm(it,candidate.event,victim,candidate.before,damage) }
         val source=candidate.source ?: return
@@ -172,6 +180,7 @@ internal object OriginalRuntime : Listener {
             ConfirmedOriginalHit.dispatch(player.toDispatcher(),TriggerData(player=player,victim=victim,item=itemCopy,
                 location=victim.location,event=candidate.event,value=damage),listOf(holder))
         } finally { proof=previous }
+        } finally { NativeFirstHits.finish(candidate.eventId,observedDamage,candidate.event) }
     }
     fun execute(family: OriginalProcEngine.Family,amount: Double,data: TriggerData): Boolean {
         val confirmed=proof ?: return false

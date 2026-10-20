@@ -1,0 +1,109 @@
+{
+  "increment": 5,
+  "changes": [
+    {
+      "id": "experience",
+      "relativePath": "experience.yml",
+      "enchanting": 8,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee",
+        "pickaxe",
+        "axe",
+        "shovel",
+        "hoe",
+        "bow",
+        "crossbow",
+        "trident",
+        "fishing_rod",
+        "shield",
+        "elytra",
+        "helmet",
+        "chestplate",
+        "leggings",
+        "boots"
+      ],
+      "conflicts": [],
+      "sourceTestSha256": "c1afabc926f945bf3f8f0a0aed9ad6b292acc343f825ebac3ab31e31edf6a828",
+      "candidateSha256": "fce304dfc16323f1ef4c6c1ec04d5cb6a1cf0bd21de9eb46acf1baaef4374621",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "mana_steal",
+      "relativePath": "mana_steal.yml",
+      "enchanting": 20,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "drain"
+      ],
+      "sourceTestSha256": "6507e58b1fee5059957d0a6ff4c06fba08f667d3e91a5705902203bd1a5a4ec4",
+      "candidateSha256": "a76dfbca45ba728a58d6ca9838ecdee9519f59bba742f2a962862c0b2d13a217",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "triple_strike",
+      "relativePath": "triple_strike.yml",
+      "enchanting": 19,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "sourceTestSha256": "95b81f3c6dbb5e58bd2260f6e9c082905be3d45e462115075683516c5ed43a9b",
+      "candidateSha256": "b41e74990866bc9eb654237f2a52c924f758648700e322ce254475ef5618a6a3",
+      "formula": "8/16/24/32/40% added once for first three non-rejected attempts per actor/session/target; uncertain consumes budget",
+      "reference": "https://hypixelskyblock.minecraft.wiki/w/Triple-Strike",
+      "referenceChecked": "2026-10-20",
+      "difference": "Hypixel table I-IV10/20/30/40%; V50% special. Local normal five tiers span8-40; existing conflicts[] preserved, unlike mutual exclusion with FirstStrike on Hypixel.",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "swarm",
+      "relativePath": "swarm.yml",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "sourceTestSha256": "acb86471b967b9baa996114d45cc95f0b5056a342c090a3c7ee0e8f3b7e34354",
+      "candidateSha256": "d4a7f67ddd9b83333a4dcc869e86a562fc63104db30f8e985189ced7549fbbcf",
+      "formula": "alpha=0.005*L*min(eligible_monsters_within_10,10)",
+      "limits": "real bounded native query max128 candidates/default8 queries per game tick; truncated incomplete count is unavailable; max10 witnesses revalidated per use",
+      "reference": "https://hypixelskyblock.minecraft.wiki/w/Swarm",
+      "referenceChecked": "2026-10-20",
+      "difference": "Reference ultimate dungeon, no normal table tier,2-10% per enemy up to10. Local normal0.5-2.5% per eligible vanilla monster; own max5-25% rather than20-100%.",
+      "installed": false,
+      "gameplayVerified": false
+    }
+  ],
+  "status": "compiled selective runtime; JVM/static/smoke passed; Paper/native reflection gameplay pending"
+}

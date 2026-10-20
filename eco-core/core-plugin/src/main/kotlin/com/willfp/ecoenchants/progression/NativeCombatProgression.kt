@@ -45,7 +45,7 @@ internal object NativeCombatProgression : Listener {
  private val itemKey=NamespacedKey("ecoenchants","original_item_id")
  private val armorKey=NamespacedKey("ecoenchants","letalidad")
  data class Capture(val actor:UUID?,val actorToken:UUID?,val victimToken:UUID?,val world:UUID,
-  val weapon:ItemStack?,val chest:ItemStack?,val maximum:Double,val primary:Boolean)
+  val weapon:ItemStack?,val chest:ItemStack?,val maximum:Double,val primary:Boolean,val mana:ItemStack?=null)
  private data class Proof(val capture:Capture,val event:EntityDamageEvent,val victim:LivingEntity,val before:Double,val damage:Double)
  private var proof:Proof?=null
  private data class Quiet(var since:Long,var task:BukkitTask?=null)
@@ -62,8 +62,10 @@ internal object NativeCombatProgression : Listener {
  private fun tier(item:ItemStack?,family:String)=if(item==null)0 else EcoEnchants.getByID(family)?.let{item.getEnchantmentLevel(it.enchantment)}?:0
  private fun refresh(player:Player){val d=player.toDispatcher();d.updateEffects();d.flushHolders()}
  private fun snapshot(player:Player,item:ItemStack?,family:String,chest:Boolean):ItemStack? {
-  if(item==null||tier(item,family) !in 1..5)return null
-  if(chest&&!item.type.name.endsWith("_CHESTPLATE")||!chest&&!item.type.name.endsWith("_SWORD"))return null
+  if(item==null)return null
+  if(tier(item,family) !in (if(family=="mana_steal")1..3 else 1..5))return null
+  val enchant=EcoEnchants.getByID(family)?:return null
+  if(chest&&!item.type.name.endsWith("_CHESTPLATE")||!chest&&(if(family=="mana_steal")!enchant.targets.any{it.matches(item)} else !item.type.name.endsWith("_SWORD")))return null
   val frozen=NativeProcAdapters.capture(item,itemKey)?:return null
   if(frozen.stamped){
    val live=if(chest)player.inventory.chestplate else player.inventory.itemInMainHand
@@ -73,11 +75,11 @@ internal object NativeCombatProgression : Listener {
   }
   return frozen.item
  }
- fun register(){Triggers.register(ConfirmedNativeCombat);Effects.register(NativeCombatEffect("lethality_stack"));Effects.register(NativeCombatEffect("last_resort"));Conditions.register(ConditionRested)}
- fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true
+ fun register(){Triggers.register(ConfirmedNativeCombat);Effects.register(NativeCombatEffect("lethality_stack"));Effects.register(NativeCombatEffect("last_resort"));Effects.register(NativeCombatEffect("mana_recovery"));Conditions.register(ConditionRested)}
+ fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true;NativeMagicRecovery.enable(plugin){cap()};NativeSwarm.enable(plugin){cap()}
   commandGuard=try{CommandDamageGuard.resolve()}catch(problem:ReflectiveOperationException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:RuntimeException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:LinkageError){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}
   Bukkit.getPluginManager().registerEvents(this,plugin);Bukkit.getOnlinePlayers().forEach{arrival(it)}}
- fun reset(){combat.values.forEach{it.task?.cancel()};combat.clear();buffs.clear();buffChecks.clear();armors.keys.toList().forEach{removeArmor(it)};proof=null;cooldowns.prune();if(enabled)Bukkit.getOnlinePlayers().forEach{arrival(it)}}
+ fun reset(){NativeSwarm.clear();NativeFirstHits.clear();NativeMagicRecovery.reset();combat.values.forEach{it.task?.cancel()};combat.clear();buffs.clear();buffChecks.clear();armors.keys.toList().forEach{removeArmor(it)};proof=null;cooldowns.prune();if(enabled)Bukkit.getOnlinePlayers().forEach{arrival(it)}}
  fun close(){enabled=false;reset();HandlerList.unregisterAll(this)}
  fun gameplay()=enabled&&commandGuard?.gameplay()==true
  fun rested(player:Player):Boolean {
@@ -107,9 +109,10 @@ internal object NativeCombatProgression : Listener {
   if(actor!=null&&!AntigriefManager.canInjure(actor,victim))return null
   if(actor!=null&&(!actor.isOnline||actor.isDead)||receiver!=null&&(!receiver.isOnline||receiver.isDead))return null
   val aToken=actor?.let{OriginalRuntime.session(it)?:return null};val vToken=receiver?.let{OriginalRuntime.session(it)?:return null}
-  val sword=if(primary&&commandGuard?.gameplay()==true&&actor!=null&&event.damager===actor&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK&&OriginalRuntime.eligible(actor,victim))snapshot(actor,actor.inventory.itemInMainHand,"letalidad",false) else null
+  val sword=if(primary&&commandGuard?.gameplay()==true&&actor!=null&&event.damager===actor&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK&&tier(actor.inventory.itemInMainHand,"letalidad") in 1..5&&OriginalRuntime.eligible(actor,victim))snapshot(actor,actor.inventory.itemInMainHand,"letalidad",false) else null
   val chest=if(primary&&receiver!=null&&commandGuard?.gameplay()==true)snapshot(receiver,receiver.inventory.chestplate,"ultimo_recurso",true) else null
-  return Capture(actor?.uniqueId,aToken,vToken,victim.world.uid,sword,chest,victim.getAttribute(Attribute.MAX_HEALTH)?.value?:0.0,primary)
+  val mana=if(primary&&actor!=null&&event.damager===actor&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK&&commandGuard?.gameplay()==true)snapshot(actor,actor.inventory.itemInMainHand,"mana_steal",false) else null
+  return Capture(actor?.uniqueId,aToken,vToken,victim.world.uid,sword,chest,victim.getAttribute(Attribute.MAX_HEALTH)?.value?:0.0,primary,mana)
  }
  fun uncertain(c:Capture,victim:LivingEntity){
   // Queue saturation cannot leave an out-of-combat authorization based on stale evidence.
@@ -127,6 +130,7 @@ internal object NativeCombatProgression : Listener {
   val old=proof;proof=Proof(c,event,victim,before,damage)
   try {
    if(actor!=null&&c.weapon!=null&&id(actor.inventory.itemInMainHand)==id(c.weapon)&&OriginalRuntime.eligible(actor,victim,true))dispatch(actor,victim,c.weapon,"letalidad",event,damage)
+   if(actor!=null&&c.mana!=null&&id(actor.inventory.itemInMainHand)==id(c.mana))dispatch(actor,victim,c.mana,"mana_steal",event,damage)
    if(receiver!=null&&c.chest!=null&&c.primary&&!receiver.isDead&&receiver.health>0&&receiver.getAttribute(Attribute.MAX_HEALTH)?.value==c.maximum&&
     NativeCombatRules.crossed(before,receiver.health,c.maximum)&&id(receiver.inventory.chestplate)==id(c.chest))dispatch(receiver,receiver,c.chest,"ultimo_recurso",event,damage)
   } finally {proof=old}
@@ -148,6 +152,11 @@ internal object NativeCombatProgression : Listener {
    val key=player.uniqueId to t
    if(key !in armor.stacks&&armor.stacks.size>=128)return false
    armor.stacks[key]=(armor.stacks[key]?:ArmorStack(t)).also{it.hit(now())};applyArmor(armor);return true
+  }
+  if(family=="mana_recovery"){
+   val item=p.capture.mana?:return false;val t=tier(item,"mana_steal")
+   if(player.uniqueId!=p.capture.actor||id(supplied)!=id(item)||t !in 1..3||percent!=.25*t||!p.capture.primary)return false
+   return NativeMagicRecovery.recover(player,t)
   }
   if(family=="last_resort"){
    if(commandGuard?.gameplay()!=true)return false
@@ -190,9 +199,11 @@ internal object NativeCombatProgression : Listener {
   if(event.damage.isFinite()&&event.damage>0)event.damage*=1-0.03*buff.tier
  }
  fun retire(uuid:UUID){
+  NativeSwarm.retire(uuid);NativeFirstHits.retire(uuid);NativeMagicRecovery.retire(uuid)
   combat.remove(uuid)?.task?.cancel();buffs.remove(uuid);buffChecks.remove(uuid)
   armors.values.toList().forEach{armor->if(armor.target.uniqueId==uuid)removeArmor(uuid) else if(armor.stacks.keys.removeIf{it.first==uuid})applyArmor(armor)}
  }
+ @EventHandler fun pluginDisabled(event:org.bukkit.event.server.PluginDisableEvent){NativeMagicRecovery.disabled(event.plugin)}
  private fun checkBuff(player:Player){
   val uuid=player.uniqueId;val buff=buffs[uuid]?:return
   if(buffChecks[uuid]===buff)return

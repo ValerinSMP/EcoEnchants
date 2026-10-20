@@ -34,6 +34,9 @@ object OriginalProgression {
     private var owner:EcoEnchantsPlugin?=null
     @JvmStatic fun register() {
         NativeMiningProgression.register()
+        NativeUtilityProgression.register()
+        NativeFirstHits.register()
+        NativeSwarm.register()
         NativeCombatProgression.register()
         Triggers.register(ConfirmedOriginalHit)
         Effects.register(OriginalProcEffect(OriginalProcEngine.Family.ECO_RESONANTE,"resonant_pulse"))

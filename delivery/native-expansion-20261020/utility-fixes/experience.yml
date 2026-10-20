@@ -1,0 +1,39 @@
+display-name: Experiencia
+description: '&7Probabilidad &a%placeholder%% &7de duplicar la XP vanilla de un monstruo (una vez por muerte).'
+placeholder: 12.5 * %level%
+type: normal
+targets:
+- melee
+- pickaxe
+- axe
+- shovel
+- hoe
+- bow
+- crossbow
+- trident
+- fishing_rod
+- shield
+- elytra
+- helmet
+- chestplate
+- leggings
+- boots
+conflicts: []
+rarity: uncommon
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 8
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVIII'
+effects:
+- id: double_mob_xp
+  args:
+    chance: 12.5 * %level%
+  triggers:
+  - entity_xp_drop

@@ -2,10 +2,10 @@
   "schema": 1,
   "scope": "130 familias; estado por evidencia, no habilita compras ni modifica config activa",
   "counts": {
-    "pending_implementation_or_audit": 83,
+    "pending_implementation_or_audit": 79,
     "previous_test_selection": 23,
     "reserved_excluded": 13,
-    "candidate_native_implemented_JVM": 5,
+    "candidate_native_implemented_JVM": 9,
     "candidate_yaml_reviewed": 4,
     "candidate_balance_native_route_JVM": 2
   },
@@ -396,7 +396,7 @@
       "enchanting": 8,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -626,7 +626,7 @@
       "enchanting": 20,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -1066,7 +1066,7 @@
       "enchanting": 35,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -1156,7 +1156,7 @@
       "enchanting": 19,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
