@@ -1,0 +1,85 @@
+{
+  "increment": 3,
+  "changes": [
+    {
+      "id": "metabolism",
+      "relativePath": "metabolism.yml",
+      "sourceTestSha256": "46b1a268e01fc9152a656dca8ccd93508f2db53d6412fa1e9f6f28c750ec1cf0",
+      "candidateSha256": "6b900056ebb3302fc331fc71b1544c5c1410f5c37c15ed5840bc795ec942c270",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2
+      ],
+      "type": "normal",
+      "targets": [
+        "chestplate"
+      ],
+      "conflicts": [],
+      "note": "1.125/1.25 antes de ceil nativo; requisito X actual, no III histórico.",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "neptune",
+      "relativePath": "ecoskills/neptune.yml",
+      "sourceTestSha256": "bc21f3fff8bfee83967cbca98d5c18cde34b2fff4bb85a2d9cb53226cdca64c1",
+      "candidateSha256": "d3ff328ce95d86d9e86ac3faad8898df3b8ba6a26dfd3dd2780bf7f94788e696",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "type": "normal",
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "note": "Factor crit_chance0.65/0.70/0.75 = reducción35/30/25%; add_stat crit_damage30/40/50 conservado.",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "getaway",
+      "relativePath": "getaway.yml",
+      "sourceTestSha256": "7b8ad9b2c5b0bdd79d0f211f41f519ccc8f3687dd632120050f1745a968a6df0",
+      "candidateSha256": "7c7a6498fbd7a2920f89e6cbc415ffd5d9780a463a99ab73cf83ec7dbbf91b08",
+      "enchanting": 7,
+      "tiers": [
+        1,
+        2
+      ],
+      "type": "normal",
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "note": "Condición nativa usa <=20%, lore fiel; factor1.1/1.2 previo conservado.",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "poison_ivy",
+      "relativePath": "poison_ivy.yml",
+      "sourceTestSha256": "c6da065f57dc998975e889e8cb8a248ea2b4c28dcb09bf8f60949ce044fd2238",
+      "candidateSha256": "365fcbf782b641f40377be87e74b3686a0d4c015013f443e7724bebcdf69113d",
+      "enchanting": 11,
+      "tiers": [
+        1,
+        2
+      ],
+      "type": "normal",
+      "targets": [
+        "leggings"
+      ],
+      "conflicts": [
+        "thorns"
+      ],
+      "note": "take_entity_damage entrega atacante en victim: apply_to_player:false sin mutar player; poisonI y límite100/120ticks real. No era auto-veneno; antes solo atacantes Player.",
+      "installed": false,
+      "gameplayVerified": false
+    }
+  ],
+  "validation": "YAML parse, actual native effect/condition/mutator source review; Paper runtime tests pending"
+}

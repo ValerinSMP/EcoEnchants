@@ -1,0 +1,28 @@
+display-name: Huida
+description: '&7Aumenta un &a%placeholder%% &7tu velocidad con el 20% de vida o menos.'
+placeholder: 10 * %level%
+type: normal
+targets:
+- boots
+conflicts: []
+rarity: rare
+max-level: 2
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: movement_speed_multiplier
+  args:
+    multiplier: 1 + 0.1 * %level%
+  triggers: []
+  conditions:
+  - id: below_health_percent
+    args:
+      percent: 20
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 7
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVII'

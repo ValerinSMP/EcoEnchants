@@ -1,0 +1,23 @@
+display-name: Metabolismo
+description: '&7Aumenta un &a%placeholder%% &7el hambre recuperada al comer.'
+placeholder: '%level% * 12.5'
+type: normal
+targets:
+- chestplate
+conflicts: []
+rarity: legendary
+max-level: 2
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: food_multiplier
+  args:
+    multiplier: 1 + 0.125 * %level%
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 10
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lX'
