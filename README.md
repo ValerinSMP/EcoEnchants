@@ -55,4 +55,4 @@ See [ENCHANT-UPGRADE-API.md](docs/ENCHANT-UPGRADE-API.md). No payment custody or
 
 ## Enchanting progression, first increment
 
-See [ENCHANTING-PROGRESSION-FIRST.md](docs/ENCHANTING-PROGRESSION-FIRST.md). Two native YAML candidates and two bounded mechanic cores; original effects remain unavailable. No installation.
+See [ORIGINAL-PROCS-RUNTIME.md](docs/ORIGINAL-PROCS-RUNTIME.md): registered native effects, confirmed-hit adapters, bounded visuals and executable YAMLs. Runtime/gameplay activation remains a separate delivery.

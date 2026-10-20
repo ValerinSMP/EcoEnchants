@@ -75,7 +75,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleEnable() {
-        com.willfp.ecoenchants.progression.OriginalProgression.diagnose(this)
+        com.willfp.ecoenchants.progression.OriginalProgression.enable(this)
         DragAndDropHandlers.register(EcoEnchantBookDragAndDropHandler)
         registerHolderProvider(EnchantFinder.toHolderProvider())
 
@@ -92,6 +92,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
     override fun handleLoad() {
         Effects.register(EffectApplyRandomEnchant)
+        com.willfp.ecoenchants.progression.OriginalProgression.register()
     }
 
     override fun handleAfterLoad() {
@@ -101,6 +102,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleReload() {
+        com.willfp.ecoenchants.progression.OriginalProgression.reload()
         DisplayCache.reload()
         EnchantSorter.reload()
         ExtraItemSupport.reload()
@@ -108,6 +110,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleDisable() {
+        com.willfp.ecoenchants.progression.OriginalProgression.disable()
         DragAndDropHandlers.unregisterAll("ecoenchants")
     }
 

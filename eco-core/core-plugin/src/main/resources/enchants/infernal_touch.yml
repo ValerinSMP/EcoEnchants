@@ -20,7 +20,7 @@ conditions:
 - id: has_skill_level
   args:
     skill: enchanting
-    level: 5
+    level: 12
     not-met-lines:
-    - '&cRequiere Nivel de Encantador &lV'
+    - '&cRequiere Nivel de Encantador &lXII'
 enabled: true

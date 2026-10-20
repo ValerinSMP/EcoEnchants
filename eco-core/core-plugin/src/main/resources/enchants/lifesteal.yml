@@ -1,23 +1,25 @@
-display-name: "Lifesteal"
-description: "Heals &a%placeholder%%&r of damage dealt"
-placeholder: "%level% * 10"
+display-name: Lifesteal
+description: Heals &a%placeholder%%&r of damage dealt
+placeholder: '%level% * 10'
 type: normal
-
 targets:
-  - sword
-conflicts: [ ]
+- sword
+conflicts: []
 rarity: rare
 max-level: 6
-
 tradeable: true
 discoverable: true
 enchantable: true
-
 effects:
-  - id: give_health
-    args:
-      amount: "%v% * (%level% * 0.1)"
-    triggers:
-      - melee_attack
-
-conditions: [ ]
+- id: give_health
+  args:
+    amount: '%v% * (%level% * 0.1)'
+  triggers:
+  - melee_attack
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 15
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXV'

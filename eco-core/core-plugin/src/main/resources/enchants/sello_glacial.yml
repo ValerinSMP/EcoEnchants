@@ -1,0 +1,31 @@
+enabled: true
+display-name: Sello glacial
+description: '&7Tras dos flechas al mismo monstruo natural, ralentiza &a%placeholder%%
+  &7durante 2 s &8(10 s).'
+placeholder: 5 + 5 * %level%
+type: normal
+targets:
+- bow
+conflicts:
+- frost
+rarity: rare
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: glacial_seal
+  args:
+    amount: 5 + 5 * %level%
+    hits: 2
+    window: 4
+    proc_cooldown: 10
+  triggers:
+  - confirmed_original_hit
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 18
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXVIII'

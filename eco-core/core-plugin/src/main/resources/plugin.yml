@@ -10,6 +10,7 @@ depend:
 softdepend:
   - libreforge
   - EcoSkills
+  - MythicMobs
   - CMI
   - EssentialsX
 

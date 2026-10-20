@@ -1,3 +1,7 @@
+> HISTÓRICO: sustituido por [ORIGINAL-PROCS-RUNTIME.md](ORIGINAL-PROCS-RUNTIME.md).
+> Toque Infernal requiere XII (5b6ea99), no V. No aplicar el skills YAML antiguo.
+> Los bloqueos descritos abajo corresponden al primer incremento.
+
 # Progresión de Encantador — primer incremento, 2026-10-20
 
 ## Estado exacto

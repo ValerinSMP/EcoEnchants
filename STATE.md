@@ -1,3 +1,12 @@
+# Originales ejecutables — entrega sin instalar, 2026-10-20
+
+- Fuente canónica personal; EcoEnchants sobre 61cac01e. Efectos registrados resonant_pulse/glacial_seal, trigger confirmed_original_hit, confirmación de daño real, snapshot de arco, exclusión NATURAL/Mythic, ralentización transitoria y FX acotados. Contrato: docs/ORIGINAL-PROCS-RUNTIME.md.
+- Toque Infernal XII y nueve movimientos 5b6ea99 preservados; no sustituir skills YAML histórico. Solo patch aditivo de anuncios. Sin cambios en eco/LibreForge/EcoSkills/vPets/vEnchanting ni contratos compra/XP.
+- Compilado en personal, JDK25/release21, ejecutor limitado. Suite 71 pruebas (incluye regresiones existentes y seis pruebas de código ajeno presente), 0 errores/fallos/omitidas. JVM/mocks, no servidor. Última revisión incluida.
+- Runtime compuesto sobre baseline Test 7dd5c987b3d2fcdcb3069b35d20a2609a8fbea8be9c503971ebe0ddb87281a0e: SHA256 752ae9eabce7593aed3336ca2e6b2c1d3ed65d3d952c23a48a3dec82bf21b55a. API byte-idéntica; 24 clases cambiadas, 1009 referencias nativas comprobadas. Descriptor Mythic contrastado con JAR instalado. Cierre estático no prueba gameplay.
+- JAR EcoEnchants-2026.27-original-procs-all.jar; artefactos personal original-procs-executable-20261020 y staging HomeSV ecosuite-original-procs-executable-20261020. Solo progresión/hooks/resources enumerados; target/ y DEVELOPMENT_HANDOFF.md ajenos preservados y excluidos del commit/runtime.
+- No instalado, no activo por esta entrega, no probado en juego; sin lifecycle ni SQL. Pendiente activación separada y prueba real Test (registro, compras, monstruos NATURAL, exclusiones, atributos, reconexión/transferencia).
+
 # Progresión Encantador — primer incremento parcial 2026-10-20
 
 - Fuente personal. PescadorIV/ToqueInfernalV configurados según Test y efectos auditados. Núcleo puro Eco resonante/Sello glacial agregado; NO efectos ejecutables, originales excluidos mediante archivos_ nativos y diagnóstico. Bloqueos y pendientes en docs/ENCHANTING-PROGRESSION-FIRST.md.

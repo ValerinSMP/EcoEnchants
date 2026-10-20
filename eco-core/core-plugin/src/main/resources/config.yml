@@ -410,3 +410,23 @@ enchant-guide:
     - '&#FF9F0FTemporalmente desactivado'
     unsupported:
     - '&7Requisito de Encantador dinámico; consulta su descripción.'
+
+# Original PvE procs: mechanical admission is bounded; only visuals degrade with particle budget.
+original-procs:
+  max-shots: 4096
+  shot-ttl-seconds: 30
+  max-pending-hits: 512
+  max-active-slows: 512
+  max-candidate-scan: 32
+  visuals:
+    enabled: true
+    observer-radius: 24
+    max-observers: 16
+    per-activation: 16
+    per-observer-per-second: 64
+    global-per-second: 256
+    pulse-particle: END_ROD
+    seal-particle: SNOWFLAKE
+    sound: block.amethyst_block.chime
+    volume: 0.25
+    pitch: 1.2

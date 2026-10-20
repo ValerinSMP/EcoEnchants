@@ -2,6 +2,9 @@ group = "com.willfp"
 version = rootProject.version
 
 dependencies {
+    testImplementation("org.mockito:mockito-core:5.20.0")
+    testImplementation("com.willfp:libreforge:2026.27:all") { isTransitive = false }
+    compileOnly("io.lumine:Mythic-Dist:5.13.0") { isTransitive = false }
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("com.willfp:eco:${rootProject.findProperty("eco-version")}")
     testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")

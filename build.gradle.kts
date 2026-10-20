@@ -91,6 +91,7 @@ allprojects {
         mavenCentral()
 
         maven("https://repo.papermc.io/repository/maven-public/")
+        maven("https://mvn.lumine.io/repository/maven-public/") { content { includeGroup("io.lumine") } }
         maven("https://repo.auxilor.io/repository/maven-public/")
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://repo.codemc.org/repository/nms/")
