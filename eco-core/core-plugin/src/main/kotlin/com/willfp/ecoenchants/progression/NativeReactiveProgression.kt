@@ -44,12 +44,13 @@ internal object NativeReactiveProgression : Listener {
  private val itemKey=NamespacedKey("ecoenchants","original_item_id")
  private data class Key(val actor:UUID,val family:String)
  private data class Arm(val source:NativeBurstProgression.Context,val family:String,val tier:Int,val percent:Double,val target:UUID?,var task:BukkitTask?=null)
- private val arms=ArmedProcLedger<Key,Arm>({cap()}){now()}
+ private val arms=ArmedProcLedger<Key,Arm>({cap()},entities={key,value->listOfNotNull(key.actor,value.target)}){now()}
  private data class Taken(val token:UUID,val world:UUID,var time:Long)
  private val taken=mutableMapOf<UUID,Taken>()
  internal data class Capture(val player:UUID,val token:UUID,val world:UUID,val guard:NativeBurstProgression.Context?,val attacker:LivingEntity?,val primary:Boolean)
  private data class Reservation(val source:NativeBurstProgression.Context,val family:OriginalProcEngine.Family,val lease:OriginalProcEngine.Lease?,val arm:ArmedProcLedger.Entry<Arm>?)
  private val pending=IdentityHashMap<EntityDamageEvent,MutableList<Reservation>>()
+ private val pendingEntities=mutableMapOf<UUID,MutableSet<EntityDamageEvent>>()
  private data class Impulse(val source:NativeBurstProgression.Context,val family:OriginalProcEngine.Family,val lease:OriginalProcEngine.Lease,val event:EntityPushedByEntityAttackEvent,var task:BukkitTask?=null)
  private val impulses=mutableMapOf<UUID,Impulse>()
  private data class Move(val source:NativeBurstProgression.Context,val event:PlayerMoveEvent,var task:BukkitTask?=null)
@@ -74,14 +75,18 @@ internal object NativeReactiveProgression : Listener {
  }
  fun register(){Triggers.register(NativeReactiveAction);Effects.register(EffectNativeReactive)}
  fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true;Bukkit.getPluginManager().registerEvents(this,plugin);Bukkit.getOnlinePlayers().forEach{arrival(it)}}
- fun reset(){arms.clear().forEach{it.value.task?.cancel()};pending.clear();impulses.values.forEach{it.task?.cancel()};impulses.clear();moves.values.forEach{it.task?.cancel()};moves.clear();taken.clear();proof=null;if(enabled)Bukkit.getOnlinePlayers().forEach{arrival(it)}}
+ fun reset(){arms.clear().forEach{it.value.task?.cancel()};pending.clear();pendingEntities.clear();impulses.values.forEach{it.task?.cancel()};impulses.clear();moves.values.forEach{it.task?.cancel()};moves.clear();taken.clear();proof=null;if(enabled)Bukkit.getOnlinePlayers().forEach{arrival(it)}}
  fun close(){enabled=false;reset();HandlerList.unregisterAll(this)}
  fun arrival(player:Player){if(!enabled||!player.isOnline||player.hasMetadata("NPC")||taken.size>=cap()&&player.uniqueId !in taken)return;val token=OriginalRuntime.session(player)?:return;taken[player.uniqueId]=Taken(token,player.world.uid,now())}
  fun retire(uuid:UUID){
   taken.remove(uuid);moves.remove(uuid)?.task?.cancel();impulses.remove(uuid)?.task?.cancel()
-  arms.entriesSnapshot().filter{it.key.actor==uuid||it.value.value.target==uuid}.keys.forEach{removeArm(it)}
-  pending.values.forEach{it.removeIf{r->r.source.player==uuid||r.arm?.value?.target==uuid}}
-  pending.entries.removeIf{it.value.isEmpty()}
+  arms.retireEntity(uuid).forEach{it.value.task?.cancel()}
+  for(event in pendingEntities.remove(uuid)?.toList()?:emptyList()){
+   val entries=pending[event]?:continue
+   unindex(event,entries)
+   entries.removeIf{it.source.player==uuid||event.entity.uniqueId==uuid||it.arm?.value?.target==uuid}
+   if(entries.isEmpty())pending.remove(event)else entries.forEach{index(event,it)}
+  }
  }
  private fun attacker(event:EntityDamageEvent):LivingEntity? {
   val source=(event as? EntityDamageByEntityEvent)?.damager?:return null
@@ -183,13 +188,20 @@ internal object NativeReactiveProgression : Listener {
    force(source,"paso_ceniza",event,player,"lava")
   })
  }
+ private fun index(event:EntityDamageEvent,entry:Reservation){
+  for(entity in listOfNotNull(entry.source.player,event.entity.uniqueId,entry.arm?.value?.target))pendingEntities.getOrPut(entity){java.util.Collections.newSetFromMap(IdentityHashMap())}.add(event)
+ }
+ private fun unindex(event:EntityDamageEvent,entries:List<Reservation>){
+  for(entry in entries)for(entity in listOfNotNull(entry.source.player,event.entity.uniqueId,entry.arm?.value?.target))pendingEntities[entity]?.let{events->events.remove(event);if(events.isEmpty())pendingEntities.remove(entity)}
+ }
  private fun reserveDamage(p:Proof,event:EntityDamageEvent,descriptor:OriginalProcEngine.Family,state:ArmedProcLedger.Entry<Arm>?,needsCooldown:Boolean):Boolean {
   if(pending.size>=1024&&event !in pending)return false
   val attempt=OriginalRuntime.track(event as? EntityDamageByEntityEvent?:return false)?:return false
   val existing=pending[event];if(existing!=null&&(existing.size>=8||existing.any{it.family==descriptor}))return false
   val lease=if(needsCooldown)OriginalRuntime.reserveNative(descriptor,p.source.player,attempt).orElse(null)?:return false else null
   if(state!=null){val key=Key(p.source.player,p.family);if(!arms.consume(key,state)){lease?.let{OriginalRuntime.rollbackNative(descriptor,p.source.player,it)};return false};state.value.task?.cancel()}
-  pending.getOrPut(event){mutableListOf()}.add(Reservation(p.source,descriptor,lease,state));return true
+  val entry=Reservation(p.source,descriptor,lease,state)
+  pending.getOrPut(event){mutableListOf()}.add(entry);index(event,entry);return true
  }
  fun execute(family:String,percent:Double,data:TriggerData):Boolean {
   val p=proof?:return false;val player=current(p.source)?:return false;val level=data.holder.holder as? EcoEnchantLevel?:return false
@@ -240,7 +252,10 @@ internal object NativeReactiveProgression : Listener {
   }
   event.damage*=1-applied/100;p.used=true;return true
  }
- private fun undoLast(event:EntityDamageEvent){val list=pending[event]?:return;val entry=list.removeLastOrNull()?:return;rollback(entry);if(list.isEmpty())pending.remove(event)}
+ private fun undoLast(event:EntityDamageEvent){
+  val list=pending[event]?:return;unindex(event,list);val entry=list.removeLastOrNull()?:return
+  rollback(entry);if(list.isEmpty())pending.remove(event)else list.forEach{index(event,it)}
+ }
  private fun rollback(entry:Reservation){
   entry.lease?.let{OriginalRuntime.rollbackNative(entry.family,entry.source.player,it)}
   val state=entry.arm?:return;val key=Key(entry.source.player,state.value.family)
@@ -248,6 +263,7 @@ internal object NativeReactiveProgression : Listener {
  }
  fun finish(event:EntityDamageEvent){
   val entries=pending.remove(event)?:return
+  unindex(event,entries)
   val rejected=explicitlyRejectedDamage(event)
   for(entry in entries)if(rejected)rollback(entry)else entry.arm?.let{state->arms.settle(Key(entry.source.player,state.value.family),state,false)}
  }

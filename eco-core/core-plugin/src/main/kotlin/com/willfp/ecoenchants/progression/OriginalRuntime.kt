@@ -41,6 +41,7 @@ internal object OriginalRuntime : Listener {
     private data class Pending(val event: EntityDamageEvent,val source: Source?,val combat: NativeCombatProgression.Capture?,val victim: LivingEntity,
                                val before: Double,val eventId: UUID,val arrow: UUID?,val burst:NativeBurstProgression.Capture?=null,val reactive:NativeReactiveProgression.Capture?=null,var task: BukkitTask? = null)
     private val pending = IdentityHashMap<EntityDamageEvent,Pending>()
+    private val pendingEntities=mutableMapOf<UUID,MutableSet<EntityDamageEvent>>()
     private data class Proof(val pending: Pending,val damage: Double)
     private var proof: Proof? = null
     private var secondary = 0
@@ -48,6 +49,7 @@ internal object OriginalRuntime : Listener {
     private var registered = false
     private data class Slow(val source: UUID,val entity: LivingEntity,val modifier: AttributeModifier,var task: BukkitTask? = null)
     private val slows = mutableMapOf<UUID,Slow>()
+    private val slowsBySource=mutableMapOf<UUID,MutableSet<UUID>>()
     private fun now() = System.nanoTime()/1_000_000L
     private fun config() = owner.configYml
     private fun limit(key: String,default: Int,max: Int): Int = (config().getIntOrNull("original-procs.$key") ?: default).coerceIn(0,max)
@@ -59,8 +61,8 @@ internal object OriginalRuntime : Listener {
         registered=true
     }
     fun reset() {
-        pending.values.toList().forEach { it.task?.cancel() };pending.clear()
-        slows.keys.toList().forEach { removeSlow(it) }
+        pending.values.toList().forEach { it.task?.cancel() };pending.clear();pendingEntities.clear()
+        slows.keys.toList().forEach { removeSlow(it) };slowsBySource.clear()
         shots.clear();sessions.clear();engine.clear();budget.clear();proof=null;mythicBroken=false
         if(::owner.isInitialized){
             shots=ShotLedger(limit("max-shots",4096,4096).coerceAtLeast(1),limit("shot-ttl-seconds",30,60).coerceAtLeast(1)*1000L) { now() }
@@ -133,7 +135,7 @@ internal object OriginalRuntime : Listener {
         if(original==null&&combat==null&&burst==null&&reactive==null)return
         if(pending.size>=limit("max-pending-hits",512,1024)){combat?.let{NativeCombatProgression.uncertain(it,victim)};return}
         val candidate=Pending(event,original?.first,combat,victim,victim.health,UUID.randomUUID(),original?.second,burst,reactive)
-        pending[event]=candidate
+        pending[event]=candidate;linkPending(candidate)
         candidate.task=Bukkit.getScheduler().runTask(owner,Runnable { confirm(candidate) })
     }
     private fun originalSource(event: EntityDamageByEntityEvent,victim: LivingEntity): Pair<Source,UUID?>? {
@@ -155,6 +157,13 @@ internal object OriginalRuntime : Listener {
         val player=Bukkit.getPlayer(context.player) ?: return null
         return if(eligible(player,victim))Pair(context,arrowId) else null
     }
+    private fun actor(candidate:Pending)=candidate.source?.player?:candidate.combat?.actor?:candidate.burst?.sources?.firstOrNull()?.player
+    private fun linkPending(candidate:Pending){
+        for(id in listOfNotNull(candidate.victim.uniqueId,actor(candidate)))pendingEntities.getOrPut(id){java.util.Collections.newSetFromMap(IdentityHashMap())}.add(candidate.event)
+    }
+    private fun unlinkPending(candidate:Pending){
+        for(id in listOfNotNull(candidate.victim.uniqueId,actor(candidate)))pendingEntities[id]?.let{events->events.remove(candidate.event);if(events.isEmpty())pendingEntities.remove(id)}
+    }
     internal fun track(event: EntityDamageByEntityEvent): UUID? {
         observe(event)
         return pending[event]?.eventId
@@ -164,7 +173,7 @@ internal object OriginalRuntime : Listener {
     internal fun sameSession(id: UUID,expected: UUID): Boolean = sessions[id]?.token==expected
     private fun confirm(candidate: Pending) {
         if(pending[candidate.event]!==candidate)return
-        pending.remove(candidate.event)
+        pending.remove(candidate.event);unlinkPending(candidate)
         candidate.task?.cancel()
         var observedDamage=0.0
         try {
@@ -231,12 +240,14 @@ internal object OriginalRuntime : Listener {
         removeSlow(target.uniqueId)
         val modifier=NativeProcAdapters.slow(attribute,slowKey,fraction)
         val record=Slow(player.uniqueId,target,modifier);slows[target.uniqueId]=record
+        slowsBySource.getOrPut(player.uniqueId){mutableSetOf()}.add(target.uniqueId)
         record.task=Bukkit.getScheduler().runTaskLater(owner,Runnable {
             if(slows[target.uniqueId]===record)removeSlow(target.uniqueId)
         },40L)
     }
     private fun removeSlow(id: UUID) {
         val slow=slows.remove(id) ?: return;slow.task?.cancel()
+        slowsBySource[slow.source]?.let{targets->targets.remove(id);if(targets.isEmpty())slowsBySource.remove(slow.source)}
         slow.entity.getAttribute(Attribute.MOVEMENT_SPEED)?.removeModifier(slow.modifier)
     }
     private fun visual(player: Player,origin: Location,family: OriginalProcEngine.Family,requested: Int) {
@@ -272,9 +283,12 @@ internal object OriginalRuntime : Listener {
         NativeBurstProgression.retire(id)
         NativeCombatProgression.retire(id)
         sessions.remove(id);engine.clearEntity(id)
-        pending.values.filter { it.source?.player==id||it.victim.uniqueId==id||it.combat?.actor==id||it.reactive?.player==id }.toList().forEach { pending.remove(it.event);it.task?.cancel() }
+        for(event in pendingEntities.remove(id)?.toList()?:emptyList()){
+            val candidate=pending[event]?:continue
+            pending.remove(event);unlinkPending(candidate);candidate.task?.cancel()
+        }
         shots.removeOwner(id)
-        slows.filter { it.value.source==id||it.key==id }.keys.toList().forEach { removeSlow(it) }
+        removeSlow(id);slowsBySource[id]?.toList()?.forEach { removeSlow(it) }
     }
     @EventHandler fun join(event: PlayerJoinEvent){token(event.player);NativeCombatProgression.arrival(event.player);NativeReactiveProgression.arrival(event.player)}
     @EventHandler fun respawn(event: PlayerRespawnEvent){token(event.player);NativeCombatProgression.arrival(event.player);NativeReactiveProgression.arrival(event.player)}
@@ -283,7 +297,7 @@ internal object OriginalRuntime : Listener {
     @EventHandler(priority=EventPriority.MONITOR)
     fun death(event: EntityDeathEvent) {
         // Death is a real post-damage boundary and may confirm the third hit immediately.
-        pending.values.filter { it.victim==event.entity }.toList().forEach { confirm(it) }
+        pendingEntities[event.entity.uniqueId]?.toList()?.forEach { damage -> pending[damage]?.takeIf { it.victim==event.entity }?.let { confirm(it) } }
         retire(event.entity.uniqueId)
     }
     @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)

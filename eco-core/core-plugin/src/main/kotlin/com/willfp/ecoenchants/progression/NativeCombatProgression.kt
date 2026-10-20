@@ -54,8 +54,9 @@ internal object NativeCombatProgression : Listener {
  private val buffs=mutableMapOf<UUID,Buff>()
  private val buffChecks=mutableMapOf<UUID,Buff>()
  private val cooldowns=LastResortGate({cap()}){now()}
- private data class Armor(val target:LivingEntity,val stacks:MutableMap<Pair<UUID,Int>,ArmorStack> = mutableMapOf(),var modifier:AttributeModifier?=null,var task:BukkitTask?=null)
+ private data class Armor(val target:LivingEntity,val stacks:MutableMap<Pair<UUID,Int>,ArmorStack> = mutableMapOf(),val actors:MutableMap<UUID,Int> = mutableMapOf(),var modifier:AttributeModifier?=null,var task:BukkitTask?=null)
  private val armors=mutableMapOf<UUID,Armor>()
+ private val armorSources=mutableMapOf<UUID,MutableSet<UUID>>()
  private fun now()=System.nanoTime()/1_000_000L
  private fun cap()=(owner.configYml.getIntOrNull("native-combat.max-players")?:512).coerceIn(1,1024)
  private fun id(item:ItemStack?):UUID?=item?.itemMeta?.persistentDataContainer?.get(itemKey,PersistentDataType.STRING)?.let{runCatching{UUID.fromString(it)}.getOrNull()}
@@ -79,7 +80,7 @@ internal object NativeCombatProgression : Listener {
  fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true;NativeMagicRecovery.enable(plugin){cap()};NativeSwarm.enable(plugin){cap()}
   commandGuard=try{CommandDamageGuard.resolve()}catch(problem:ReflectiveOperationException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:RuntimeException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:LinkageError){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}
   Bukkit.getPluginManager().registerEvents(this,plugin);Bukkit.getOnlinePlayers().forEach{arrival(it)}}
- fun reset(){NativeSwarm.clear();NativeFirstHits.clear();NativeMagicRecovery.reset();combat.values.forEach{it.task?.cancel()};combat.clear();buffs.clear();buffChecks.clear();armors.keys.toList().forEach{removeArmor(it)};proof=null;cooldowns.prune();if(enabled)Bukkit.getOnlinePlayers().forEach{arrival(it)}}
+ fun reset(){NativeSwarm.clear();NativeFirstHits.clear();NativeMagicRecovery.reset();combat.values.forEach{it.task?.cancel()};combat.clear();buffs.clear();buffChecks.clear();armors.keys.toList().forEach{removeArmor(it)};armorSources.clear();proof=null;cooldowns.prune();if(enabled)Bukkit.getOnlinePlayers().forEach{arrival(it)}}
  fun close(){enabled=false;reset();HandlerList.unregisterAll(this)}
  fun gameplay()=enabled&&commandGuard?.gameplay()==true
  fun rested(player:Player):Boolean {
@@ -151,6 +152,7 @@ internal object NativeCombatProgression : Listener {
    if(armor==null){if(armors.size>=cap())return false;armor=Armor(p.victim);armors[p.victim.uniqueId]=armor}
    val key=player.uniqueId to t
    if(key !in armor.stacks&&armor.stacks.size>=128)return false
+   if(key !in armor.stacks){armor.actors[player.uniqueId]=(armor.actors[player.uniqueId]?:0)+1;armorSources.getOrPut(player.uniqueId){mutableSetOf()}.add(p.victim.uniqueId)}
    armor.stacks[key]=(armor.stacks[key]?:ArmorStack(t)).also{it.hit(now())};applyArmor(armor);return true
   }
   if(family=="mana_recovery"){
@@ -170,7 +172,12 @@ internal object NativeCombatProgression : Listener {
   return false
  }
  private fun applyArmor(armor:Armor){
-  val time=now();armor.stacks.entries.removeIf{!it.value.live(time)}
+  val time=now();val iterator=armor.stacks.entries.iterator()
+  while(iterator.hasNext()){
+   val entry=iterator.next();if(entry.value.live(time))continue;iterator.remove()
+   val actor=entry.key.first;val left=(armor.actors[actor]?:1)-1
+   if(left<=0){armor.actors.remove(actor);unlinkArmor(actor,armor.target.uniqueId)}else armor.actors[actor]=left
+  }
   if(armor.stacks.isEmpty()||!armor.target.isValid||armor.target.isDead){removeArmor(armor.target.uniqueId);return}
   val attr=armor.target.getAttribute(Attribute.ARMOR)?:run{removeArmor(armor.target.uniqueId);return}
   armor.modifier?.let{attr.removeModifier(it)}
@@ -185,7 +192,12 @@ internal object NativeCombatProgression : Listener {
    armor.task=null;applyArmor(armor)
   },delay)
  }
- private fun removeArmor(uuid:UUID){val armor=armors.remove(uuid)?:return;armor.task?.cancel();armor.modifier?.let{armor.target.getAttribute(Attribute.ARMOR)?.removeModifier(it)}}
+ private fun unlinkArmor(actor:UUID,target:UUID){armorSources[actor]?.let{targets->targets.remove(target);if(targets.isEmpty())armorSources.remove(actor)}}
+ private fun removeArmor(uuid:UUID){
+  val armor=armors.remove(uuid)?:return;armor.task?.cancel()
+  armor.actors.keys.forEach{unlinkArmor(it,uuid)};armor.actors.clear()
+  armor.modifier?.let{armor.target.getAttribute(Attribute.ARMOR)?.removeModifier(it)}
+ }
  @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true)
  fun reduce(event:EntityDamageByEntityEvent){
   val player=event.entity as? Player?:return;val buff=buffs[player.uniqueId]?:return
@@ -201,7 +213,12 @@ internal object NativeCombatProgression : Listener {
  fun retire(uuid:UUID){
   NativeSwarm.retire(uuid);NativeFirstHits.retire(uuid);NativeMagicRecovery.retire(uuid)
   combat.remove(uuid)?.task?.cancel();buffs.remove(uuid);buffChecks.remove(uuid)
-  armors.values.toList().forEach{armor->if(armor.target.uniqueId==uuid)removeArmor(uuid) else if(armor.stacks.keys.removeIf{it.first==uuid})applyArmor(armor)}
+  removeArmor(uuid)
+  for(target in armorSources[uuid]?.toList()?:emptyList()){
+   val armor=armors[target]
+   if(armor==null){unlinkArmor(uuid,target);continue}
+   armor.stacks.keys.removeIf{it.first==uuid};armor.actors.remove(uuid);unlinkArmor(uuid,target);applyArmor(armor)
+  }
  }
  @EventHandler fun pluginDisabled(event:org.bukkit.event.server.PluginDisableEvent){NativeMagicRecovery.disabled(event.plugin)}
  private fun checkBuff(player:Player){

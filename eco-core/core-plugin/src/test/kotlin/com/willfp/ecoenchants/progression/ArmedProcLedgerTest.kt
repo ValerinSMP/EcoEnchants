@@ -2,6 +2,21 @@ package com.willfp.ecoenchants.progression
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 class ArmedProcLedgerTest {
+ @Test fun `indexed cleanup visits only states associated with actor or target`(){
+  var reads=0;val actor=java.util.UUID.randomUUID();val unrelated=java.util.UUID.randomUUID()
+  val state=ArmedProcLedger<Int,java.util.UUID>({1024},entities={_,target->reads++;listOf(actor,target)}){0L}
+  val targets=(0 until 500).map{java.util.UUID.randomUUID()};targets.forEachIndexed{key,target->state.arm(key,target,3000)}
+  val before=reads;repeat(1000){assertTrue(state.retireEntity(unrelated).isEmpty())};assertEquals(before,reads);assertEquals(500,state.retainedEntries())
+  assertEquals(1,state.retireEntity(targets[0]).size);assertEquals(499,state.retireEntity(actor).size);assertEquals(0,state.retainedEntries());assertTrue(state.retireEntity(targets[1]).isEmpty())
+ }
+ @Test fun `replacement expiry and consumed settlement clean only current entity links`(){
+  var now=0L;val actor=java.util.UUID.randomUUID();val oldTarget=java.util.UUID.randomUUID();val newTarget=java.util.UUID.randomUUID()
+  val state=ArmedProcLedger<String,java.util.UUID>({4},entities={_,target->listOf(actor,target)}){now}
+  val old=state.arm("key",oldTarget,3000)!!;state.consume("key",old);val fresh=state.arm("key",newTarget,3000)!!
+  assertTrue(state.retireEntity(oldTarget).isEmpty());assertSame(fresh,state.peek("key"));assertFalse(state.settle("key",old,true));assertTrue(state.consume("key",fresh));assertFalse(state.settle("key",fresh,false));assertTrue(state.retireEntity(newTarget).isEmpty())
+  state.arm("key",newTarget,3000);now=3000;assertNull(state.peek("key"));assertTrue(state.retireEntity(actor).isEmpty())
+ }
+
  @Test fun `explicit cancellation restores original deadline and consumes only once`(){
   var now=0L;val state=ArmedProcLedger<String,String>({4}){now};val first=state.arm("guard","original",3000)!!
   assertTrue(state.consume("guard",first));assertNull(state.peek("guard"));assertFalse(state.consume("guard",first));now=1000

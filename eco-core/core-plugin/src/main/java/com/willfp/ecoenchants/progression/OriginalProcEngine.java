@@ -42,6 +42,7 @@ public final class OriginalProcEngine {
                              double radius,int durationTicks,int maxParticles) {}
     private record Key(UUID player,UUID item,UUID target,UUID world) {}
     private record Window(int hits,long expires) {}
+    private record WindowRef(Family family,Key key) {}
     record Lease(UUID id,long until) {}
     private final Thread owner=Thread.currentThread();
     private final LongSupplier millis;
@@ -50,6 +51,7 @@ public final class OriginalProcEngine {
     private final EnumMap<Family,LinkedHashMap<UUID,Lease>> cooldowns=new EnumMap<>(Family.class);
     private record EventKey(Family family,UUID event) {}
     private final LinkedHashMap<EventKey,Long> events=new LinkedHashMap<>();
+    private final Map<UUID,Set<WindowRef>> windowEntities=new HashMap<>();
     public OriginalProcEngine(int capacity,LongSupplier millis){
         if(capacity<1||capacity>4096)throw new IllegalArgumentException("capacity must be 1..4096");
         this.capacity=capacity;this.millis=Objects.requireNonNull(millis);
@@ -76,10 +78,10 @@ public final class OriginalProcEngine {
         if(old==null&&(map.size()>=capacity||cd.size()>=capacity))return Optional.empty();
         events.put(eventKey,now+1000);
         int hits=old==null?1:old.hits()+1;
-        if(hits<family.hits){map.put(key,new Window(hits,old==null?now+family.window:old.expires()));return Optional.empty();}
+        if(hits<family.hits){if(old==null)linkWindow(family,key);map.put(key,new Window(hits,old==null?now+family.window:old.expires()));return Optional.empty();}
         // At capacity, deny instead of evicting an active cooldown and permitting a bypass.
         if(cd.size()>=capacity)return Optional.empty();
-        map.remove(key);cd.put(h.player(),new Lease(h.event(),now+family.cooldown));
+        map.remove(key);if(old!=null)unlinkWindow(family,key);cd.put(h.player(),new Lease(h.event(),now+family.cooldown));
         return Optional.of(new Activation(family,family.values[h.tier()-1],h.finalDamage(),
             switch(family){case ECO_RESONANTE,PULSO_ABISAL,CONSTELACION->2;case RUPTURA_SONICA,TORMENTA_ENCADENADA->3;default->1;},
             switch(family){case ECO_RESONANTE,PULSO_ABISAL->2;case BRASA_ERRANTE,REBOTE_PRISMATICO,RUPTURA_SONICA,TORMENTA_ENCADENADA,CONSTELACION->3;default->0;},
@@ -102,7 +104,7 @@ public final class OriginalProcEngine {
             var cds=cooldowns.get(f).entrySet().iterator();
             while(cds.hasNext()){if(cds.next().getValue().until()>now)break;cds.remove();}
             var it=windows.get(f).entrySet().iterator();
-            while(it.hasNext()){if(it.next().getValue().expires()>now)break;it.remove();}
+            while(it.hasNext()){var entry=it.next();if(entry.getValue().expires()>now)break;it.remove();unlinkWindow(f,entry.getKey());}
         }
     }
     private static <K>void expireLong(LinkedHashMap<K,Long>map,long now){
@@ -110,8 +112,21 @@ public final class OriginalProcEngine {
     }
     /** Called on quit/death/world change/transfer; local cooldown remains until its bounded TTL. */
     public void clearEntity(UUID id){
-        main();for(var map:windows.values())map.keySet().removeIf(k->k.player().equals(id)||k.target().equals(id));
+        main();var refs=windowEntities.remove(id);if(refs==null)return;
+        for(var ref:refs){windows.get(ref.family()).remove(ref.key());unlinkWindow(ref.family(),ref.key());}
     }
     public int retainedEntries(){main();return events.size()+windows.values().stream().mapToInt(Map::size).sum()+cooldowns.values().stream().mapToInt(Map::size).sum();}
-    public void clear(){main();events.clear();windows.values().forEach(Map::clear);cooldowns.values().forEach(Map::clear);}
+    public void clear(){main();events.clear();windows.values().forEach(Map::clear);cooldowns.values().forEach(Map::clear);windowEntities.clear();}
+    private void linkWindow(Family family,Key key){
+        var ref=new WindowRef(family,key);
+        windowEntities.computeIfAbsent(key.player(),ignored->new HashSet<>()).add(ref);
+        windowEntities.computeIfAbsent(key.target(),ignored->new HashSet<>()).add(ref);
+    }
+    private void unlinkWindow(Family family,Key key){
+        var ref=new WindowRef(family,key);
+        for(var id:List.of(key.player(),key.target())){
+            var refs=windowEntities.get(id);if(refs==null)continue;refs.remove(ref);if(refs.isEmpty())windowEntities.remove(id);
+        }
+    }
+    int windowReferences(UUID entity){main();var refs=windowEntities.get(entity);return refs==null?0:refs.size();}
 }

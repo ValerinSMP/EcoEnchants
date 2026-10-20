@@ -65,15 +65,16 @@ internal object NativeBurstProgression : Listener {
  private val trails=mutableMapOf<UUID,Trail>()
  private data class Dot(val source:Context,val target:LivingEntity,val damage:Double,var remaining:Int=3,var task:BukkitTask?=null)
  private val dots=mutableMapOf<UUID,Dot>()
+ private val dotEntities=mutableMapOf<UUID,MutableSet<UUID>>()
  private val queryBudget=SwarmQueryBudget()
  private fun now()=System.nanoTime()/1_000_000L
  private fun limit()=(owner.configYml.getIntOrNull("original-procs.max-active-effects")?:512).coerceIn(1,1024)
  private fun id(item:ItemStack)=item.itemMeta?.persistentDataContainer?.get(itemKey,PersistentDataType.STRING)?.let{runCatching{UUID.fromString(it)}.getOrNull()}
  fun register(){Triggers.register(ConfirmedNativeBurst);Effects.register(EffectNativeBurst);Conditions.register(ConditionHuntersTrail)}
  fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true;Bukkit.getPluginManager().registerEvents(this,plugin)}
- fun reset(){shots.clear();dots.values.forEach{it.task?.cancel()};dots.clear();trails.keys.toList().forEach{removeTrail(it)};queryBudget.reset();proof=null}
+ fun reset(){shots.clear();dots.keys.toList().forEach{removeDot(it)};dotEntities.clear();trails.keys.toList().forEach{removeTrail(it)};queryBudget.reset();proof=null}
  fun close(){reset();enabled=false;HandlerList.unregisterAll(this)}
- fun retire(uuid:UUID){shots.removeOwner(uuid);removeTrail(uuid);dots.filter{it.value.source.player==uuid||it.value.target.uniqueId==uuid}.keys.toList().forEach{dots.remove(it)?.task?.cancel()}}
+ fun retire(uuid:UUID){shots.removeOwner(uuid);removeTrail(uuid);dotEntities[uuid]?.toList()?.forEach{removeDot(it)}}
  private fun refresh(player:Player){player.clearEnchantmentCache();val d=player.toDispatcher();d.forceRefreshHolders();d.flushHolders()}
  internal fun itemContext(player:Player,item:ItemStack,kind:String,charged:Boolean,slot:EquipmentSlot?,projectile:Trident?=null):Context? {
   val allowed=familiesByKind[kind]?:return null
@@ -167,7 +168,7 @@ internal object NativeBurstProgression : Listener {
   when(family){
    "marca_celeste","eclipse"->NativeReactiveProgression.arm(source,family,tier,percent,if(family=="marca_celeste")p.victim.uniqueId else null)
    "estela_cazador"->trail(player,source,tier)
-   "cicatriz_ignea"->{val key=UUID.randomUUID();val dot=Dot(source,p.victim,p.damage*percent/100);dots[key]=dot;scheduleDot(key,dot)}
+   "cicatriz_ignea"->{val key=UUID.randomUUID();val dot=Dot(source,p.victim,p.damage*percent/100);dots[key]=dot;for(entity in listOf(source.player,p.victim.uniqueId))dotEntities.getOrPut(entity){mutableSetOf()}.add(key);scheduleDot(key,dot)}
    "cometa","legado_valerin"->damage(source,p.victim,p.damage*percent/100,true)
    "tormenta_encadenada"->{
     val visited=mutableSetOf(p.victim.uniqueId);var anchor=p.victim
@@ -197,13 +198,17 @@ internal object NativeBurstProgression : Listener {
   if(result.availability()!=BoundedLivingQueries.Availability.AVAILABLE)return emptyList()
   return result.candidates().filter{it!==anchor&&it.uniqueId !in excluded&&it.location.distanceSquared(location)<=radius*radius&&it.noDamageTicks<=it.maximumNoDamageTicks/2&&OriginalRuntime.eligible(player,it)&&anchor.hasLineOfSight(it)}.sortedBy{it.location.distanceSquared(location)}.take(maximum)
  }
+ private fun removeDot(key:UUID){
+  val dot=dots.remove(key)?:return;dot.task?.cancel()
+  for(entity in listOf(dot.source.player,dot.target.uniqueId))dotEntities[entity]?.let{ids->ids.remove(key);if(ids.isEmpty())dotEntities.remove(entity)}
+ }
  private fun scheduleDot(key:UUID,dot:Dot){
   dot.task=Bukkit.getScheduler().runTaskLater(owner,Runnable{
    if(dots[key]!==dot)return@Runnable
    val player=current(dot.source)
-   if(player==null||!OriginalRuntime.eligible(player,dot.target)){dots.remove(key);return@Runnable}
+   if(player==null||!OriginalRuntime.eligible(player,dot.target)){removeDot(key);return@Runnable}
    damage(dot.source,dot.target,dot.damage,true);OriginalRuntime.procVisual(player,dot.target.location,3);if(dots[key]!==dot)return@Runnable;dot.remaining--
-   if(dot.remaining>0)scheduleDot(key,dot)else dots.remove(key)
+   if(dot.remaining>0)scheduleDot(key,dot)else removeDot(key)
   },20L)
  }
  fun activeTrail(player:Player,item:ItemStack,tier:Int):Boolean { return trails[player.uniqueId]?.let{it.tier==tier&&it.until>now()&&it.token==OriginalRuntime.session(player)&&it.world==player.world.uid&&id(item)==it.item&&id(player.inventory.boots?:return false)==it.item}?:false }
