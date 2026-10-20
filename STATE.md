@@ -1,11 +1,11 @@
-# Originales ejecutables — entrega sin instalar, 2026-10-20
+# Elegibilidad de originales — entrega sin instalar, 2026-10-20
 
-- Fuente canónica personal; EcoEnchants sobre 61cac01e. Efectos registrados resonant_pulse/glacial_seal, trigger confirmed_original_hit, confirmación de daño real, snapshot de arco, exclusión NATURAL/Mythic, ralentización transitoria y FX acotados. Contrato: docs/ORIGINAL-PROCS-RUNTIME.md.
-- Toque Infernal XII y nueve movimientos 5b6ea99 preservados; no sustituir skills YAML histórico. Solo patch aditivo de anuncios. Sin cambios en eco/LibreForge/EcoSkills/vPets/vEnchanting ni contratos compra/XP.
-- Compilado en personal, JDK25/release21, ejecutor limitado. Suite 71 pruebas (incluye regresiones existentes y seis pruebas de código ajeno presente), 0 errores/fallos/omitidas. JVM/mocks, no servidor. Última revisión incluida.
-- Runtime compuesto sobre baseline Test 7dd5c987b3d2fcdcb3069b35d20a2609a8fbea8be9c503971ebe0ddb87281a0e: SHA256 752ae9eabce7593aed3336ca2e6b2c1d3ed65d3d952c23a48a3dec82bf21b55a. API byte-idéntica; 24 clases cambiadas, 1009 referencias nativas comprobadas. Descriptor Mythic contrastado con JAR instalado. Cierre estático no prueba gameplay.
-- JAR EcoEnchants-2026.27-original-procs-all.jar; artefactos personal original-procs-executable-20261020 y staging HomeSV ecosuite-original-procs-executable-20261020. Solo progresión/hooks/resources enumerados; target/ y DEVELOPMENT_HANDOFF.md ajenos preservados y excluidos del commit/runtime.
-- No instalado, no activo por esta entrega, no probado en juego; sin lifecycle ni SQL. Pendiente activación separada y prueba real Test (registro, compras, monstruos NATURAL, exclusiones, atributos, reconexión/transferencia).
+- Incremento sobre 29c25061, fuente personal. ProcGuards permite NATURAL, COMMAND (/summon), SPAWNER_EGG y DISPENSE_EGG. Continúan fuera SPAWNER/TRIAL_SPAWNER, CUSTOM/desconocidos y todas las exclusiones nativas por jefe/Mythic/NPC/mascota/aliado/PDC/tag/nombre/invulnerabilidad/protección. Sin bypass de owner ni excepciones en vEnchanting.
+- YAML solo cambia «monstruo natural» por «monstruo», valores/colores idénticos. Daño confirmado, procedencia del arco, cooldown, límites, requisitos, compra/XP sin cambios. Toque Infernal XII y nueve movimientos 5b6ea99 conservados.
+- Build personal con ejecutor limitado JDK25/release21. 74 pruebas JVM/Mockito, 0 fallos/errores/omitidas (incluye regresiones y seis pruebas ajenas del checkout). No prueba de servidor/gameplay. Cierre estático del único cambio de clase sin referencias internas rotas.
+- JAR EcoEnchants-2026.27-original-procs-eligibility-all.jar SHA256 3996a63b4335bf657b22cf3955cdc73ef6381cb4034973831b4494273203bac5. Frente al runtime de 29c25061 únicamente difieren ProcGuards.class y las dos descripciones YAML; API y todas las demás entradas byte-idénticas. Test observado con runtime padre SHA752ae9ea..., no instalado por este incremento.
+- Artefactos personal original-procs-eligibility-20261020; staging HomeSV ecosuite-original-procs-eligibility-20261020. Contrato docs/ORIGINAL-PROCS-RUNTIME.md y docs/VENCHANTING-ORIGINAL-PROCS-HANDOFF.md. No cambios ajenos incluidos.
+- Sin instalar ni lifecycle; pendiente integración/arranque y pruebas en juego en el chat vEnchanting. No modificaciones en vEnchanting/vPets/eco/LibreForge/EcoSkills ni SQL.
 
 # Progresión Encantador — primer incremento parcial 2026-10-20
 

@@ -10,6 +10,6 @@ public final class ProcGuards {
   return Math.max(0,Math.min(finalDamage,healthBefore-healthAfter));
  }
  public static boolean eligible(boolean monster,String spawnReason,boolean boss,boolean mythic,boolean marked,boolean allied,boolean invulnerable,boolean protectedTarget){
-  return monster&&"NATURAL".equals(spawnReason)&&!boss&&!mythic&&!marked&&!allied&&!invulnerable&&!protectedTarget;
+  return monster&&("NATURAL".equals(spawnReason)||"COMMAND".equals(spawnReason)||"SPAWNER_EGG".equals(spawnReason)||"DISPENSE_EGG".equals(spawnReason))&&!boss&&!mythic&&!marked&&!allied&&!invulnerable&&!protectedTarget;
  }
 }

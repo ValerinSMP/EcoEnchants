@@ -1,6 +1,6 @@
 enabled: true
 display-name: Sello glacial
-description: '&7Tras dos flechas al mismo monstruo natural, ralentiza &a%placeholder%%
+description: '&7Tras dos flechas al mismo monstruo, ralentiza &a%placeholder%%
   &7durante 2 s &8(10 s).'
 placeholder: 5 + 5 * %level%
 type: normal

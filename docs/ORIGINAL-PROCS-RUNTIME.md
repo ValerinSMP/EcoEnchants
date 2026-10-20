@@ -31,11 +31,13 @@ Se conserva una copia del arco y del tier al disparar, con jugador/mundo/sesión
 cambiar de arma después no cambia el origen. Cada proyectil/objetivo cuenta una
 vez, hasta ocho objetivos por proyectil. Flechas no registradas no cuentan.
 
-Política conservadora: únicamente Enemy vanilla de aparición NATURAL. Quedan
+Política conservadora: únicamente Enemy vanilla de aparición NATURAL, COMMAND (/summon),
+SPAWNER_EGG o DISPENSE_EGG (huevos, también dispensados). Quedan
 excluidos jugadores, aliados de scoreboard personal o principal, NPC, domesticados,
 Boss/Wither/Dragon/Warden/ElderGuardian, TODOS los mobs MythicMobs, entidades con
 PDC/tags/nombre personalizado, invulnerables y objetivos no autorizados por
-AntigriefManager. Spawner, huevos y /summon no sirven como prueba positiva.
+AntigriefManager. Spawner/trial spawner, CUSTOM de plugins y orígenes desconocidos siguen excluidos.
+/summon y huevos sí sirven como prueba positiva si no existe otra exclusión.
 Si Mythic está presente y deshabilitado o su API falla, se bloquean estos efectos
 y se registra la causa completa una vez hasta reload. No existe un modo inseguro
 que permita adivinar cuáles de sus mobs son jefes.
@@ -90,8 +92,15 @@ a ejecutar el servidor. El cierre de referencias nativas y la comparación binar
 de API son comprobaciones estáticas, no una prueba de gameplay.
 
 Pendiente en Test, mediante activación separada: arranque y registro, requisitos
-XVI/XVIII, tres golpes naturales y dos flechas con cambio de arma, muerte/daño
+XVI/XVIII, tres golpes a monstruos y dos flechas con cambio de arma, muerte/daño
 cancelado, PvP/jefes/Mythic/aliados, antigrief, retirada exacta sin acumulación,
 logout/reconexión/cambio de nodo, reload/disable y compra con vEnchanting.
 No instalación, lifecycle ni verificación en juego en este incremento. No SQL ni
 cambios en EcoSkills, vPets o vEnchanting.
+
+## Ajuste de elegibilidad sobre 29c25061
+Se amplían solo los orígenes permitidos en ProcGuards; todas las exclusiones se
+aplican igual, incluso a jefes/Mythic creados por comandos. Sin bypass de owner
+ni excepciones en vEnchanting. YAML solo sustituye «monstruo natural» por
+«monstruo», conservando valores y códigos de color.
+Referencia API: https://jd.papermc.io/paper/26.2/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html

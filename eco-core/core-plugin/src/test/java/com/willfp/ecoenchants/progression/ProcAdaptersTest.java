@@ -22,16 +22,29 @@ class ProcAdaptersTest {
   assertEquals(0,ProcGuards.confirmedDamage(false,true,Double.NaN,10,0));
   assertEquals(0,ProcGuards.confirmedDamage(false,true,10,Double.NaN,0));
  }
- @Test void onlyUnmarkedNaturalOrdinaryMonstersAreEligible(){
+ @Test void naturalVanillaMonsterIsEligible(){
   assertTrue(ProcGuards.eligible(true,"NATURAL",false,false,false,false,false,false));
-  for(String spawn:List.of("SPAWNER","TRIAL_SPAWNER","CUSTOM","SPAWNER_EGG","DEFAULT","COMMAND"))
-   assertFalse(ProcGuards.eligible(true,spawn,false,false,false,false,false,false),spawn);
-  assertFalse(ProcGuards.eligible(false,"NATURAL",false,false,false,false,false,false));
  }
- @Test void authoritativeBossMythicMetadataAlliesInvulnerabilityAndProtectionEachDeny(){
-  for(int i=0;i<6;i++){
-   boolean[] v=new boolean[6];v[i]=true;
-   assertFalse(ProcGuards.eligible(true,"NATURAL",v[0],v[1],v[2],v[3],v[4],v[5]));
+ @Test void summonedVanillaMonsterIsEligible(){
+  assertTrue(ProcGuards.eligible(true,"COMMAND",false,false,false,false,false,false));
+ }
+ @Test void spawnEggVanillaMonsterIsEligibleIncludingDispensers(){
+  for(String spawn:List.of("SPAWNER_EGG","DISPENSE_EGG"))
+   assertTrue(ProcGuards.eligible(true,spawn,false,false,false,false,false,false),spawn);
+ }
+ @Test void spawnersAndOtherPreviouslyUnsupportedOriginsRemainExcluded(){
+  for(String spawn:List.of("SPAWNER","TRIAL_SPAWNER","OMINOUS_ITEM_SPAWNER","CUSTOM","DEFAULT","BREEDING","SLIME_SPLIT"))
+   assertFalse(ProcGuards.eligible(true,spawn,false,false,false,false,false,false),spawn);
+  assertFalse(ProcGuards.eligible(true,null,false,false,false,false,false,false));
+ }
+ @Test void allAcceptedOriginsStillRejectNonMonstersAndEveryIndependentExclusion(){
+  // marked is the unchanged native union: NPC, pet, PDC, tags or custom name.
+  for(String spawn:List.of("NATURAL","COMMAND","SPAWNER_EGG","DISPENSE_EGG")){
+   assertFalse(ProcGuards.eligible(false,spawn,false,false,false,false,false,false),spawn+" nonmonster/player");
+   for(int i=0;i<6;i++){
+    boolean[] v=new boolean[6];v[i]=true;
+    assertFalse(ProcGuards.eligible(true,spawn,v[0],v[1],v[2],v[3],v[4],v[5]),spawn+" exclusion "+i);
+   }
   }
  }
  @Test void transferAndReconnectArrivalGuardCannotShortenEitherCooldown(){

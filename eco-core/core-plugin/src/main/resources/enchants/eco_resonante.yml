@@ -1,6 +1,6 @@
 enabled: true
 display-name: Eco resonante
-description: '&7Tras tres golpes al mismo monstruo natural, inflige &a%placeholder%%
+description: '&7Tras tres golpes al mismo monstruo, inflige &a%placeholder%%
   &7del daño final a otros 2 a 2 bloques &8(8 s).'
 placeholder: 2 + 2 * %level%
 type: normal
