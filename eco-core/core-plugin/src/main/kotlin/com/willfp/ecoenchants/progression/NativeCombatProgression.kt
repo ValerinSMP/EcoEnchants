@@ -75,10 +75,11 @@ internal object NativeCombatProgression : Listener {
  }
  fun register(){Triggers.register(ConfirmedNativeCombat);Effects.register(NativeCombatEffect("lethality_stack"));Effects.register(NativeCombatEffect("last_resort"));Conditions.register(ConditionRested)}
  fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true
-  commandGuard=try{CommandDamageGuard.resolve()}catch(problem:ReflectiveOperationException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso disabled: native command damage guard unavailable",problem);null}catch(problem:RuntimeException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso disabled: native command damage guard unavailable",problem);null}catch(problem:LinkageError){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso disabled: native command damage guard unavailable",problem);null}
+  commandGuard=try{CommandDamageGuard.resolve()}catch(problem:ReflectiveOperationException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:RuntimeException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:LinkageError){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}
   Bukkit.getPluginManager().registerEvents(this,plugin);Bukkit.getOnlinePlayers().forEach{arrival(it)}}
  fun reset(){combat.values.forEach{it.task?.cancel()};combat.clear();buffs.clear();buffChecks.clear();armors.keys.toList().forEach{removeArmor(it)};proof=null;cooldowns.prune();if(enabled)Bukkit.getOnlinePlayers().forEach{arrival(it)}}
  fun close(){enabled=false;reset();HandlerList.unregisterAll(this)}
+ fun gameplay()=enabled&&commandGuard?.gameplay()==true
  fun rested(player:Player):Boolean {
   if(!enabled||OriginalRuntime.age(player)<10_000)return false
   val state=combat[player.uniqueId]?:return false // Missing is unknown, never authorize.

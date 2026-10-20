@@ -1,0 +1,1314 @@
+{
+  "schema": 1,
+  "scope": "130 familias; estado por evidencia, no habilita compras ni modifica config activa",
+  "counts": {
+    "pending_implementation_or_audit": 83,
+    "previous_test_selection": 23,
+    "reserved_excluded": 13,
+    "candidate_native_implemented_JVM": 5,
+    "candidate_yaml_reviewed": 4,
+    "candidate_balance_native_route_JVM": 2
+  },
+  "rows": [
+    {
+      "id": "abrasion",
+      "name": "Abrasion",
+      "enchanting": 22,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "adrenaline",
+      "name": "Adrenalina",
+      "enchanting": 18,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "aguja_aurora",
+      "name": "Aguja de aurora",
+      "enchanting": 30,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "ancla",
+      "name": "Ancla",
+      "enchanting": 22,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "angler",
+      "name": "Pescador",
+      "enchanting": 4,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "arcane_defence",
+      "name": "Defensa Arcana",
+      "enchanting": 12,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "bastion",
+      "name": "Bastión",
+      "enchanting": 25,
+      "maxLevel": 1,
+      "type": "special",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "blackout",
+      "name": "Apagón",
+      "enchanting": 14,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "blast_mining",
+      "name": "Minería Explosiva",
+      "enchanting": 22,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "bleed",
+      "name": "Venenoso",
+      "enchanting": 17,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "block_breather",
+      "name": "Respirador de Bloques",
+      "enchanting": 5,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "boss_hunter",
+      "name": "Cazajefes",
+      "enchanting": 30,
+      "maxLevel": 8,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "brasa_errante",
+      "name": "Brasa errante",
+      "enchanting": 21,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "caffeinated",
+      "name": "Cafeinado",
+      "enchanting": 10,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "carve",
+      "name": "Tallar",
+      "enchanting": 8,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "chemist",
+      "name": "Químico",
+      "enchanting": 10,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "cicatriz_ignea",
+      "name": "Cicatriz ígnea",
+      "enchanting": 32,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "cleave",
+      "name": "Desgarre",
+      "enchanting": 4,
+      "maxLevel": 6,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "combatant",
+      "name": "Combatiente",
+      "enchanting": 9,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "combo",
+      "name": "Combo",
+      "enchanting": 24,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "cometa",
+      "name": "Cometa",
+      "enchanting": 35,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "constelacion",
+      "name": "Constelación",
+      "enchanting": 35,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "contagion",
+      "name": "Contagio",
+      "enchanting": 18,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "crimson_slayer",
+      "name": "Exterminador Carmesí",
+      "enchanting": 30,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "crit_luck",
+      "name": "Suerte Crítica",
+      "enchanting": 9,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "criticals",
+      "name": "Críticos",
+      "enchanting": 14,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "cubism",
+      "name": "Cubismo",
+      "enchanting": 3,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "cuidado",
+      "name": "Cuidado",
+      "enchanting": 7,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "candidate_native_implemented_JVM",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "dexterity",
+      "name": "Destreza",
+      "enchanting": 18,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "drain",
+      "name": "Drenaje",
+      "enchanting": 15,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "dynamite",
+      "name": "Dinamita",
+      "enchanting": 24,
+      "maxLevel": 2,
+      "type": "spell",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "eclipse",
+      "name": "Eclipse",
+      "enchanting": 35,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "eco_resonante",
+      "name": "Eco resonante",
+      "enchanting": 16,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "end_affinity",
+      "name": "Afinidad del End",
+      "enchanting": 12,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "ender_slayer",
+      "name": "Asesino del End",
+      "enchanting": 11,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "escape",
+      "name": "Escape",
+      "enchanting": 6,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "estela_cazador",
+      "name": "Estela del cazador",
+      "enchanting": 28,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "excavation",
+      "name": "Excavación",
+      "enchanting": 18,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "experience",
+      "name": "Experiencia",
+      "enchanting": 8,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "feather_step",
+      "name": "Paso de Pluma",
+      "enchanting": 7,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "finishing",
+      "name": "Ejecución",
+      "enchanting": 14,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "first_strike",
+      "name": "Primer Golpe",
+      "enchanting": 16,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "flashbang",
+      "name": "Granada Cegadora",
+      "enchanting": 10,
+      "maxLevel": 6,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "foraging",
+      "name": "Recolección",
+      "enchanting": 8,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "forceful_crit",
+      "name": "Crítico Forzoso",
+      "enchanting": 20,
+      "maxLevel": 6,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortaleza",
+      "enchanting": 16,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "frost",
+      "name": "Escarcha",
+      "enchanting": 12,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "getaway",
+      "name": "Huida",
+      "enchanting": 7,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "candidate_yaml_reviewed",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "giant_killer",
+      "name": "Asesino de Gigantes",
+      "enchanting": 15,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "candidate_balance_native_route_JVM",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "goliath",
+      "name": "Goliat",
+      "enchanting": 25,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "candidate_balance_native_route_JVM",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "green_thumb",
+      "name": "Mano Verde",
+      "enchanting": 9,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "guardia_cristal",
+      "name": "Guardia de cristal",
+      "enchanting": 25,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "harvesting",
+      "name": "Cosecha",
+      "enchanting": 8,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "haunting",
+      "name": "Espectralidad",
+      "enchanting": 18,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "indestructible",
+      "name": "Indestructible",
+      "enchanting": null,
+      "maxLevel": 1,
+      "type": "ultimate",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "infernal_touch",
+      "name": "Toque Infernal",
+      "enchanting": 12,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "introversion",
+      "name": "Introversión",
+      "enchanting": 12,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "jumpshot",
+      "name": "Salto Disparo",
+      "enchanting": 8,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "legado_valerin",
+      "name": "Legado de Valerin",
+      "enchanting": 35,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "letalidad",
+      "name": "Letalidad",
+      "enchanting": 14,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "candidate_native_implemented_JVM",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "lifesteal",
+      "name": "Robavida",
+      "enchanting": 15,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "mana_steal",
+      "name": "Robo de Mana",
+      "enchanting": 20,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "marca_celeste",
+      "name": "Marca celeste",
+      "enchanting": 21,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "metabolism",
+      "name": "Metabolismo",
+      "enchanting": 10,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "candidate_yaml_reviewed",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "might",
+      "name": "Poderío",
+      "enchanting": 18,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "neptune",
+      "name": "Neptuno",
+      "enchanting": 33,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "candidate_yaml_reviewed",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "nether_affinity",
+      "name": "Afinidad del Nether",
+      "enchanting": 15,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "nether_prospector",
+      "name": "Nether Prospector",
+      "enchanting": 28,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "one_for_all",
+      "name": "Uno para Todos",
+      "enchanting": 25,
+      "maxLevel": 1,
+      "type": "special",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "overload",
+      "name": "Sobrecarga",
+      "enchanting": 33,
+      "maxLevel": 7,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "paso_ceniza",
+      "name": "Paso de ceniza",
+      "enchanting": 35,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "poison_ivy",
+      "name": "Hiedra Venenosa",
+      "enchanting": 11,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "candidate_yaml_reviewed",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "prosecute",
+      "name": "Enjuiciamiento",
+      "enchanting": 25,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "prospector",
+      "name": "Prospector",
+      "enchanting": 10,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "pulso_abisal",
+      "name": "Pulso abisal",
+      "enchanting": 28,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "rapid",
+      "name": "Rápido",
+      "enchanting": 22,
+      "maxLevel": 6,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "rebote_prismatico",
+      "name": "Rebote prismático",
+      "enchanting": 30,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "rebounding",
+      "name": "Rebote",
+      "enchanting": 14,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "rejuvenate",
+      "name": "Rejuvenecimiento",
+      "enchanting": 10,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "repairing",
+      "name": "Reparando",
+      "enchanting": 15,
+      "maxLevel": 3,
+      "type": "special",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "replenish",
+      "name": "Reabastecimiento",
+      "enchanting": 7,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "reposo",
+      "name": "Reposo",
+      "enchanting": 23,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "candidate_native_implemented_JVM",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "resguardo_arcano",
+      "name": "Resguardo Arcano",
+      "enchanting": 25,
+      "maxLevel": 1,
+      "type": "special",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "ritmo_minero",
+      "name": "Ritmo minero",
+      "enchanting": 15,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "candidate_native_implemented_JVM",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "rocket_saver",
+      "name": "Ahorro de Cohetes",
+      "enchanting": 10,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "ruptura_sonica",
+      "name": "Ruptura sónica",
+      "enchanting": 33,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "sculk_slayer",
+      "name": "Cazador de Sculk",
+      "enchanting": 5,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "sello_glacial",
+      "name": "Sello glacial",
+      "enchanting": 18,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "shulker_harvest",
+      "name": "Cosecha de Shulker",
+      "enchanting": 24,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "shura",
+      "name": "Shura",
+      "enchanting": 26,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "skull_puncture",
+      "name": "Perforacráneos",
+      "enchanting": 16,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "slaughter",
+      "name": "Matanza",
+      "enchanting": 12,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "slipstream",
+      "name": "Corriente",
+      "enchanting": 9,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "smoldering",
+      "name": "Sofocante",
+      "enchanting": 23,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "snipe",
+      "name": "Francotirador",
+      "enchanting": 6,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "sorcery",
+      "name": "Hechicería",
+      "enchanting": 10,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "soulbound",
+      "name": "Vinculado al Alma",
+      "enchanting": null,
+      "maxLevel": 1,
+      "type": "ultimate",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "sparks",
+      "name": "Chispas",
+      "enchanting": 16,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "stamina",
+      "name": "Resistencia",
+      "enchanting": 5,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "steel_string",
+      "name": "Cuerda de Acero",
+      "enchanting": 17,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "streamlining",
+      "name": "Aerodinámico",
+      "enchanting": 7,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "strongarm",
+      "name": "Brazo Fuerte",
+      "enchanting": 16,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "stun",
+      "name": "Aturdimiento",
+      "enchanting": 13,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "superior",
+      "name": "Superior",
+      "enchanting": 25,
+      "maxLevel": 2,
+      "type": "special",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "sustento",
+      "name": "Sustento",
+      "enchanting": 1,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "swarm",
+      "name": "Enjambre",
+      "enchanting": 35,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "telekinesis",
+      "name": "Telequinesis",
+      "enchanting": 16,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "thor",
+      "name": "Thor",
+      "enchanting": 24,
+      "maxLevel": 6,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "thrive",
+      "name": "Prosperar",
+      "enchanting": 5,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "thunderbolt",
+      "name": "Rayo Trueno",
+      "enchanting": 20,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "thunderlord",
+      "name": "Señor de Truenos",
+      "enchanting": 20,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "timber",
+      "name": "Talador",
+      "enchanting": 20,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "titan_killer",
+      "name": "Asesino de Titanes",
+      "enchanting": 28,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "tormenta_encadenada",
+      "name": "Tormenta encadenada",
+      "enchanting": 35,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "triple_strike",
+      "name": "Triple Golpe",
+      "enchanting": 19,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "tripleshot",
+      "name": "Triple Disparo",
+      "enchanting": 19,
+      "maxLevel": 1,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "ultimate_wise",
+      "name": "Sabiduría Definitiva",
+      "enchanting": 20,
+      "maxLevel": 5,
+      "type": "ultimate",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "ultimo_recurso",
+      "name": "Último recurso",
+      "enchanting": 30,
+      "maxLevel": 5,
+      "type": "ultimate",
+      "status": "candidate_native_implemented_JVM",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "vampirism",
+      "name": "Vampirismo",
+      "enchanting": 15,
+      "maxLevel": 5,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "vanish",
+      "name": "Desvanecer",
+      "enchanting": 9,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "veinminer",
+      "name": "Minería de Veta",
+      "enchanting": 28,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "velo_lunar",
+      "name": "Velo lunar",
+      "enchanting": 32,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "vicious",
+      "name": "Feroz",
+      "enchanting": 26,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "vigilia",
+      "name": "Vigilia",
+      "enchanting": 33,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "warp_drive",
+      "name": "Motor de Curvatura",
+      "enchanting": 26,
+      "maxLevel": 1,
+      "type": "special",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "wisdom",
+      "name": "Sabiduría",
+      "enchanting": 27,
+      "maxLevel": 3,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "woodworker",
+      "name": "Leñador",
+      "enchanting": 10,
+      "maxLevel": 4,
+      "type": "normal",
+      "status": "previous_test_selection",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "wound",
+      "name": "Herida",
+      "enchanting": 18,
+      "maxLevel": 7,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "wyvern",
+      "name": "Dragón",
+      "enchanting": 28,
+      "maxLevel": 2,
+      "type": "normal",
+      "status": "pending_implementation_or_audit",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    },
+    {
+      "id": "xray",
+      "name": "Visión X",
+      "enchanting": 25,
+      "maxLevel": 3,
+      "type": "spell",
+      "status": "reserved_excluded",
+      "installedByThisTask": false,
+      "gameplayVerifiedByThisTask": false
+    }
+  ]
+}

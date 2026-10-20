@@ -1,0 +1,84 @@
+{
+  "increment": 4,
+  "requires": "coordinated native-additive runtime package; not the mining/five pair alone",
+  "changes": [
+    {
+      "id": "giant_killer",
+      "relativePath": "giant_killer.yml",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "type": "normal",
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "titan_killer"
+      ],
+      "formula": "alpha=min(max(Hvictim/Hplayer-1,0)*0.1*L,0.05*L)",
+      "reference": "https://hypixelskyblock.minecraft.wiki/w/Giant_Killer",
+      "referenceChecked": "2026-10-20",
+      "note": "Referencia mesa I–V, VI/VII especiales. Local I–IV mismos coeficientes/topes; V local0.5%/25%, referenciaV0.6%/30%. Modelo de defensa diferente; no comparar corazones absolutos.",
+      "sourceTestSha256": "1003de729108203b205ef1916e3c6ca65584983fcfcb11a40ff483e12a21c401",
+      "candidateSha256": "298d83c9cc2bf3aba8f5209d6cce5e7234e9cc70435f66b478b07518468a2e8a",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "goliath",
+      "relativePath": "goliath.yml",
+      "enchanting": 25,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "type": "normal",
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "formula": "alpha=min(max(Hvictim/Hplayer-1,0)*0.02*L,0.04*L)",
+      "reference": null,
+      "referenceChecked": null,
+      "note": "Diseño local, no equivalente directo de Hypixel: topes4/8/12/16/20% por este enchant, no cap global. Pasa de máximo4.6x enV a1.2x aislado; GK+GoliathV suman como máximo45% sobre base común.",
+      "sourceTestSha256": "33a65ef9baf7dbc41957138970cb514265537f75fd47e8a41dd36dd4c21aacad",
+      "candidateSha256": "8ecb1819522d22d8ed7159c8610dda81b86b7eb656d11edd80ffe825a4f615ee",
+      "installed": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cubism",
+      "relativePath": "cubism.yml",
+      "enchanting": 3,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "type": "normal",
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "formula": "alpha=0.05*L",
+      "reference": "https://hypixelskyblock.minecraft.wiki/w/Cubism",
+      "referenceChecked": null,
+      "note": "Valores y filtros existentes preservados; solo opt-in a suma nativa. Comparativa actual de Cubism aún pendiente; no declarar equivalente o inferior a Hypixel.",
+      "sourceTestSha256": "0fca5119a46201c58a28db0f12a3317937c476dfd0ea553a28d570eddf4c0360",
+      "candidateSha256": "0946031502ca7b7dd1e4f657e8f59e288c07989bd11e3b67aedb3ed8f83243b5",
+      "installed": false,
+      "gameplayVerified": false
+    }
+  ],
+  "validation": "Native argument/source review, YAML and tier calculations; Paper and gameplay pending"
+}

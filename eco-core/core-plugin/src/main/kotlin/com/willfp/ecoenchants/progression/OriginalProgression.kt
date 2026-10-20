@@ -31,6 +31,7 @@ internal class OriginalProcEffect(private val family: OriginalProcEngine.Family,
     }
 }
 object OriginalProgression {
+    private var owner:EcoEnchantsPlugin?=null
     @JvmStatic fun register() {
         NativeMiningProgression.register()
         NativeCombatProgression.register()
@@ -38,7 +39,7 @@ object OriginalProgression {
         Effects.register(OriginalProcEffect(OriginalProcEngine.Family.ECO_RESONANTE,"resonant_pulse"))
         Effects.register(OriginalProcEffect(OriginalProcEngine.Family.SELLO_GLACIAL,"glacial_seal"))
     }
-    @JvmStatic fun enable(plugin: EcoEnchantsPlugin) { OriginalRuntime.enable(plugin);NativeMiningProgression.enable(plugin);NativeCombatProgression.enable(plugin) }
+    @JvmStatic fun enable(plugin: EcoEnchantsPlugin) { owner=plugin;OriginalRuntime.enable(plugin);NativeMiningProgression.enable(plugin);NativeCombatProgression.enable(plugin);NativeNormalDamage.enable(plugin) }
     @JvmStatic fun reload() { OriginalRuntime.reset();NativeMiningProgression.reset();NativeCombatProgression.reset() }
-    @JvmStatic fun disable() { NativeCombatProgression.close();NativeMiningProgression.close();OriginalRuntime.close() }
+    @JvmStatic fun disable() { owner?.let{NativeNormalDamage.close(it)};owner=null;NativeCombatProgression.close();NativeMiningProgression.close();OriginalRuntime.close() }
 }
