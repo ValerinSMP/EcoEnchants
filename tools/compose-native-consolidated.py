@@ -26,7 +26,7 @@ for repo,path,sha,name in plans:
     n=str(f.relative_to(classes));changes[n]=transform(before.get(n,empty),f.read_bytes())
  else:
   fresh=read(r/repo/'eco-core/core-plugin/build/libs/core-plugin-2026.27-all.jar')
-  tokens=['OriginalProgression','OriginalProcEffect','OriginalRuntime','OriginalProcEngine','ProcGuards','NativeBurstProgression','EffectNativeBurst','NativeReactiveProgression','NativeCombatProgression','FilterEnchantCombatMode','FilterGenuineKill','NativeFirstHits','FirstHitsLedger','EffectThirdHitMultiplier','EffectRecentKillsMultiplier','NativeSwarm','EffectSwarmMultiplier','EnchantmentReplenish']
+  tokens=['OriginalProgression','OriginalProcEffect','OriginalRuntime','OriginalProcEngine','ProcGuards','NativeBurstProgression','EffectNativeBurst','NativeReactiveProgression','NativeCombatProgression','FilterEnchantCombatMode','FilterGenuineKill','NativeUtilityProgression','NativeUtilityProgressionKt','EffectDoubleMobXp','NativeFirstHits','FirstHitsLedger','EffectThirdHitMultiplier','EffectRecentKillsMultiplier','NativeSwarm','EffectSwarmMultiplier','EnchantmentReplenish']
   changes={n:b for n,b in fresh.items() if n.endswith('.class') and n.startswith('com/willfp/ecoenchants/') and n.split('/')[-1].split('$')[0].removesuffix('.class') in tokens}
  after=before|changes
  assert all(after[n]==b for n,b in before.items() if n not in changes)

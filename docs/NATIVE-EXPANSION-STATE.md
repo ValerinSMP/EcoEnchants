@@ -7,3 +7,7 @@
 - Sin instalación, activación, reinicio, reload o comandos productivos. Test conserva los cuatro hashes requirement-views rechecados; producción EE64213413… preservada. Sin reemplazar skills.yml, nueve movimientos, Toque Infernal XII, XP/SDK/vPets/vEnchanting/BD. Cambios ajenos preservados y fuera del compuesto. No subagentes.
 - Siguiente: integración y pruebas reales por chat vEnchanting, verificando hashes/configs actuales antes de aplicar; no instalar a ciegas117 archivos. Respaldar en disco secundario al instalar, no se generó respaldo porque aquí no se reemplazó nada.
 - Incidencia nueva: pérdida total de inventario por kill de combat logout, también Soulbound. Investigación aparte en PVPMANAGER-ITEM-LOSS-20261020.md, causa no confirmada, sin fix incluido ni cambios al castigo.
+
+## Corrección bootstrap posterior a fallo real en Dev
+
+Entrega anterior EEe8ca5859… rechazada: clase NativeUtilityProgression omitida por selector de composición. Código Kotlin no cambió. Selectores corregidos; ZIP añade solo esa clase, SDK/YAML intactos. EE nuevo1d7a0ca87822f38be5dbb9e2aae528cdb4e7895a301d179394e25ba34e64152c. Ver docs/NATIVE-BOOTSTRAP-FIX-HANDOFF.md y bootstrap-verification.json. Auditoría1155métodos/8155referencias y ejecución real de handleLoad con almacenamiento de registros simulado: anterior falla exacto, corregido pasa. No callbacks de activación/Paper/SQL/gameplay; no instalación ni lifecycle. Reintento corresponde al chat vEnchanting en Dev Custom/Sync; no Test HomeSV.

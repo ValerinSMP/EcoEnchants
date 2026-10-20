@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "previousRejectedSha256": "e8ca5859f41e79056a2c29e686f26cd09d7dbdd770c1cad60e42d11e3377ab6b",
+  "correctedSha256": "1d7a0ca87822f38be5dbb9e2aae528cdb4e7895a301d179394e25ba34e64152c",
+  "existingEntriesChanged": 0,
+  "removedEntries": 0,
+  "addedClasses": [
+    "com/willfp/ecoenchants/progression/NativeUtilityProgression.class"
+  ],
+  "definitionsUnchanged": 117,
+  "apiAndSdkAllExistingBytesUnchanged": true,
+  "staticAudit": {
+    "methods": 1155,
+    "memberReferences": 8155,
+    "missingOwnedClassesFatal": true
+  },
+  "executed": {
+    "method": "EcoEnchantsPlugin.handleLoad -> OriginalProgression.register",
+    "effects": 14,
+    "triggers": 5,
+    "conditions": 3,
+    "filters": 2,
+    "previousJarFailsWithReportedMissingClass": true,
+    "correctedJarPasses": true,
+    "boundary": "Registry storage simulated; registration callbacks, JavaPlugin constructor, Paper enable, SQL and gameplay not executed"
+  },
+  "build": "personal constrained executor; compose/javac/JVM only; unchanged Gradle modules not rebuilt",
+  "installed": false,
+  "active": false,
+  "gameplayVerified": false
+}

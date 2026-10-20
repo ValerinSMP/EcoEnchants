@@ -42,7 +42,7 @@ for repo,path,sha,name in plans:
   changes[n]=transform('copy',before[n],(r/repo/'core/common/build/classes/kotlin/main'/n).read_bytes())
  else:
   fresh=read(r/repo/'eco-core/core-plugin/build/libs/core-plugin-2026.27-all.jar')
-  tokens=['NativeCombatProgression','OriginalProgression','OriginalRuntime','NativeUtilityProgressionKt','EffectDoubleMobXp','NativeMagicRecovery','NativeMagicRecoveryKt','ManaCredit','MagicWriteResult','FirstHitsLedger','FirstHitResolution','NativeFirstHits','EffectFirstHitsMultiplier','NativeSwarm','EffectSwarmMultiplier','SwarmQueryBudget']
+  tokens=['NativeCombatProgression','OriginalProgression','OriginalRuntime','NativeUtilityProgression','NativeUtilityProgressionKt','EffectDoubleMobXp','NativeMagicRecovery','NativeMagicRecoveryKt','ManaCredit','MagicWriteResult','FirstHitsLedger','FirstHitResolution','NativeFirstHits','EffectFirstHitsMultiplier','NativeSwarm','EffectSwarmMultiplier','SwarmQueryBudget']
   changes={n:b for n,b in fresh.items() if n.startswith('com/willfp/ecoenchants/progression/') and n.endswith('.class') and n.split('/')[-1].split('$')[0].removesuffix('.class') in tokens}
  after=before|changes
  assert all(after[n]==b for n,b in before.items() if n not in changes)

@@ -1,3 +1,5 @@
+> Corrección posterior: el JAR EE e8ca5859… falló en Dev por clase ausente y queda rechazado. Usar docs/NATIVE-BOOTSTRAP-FIX-HANDOFF.md y el conjunto bootstrap-fixed; resto del contrato y117 definiciones conservados.
+
 # Entrega consolidada EcoSuite — 20/10/2026
 
 Candidato de código/YAML para integración por el chat de vEnchanting. **No instalado, no activo ni probado en juego.** Este documento sustituye la elección de JAR por lotes anteriores, no sus evidencias. No ejecutar instrucciones históricas de instalación. Producción queda intacta.
