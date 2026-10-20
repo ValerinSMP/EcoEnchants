@@ -1,0 +1,32 @@
+enabled: true
+display-name: Legado de Valerin
+description: '&7Tras ocho golpes al mismo monstruo en 10 s, inflige un &a%placeholder%%&7 adicional del último golpe y emite un sello de luz (30 s).'
+placeholder: '15'
+type: normal
+targets:
+- sword
+conflicts:
+- eclipse
+- tormenta_encadenada
+- ruptura_sonica
+- eco_resonante
+- brasa_errante
+rarity: legendary
+max-level: 1
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_burst
+  args:
+    family: legado_valerin
+    percent: '15'
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 35
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXXV'

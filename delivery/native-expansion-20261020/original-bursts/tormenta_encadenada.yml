@@ -1,0 +1,30 @@
+enabled: true
+display-name: Tormenta encadenada
+description: '&7Tras cinco golpes al mismo monstruo en 7 s, encadena un rayo que inflige un &a%placeholder%%&7 del último golpe a otros 3 monstruos como máximo (18
+  s).'
+placeholder: 4 + 2 * %level%
+type: normal
+targets:
+- sword
+conflicts:
+- thunderlord
+- thunderbolt
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_burst
+  args:
+    family: tormenta_encadenada
+    percent: 4 + 2 * %level%
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 35
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXXV'

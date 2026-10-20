@@ -1,0 +1,292 @@
+{
+  "increment": 8,
+  "changes": [
+    {
+      "id": "brasa_errante",
+      "enchanting": 21,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "eco_resonante"
+      ],
+      "type": "normal",
+      "values": [
+        4,
+        6,
+        8
+      ],
+      "cooldownSeconds": 12,
+      "definitionPath": "brasa_errante.yml",
+      "candidateSha256": "b3cfa12a7501a846832fa2c1cfad705c1710c5ce4ecdb77a9633a6d7f4841c3d",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "estela_cazador",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        5,
+        7,
+        9
+      ],
+      "cooldownSeconds": 20,
+      "definitionPath": "estela_cazador.yml",
+      "candidateSha256": "940d5d629ee72d6ff12c8d362c3285bcbf25935ec44295cdbf7c422f687fe106",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "pulso_abisal",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        4,
+        6,
+        8
+      ],
+      "cooldownSeconds": 12,
+      "definitionPath": "pulso_abisal.yml",
+      "candidateSha256": "fa51cc22d23521ac5947e67d4d16361b4202b634f10c06a7ea86b0d7fe1de2cb",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "rebote_prismatico",
+      "enchanting": 30,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [
+        "tripleshot"
+      ],
+      "type": "normal",
+      "values": [
+        8,
+        10,
+        12
+      ],
+      "cooldownSeconds": 15,
+      "definitionPath": "rebote_prismatico.yml",
+      "candidateSha256": "e284ac105bf656c21ea599e4bf4666c9f4e062f6c21aa299fd738cc2788b6754",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "cicatriz_ignea",
+      "enchanting": 32,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "axe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "values": [
+        3,
+        4,
+        5
+      ],
+      "cooldownSeconds": 12,
+      "definitionPath": "cicatriz_ignea.yml",
+      "candidateSha256": "939dc8741a5b1d3559a5c7690768867c9940177daf74e50ad6fa0240eb4b71d0",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "ruptura_sonica",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "eco_resonante"
+      ],
+      "type": "normal",
+      "values": [
+        6,
+        8,
+        10
+      ],
+      "cooldownSeconds": 15,
+      "definitionPath": "ruptura_sonica.yml",
+      "candidateSha256": "43dba426a28e502264408fd819f8aa04735aef2c505909254cdb49bfcb958c68",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "tormenta_encadenada",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "thunderlord",
+        "thunderbolt"
+      ],
+      "type": "normal",
+      "values": [
+        6,
+        8,
+        10
+      ],
+      "cooldownSeconds": 18,
+      "definitionPath": "tormenta_encadenada.yml",
+      "candidateSha256": "027ee8ee7573f1f74c6c13f9e08d35e0d7c83bddc337166c811eab5ce2287f84",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "cometa",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [
+        "rebote_prismatico"
+      ],
+      "type": "normal",
+      "values": [
+        10,
+        12,
+        15
+      ],
+      "cooldownSeconds": 20,
+      "definitionPath": "cometa.yml",
+      "candidateSha256": "385e10545cf4cea367c4e6a531f548471c21e2bc3452e83e3b155946f0a148a1",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "constelacion",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [
+        "pulso_abisal"
+      ],
+      "type": "normal",
+      "values": [
+        8,
+        10,
+        12
+      ],
+      "cooldownSeconds": 25,
+      "definitionPath": "constelacion.yml",
+      "candidateSha256": "2c54d1f82046753bf7a287b737165122a770d99a72a6f4f09276f9127c515e9a",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    },
+    {
+      "id": "legado_valerin",
+      "enchanting": 35,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "eclipse",
+        "tormenta_encadenada",
+        "ruptura_sonica",
+        "eco_resonante",
+        "brasa_errante"
+      ],
+      "type": "normal",
+      "values": [
+        15
+      ],
+      "cooldownSeconds": 30,
+      "definitionPath": "legado_valerin.yml",
+      "candidateSha256": "3a18f0b7c9d2d1f4621fee1d49ae484739393f28d94ea30eb8e94af3fe2f89da",
+      "sourceTestSha256": null,
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false,
+      "validation": "EE104 JVM/mocks, composed closure/smoke; actual Paper registration/effect/world tests pending"
+    }
+  ],
+  "requires": "coordinated increment8 LF/EE; unchanged eco utility and EcoSkills requirement-views",
+  "reference": "Originales Valerin con contrato plan.yml; niveles exclusivamente levels.json, sin equivalencia Hypixel inventada"
+}

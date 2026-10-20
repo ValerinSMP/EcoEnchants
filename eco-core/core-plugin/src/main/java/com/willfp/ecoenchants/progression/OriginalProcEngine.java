@@ -10,7 +10,17 @@ import java.util.function.LongSupplier;
 public final class OriginalProcEngine {
     public enum Family {
         ECO_RESONANTE(3,5_000,8_000,new double[]{4,6,8}),
-        SELLO_GLACIAL(2,4_000,10_000,new double[]{10,15,20});
+        SELLO_GLACIAL(2,4_000,10_000,new double[]{10,15,20}),
+        BRASA_ERRANTE(1,1_000,12_000,new double[]{4,6,8}),
+        ESTELA_CAZADOR(1,1_000,20_000,new double[]{5,7,9}),
+        PULSO_ABISAL(1,1_000,12_000,new double[]{4,6,8}),
+        REBOTE_PRISMATICO(1,1_000,15_000,new double[]{8,10,12}),
+        CICATRIZ_IGNEA(3,5_000,12_000,new double[]{3,4,5}),
+        RUPTURA_SONICA(4,6_000,15_000,new double[]{6,8,10}),
+        TORMENTA_ENCADENADA(5,7_000,18_000,new double[]{6,8,10}),
+        COMETA(3,8_000,20_000,new double[]{10,12,15}),
+        CONSTELACION(3,8_000,25_000,new double[]{8,10,12}),
+        LEGADO_VALERIN(8,10_000,30_000,new double[]{15});
         final int hits;final long window,cooldown;final double[] values;
         Family(int hits,long window,long cooldown,double[]values){this.hits=hits;this.window=window;this.cooldown=cooldown;this.values=values;}
     }
@@ -29,7 +39,8 @@ public final class OriginalProcEngine {
     private final int capacity;
     private final EnumMap<Family,LinkedHashMap<Key,Window>> windows=new EnumMap<>(Family.class);
     private final EnumMap<Family,LinkedHashMap<UUID,Long>> cooldowns=new EnumMap<>(Family.class);
-    private final LinkedHashMap<UUID,Long> events=new LinkedHashMap<>();
+    private record EventKey(Family family,UUID event) {}
+    private final LinkedHashMap<EventKey,Long> events=new LinkedHashMap<>();
     public OriginalProcEngine(int capacity,LongSupplier millis){
         if(capacity<1||capacity>4096)throw new IllegalArgumentException("capacity must be 1..4096");
         this.capacity=capacity;this.millis=Objects.requireNonNull(millis);
@@ -43,25 +54,27 @@ public final class OriginalProcEngine {
             &&!h.npc()&&!h.pet()&&!h.ally()&&h.bossExcluded()&&!h.spawner()&&!h.invulnerable()&&!h.secondary();
     }
     public Optional<Activation> record(Family family,Hit h){
-        main();Objects.requireNonNull(family);if(!valid(h))return Optional.empty();
+        main();Objects.requireNonNull(family);if(!valid(h)||h.tier()>family.values.length)return Optional.empty();
         long now=millis.getAsLong();expire(now);
-        if(events.containsKey(h.event())||events.size()>=capacity)return Optional.empty();
-        // Current families have disjoint weapon types; one confirmed event counts once.
+        var eventKey=new EventKey(family,h.event());
+        if(events.containsKey(eventKey)||events.size()>=capacity)return Optional.empty();
+        // One event may carry several independent families; each family claims it once.
         // Rejected events never enter the bounded deduplication map.
         var cd=cooldowns.get(family);
         if(cd.containsKey(h.player()))return Optional.empty();
         var map=windows.get(family);var key=new Key(h.player(),h.item(),h.target(),h.world());
         var old=map.get(key);
         if(old==null&&(map.size()>=capacity||cd.size()>=capacity))return Optional.empty();
-        events.put(h.event(),now+1000);
+        events.put(eventKey,now+1000);
         int hits=old==null?1:old.hits()+1;
         if(hits<family.hits){map.put(key,new Window(hits,old==null?now+family.window:old.expires()));return Optional.empty();}
         // At capacity, deny instead of evicting an active cooldown and permitting a bypass.
         if(cd.size()>=capacity)return Optional.empty();
         map.remove(key);cd.put(h.player(),now+family.cooldown);
         return Optional.of(new Activation(family,family.values[h.tier()-1],h.finalDamage(),
-            family==Family.ECO_RESONANTE?2:1,family==Family.ECO_RESONANTE?2:0,
-            family==Family.SELLO_GLACIAL?40:0,family==Family.ECO_RESONANTE?16:12));
+            switch(family){case ECO_RESONANTE,PULSO_ABISAL,CONSTELACION->2;case RUPTURA_SONICA,TORMENTA_ENCADENADA->3;default->1;},
+            switch(family){case ECO_RESONANTE,PULSO_ABISAL->2;case BRASA_ERRANTE,REBOTE_PRISMATICO,RUPTURA_SONICA,TORMENTA_ENCADENADA,CONSTELACION->3;default->0;},
+            switch(family){case SELLO_GLACIAL->40;case ESTELA_CAZADOR,CICATRIZ_IGNEA->60;default->0;},family==Family.ECO_RESONANTE||family==Family.LEGADO_VALERIN?16:12));
     }
     /** No timer. Fixed deadlines keep insertion order, so expiry only visits expired heads. */
     public void expire(long now){

@@ -1,0 +1,28 @@
+enabled: true
+display-name: Cometa
+description: '&7Tras acertar tres disparos cargados al mismo monstruo en 8 s, inflige un &a%placeholder%%&7 adicional del tercer impacto (20 s).'
+placeholder: 8 + 2 * %level% + max(0, %level% - 2)
+type: normal
+targets:
+- bow
+conflicts:
+- rebote_prismatico
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_burst
+  args:
+    family: cometa
+    percent: 8 + 2 * %level% + max(0, %level% - 2)
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 35
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXXV'

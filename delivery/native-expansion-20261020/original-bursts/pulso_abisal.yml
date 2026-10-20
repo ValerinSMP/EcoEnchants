@@ -1,0 +1,27 @@
+enabled: true
+display-name: Pulso abisal
+description: '&7Al acertar un tridente bajo el agua, inflige un &a%placeholder%%&7 adicional de ese golpe a un máximo de 2 monstruos a 2 bloques (12 s).'
+placeholder: 2 + 2 * %level%
+type: normal
+targets:
+- trident
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_burst
+  args:
+    family: pulso_abisal
+    percent: 2 + 2 * %level%
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 28
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXVIII'

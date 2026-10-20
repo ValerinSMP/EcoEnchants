@@ -34,6 +34,7 @@ object OriginalProgression {
     private var owner:EcoEnchantsPlugin?=null
     @JvmStatic fun register() {
         NativeMiningProgression.register()
+        NativeBurstProgression.register()
         NativeUtilityProgression.register()
         NativeFirstHits.register()
         NativeSwarm.register()
@@ -42,7 +43,7 @@ object OriginalProgression {
         Effects.register(OriginalProcEffect(OriginalProcEngine.Family.ECO_RESONANTE,"resonant_pulse"))
         Effects.register(OriginalProcEffect(OriginalProcEngine.Family.SELLO_GLACIAL,"glacial_seal"))
     }
-    @JvmStatic fun enable(plugin: EcoEnchantsPlugin) { owner=plugin;OriginalRuntime.enable(plugin);NativeMiningProgression.enable(plugin);NativeCombatProgression.enable(plugin);NativeNormalDamage.enable(plugin) }
-    @JvmStatic fun reload() { OriginalRuntime.reset();NativeMiningProgression.reset();NativeCombatProgression.reset() }
-    @JvmStatic fun disable() { owner?.let{NativeNormalDamage.close(it)};owner=null;NativeCombatProgression.close();NativeMiningProgression.close();OriginalRuntime.close() }
+    @JvmStatic fun enable(plugin: EcoEnchantsPlugin) { owner=plugin;OriginalRuntime.enable(plugin);NativeMiningProgression.enable(plugin);NativeCombatProgression.enable(plugin);NativeBurstProgression.enable(plugin);NativeNormalDamage.enable(plugin) }
+    @JvmStatic fun reload() { OriginalRuntime.reset();NativeMiningProgression.reset();NativeCombatProgression.reset();NativeBurstProgression.reset() }
+    @JvmStatic fun disable() { owner?.let{NativeNormalDamage.close(it)};owner=null;NativeBurstProgression.close();NativeCombatProgression.close();NativeMiningProgression.close();OriginalRuntime.close() }
 }

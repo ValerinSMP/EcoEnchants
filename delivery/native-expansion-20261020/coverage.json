@@ -2,11 +2,11 @@
   "schema": 1,
   "scope": "130 familias; estado por evidencia, no habilita compras ni modifica config activa",
   "counts": {
-    "pending_implementation_or_audit": 57,
+    "pending_implementation_or_audit": 47,
     "previous_test_selection": 23,
     "reserved_excluded": 13,
     "candidate_yaml_reviewed": 26,
-    "candidate_native_implemented_JVM": 9,
+    "candidate_native_implemented_JVM": 19,
     "candidate_balance_native_route_JVM": 2
   },
   "rows": [
@@ -136,7 +136,7 @@
       "enchanting": 21,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -176,7 +176,7 @@
       "enchanting": 32,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -216,7 +216,7 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -226,7 +226,7 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -376,7 +376,7 @@
       "enchanting": 28,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -596,7 +596,7 @@
       "enchanting": 35,
       "maxLevel": 1,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -756,7 +756,7 @@
       "enchanting": 28,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -776,7 +776,7 @@
       "enchanting": 30,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -866,7 +866,7 @@
       "enchanting": 33,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },
@@ -1146,7 +1146,7 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_native_implemented_JVM",
       "installedByThisTask": false,
       "gameplayVerifiedByThisTask": false
     },

@@ -39,7 +39,7 @@ internal object OriginalRuntime : Listener {
                               val itemId: UUID,val item: ItemStack,val tier: Int)
     private var shots = ShotLedger<Source>(4096,30_000) { now() }
     private data class Pending(val event: EntityDamageEvent,val source: Source?,val combat: NativeCombatProgression.Capture?,val victim: LivingEntity,
-                               val before: Double,val eventId: UUID,val arrow: UUID?,var task: BukkitTask? = null)
+                               val before: Double,val eventId: UUID,val arrow: UUID?,val burst:NativeBurstProgression.Capture?=null,var task: BukkitTask? = null)
     private val pending = IdentityHashMap<EntityDamageEvent,Pending>()
     private data class Proof(val pending: Pending,val damage: Double)
     private var proof: Proof? = null
@@ -91,10 +91,13 @@ internal object OriginalRuntime : Listener {
     fun shoot(event: EntityShootBowEvent) {
         val player=event.entity as? Player ?: return
         val bow=event.bow ?: return
-        if(bow.type!=Material.BOW||event.projectile !is AbstractArrow)return
+        if(event.projectile !is AbstractArrow)return
         val live=if(event.hand==EquipmentSlot.HAND)player.inventory.itemInMainHand else player.inventory.itemInOffHand
         if(live!=bow)return
-        val snapshot=source(player,live,OriginalProcEngine.Family.SELLO_GLACIAL,event.hand) ?: return
+        NativeBurstProgression.shoot(event)
+        if(bow.type!=Material.BOW)return
+        val actual=if(event.hand==EquipmentSlot.HAND)player.inventory.itemInMainHand else player.inventory.itemInOffHand
+        val snapshot=source(player,actual,OriginalProcEngine.Family.SELLO_GLACIAL,event.hand) ?: return
         shots.remember(event.projectile.uniqueId,player.uniqueId,snapshot)
     }
     internal fun eligible(player: Player,victim: LivingEntity,allowDead: Boolean=false): Boolean {
@@ -125,9 +128,10 @@ internal object OriginalRuntime : Listener {
         val victim=event.entity as? LivingEntity ?: return
         val original=if(secondary==0&&DamageMultiplierBypass.current==null&&event is EntityDamageByEntityEvent) originalSource(event,victim) else null
         val combat=NativeCombatProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
-        if(original==null&&combat==null)return
+        val burst=NativeBurstProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
+        if(original==null&&combat==null&&burst==null)return
         if(pending.size>=limit("max-pending-hits",512,1024)){combat?.let{NativeCombatProgression.uncertain(it,victim)};return}
-        val candidate=Pending(event,original?.first,combat,victim,victim.health,UUID.randomUUID(),original?.second)
+        val candidate=Pending(event,original?.first,combat,victim,victim.health,UUID.randomUUID(),original?.second,burst)
         pending[event]=candidate
         candidate.task=Bukkit.getScheduler().runTask(owner,Runnable { confirm(candidate) })
     }
@@ -167,6 +171,7 @@ internal object OriginalRuntime : Listener {
         observedDamage=damage
         if(damage<=0)return
         candidate.combat?.let { NativeCombatProgression.confirm(it,candidate.event,victim,candidate.before,damage) }
+        candidate.burst?.let{NativeBurstProgression.confirm(it,candidate.event,victim,damage,candidate.eventId)}
         val source=candidate.source ?: return
         val player=Bukkit.getPlayer(source.player) ?: return
         if(sessions[source.player]?.token!=source.token||player.world.uid!=source.world||!player.isOnline||!eligible(player,victim,true))return
@@ -198,15 +203,13 @@ internal object OriginalRuntime : Listener {
         val player=Bukkit.getPlayer(src.player) ?: return false
         if(family==OriginalProcEngine.Family.ECO_RESONANTE){
             val origin=candidate.victim.location
-            val targets=origin.world.getNearbyLivingEntities(origin,2.0).asSequence().take(limit("max-candidate-scan",32,64))
-                .filter { it!=candidate.victim&&it.location.distanceSquared(origin)<=4&&
-                    it.noDamageTicks<=it.maximumNoDamageTicks/2&&eligible(player,it)&&candidate.victim.hasLineOfSight(it) }
-                .sortedBy { it.location.distanceSquared(origin) }.take(2).toList()
-            withSecondaryDamage {
-                DamageMultiplierBypass.withProvenance(DamageProvenance(DamageOrigin.PASSIVE,player.uniqueId)){
-                    targets.forEach {
-                        if(eligible(player,it)&&it.location.distanceSquared(origin)<=4&&candidate.victim.hasLineOfSight(it)&&it.noDamageTicks<=it.maximumNoDamageTicks/2)
-                            it.dealDamage(confirmed.damage*activation.value()/100,source=player,trueDamage=false,checkAntigrief=true)
+            val targets=NativeBurstProgression.targets(player,candidate.victim,2.0,2)
+            targets.forEach { target ->
+                if(eligible(player,target)&&target.location.distanceSquared(origin)<=4&&candidate.victim.hasLineOfSight(target)&&target.noDamageTicks<=target.maximumNoDamageTicks/2){
+                    withSecondaryDamage {
+                        com.willfp.libreforge.effects.impl.RepeatedDamage.run(player.uniqueId,player.uniqueId,target.uniqueId){
+                            target.dealDamage(confirmed.damage*activation.value()/100,source=player,trueDamage=false,checkAntigrief=true)
+                        }
                     }
                 }
             }
@@ -214,6 +217,8 @@ internal object OriginalRuntime : Listener {
         visual(player,candidate.victim.location,family,activation.maxParticles())
         return true
     }
+    internal fun recordNative(family:OriginalProcEngine.Family,hit:OriginalProcEngine.Hit)=engine.record(family,hit)
+    internal fun procVisual(player:Player,origin:Location,requested:Int)=visual(player,origin,OriginalProcEngine.Family.ECO_RESONANTE,requested)
     private fun applySlow(player: Player,target: LivingEntity,fraction: Double) {
         if(!target.isValid||target.isDead)return
         val attribute=target.getAttribute(Attribute.MOVEMENT_SPEED) ?: return
@@ -253,8 +258,12 @@ internal object OriginalRuntime : Listener {
     }
     internal fun withSecondaryDamage(body: () -> Unit){secondary++;try{body()}finally{secondary--}}
     @EventHandler(priority=EventPriority.HIGHEST)
-    fun noSecondaryProcs(event: TriggerDispatchEvent){if(secondary>0)event.isCancelled=true}
+    fun noSecondaryProcs(event: TriggerDispatchEvent){
+        // Never suppress real death/drop/XP or receiver callbacks to avoid sender proc recursion.
+        if(secondary>0&&event.trigger.trigger.id in setOf("melee_attack","bow_attack","trident_attack","headshot"))event.isCancelled=true
+    }
     private fun retire(id: UUID) {
+        NativeBurstProgression.retire(id)
         NativeCombatProgression.retire(id)
         sessions.remove(id);engine.clearEntity(id)
         pending.values.filter { it.source?.player==id||it.victim.uniqueId==id||it.combat?.actor==id }.toList().forEach { pending.remove(it.event);it.task?.cancel() }

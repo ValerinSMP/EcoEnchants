@@ -1,0 +1,28 @@
+enabled: true
+display-name: Rebote prismático
+description: '&7Una flecha completamente cargada rebota visualmente hacia otro monstruo a 3 bloques e inflige un &a%placeholder%%&7 del daño inicial (15 s).'
+placeholder: 6 + 2 * %level%
+type: normal
+targets:
+- bow
+conflicts:
+- tripleshot
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_burst
+  args:
+    family: rebote_prismatico
+    percent: 6 + 2 * %level%
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 30
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXX'

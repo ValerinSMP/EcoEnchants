@@ -57,6 +57,9 @@ class NativeProcAdaptersTest {
     }
     @Test fun `actual native trigger listener suppresses secondary procs and restores scope after exceptions`() {
         val event=mock(TriggerDispatchEvent::class.java)
+        val dispatched=mock(com.willfp.libreforge.triggers.DispatchedTrigger::class.java)
+        val trigger=mock(com.willfp.libreforge.triggers.Trigger::class.java)
+        `when`(trigger.id).thenReturn("melee_attack");`when`(dispatched.trigger).thenReturn(trigger);`when`(event.trigger).thenReturn(dispatched)
         OriginalRuntime.withSecondaryDamage {
             OriginalRuntime.noSecondaryProcs(event)
             OriginalRuntime.withSecondaryDamage { OriginalRuntime.noSecondaryProcs(event) }
