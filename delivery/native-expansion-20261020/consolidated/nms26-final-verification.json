@@ -1,0 +1,14 @@
+{
+  "paperDevBundlePinned": "26.2.build.134-stable",
+  "compileKotlin": "PASS",
+  "shadowJar": "PASS",
+  "compiledNmsSha256": "b4960be4570fd26aab50c1fa0297d5fc56190d49bb78371679355b0d0545b0fe",
+  "candidateEcoSha256": "5ca36aa859cef009156cef5e821ad7907e62f11006c8cde7382130799542544f",
+  "comparison": "javap -p -c -s; normalize CP indexes and Kotlin shading only",
+  "candidateMatchesCompiled": {
+    "BoundedLivingQueriesBackend": true,
+    "CommonsProvider$Companion.setIfNeeded": true
+  },
+  "runtimeTest": false,
+  "installed": false
+}
