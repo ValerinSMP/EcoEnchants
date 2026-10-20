@@ -1,0 +1,23 @@
+enabled: true
+type: normal
+conflicts: []
+rarity: rare
+tradeable: true
+discoverable: true
+enchantable: true
+display-name: Cuidado
+description: '&7Evita romper cultivos inmaduros y tallos con esta herramienta.'
+max-level: 1
+targets:
+- hoe
+effects:
+- id: guard_immature_crops
+  triggers:
+  - manual_crop_guard
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 7
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVII'

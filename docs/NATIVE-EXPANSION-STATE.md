@@ -1,0 +1,10 @@
+# Expansión nativa — trabajo en curso, 2026-10-20
+
+- Alcance actual: PROMPT-ECOSUITE-TODOS-Y-BALANCE.md; 130 familias con niveles en levels.json, reservas del manifiesto vigentes. No instalación/lifecycle ni edición de vEnchanting/vPets/economía/curva.
+- Fuente personal sobre paquete requisitos: eco458431fc, LF5ffa0e88, Skills9080afc, Enchants258f475e. Test contrastado conserva exactamente los cuatro hashes entregados en requirement-lore; no reconstruir sobre shadowJars completos.
+- Primer incremento fuente ejecutable: Cuidado I/VII y Ritmo minero I–III/XV; native trigger manual_crop_guard/effect guard_immature_crops; condición has_mining_rhythm y efecto existente mining_speed_multiplier, atributo transitorio opt-in en AttributeEffect (default legacy intacto).
+- Confirmación manual por BlockDamageEvent + BlockBreakEvent no cancelado + retirada real de bloque al tick siguiente. Exclusión secundaria nativa blockbreakevent-ignore y custom registrados en eco. Ventana 10s; contador máximo10; un bonus por pico/jugador; tareas/eventos acotados y limpieza. Sin XP/drops/Haste nuevos. Revisión final incluye varios bloques manuales en el mismo tick, fence de callbacks y refresco nativo de provider al asignar identidad al pico.
+- Validación final del primer incremento: LF155 y EcoEnchants78 JVM/mocks, cero fallos. Cierre estático de 9 clases y 425 referencias propias pasó sobre los JAR compuestos. No es prueba Paper/MySQL/gameplay. Artefactos y contrato en docs/NATIVE-MINING-HANDOFF.md; no instalado ni activo.
+- Siguiente: continuar Letalidad, Reposo, Último recurso con confirmación compartida, luego tabla/agrupación ofensiva selectiva y resto de familias no reservadas.
+- Hallazgo: blast_mining/flashbang/sparks sin id exterior son wrappers de chain VÁLIDOS (Effects.compile usa effects si falta id); no borrar/inventar id. Hypixel wiki oficial ahora redirige al anuncio de cierre julio2026; referencias comunitarias actuales, fecha/ficha/normal vs especiales deben documentarse sin afirmar prueba del servidor Hypixel.
+- Cambios ajenos: target/AI/XP receipts/BoundCounter/STATE ajenos preservados; no delegación.
