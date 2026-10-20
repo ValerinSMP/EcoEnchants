@@ -14,7 +14,7 @@ internal object ConfirmedOriginalHit : Trigger("confirmed_original_hit") {
         TriggerParameter.EVENT,TriggerParameter.LOCATION,TriggerParameter.VALUE)
 }
 internal class OriginalProcEffect(private val family: OriginalProcEngine.Family,id: String) : Effect<NoCompileData>(id) {
-    override val description = "Runs a bounded original proc after a confirmed direct PvE hit."
+    override val description = "Runs a bounded original proc after a confirmed direct hit allowed by its PvP/PvE setting."
     override val categories = setOf("combat")
     override val parameters = ConfirmedOriginalHit.parameters
     override val arguments = arguments {

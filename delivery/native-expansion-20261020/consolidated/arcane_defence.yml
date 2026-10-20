@@ -1,0 +1,30 @@
+display-name: Defensa Arcana
+description: '&7Tienes un &a%placeholder%% &7de probabilidad de evitar daño mágico o de veneno.'
+placeholder: '%level% * 4'
+type: normal
+targets:
+- armor
+conflicts: []
+rarity: epic
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: cancel_event
+  args:
+    chance: '%level% * 4'
+  triggers:
+  - take_damage
+  filters:
+    damage_cause:
+    - poison
+    - magic
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 12
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXII'
+enabled: true

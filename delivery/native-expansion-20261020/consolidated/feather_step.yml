@@ -1,0 +1,21 @@
+display-name: Paso de Pluma
+description: '&7Evita pisotear cultivos al caminar o saltar sobre ellos.'
+type: normal
+targets:
+- boots
+conflicts: []
+rarity: legendary
+max-level: 1
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: feather_step
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 7
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVII'
+enabled: true

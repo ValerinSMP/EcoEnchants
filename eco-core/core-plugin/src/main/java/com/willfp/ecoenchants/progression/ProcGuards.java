@@ -3,6 +3,16 @@ package com.willfp.ecoenchants.progression;
 /** Exact predicates shared by live Paper adapter and deterministic boundary tests. */
 public final class ProcGuards {
  private ProcGuards(){}
+ /** Invalid explicit modes fail closed. No setting means both for opted-in combat families. */
+ public static boolean combatModeAllows(String mode,boolean player){
+  if(mode==null)return true;
+  return switch(mode.trim().toLowerCase(java.util.Locale.ROOT)){
+   case "both" -> true;
+   case "pvp" -> player;
+   case "pve" -> !player;
+   default -> false;
+  };
+ }
  public static boolean mayAct(boolean online,boolean dead){return online&&!dead;}
  public static boolean arrivalReady(OriginalProcEngine.Family family,long ageMillis){return family!=null&&ageMillis>=family.cooldown;}
  public static double confirmedDamage(boolean cancelled,boolean sameLastCause,double finalDamage,double healthBefore,double healthAfter){

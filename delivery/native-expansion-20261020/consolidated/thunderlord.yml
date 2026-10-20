@@ -1,0 +1,30 @@
+display-name: Señor de Truenos
+description: '&7Cada tercer golpe al mismo objetivo añade &a%placeholder%%&7 de daño, con 10 s de recarga.'
+placeholder: 8 * %level%
+type: normal
+targets:
+- melee
+conflicts:
+- thunderbolt
+rarity: legendary
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 20
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXX'
+effects:
+- id: third_hit_multiplier
+  args:
+    multiplier: 1 + 0.08 * %level%
+  triggers:
+  - melee_attack
+  filters:
+    enchant_combat_mode: true
+enabled: true
+combat-mode: both

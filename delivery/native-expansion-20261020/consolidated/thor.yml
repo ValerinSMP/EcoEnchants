@@ -1,0 +1,33 @@
+display-name: Thor
+description: Da un &a%chance%%&r de probabilidad de lanzar &a%bolts%&r rayos contra tu enemigo
+placeholders:
+  chance: '%level%'
+  bolts: ceil(%level% / 2)
+type: normal
+targets:
+- bow
+- crossbow
+conflicts: []
+rarity: epic
+max-level: 6
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: strike_lightning
+  args:
+    amount: ceil(%level% / 2)
+    chance: '%level%'
+  triggers:
+  - bow_attack
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 24
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXIV'
+enabled: true
+combat-mode: both

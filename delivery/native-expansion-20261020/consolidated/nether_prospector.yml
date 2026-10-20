@@ -1,0 +1,33 @@
+display-name: Nether Prospector
+description: '&7Tiene &a%placeholder%%&7 de duplicar escombros ancestrales no colocados por jugadores.'
+placeholder: 33 + 42 * (%level% - 1)
+type: normal
+targets:
+- pickaxe
+conflicts:
+- fortune
+- silk_touch
+rarity: legendary
+max-level: 2
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: multiply_drops
+  args:
+    on_items:
+    - ancient_debris
+    multiplier: 2
+    chance: 33 + 42 * (%level% - 1)
+  filters:
+    player_placed: false
+  triggers:
+  - block_item_drop
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 28
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXVIII'
+enabled: true

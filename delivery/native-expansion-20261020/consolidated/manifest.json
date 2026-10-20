@@ -1,0 +1,4736 @@
+{
+  "schema": 1,
+  "definitions": [
+    {
+      "id": "abrasion",
+      "enchanting": 22,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "abrasion.yml",
+      "candidateSha256": "b2051fbf1d9b9cd6d50bf35b055d0f1a2c90100d3805f3a7a96446272aa47b7e",
+      "sourceTestPath": "disabled/abrasion.yml",
+      "sourceTestSha256": "9ed9def23d3823ea290acc6f4a3dc74f8bfe10bd47cd4afd0b6540c7aa8ec3a0",
+      "effects": [
+        {
+          "id": "damage_armor",
+          "args": {
+            "damage": "%level%"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "adrenaline",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "shield"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "adrenaline.yml",
+      "candidateSha256": "1cabfc0372cbf738c11283cff656fd1847915b8e36a4b3aa1cd5cf6f7aa96186",
+      "sourceTestPath": "adrenaline.yml",
+      "sourceTestSha256": "e7513a512debcb718735549292645b6cfcd4239c2a8096a3936914a1c9956100",
+      "effects": [
+        {
+          "id": "potion_effect",
+          "args": {
+            "effect": "increase_damage",
+            "level": 2,
+            "duration": "20 + 10 * %level%",
+            "apply-to-player": true,
+            "mana_cost": 15
+          },
+          "triggers": [
+            "shield_block"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "aguja_aurora",
+      "enchanting": 30,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "aguja_aurora.yml",
+      "candidateSha256": "393ba985ffd93d14568ae9b04bbfa533bc1ef1b7409610149a20efe9f6d07bc8",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "aguja_aurora",
+            "percent": "2 + 2 * %level%"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ancla",
+      "enchanting": 22,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "ancla.yml",
+      "candidateSha256": "42ad6d4cb80f79e5cf64b47131bd4e2cf9f50516a14931de0cf56b777401e8ab",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "ancla",
+            "percent": "min(5 + 3 * (%level% - 1), 10)"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "angler",
+      "enchanting": 4,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "fishing_rod"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "angler.yml",
+      "candidateSha256": "f423ad35b4a753b3b53ee3bf5dcd3c676a67317b1efcc5410f1b3d9aba7d66eb",
+      "sourceTestPath": "ecoskills/angler.yml",
+      "sourceTestSha256": "5565f5b7e723c031196fb7ba8cad2efa18a68bd6c01f2188394820eab438cacc",
+      "effects": [
+        {
+          "id": "skill_xp_multiplier",
+          "args": {
+            "multiplier": "1 + 0.15 * %level%",
+            "skills": [
+              "fishing"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "arcane_defence",
+      "enchanting": 12,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "armor"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "arcane_defence.yml",
+      "candidateSha256": "1c91e4511495deff1d03346ac8f0d14886fb6744d14e8d1a1d8f6eff1db72b45",
+      "sourceTestPath": "arcane_defence.yml",
+      "sourceTestSha256": "f58aa1261e34bfae7677d6a0f9b578babedfdc328f67d94ca5a8ab493ceeedc1",
+      "effects": [
+        {
+          "id": "cancel_event",
+          "args": {
+            "chance": "%level% * 4"
+          },
+          "triggers": [
+            "take_damage"
+          ],
+          "filters": {
+            "damage_cause": [
+              "poison",
+              "magic"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "blackout",
+      "enchanting": 14,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "blackout.yml",
+      "candidateSha256": "cd8a57b7a9bc84a7b90b9cec26c87e986bb7ac42d18c520833cbcbf0ae7e5594",
+      "sourceTestPath": "blackout.yml",
+      "sourceTestSha256": "1c2cf3f69a4974c860bfddf78d775250e868cbfc4a563d3f6dc1a4e4f577957a",
+      "effects": [
+        {
+          "id": "potion_effect",
+          "args": {
+            "effect": "darkness",
+            "level": 1,
+            "duration": "80 + ceil(%level% / 2) * 20",
+            "apply-to-player": false,
+            "chance": "6 + %level%",
+            "cooldown": 8,
+            "send_cooldown_message": false
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Efectos nativos conservados; cooldown reconocido dentro de args, silencioso.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "blast_mining",
+      "enchanting": 22,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "pickaxe"
+      ],
+      "conflicts": [
+        "veinminer"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "blast_mining.yml",
+      "candidateSha256": "96ba3c6878d86a514287bbce2d183ee91e0de44c38e9e65417487d4efdabf392",
+      "sourceTestPath": "blast_mining.yml",
+      "sourceTestSha256": "73018ad60354069a7089a65f63f432aa6c6cace68ff63399492c6aea7d879b94",
+      "effects": [
+        {
+          "triggers": [
+            "mine_block"
+          ],
+          "args": {
+            "chance": "10 * %level%",
+            "mana_cost": 45
+          },
+          "effects": [
+            {
+              "id": "create_explosion",
+              "args": {
+                "power": 0,
+                "amount": 1
+              }
+            },
+            {
+              "id": "mine_radius",
+              "args": {
+                "radius": 1,
+                "prevent_trigger": false,
+                "blacklisted_blocks": [
+                  "bedrock",
+                  "obsidian",
+                  "crying_obsidian",
+                  "chest",
+                  "barrel",
+                  "barrier",
+                  "reinforced_deepslate"
+                ],
+                "check_hardness": true,
+                "disable_on_sneak": true
+              }
+            }
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "bleed",
+      "enchanting": 17,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "bleed.yml",
+      "candidateSha256": "9c68dd5dfe4785f652ded72e445dbd88a0581eb0adafe6c8af1a3cbef1dd6adb",
+      "sourceTestPath": "bleed.yml",
+      "sourceTestSha256": "e9ee02ab48ad70dc865f0972adaef6b9d32f5f32ec8eadd2d26fcb78fbfd7679",
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "bleed",
+            "damage": 1,
+            "amount": "2 + %level%",
+            "interval": 20,
+            "chance": "10 * %level%",
+            "cooldown": 4,
+            "send_cooldown_message": false
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        },
+        {
+          "id": "potion_effect",
+          "args": {
+            "effect": "slowness",
+            "level": 1,
+            "duration": "40 + 20 * %level%",
+            "chance": "10 * %level%",
+            "cooldown": 4,
+            "send_cooldown_message": false
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Pulsos reales con fuente y protecciones, en scheduler de procs existente; nunca fuerza kill antes de aplicar daño; conserva todos los tiers (Wound VII). cooldown reconocido dentro de args, silencioso.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "block_breather",
+      "enchanting": 5,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "helmet"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "block_breather.yml",
+      "candidateSha256": "d3301b001f18f2d717cbe3a617209e872c759bcdb973bcdb568ad1d396d8bbc1",
+      "sourceTestPath": "block_breather.yml",
+      "sourceTestSha256": "925ac322cbe996406c51eff34749d827dfbb1e68a6e0f4304eeaae4eaad9495c",
+      "effects": [
+        {
+          "id": "cancel_event",
+          "args": {
+            "chance": "%level% * 15"
+          },
+          "triggers": [
+            "take_damage"
+          ],
+          "filters": {
+            "damage_cause": [
+              "suffocation"
+            ]
+          }
+        }
+      ],
+      "note": " Requisito del catálogo aprobado actual.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "boss_hunter",
+      "enchanting": 30,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "boss_hunter.yml",
+      "candidateSha256": "b873a12b4bc84849cc4cb925f3ad9e5b94346cf6688eaba01dca888f49a42137",
+      "sourceTestPath": "boss_hunter.yml",
+      "sourceTestSha256": "fca152d8a92be27c211f0e3fbc92687ef683162a36b91cc27dedabe569a9928d",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + 0.1 * %level%",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "bow_attack"
+          ],
+          "filters": {
+            "is_boss": true,
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "brasa_errante",
+      "enchanting": 21,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "eco_resonante"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "brasa_errante.yml",
+      "candidateSha256": "4599f9aa4823f924dda1a4b0771a94a3fcc9ce1efc1453a830cfcd2046752ee1",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "brasa_errante",
+            "percent": "2 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "caffeinated",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "caffeinated.yml",
+      "candidateSha256": "40fbc94126ea46ef43ed7a1bc745f67376d06f6a9a84dd6978235ee10431b78a",
+      "sourceTestPath": "caffeinated.yml",
+      "sourceTestSha256": "1340ff64c0133b381237713afac503981e52547163beecf4634466542c07f754",
+      "effects": [
+        {
+          "id": "attack_speed_multiplier",
+          "args": {
+            "multiplier": "1 + %level% * 0.05"
+          },
+          "triggers": []
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "carve",
+      "enchanting": 8,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "carve.yml",
+      "candidateSha256": "cdb07bda61f4e87e80854da5774d49084f78871dcc6d8bb66975656c46db0d3e",
+      "sourceTestPath": "carve.yml",
+      "sourceTestSha256": "4ef6b9ea92029dc48745945d716c9c492f09235ae1dbe5ab0f5ec544ce5a30dc",
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "carve",
+            "damage": "2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Cola de daño confirmado y consulta nativa acotada; excluye golpeado principal/portador/aliados/protegidos y no repite crítico/fuerza; Carve plano, Cleave porcentual.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "chemist",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "helmet"
+      ],
+      "conflicts": [
+        "enriched_plating",
+        "sorcery"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "chemist.yml",
+      "candidateSha256": "109b43c57903abcb0a39fb4523418f5278a9637251466e1c78108c4689ffaddb",
+      "sourceTestPath": "ecoskills/chemist.yml",
+      "sourceTestSha256": "2aad7de95437a6da90461287ea0ebebacf773be07ea644cf8169fb6d096943c8",
+      "effects": [
+        {
+          "id": "skill_xp_multiplier",
+          "args": {
+            "multiplier": "1 + 0.075 * %level%",
+            "skills": [
+              "alchemy"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cicatriz_ignea",
+      "enchanting": 32,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "axe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "cicatriz_ignea.yml",
+      "candidateSha256": "5c2b98385a78a7a5814155bc81e3732d6416319dc3c5dc30431ab7fe17220256",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "cicatriz_ignea",
+            "percent": "2 + 1 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cleave",
+      "enchanting": 4,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "cleave.yml",
+      "candidateSha256": "7eecd3ff47ae7bce2cc35a837b61293911d5bd15ef70f2cc35acf393058faf0a",
+      "sourceTestPath": "cleave.yml",
+      "sourceTestSha256": "7870d1bc33cf52ada05bff82b10c49b9bb0b3a432d883f6ab5576711f836cf2e",
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "cleave",
+            "percent": "5 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Cola de daño confirmado y consulta nativa acotada; excluye golpeado principal/portador/aliados/protegidos y no repite crítico/fuerza; Carve plano, Cleave porcentual.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "combatant",
+      "enchanting": 9,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "combatant.yml",
+      "candidateSha256": "d37ce2144c2edc4c93f871c4b17652f8b1b472fee94613e539b4cea66ed93a18",
+      "sourceTestPath": "ecoskills/combatant.yml",
+      "sourceTestSha256": "3bebb26e1350b2a72152ee97f4c8ba1e4105d47266729e822a75decbf0725b69",
+      "effects": [
+        {
+          "id": "skill_xp_multiplier",
+          "args": {
+            "multiplier": "1 + %level% / 12",
+            "skills": [
+              "combat"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "combo",
+      "enchanting": 24,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "combo.yml",
+      "candidateSha256": "9acac8ef80c28b4a188ea77a0ae950ac2b6b35751392df2ce6d63f1c8c8845ea",
+      "sourceTestPath": "combo.yml",
+      "sourceTestSha256": "1aec243e5ebd08cdf9e23ae7cd72ada7516d39dbeec3c6d38b1ced325e532c46",
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "combo",
+            "percent": "%level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        },
+        {
+          "id": "recent_kills_multiplier",
+          "args": {},
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ventana real2+2L segundos, máximo2+L muertes, +L% por muerte; memoria de sesión, sin puntos permanentes.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cometa",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [
+        "rebote_prismatico"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "cometa.yml",
+      "candidateSha256": "91a3c5bc2632d4af2e6f50f9d82e1f0fe51f3adbe889c24553ab7109b6799627",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "cometa",
+            "percent": "8 + 2 * %level% + max(0, %level% - 2)"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "constelacion",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [
+        "pulso_abisal"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "constelacion.yml",
+      "candidateSha256": "55e5e16d388018d991557c2b80fd571ed88e0d3cacef7db29386b7e9b1de6d0c",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "constelacion",
+            "percent": "6 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "contagion",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "contagion.yml",
+      "candidateSha256": "dc57799729a4760c3cf655c177b950c9aca79a1917b06a070ccce39913082018",
+      "sourceTestPath": "contagion.yml",
+      "sourceTestSha256": "2ae386a9169c166bed470925778de90c15552d2c24df16094ebe7782f6b359e3",
+      "effects": [
+        {
+          "triggers": [
+            "projectile_hit"
+          ],
+          "args": {
+            "chance": "5 * %level%"
+          },
+          "effects": [
+            {
+              "id": "spawn_potion_cloud",
+              "args": {
+                "effect": "poison",
+                "level": 1,
+                "duration": 60
+              }
+            },
+            {
+              "id": "play_sound",
+              "args": {
+                "sound": "entity_splash_potion_break",
+                "pitch": 0.7,
+                "volume": 1
+              }
+            }
+          ]
+        }
+      ],
+      "note": "Restaura5L% de probabilidad compartida entre nube y sonido; cadena exterior sin id es nativa válida. Nube vanilla afecta ambos modos, no se promete filtro por víctima.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "crit_luck",
+      "enchanting": 9,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "crit_luck.yml",
+      "candidateSha256": "8c126b2640e060ac3ce855d96c4a1bb3ea41df3df2f837c219e49c5b3fbf8e9d",
+      "sourceTestPath": "ecoskills/crit_luck.yml",
+      "sourceTestSha256": "c517c2bbfce780d2228aca21c6a2dac62f11484ec660c55651c026fc4337258f",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_chance",
+            "amount": "4 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "criticals",
+      "enchanting": 14,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "criticals.yml",
+      "candidateSha256": "5aa3152389fab0f7a21418d6ad58ef63237f2debe039b745e2db020cb63378ac",
+      "sourceTestPath": "criticals.yml",
+      "sourceTestSha256": "e358caac28d0cb67f1caeb0be8edbac11de3ff67b0c5ac182c305b3a2517d390",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_chance",
+            "amount": "5 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cubism",
+      "enchanting": 3,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "pve",
+      "definitionPath": "cubism.yml",
+      "candidateSha256": "92cd09e6cab885e082c411b2b2e97bee675f1d493c89207de455e6bfc18470c4",
+      "sourceTestPath": "cubism.yml",
+      "sourceTestSha256": "0fca5119a46201c58a28db0f12a3317937c476dfd0ea553a28d570eddf4c0360",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + 0.05 * %level%",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack",
+            "bow_attack"
+          ],
+          "filters": {
+            "entities": [
+              "slime",
+              "magma_cube"
+            ],
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cuidado",
+      "enchanting": 7,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "hoe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "cuidado.yml",
+      "candidateSha256": "624570ae8ff5a14c6f4211da96fbd68b668765c78f5f2d527e1e1c3bea9ba7be",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "guard_immature_crops",
+          "triggers": [
+            "manual_crop_guard"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "dexterity",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "dexterity.yml",
+      "candidateSha256": "593b83b63d75357eb89ac583efe5f8356038a4104623f65dbae16b609e6807ce",
+      "sourceTestPath": "dexterity.yml",
+      "sourceTestSha256": "205d5d6cc927bf8eaadab4cc3c56ab257a92919c0789f9e6be573d7ca055fd63",
+      "effects": [
+        {
+          "id": "attack_speed_multiplier",
+          "args": {
+            "multiplier": "1 + 0.1 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "drain",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "lifesteal",
+        "mana_steal"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "drain.yml",
+      "candidateSha256": "6c698acf2870c899148d7c7a14e34591a3976955937e64329e137f3e72358553",
+      "sourceTestPath": "drain.yml",
+      "sourceTestSha256": "64c0faf50c6b7a638de01ccd6526bf8bbcd6821868869330704f8b5330c08eee",
+      "effects": [
+        {
+          "id": "give_health",
+          "args": {
+            "amount": "min(%v% * 0.001 * %level% * %player_max_health%, %player_max_health% * 0.01 * %level%)",
+            "trigger_heal": true,
+            "cooldown": 4,
+            "send_cooldown_message": false
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Solo daño confirmado y no sobreletal; evento de curación cancelable. Límite por familia local explícito, no equivalencia de HP con Hypixel.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "eclipse",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "combo"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "eclipse.yml",
+      "candidateSha256": "93138f35c43d99cb23df18a5c53583c0eac070e543428cf18a235af173fc5521",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "eclipse",
+            "percent": "4 + 2 * %level%"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        },
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "eclipse",
+            "percent": "4 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "eco_resonante",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "cleave"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "eco_resonante.yml",
+      "candidateSha256": "1fa98f076054ba4bac92c618cbac84fa6ff179563a5ecdfc3c8577a18a5c2325",
+      "sourceTestPath": "eco_resonante.yml",
+      "sourceTestSha256": "6d74caa143bdf549cebc868fc3abf2537d4802db0e8a742ed4aada398603449a",
+      "effects": [
+        {
+          "id": "resonant_pulse",
+          "args": {
+            "amount": "2 + 2 * %level%",
+            "hits": 3,
+            "window": 5,
+            "proc_cooldown": 8
+          },
+          "triggers": [
+            "confirmed_original_hit"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "end_affinity",
+      "enchanting": 12,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "nether_affinity"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "end_affinity.yml",
+      "candidateSha256": "9b8e9a862a033e9bb84ec0f57f739e4fc934d812eca586d9f193063fa507b193",
+      "sourceTestPath": "end_affinity.yml",
+      "sourceTestSha256": "975ea53cbf6099db486d5ca0af6eacab034ba0b24c57a8c230cbc00c70ab6376",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1.2 + %level% * 0.1",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack",
+            "bow_attack",
+            "trident_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ender_slayer",
+      "enchanting": 11,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "sculk_slayer",
+        "crimson_slayer"
+      ],
+      "type": "normal",
+      "combatMode": "pve",
+      "definitionPath": "ender_slayer.yml",
+      "candidateSha256": "10bf01fe82e41058f75d5722566cf1f9cb2d1f7b3c8fb84a26f4cbc1ad3ec476",
+      "sourceTestPath": "ender_slayer.yml",
+      "sourceTestSha256": "0e3795fb6b036964df14c8460fc986e59ace5eb4300a1de26a8f3418b6fab63f",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + (5 * %level% + 5 * max(0, %level% - 4)) / 100",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "entities": [
+              "enderman",
+              "endermite",
+              "ender_dragon"
+            ],
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "5/10/15/20/30% aditivo, filtros originales; antes sumaba daño plano pese a anunciar porcentaje.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "escape",
+      "enchanting": 6,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [
+        "streamlining"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "escape.yml",
+      "candidateSha256": "adcf6051a93e01dbabbc31e2a0ff9ba106d3dd114ddbfd8870117ca03b63d265",
+      "sourceTestPath": "escape.yml",
+      "sourceTestSha256": "8ad83e18063da6940b5324c555d0929b8e01533003cf3549c260a37dc2878a5d",
+      "effects": [
+        {
+          "id": "potion_effect",
+          "args": {
+            "effect": "speed",
+            "level": "%level%",
+            "duration": 30,
+            "apply_to_player": true
+          },
+          "triggers": [
+            "take_entity_damage"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "VelocidadI/II significa20/40%, no1/2%; conserva duración y efectos.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "estela_cazador",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "estela_cazador.yml",
+      "candidateSha256": "0f2ff4afd0e8da558f4a6efcf485383de18ebeb6e68a425f3f54ac8c5df8092c",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "estela_cazador",
+            "percent": "3 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        },
+        {
+          "id": "movement_speed_multiplier",
+          "args": {
+            "multiplier": "1 + (3 + 2 * %level%) / 100",
+            "transient": true
+          },
+          "conditions": [
+            {
+              "id": "has_hunters_trail"
+            }
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "excavation",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "shovel"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "excavation.yml",
+      "candidateSha256": "bcea46b82d9040a946abcf8582bdce22505bbff159fc8f0171ddb226daa1c181",
+      "sourceTestPath": "excavation.yml",
+      "sourceTestSha256": "06d4cf3e4683844da9a8854569483a3adc8592b191c29ac9c99406f99421e30e",
+      "effects": [
+        {
+          "id": "drill",
+          "args": {
+            "amount": "%level%",
+            "check-hardness": true,
+            "disable-on-sneak": true
+          },
+          "triggers": [
+            "mine_block"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "experience",
+      "enchanting": 8,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee",
+        "pickaxe",
+        "axe",
+        "shovel",
+        "hoe",
+        "bow",
+        "crossbow",
+        "trident",
+        "fishing_rod",
+        "shield",
+        "elytra",
+        "helmet",
+        "chestplate",
+        "leggings",
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "experience.yml",
+      "candidateSha256": "7275fee5ae9c0fac713b6ebca7fdc2f0851c28e2344cd85403b352aa3619a394",
+      "sourceTestPath": "experience.yml",
+      "sourceTestSha256": "c1afabc926f945bf3f8f0a0aed9ad6b292acc343f825ebac3ab31e31edf6a828",
+      "effects": [
+        {
+          "id": "double_mob_xp",
+          "args": {
+            "chance": "12.5 * %level%"
+          },
+          "triggers": [
+            "entity_xp_drop"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "feather_step",
+      "enchanting": 7,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "feather_step.yml",
+      "candidateSha256": "bce45d60547e11d83ab4f20bd564e03ac4e06bb819784074fed5faa48e23121e",
+      "sourceTestPath": "feather_step.yml",
+      "sourceTestSha256": "2d296fb5519994cfb2dbc0799f85e0668da12a58c57b5fda5b7c98cf602de64c",
+      "effects": [
+        {
+          "id": "feather_step"
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "finishing",
+      "enchanting": 14,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "prosecute"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "finishing.yml",
+      "candidateSha256": "f438e27d60bb4019955c5ef1da8691bde4d53de2e400dae17f8fbb007b943b32",
+      "sourceTestPath": "finishing.yml",
+      "sourceTestSha256": "12dff9f7e8598c1f3707772d68f17e1058cdd044627dcd5c0253cc294f3b44d4",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + ((1 - %victim_health% / %victim_max_health%) * 0.1 * %level%)",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "first_strike",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "first_strike.yml",
+      "candidateSha256": "2cb27fcda052f945132090b2edbb193b7fbc7518bf1d8bf8749885626286a482",
+      "sourceTestPath": "first_strike.yml",
+      "sourceTestSha256": "0f1da10ab6095b4ecceb7edcf39214e1cc25480c99c51cca17808dd8a9d6c810",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1.2 + 0.12 * %level%",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "on_max_health": true,
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "flashbang",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "flashbang.yml",
+      "candidateSha256": "ec4881553bb8488e37ec5715cb504a7a8b53e5987f19e12b42f4bdd029fe23b1",
+      "sourceTestPath": "flashbang.yml",
+      "sourceTestSha256": "69560f02d6a8f53e215e14e3ed0a630a10db235d3830b6ea34809145e9008374",
+      "effects": [
+        {
+          "triggers": [
+            "bow_attack"
+          ],
+          "args": {
+            "chance": "%level%"
+          },
+          "effects": [
+            {
+              "id": "potion_effect",
+              "args": {
+                "effect": "blindness",
+                "level": 3,
+                "duration": 50,
+                "apply_to_player": false
+              }
+            },
+            {
+              "id": "play_sound",
+              "args": {
+                "sound": "entity_dragon_fireball_explode",
+                "pitch": 1.5,
+                "volume": 4
+              },
+              "mutators": [
+                {
+                  "id": "victim_as_player"
+                }
+              ]
+            }
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "foraging",
+      "enchanting": 8,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "shears"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "foraging.yml",
+      "candidateSha256": "6ed2c9635ce0e989bd191f9df0a6827da822d43b0c176d2027c8e7926e159039",
+      "sourceTestPath": "foraging.yml",
+      "sourceTestSha256": "81f38b36411e7cbc11fba7cedd02613ce19b1104337c36a0a98062da61575e48",
+      "effects": [
+        {
+          "id": "multiply_drops",
+          "args": {
+            "on_items": [
+              "apple"
+            ],
+            "fortune": "%level%"
+          },
+          "triggers": [
+            "block_item_drop"
+          ]
+        }
+      ],
+      "note": "Fortuna nativa1+uniforme[0,L], media1+L/2; corrige porcentaje medio de manzanas, sin cambiar drops. Requisito del catálogo aprobado actual.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "forceful_crit",
+      "enchanting": 20,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "forceful_crit.yml",
+      "candidateSha256": "9d759a9f604ecee6d64497df38a02f083e9cbd24db279d6f79a6b0ca94993438",
+      "sourceTestPath": "ecoskills/forceful_crit.yml",
+      "sourceTestSha256": "b650127a98d9ea14b8d26d74002ace0bac5b0544eb2bb28d94cba6a4868e9685",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_damage",
+            "amount": "3 + 2 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "fortitude",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "armor"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "fortitude.yml",
+      "candidateSha256": "4b695cffe66a677d4faa4d7b2a678a768fd9c2743b0426d35fe2a33e75174631",
+      "sourceTestPath": "fortitude.yml",
+      "sourceTestSha256": "3fbddb74f02b1758da9395cff52f8f2543b60d0516b3328fbf2eb8a4f49b9412",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + %level% * 0.02",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack",
+            "bow_attack",
+            "trident_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "frost",
+      "enchanting": 12,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "frost.yml",
+      "candidateSha256": "5d740cde65cdd440ccd2974ddb9589ab3d28e88de899c346f78b666900d3461c",
+      "sourceTestPath": "frost.yml",
+      "sourceTestSha256": "355d18c2dc56afc44dd7a83492e0f1c4fa1ae5c6cbb95f2f6042920bcfb55ce0",
+      "effects": [
+        {
+          "id": "set_freeze_ticks",
+          "args": {
+            "ticks": "60 + 20 * %level%",
+            "chance": "3 + 2 * %level%"
+          },
+          "triggers": [
+            "bow_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Corrige duración mostrada4/5/6 segundos de congelación; conserva efecto nativo.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "getaway",
+      "enchanting": 7,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "getaway.yml",
+      "candidateSha256": "dafca8651c2da16b220dcc7bb9cfc1ed3db50a47b982c5ebd2f1a69c3767fb71",
+      "sourceTestPath": "getaway.yml",
+      "sourceTestSha256": "7b8ad9b2c5b0bdd79d0f211f41f519ccc8f3687dd632120050f1745a968a6df0",
+      "effects": [
+        {
+          "id": "movement_speed_multiplier",
+          "args": {
+            "multiplier": "1 + 0.1 * %level%"
+          },
+          "triggers": [],
+          "conditions": [
+            {
+              "id": "below_health_percent",
+              "args": {
+                "percent": 20
+              }
+            }
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "giant_killer",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "titan_killer"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "giant_killer.yml",
+      "candidateSha256": "39a2d6a60d1ee37dd37f1f4cf10d702691f7746fef893c2bcaef10959eba183b",
+      "sourceTestPath": "giant_killer.yml",
+      "sourceTestSha256": "1003de729108203b205ef1916e3c6ca65584983fcfcb11a40ff483e12a21c401",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + min(max(%victim_max_health% / %player_max_health% - 1, 0) * 0.1 * %level%, 0.05 * %level%)",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "goliath",
+      "enchanting": 25,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "goliath.yml",
+      "candidateSha256": "3c88e334dadb0c12aedd6d39a2df2ba452b515b1fdeacd127a4006f2ae70cb6c",
+      "sourceTestPath": "goliath.yml",
+      "sourceTestSha256": "33a65ef9baf7dbc41957138970cb514265537f75fd47e8a41dd36dd4c21aacad",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + min(max(%victim_max_health% / %player_max_health% - 1, 0) * 0.02 * %level%, 0.04 * %level%)",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "green_thumb",
+      "enchanting": 9,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "hoe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "green_thumb.yml",
+      "candidateSha256": "ef2849282f7dfbcbc254cbf2947a89c9baa693b85a55564e8a61f8d8ed57903d",
+      "sourceTestPath": "ecoskills/green_thumb.yml",
+      "sourceTestSha256": "4b2ea9084e707915f08382449eda3b99c6c0fba789bc72b1959b8c1faff10d1f",
+      "effects": [
+        {
+          "id": "skill_xp_multiplier",
+          "args": {
+            "multiplier": "1 + 0.125 * %level%",
+            "skills": [
+              "farming"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "guardia_cristal",
+      "enchanting": 25,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "chestplate"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "guardia_cristal.yml",
+      "candidateSha256": "3db2a3ed7a36d2ebbfb724200f2aa714f3123b916bc42322410624aabb5e29fc",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "guardia_cristal",
+            "percent": "6 + 2 * %level%"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "haunting",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "helmet"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "haunting.yml",
+      "candidateSha256": "c4c1aca37a9a759b5cba0a3a6acd2d558b986280ddee3c5c3f8e9af475454dd0",
+      "sourceTestPath": "haunting.yml",
+      "sourceTestSha256": "f02e63d1b98baa5d15db7380935ad44ac1dce8d88378f90ff720198fc050cd0e",
+      "effects": [
+        {
+          "id": "spawn_potion_cloud",
+          "args": {
+            "effect": "harm",
+            "level": 1,
+            "duration": "20 + %level% * 20"
+          },
+          "triggers": [
+            "death"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "infernal_touch",
+      "enchanting": 12,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "pickaxe"
+      ],
+      "conflicts": [
+        "silk_touch"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "infernal_touch.yml",
+      "candidateSha256": "494f55b3d02f662b7134b47a6bd716b272102f3978236154b694b956305bfee1",
+      "sourceTestPath": "infernal_touch.yml",
+      "sourceTestSha256": "309c7322cf6dab933126d60c50bf389c333d211577d086df9b7a6fdca70ae68d",
+      "effects": [
+        {
+          "id": "autosmelt",
+          "args": {
+            "drop_xp": true
+          },
+          "triggers": [
+            "block_item_drop"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "introversion",
+      "enchanting": 12,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "sharpness",
+        "smite",
+        "bane_of_arthropods",
+        "slaughter",
+        "brightness"
+      ],
+      "type": "normal",
+      "combatMode": "pvp",
+      "definitionPath": "introversion.yml",
+      "candidateSha256": "931207fd9af26bfde936b85666730d785980a21bd644063b26b966e53d2f2f34",
+      "sourceTestPath": "introversion.yml",
+      "sourceTestSha256": "4d37e212235db3ff1367c2d3f4070006c68db4d902a47ab04a1114ad348c43e2",
+      "effects": [
+        {
+          "id": "add_damage",
+          "args": {
+            "damage": "2.5 * %level%"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "entities": [
+              "player"
+            ],
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "jumpshot",
+      "enchanting": 8,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "jumpshot.yml",
+      "candidateSha256": "c35f2e655f973c0c65cb880594afc1478118d4608ddd454659bb96a402ea9ceb",
+      "sourceTestPath": "jumpshot.yml",
+      "sourceTestSha256": "ab4c58f31210b2c791205e5c5d87fb2184d0c2967102789a013ab67a9c1682c3",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + 0.1 * %level%",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "bow_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "10% por tier aditivo solo cuando la condición nativa in_air se cumple; no simula tiempo de vuelo.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "legado_valerin",
+      "enchanting": 35,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "eclipse",
+        "tormenta_encadenada",
+        "ruptura_sonica",
+        "eco_resonante",
+        "brasa_errante"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "legado_valerin.yml",
+      "candidateSha256": "bd703acba28d40fecd1682042a2da6fba9b76c1abce72d24467652c6854f675b",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "legado_valerin",
+            "percent": "15"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "letalidad",
+      "enchanting": 14,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "letalidad.yml",
+      "candidateSha256": "8f2c256d9d85f979eac14d30df91b918a621b0a240e5035aeb3249af2fa786ef",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "lethality_stack",
+          "args": {
+            "percent": "%level%"
+          },
+          "triggers": [
+            "confirmed_native_combat"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "lifesteal",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "drain"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "lifesteal.yml",
+      "candidateSha256": "2a896b142470e504f0fc7012cf3b8c6c9e9b8ea8a510a9c2883fa658b4988c0f",
+      "sourceTestPath": "lifesteal.yml",
+      "sourceTestSha256": "517e299f49c6953210c53231a5794d28565055df06c90af6200b81de9f889fa9",
+      "effects": [
+        {
+          "id": "give_health",
+          "args": {
+            "amount": "min(%v% * %level% * 0.1, %player_max_health% * 0.005 * %level%)",
+            "trigger_heal": true
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        },
+        {
+          "id": "spawn_particle",
+          "args": {
+            "particle": "heart",
+            "amount": 3,
+            "chance": 50
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Solo daño confirmado y no sobreletal; evento de curación cancelable. Límite por familia local explícito, no equivalencia de HP con Hypixel.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "mana_steal",
+      "enchanting": 20,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "drain"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "mana_steal.yml",
+      "candidateSha256": "ae71889a9658851acb794cfec02d4ee2343d436b709a68ab98bf6721c5cbe7d6",
+      "sourceTestPath": "mana_steal.yml",
+      "sourceTestSha256": "6507e58b1fee5059957d0a6ff4c06fba08f667d3e91a5705902203bd1a5a4ec4",
+      "effects": [
+        {
+          "id": "mana_recovery",
+          "args": {
+            "percent": "0.25 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_combat"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "marca_celeste",
+      "enchanting": 21,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "marca_celeste.yml",
+      "candidateSha256": "f9de834d443f40e5b5a104fc26fa44656dab5d8ff09e43956e50ed3519408a58",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "marca_celeste",
+            "percent": "2 + 2 * %level%"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        },
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "marca_celeste",
+            "percent": "2 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "metabolism",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "chestplate"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "metabolism.yml",
+      "candidateSha256": "110d62a3496c8db539580355f52a7e5aee47259ea9e44b953219ed887fa82aa8",
+      "sourceTestPath": "metabolism.yml",
+      "sourceTestSha256": "46b1a268e01fc9152a656dca8ccd93508f2db53d6412fa1e9f6f28c750ec1cf0",
+      "effects": [
+        {
+          "id": "food_multiplier",
+          "args": {
+            "multiplier": "1 + 0.125 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "might",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "might.yml",
+      "candidateSha256": "e38d0eaf3d54cf61f4b7173f65bc9ba39be3d4e803ac131589d78759ffe1d426",
+      "sourceTestPath": "ecoskills/might.yml",
+      "sourceTestSha256": "802ba8c4e93d36b0523e677a9af3e66afbe2ceb2e55d36dd8da863959ca10452",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "strength",
+            "amount": "-1 + 4 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "neptune",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "neptune.yml",
+      "candidateSha256": "7679a89c988c42427c92240e99f9258a4ed35f0d856a619db1c488fe6b053ed9",
+      "sourceTestPath": "ecoskills/neptune.yml",
+      "sourceTestSha256": "bc21f3fff8bfee83967cbca98d5c18cde34b2fff4bb85a2d9cb53226cdca64c1",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_damage",
+            "amount": "20 + 10 * %level%"
+          }
+        },
+        {
+          "id": "multiply_stat",
+          "args": {
+            "stat": "crit_chance",
+            "multiplier": "0.6 + 0.05 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "nether_affinity",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "end_affinity"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "nether_affinity.yml",
+      "candidateSha256": "23def90f3f52daeeee71f727c038c727a76ffcce990a1968d725a33c2740062a",
+      "sourceTestPath": "nether_affinity.yml",
+      "sourceTestSha256": "32a9f7860327349b93c1cac8b8ad420129db934a66dfe60f91ba0216294fec0a",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1.2 + %level% * 0.1",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack",
+            "bow_attack",
+            "trident_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "nether_prospector",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "pickaxe"
+      ],
+      "conflicts": [
+        "fortune",
+        "silk_touch"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "nether_prospector.yml",
+      "candidateSha256": "98d519b05df26bda99fde933cc42484381cef98dfcc7a1aa1aa78ab7196b329e",
+      "sourceTestPath": "nether_prospector.yml",
+      "sourceTestSha256": "279d5cf7f76d4ff42c893ce162fb934e6016e67daf5f373a5286091e99616ad8",
+      "effects": [
+        {
+          "id": "multiply_drops",
+          "args": {
+            "on_items": [
+              "ancient_debris"
+            ],
+            "multiplier": 2,
+            "chance": "33 + 42 * (%level% - 1)"
+          },
+          "filters": {
+            "player_placed": false
+          },
+          "triggers": [
+            "block_item_drop"
+          ]
+        }
+      ],
+      "note": "Descripción de chance real33/75%; no altera economía ni multiplicadores.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "overload",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "overload.yml",
+      "candidateSha256": "b34c59e03b3f522a20fcb0f3b84612a95aa0f879267b4968cafce0a915e9570a",
+      "sourceTestPath": "ecoskills/overload.yml",
+      "sourceTestSha256": "3dd074c75366061f4b5f96b2c4598bf94c5d55f33c7631aac4965f8bca1af6b8",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_chance",
+            "amount": "1 * %level%"
+          }
+        },
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "crit_damage",
+            "amount": "1 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "paso_ceniza",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "paso_ceniza.yml",
+      "candidateSha256": "c80375f252179e653101155e820a1742f8bdb806d2f7e27810bfd52a01ca7b6d",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "paso_ceniza",
+            "percent": "3 + 2 * %level%"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "poison_ivy",
+      "enchanting": 11,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "leggings"
+      ],
+      "conflicts": [
+        "thorns"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "poison_ivy.yml",
+      "candidateSha256": "8f22942d19bfe570299ff685c52d26b89fb8783472e41052c91e4a44991d8a1c",
+      "sourceTestPath": "poison_ivy.yml",
+      "sourceTestSha256": "c6da065f57dc998975e889e8cb8a248ea2b4c28dcb09bf8f60949ce044fd2238",
+      "effects": [
+        {
+          "id": "potion_effect",
+          "args": {
+            "effect": "poison",
+            "level": 1,
+            "duration": "min(5 * %level% * %v%, 80 + 20 * %level%)",
+            "apply-to-player": false
+          },
+          "triggers": [
+            "take_entity_damage"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "prosecute",
+      "enchanting": 25,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "finishing"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "prosecute.yml",
+      "candidateSha256": "5ee6027ce5a49c059dc8f54fc08c4b0f81d2794a0b6f921d8ffd5587ef4741fb",
+      "sourceTestPath": "prosecute.yml",
+      "sourceTestSha256": "9198c36f6fe37360562763230421a9e5dd992eff2ef7e84e8f30a7cbc55c398a",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + ((%victim_health% / %victim_max_health%) * 0.05 * %level%)",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "prospector",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "pickaxe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "prospector.yml",
+      "candidateSha256": "9d474e164a55b23b174ff78dd2de85019cb43837a7cfb5e4fcc55a64a4c3cc43",
+      "sourceTestPath": "ecoskills/prospector.yml",
+      "sourceTestSha256": "ea61c7666344303bc3fb73d84cbbded09c5e40e9862c38e018d092518e37df0f",
+      "effects": [
+        {
+          "id": "skill_xp_multiplier",
+          "args": {
+            "multiplier": "1 + 0.05 * %level%",
+            "skills": [
+              "mining"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "pulso_abisal",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "pulso_abisal.yml",
+      "candidateSha256": "d994d49f83d5a97482e885b6f55e8a3abd07c6a7efee297255cc0683ae642bb5",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "pulso_abisal",
+            "percent": "2 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rapid",
+      "enchanting": 22,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "rapid.yml",
+      "candidateSha256": "7e858f6b56ea6e6adf9bcbe99875e53123b854d700a7867309dd9b58f7b3e885",
+      "sourceTestPath": "rapid.yml",
+      "sourceTestSha256": "16e7e1958e2d3650d8d07088acd8f113da94031bb4fd78a7536aa8f0632e1479",
+      "effects": [
+        {
+          "id": "rapid_bows",
+          "args": {
+            "percent_faster": "15 * %level%",
+            "normalized_force": true
+          }
+        }
+      ],
+      "note": "Fuerza de EntityShootBowEvent ya es0–1: normalización opt-in, mantiene umbral100−15L y velocidad máxima3; no declara crítico/carga completa para procs nuevos.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rebote_prismatico",
+      "enchanting": 30,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [
+        "tripleshot"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "rebote_prismatico.yml",
+      "candidateSha256": "a961d77dd841694d18834e63fd02cc5de6ce39069393c677047e6b6d9efdaf34",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "rebote_prismatico",
+            "percent": "6 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rebounding",
+      "enchanting": 14,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "shield"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "rebounding.yml",
+      "candidateSha256": "f8238452bda95119ce1aaeba278c109ea3fc36f8dc28a9741f9082eefb62b1cf",
+      "sourceTestPath": "rebounding.yml",
+      "sourceTestSha256": "ac03fb53d850b46ddba6ad9c338baff274d2ac138ca0d1b93e993e5c0e32b262",
+      "effects": [
+        {
+          "id": "damage_victim",
+          "args": {
+            "damage": "%v% * (0.2 + %level% * 0.1)",
+            "use-source": false,
+            "use_source": true,
+            "damage_origin": "PASSIVE",
+            "check_antigrief": true,
+            "prevent_recursive": true
+          },
+          "triggers": [
+            "shield_block"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Cantidad realmente bloqueada, fuente nativa/protección y guardia de recursión; no refleja todo ataque por tener levantado el escudo.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rejuvenate",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "armor"
+      ],
+      "conflicts": [
+        "reposo"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "rejuvenate.yml",
+      "candidateSha256": "34bbebea4f3aabfa9b75b0c58ae61f450dd3252f39e717f3d6a13597d44047d5",
+      "sourceTestPath": "rejuvenate.yml",
+      "sourceTestSha256": "972b981c1b12374fcc522841aaf45faa5631e0a57ced2fc6de04088f36eb898f",
+      "effects": [
+        {
+          "id": "regen_multiplier",
+          "args": {
+            "multiplier": "1 + 0.01 * %level%",
+            "reason": [
+              "satiated"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "replenish",
+      "enchanting": 7,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "hoe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "replenish.yml",
+      "candidateSha256": "54dd9e1e9054c78ebf80dbcc19001740941f6aade28bdd2ea432b652ac686e6a",
+      "sourceTestPath": "replenish.yml",
+      "sourceTestSha256": "37502020916b22ca6e24905c182f2f21d9ae4d0bdbbe4770fd8436cc6a3772d1",
+      "effects": [],
+      "note": "Semillas tras permiso/madurez, lote64/tick y cola1024; cancelación/sesión/chunk/bloque/reload protegidos y rollback de colocación vetada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "reposo",
+      "enchanting": 23,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "chestplate"
+      ],
+      "conflicts": [
+        "rejuvenate"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "reposo.yml",
+      "candidateSha256": "89a3413e08fe35db417e0079b3533f6b6cc011ac5595026be9cf806ba10c7d3d",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "regen_multiplier",
+          "args": {
+            "multiplier": "1 + 0.03 * %level%",
+            "reason": [
+              "SATIATED"
+            ]
+          },
+          "conditions": [
+            {
+              "id": "out_of_confirmed_combat"
+            }
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ritmo_minero",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "pickaxe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "ritmo_minero.yml",
+      "candidateSha256": "1cc1f1f56ea265ce9241acf432a1c5515fcc2ed3c83cb4ec0cb5f4fc2f182a22",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "mining_speed_multiplier",
+          "args": {
+            "multiplier": "1 + 0.05 * %level%",
+            "transient": true
+          },
+          "conditions": [
+            {
+              "id": "has_mining_rhythm"
+            }
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rocket_saver",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "elytra"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "rocket_saver.yml",
+      "candidateSha256": "f858497c95af620e4ae54026292f550498ac8ec308b6ff0558e00b6f921f013b",
+      "sourceTestPath": "rocket_saver.yml",
+      "sourceTestSha256": "551c5424b8d0c857d7441e7883af1c083bd1e5c3501398831db5071f383064c1",
+      "effects": [
+        {
+          "id": "elytra_boost_save_chance",
+          "args": {
+            "chance": "%level% * 20"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ruptura_sonica",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "eco_resonante"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "ruptura_sonica.yml",
+      "candidateSha256": "4dcd3bfe6c2a00bd857cd76bf1c25761efb96572968bb3aaafd868ee2fa7ac3d",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "ruptura_sonica",
+            "percent": "4 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sculk_slayer",
+      "enchanting": 5,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee",
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [
+        "ender_slayer",
+        "crimson_slayer"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "sculk_slayer.yml",
+      "candidateSha256": "d2e5284a0ddcaf8e283ec76ba2101d1be3b435bb0e26cba39991a81657e6c40f",
+      "sourceTestPath": "sculk_slayer.yml",
+      "sourceTestSha256": "8f640b875aba026c880d7227a940981670e662452a551ed7b230107c0c81a9cf",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + (0.2 + (%level% * 0.1))",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack",
+            "bow_attack",
+            "trident_attack"
+          ],
+          "conditions": [
+            {
+              "id": "in_world",
+              "args": {
+                "world": "world_warden"
+              }
+            }
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sello_glacial",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow"
+      ],
+      "conflicts": [
+        "frost"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "sello_glacial.yml",
+      "candidateSha256": "e8cfd0bd57acd1ad6eb1de7a2e5ca09942050484ba470b22ddb59e126157f253",
+      "sourceTestPath": "sello_glacial.yml",
+      "sourceTestSha256": "82ccff7d81db5ee5b80f5ab443758e5de3947044f17a4c8cb9ba536085160459",
+      "effects": [
+        {
+          "id": "glacial_seal",
+          "args": {
+            "amount": "5 + 5 * %level%",
+            "hits": 2,
+            "window": 4,
+            "proc_cooldown": 10
+          },
+          "triggers": [
+            "confirmed_original_hit"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "shulker_harvest",
+      "enchanting": 24,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "looting"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "shulker_harvest.yml",
+      "candidateSha256": "9e07ad58f03eed046428a2f913c26a3288658d6bef815f063b1c7e8f7a55e827",
+      "sourceTestPath": "shulker_harvest.yml",
+      "sourceTestSha256": "013651304183295bd638688b9cf787683a07d38b793aa03ec412b3f21e5080a5",
+      "effects": [
+        {
+          "id": "multiply_drops",
+          "args": {
+            "on_items": [
+              "shulker_shell"
+            ],
+            "fortune": "2 + %level%"
+          },
+          "triggers": [
+            "entity_item_drop"
+          ]
+        }
+      ],
+      "note": "Media del multiplicador nativo de fortuna3..5: +150/200/250%, conserva distribución.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "shura",
+      "enchanting": 26,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "shura.yml",
+      "candidateSha256": "10f02b89a9c8079025d0421307577142ff87ab1a321727d0eeda415d5e3d599d",
+      "sourceTestPath": "shura.yml",
+      "sourceTestSha256": "169c5b04b9e494e80d4d691a758605bc4fe48eca042ca0f90b12186512c682b6",
+      "effects": [
+        {
+          "id": "crit_multiplier",
+          "args": {
+            "multiplier": "1 + 0.25 * %level%"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Conserva crítico nativo por caída y multiplicador; añade umbral de vida anunciado, no EcoSkills crit chance.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "skull_puncture",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow",
+        "crossbow",
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "skull_puncture.yml",
+      "candidateSha256": "a6d9597ee5aacaa15c72fc44f4a90448b4c84a640320ddce4a8244f15e292868",
+      "sourceTestPath": "skull_puncture.yml",
+      "sourceTestSha256": "67d1d301a7e8557624a693db2008e71165eb0ed591a0240bbf176044a7e02820",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + 0.1 * %level%",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "headshot"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "slaughter",
+      "enchanting": 12,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "sharpness",
+        "smite",
+        "bane_of_arthropods",
+        "introversion",
+        "brightness"
+      ],
+      "type": "normal",
+      "combatMode": "pve",
+      "definitionPath": "slaughter.yml",
+      "candidateSha256": "b32f2963dd58d91a915a22593880cb1dd314162bbd36e31c159c7de581ed7cec",
+      "sourceTestPath": "slaughter.yml",
+      "sourceTestSha256": "71f632ee707f4bbffb2d279d932ea177147153e2b6018e6d8eff9ec4199f674d",
+      "effects": [
+        {
+          "id": "add_damage",
+          "args": {
+            "damage": "2.5 * %level%"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "entities": [
+              "cow",
+              "sheep",
+              "pig",
+              "horse",
+              "parrot",
+              "cat",
+              "ocelot",
+              "fox",
+              "villager",
+              "axolotl",
+              "chicken"
+            ],
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Corrige ocelot; conserva daño plano y lista de criaturas. Requisito del catálogo aprobado actual.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "slipstream",
+      "enchanting": 9,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "slipstream.yml",
+      "candidateSha256": "18704d4d7e7b34ad6e8bf3ea63bd68c96fa79880381c59eab8e8b917e03ae5c7",
+      "sourceTestPath": "slipstream.yml",
+      "sourceTestSha256": "032c8957db6ac5ca0e644220e25a8d030785785e368106dd58899661926d703d",
+      "effects": [
+        {
+          "id": "movement_speed_multiplier",
+          "args": {
+            "multiplier": "1 + %level% * 0.08"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "smoldering",
+      "enchanting": 23,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "pve",
+      "definitionPath": "smoldering.yml",
+      "candidateSha256": "497f3fdb2e9509a8a26b73bca99fe4113322506a1dc926e042921f5cc83e4dba",
+      "sourceTestPath": "smoldering.yml",
+      "sourceTestSha256": "3703dcef20d7302237b08f2a31dcb97af0759395676786b2bad682c760fa1a8b",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + 0.03 * %level%",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "entities": [
+              "blaze"
+            ],
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "3% por tier aditivo contra blaze; corrige plano frente al porcentaje anunciado.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "snipe",
+      "enchanting": 6,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "snipe.yml",
+      "candidateSha256": "7f60756c78ba0d3b7b4a327d9c8b2832df810f4edb4280bff14cc9973562914c",
+      "sourceTestPath": "snipe.yml",
+      "sourceTestSha256": "5264c26afdc8aa6c558cd2c6c410f44d73e20ba870e4b435c80ccc2cb15bfb55",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + (%distance% / (11 - ceil(%level% / 2))) * 0.01 * %level%",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "bow_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sorcery",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "helmet"
+      ],
+      "conflicts": [
+        "enriched_plating",
+        "chemist"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "sorcery.yml",
+      "candidateSha256": "223e0b02e9001671570bfa56e10efb285a80dd9c4d43aeeb5fdcd1c6d582a69d",
+      "sourceTestPath": "ecoskills/sorcery.yml",
+      "sourceTestSha256": "a7ff7715768b70e566cb63c028761c5de7d1f6c7d77c1ad06311058a75cfddbc",
+      "effects": [
+        {
+          "id": "skill_xp_multiplier",
+          "args": {
+            "multiplier": "1 + 0.06 * %level%",
+            "skills": [
+              "enchanting"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sparks",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "fishing_rod"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "sparks.yml",
+      "candidateSha256": "3369faef36dcfaf47c9fc1b530d27f8329b6f9856f9731d2832854285e24e346",
+      "sourceTestPath": "sparks.yml",
+      "sourceTestSha256": "dd6c1b063ff3aaed662369c75866ed06e3a465026e51659787ce8396ad39c82e",
+      "effects": [
+        {
+          "triggers": [
+            "catch_entity"
+          ],
+          "args": {
+            "chance": "25 + 5 * %level%"
+          },
+          "effects": [
+            {
+              "id": "smite",
+              "args": {
+                "damage": "1 + 1 * %level%",
+                "silent": true
+              }
+            },
+            {
+              "id": "particle_animation",
+              "args": {
+                "particle": "electric_spark",
+                "particle-amount": 10,
+                "animation": "ground_spiral",
+                "tick-multiplier": 1,
+                "entity": "victim",
+                "use-eye-location": false,
+                "particle_args": {
+                  "scalar": 5.5,
+                  "distance-scalar": 0.3,
+                  "duration": 25
+                }
+              },
+              "mutators": [
+                {
+                  "id": "location_to_victim"
+                }
+              ]
+            }
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Añade tormenta nativa requerida; cadena exterior conservada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "stamina",
+      "enchanting": 5,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "chestplate"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "stamina.yml",
+      "candidateSha256": "38d8b934b55a8ccc4db4aa1f7c706558843f54c19898ceff958209f6a85ac98b",
+      "sourceTestPath": "stamina.yml",
+      "sourceTestSha256": "29a1a9f7b216b60b4c03ace8f555ab39d88b09a9456515388343080999f13698",
+      "effects": [
+        {
+          "id": "hunger_multiplier",
+          "args": {
+            "multiplier": "1 - %level% * 0.2"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "steel_string",
+      "enchanting": 17,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "steel_string.yml",
+      "candidateSha256": "fdb40fdc4557591c01f9eddbb1714538216fd1ab8968244fffb255ac4a4943d9",
+      "sourceTestPath": "ecoskills/steel_string.yml",
+      "sourceTestSha256": "aa0fb67dfa0c470df1d58c354d0614318f34121034b36fcfaf5ccec564d2056d",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "strength",
+            "amount": "3 + 2 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "streamlining",
+      "enchanting": 7,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "streamlining.yml",
+      "candidateSha256": "b5b6f2b4cfb55188859f4705b6125bfe2f34c768283d3a4223848105ff560f72",
+      "sourceTestPath": "streamlining.yml",
+      "sourceTestSha256": "1676cf6362b09264d06aa18752d14e40958e54b435832952fcd440ca95ab2d03",
+      "effects": [
+        {
+          "id": "movement_speed_multiplier",
+          "args": {
+            "multiplier": "1 + %level% * 0.05"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "strongarm",
+      "enchanting": 16,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "strongarm.yml",
+      "candidateSha256": "4ec3c12281a4f5218b4b5ad2ff7fbafb54840352cf3c4c889bb622247531b129",
+      "sourceTestPath": "ecoskills/strongarm.yml",
+      "sourceTestSha256": "87007f4f363b851cad2895a61fb87d055f117dd9b8cac829296eed2654fe9bbe",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "strength",
+            "amount": "2 + 4 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "stun",
+      "enchanting": 13,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "pve",
+      "definitionPath": "stun.yml",
+      "candidateSha256": "ee953eb21dd87db5faf17bdb84a5c0127e2f35cfc0025b0f472f4c64ecd415ad",
+      "sourceTestPath": "stun.yml",
+      "sourceTestSha256": "f420dcde60817387691e46e7af59bdc3b717e260241c4e18c76af3ef910bc6cb",
+      "effects": [
+        {
+          "id": "strip_ai",
+          "args": {
+            "duration": 40,
+            "chance": "2.5 + 2.5 * %level%"
+          },
+          "triggers": [
+            "melee_attack",
+            "bow_attack",
+            "trident_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "IA solo existe en criaturas; PvE explícito, no promete aturdir jugadores.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sustento",
+      "enchanting": 1,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "sustento.yml",
+      "candidateSha256": "6cdcd547b5269a6b5a178a8208b0e13a858328924ec630f8bf225e5292734c07",
+      "sourceTestPath": "sustento.yml",
+      "sourceTestSha256": "998e00d661a183faf427e6dfde976db3df4cb73598352884474ab484545061d0",
+      "effects": [
+        {
+          "id": "give_food",
+          "args": {
+            "amount": 1,
+            "cooldown": 20,
+            "cooldown_group": "ecoenchants_sustento",
+            "send_cooldown_message": false
+          },
+          "triggers": [
+            "skill_mob_kill"
+          ],
+          "filters": {
+            "text": [
+              "melee"
+            ],
+            "from_spawner": false,
+            "entities": [
+              "zombie",
+              "husk",
+              "drowned",
+              "skeleton",
+              "stray",
+              "bogged",
+              "wither_skeleton",
+              "creeper",
+              "spider",
+              "cave_spider",
+              "witch",
+              "slime",
+              "magma_cube",
+              "blaze",
+              "ghast",
+              "guardian",
+              "pillager",
+              "vindicator",
+              "evoker",
+              "ravager",
+              "silverfish",
+              "endermite",
+              "phantom",
+              "breeze"
+            ]
+          },
+          "conditions": [
+            {
+              "id": "below_hunger_percent",
+              "args": {
+                "percent": 95
+              }
+            }
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "swarm",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "swarm.yml",
+      "candidateSha256": "ad10591a7f0a87b97b0a949b7c6d6bfc2d2c4e917edc0872ca37001eb43cfb13",
+      "sourceTestPath": "swarm.yml",
+      "sourceTestSha256": "acb86471b967b9baa996114d45cc95f0b5056a342c090a3c7ee0e8f3b7e34354",
+      "effects": [
+        {
+          "id": "swarm_multiplier",
+          "args": {
+            "percent_per_monster": "0.5 * %level%"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "telekinesis",
+      "enchanting": 16,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "melee",
+        "pickaxe",
+        "axe",
+        "shovel",
+        "hoe",
+        "bow",
+        "crossbow",
+        "trident",
+        "fishing_rod",
+        "shield",
+        "elytra",
+        "helmet",
+        "chestplate",
+        "leggings",
+        "boots"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "telekinesis.yml",
+      "candidateSha256": "896dec29b943d86aa8b1afe6d52a9cc99b9f9a187ba19f2f2df8ea6b2d2d6f32",
+      "sourceTestPath": "telekinesis.yml",
+      "sourceTestSha256": "0f9f4a326a3a0c1c1ce0060de8485a76400e4fc868de199859e1fa45d3b0c0b2",
+      "effects": [
+        {
+          "id": "telekinesis",
+          "triggers": []
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thor",
+      "enchanting": 24,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "thor.yml",
+      "candidateSha256": "03bfe58845e07a986b35930c2c44c487704e202f11962f66c02f2d5984459cc1",
+      "sourceTestPath": "thor.yml",
+      "sourceTestSha256": "570546273176192a70a84ca2577be82b2e7e72bede5cbb8cfbdb1c3a6492765f",
+      "effects": [
+        {
+          "id": "strike_lightning",
+          "args": {
+            "amount": "ceil(%level% / 2)",
+            "chance": "%level%"
+          },
+          "triggers": [
+            "bow_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thrive",
+      "enchanting": 5,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "armor"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "thrive.yml",
+      "candidateSha256": "26e60bf3380a21557eb3ddda06432d9f4a8cc94dce175b9d20ec95d4738c370c",
+      "sourceTestPath": "thrive.yml",
+      "sourceTestSha256": "1439233056bd613fe48d76e2ef1b432fe34c84339b1d8c81885502157a874606",
+      "effects": [
+        {
+          "id": "bonus_health",
+          "args": {
+            "health": "%level% * 2"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thunderbolt",
+      "enchanting": 20,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "thunderlord"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "thunderbolt.yml",
+      "candidateSha256": "051bd2fdc1ce4e050cf4dc54e0cbdcab5ce309cca735028dfbb2d8b2f0654726",
+      "sourceTestPath": "thunderbolt.yml",
+      "sourceTestSha256": "1f1e79ca5d479228b59c6330f0406cfb41722b928b8742fae18ead65c94525e7",
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "thunderbolt",
+            "percent": "4 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "4–20% del daño final confirmado, hasta10 objetivos/radio2 y CD10s; sustituye rayos aleatorios con daño vanilla ajeno al porcentaje.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thunderlord",
+      "enchanting": 20,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "thunderbolt"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "thunderlord.yml",
+      "candidateSha256": "02b6b7c6e9e5565aa3035d8895b8609b8a85fe7c90a930e15829b58b50ccc8f8",
+      "sourceTestPath": "thunderlord.yml",
+      "sourceTestSha256": "8a1e9adcd5bfb6b51612dbe9bf199f3a084fbf9946212d044e900206a2c9e3af",
+      "effects": [
+        {
+          "id": "third_hit_multiplier",
+          "args": {
+            "multiplier": "1 + 0.08 * %level%"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "8–40% aditivo al tercer intento tras dos golpes confirmados; sin puntos persistentes/NBT por golpe, CD10s por jugador.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "timber",
+      "enchanting": 20,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "axe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "timber.yml",
+      "candidateSha256": "813fea0e09326f7061196d715c77e6852c3fc386689b85147ad1e6a25864271a",
+      "sourceTestPath": "timber.yml",
+      "sourceTestSha256": "54ec878d2f234dcf7f0caca9899018567c97b535bac56a833186d5fcf58f18c8",
+      "effects": [
+        {
+          "id": "mine_vein",
+          "args": {
+            "limit": "5 * %level%",
+            "disable_on_sneak": true,
+            "mana_cost": 20
+          },
+          "filters": {
+            "blocks": [
+              "oak_wood",
+              "dark_oak_wood",
+              "acacia_wood",
+              "jungle_wood",
+              "birch_wood",
+              "mangrove_wood",
+              "crimson_stem",
+              "spruce_wood",
+              "warped_stem",
+              "oak_log",
+              "dark_oak_log",
+              "acacia_log",
+              "jungle_log",
+              "birch_log",
+              "spruce_log",
+              "mangrove_log",
+              "cherry_log",
+              "MUSHROOM_STEM",
+              "BROWN_MUSHROOM_BLOCK",
+              "RED_MUSHROOM_BLOCK",
+              "pale_oak_log"
+            ]
+          },
+          "triggers": [
+            "mine_block"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "titan_killer",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [
+        "giant_killer"
+      ],
+      "type": "normal",
+      "combatMode": "pvp",
+      "definitionPath": "titan_killer.yml",
+      "candidateSha256": "82f6cf6120e0aca35b6f254a5c433b8a34cc1528f03e8db29e33287eb108f2de",
+      "sourceTestPath": "titan_killer.yml",
+      "sourceTestSha256": "04a4fc55406e1336708dd9c16efd922ff35a068ac6b0c3c3fdfdb8f9f1005264",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + min(max(0, %victim_ecoskills_defense%) / 100 * (0.02 * %level% + 0.02 * max(0, %level% - 4)), 0.06 * %level% + 0.10 * max(0, %level% - 4))",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "entities": [
+              "player"
+            ],
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Solo PvP: Defensa EcoSkills pertenece a jugadores. Tasas2/4/6/8/12 y caps6/12/18/24/40%; sin inventar stats de criaturas.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "tormenta_encadenada",
+      "enchanting": 35,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword"
+      ],
+      "conflicts": [
+        "thunderlord",
+        "thunderbolt"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "tormenta_encadenada.yml",
+      "candidateSha256": "f3c88e436073c7b216ef5343cc592ff50cbde1aeac5075c94b198ba379cd97d8",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "tormenta_encadenada",
+            "percent": "4 + 2 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "triple_strike",
+      "enchanting": 19,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "triple_strike.yml",
+      "candidateSha256": "10ba3af7a1727249db0b1cf98de6aa347707bd0138e7eba7621c853513613d2c",
+      "sourceTestPath": "triple_strike.yml",
+      "sourceTestSha256": "95b81f3c6dbb5e58bd2260f6e9c082905be3d45e462115075683516c5ed43a9b",
+      "effects": [
+        {
+          "id": "first_hits_multiplier",
+          "args": {
+            "multiplier": "1 + 0.08 * %level%"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "tripleshot",
+      "enchanting": 19,
+      "tiers": [
+        1
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "tripleshot.yml",
+      "candidateSha256": "235c06809f21cb9faf75512cf97f46dc8bcf84df08980d967944dfc31d13ac43",
+      "sourceTestPath": "tripleshot.yml",
+      "sourceTestSha256": "67b1904f4fec06173959d13bda5ec0921a7d5f685722426d72f0b7e4d46308b6",
+      "effects": [
+        {
+          "id": "run_chain",
+          "args": {
+            "chain": "shoot_extra_arrows",
+            "chain-args": {
+              "arrows": 1
+            }
+          },
+          "triggers": [
+            "shoot_bow"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ultimo_recurso",
+      "enchanting": 30,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "chestplate"
+      ],
+      "conflicts": [],
+      "type": "ultimate",
+      "combatMode": "both",
+      "definitionPath": "ultimo_recurso.yml",
+      "candidateSha256": "26ee248096b397c718de880a66f8fd6ab05fe88fc352c66cf37879bb60ab7d7e",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "last_resort",
+          "args": {
+            "percent": "3 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_combat"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vampirism",
+      "enchanting": 15,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "vampirism.yml",
+      "candidateSha256": "c15ee63d88520e81fd00c135157e8b62c94f0a67257af9e2c137993360fcbc32",
+      "sourceTestPath": "vampirism.yml",
+      "sourceTestSha256": "d1713ab27de40a3b6728fd383cd0370a73b2b936201a4f586a399e20e61039f3",
+      "effects": [
+        {
+          "id": "give_health",
+          "args": {
+            "amount": "max(0, %player_max_health% - %player_health%) * 0.01 * %level%",
+            "trigger_heal": true
+          },
+          "triggers": [
+            "kill"
+          ],
+          "filters": {
+            "genuine_kill": true,
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "1–5% de vida faltante tras muerte nativa real y curación cancelable; ignora force sin testigo, evita doble aviso Mythic/bleed.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vanish",
+      "enchanting": 9,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "armor"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "vanish.yml",
+      "candidateSha256": "b3bd0890fdef2204f81dd940a526b8684872e11bbbba419b94b6c3d2647786b0",
+      "sourceTestPath": "vanish.yml",
+      "sourceTestSha256": "9a18893c4f67aa2e3c5ffb720a6f0f7a8a5ac46f8dd5d62aa3f3e1ae44976b6d",
+      "effects": [
+        {
+          "id": "potion_effect",
+          "args": {
+            "chance": "%level% * 2",
+            "effect": "invisibility",
+            "level": 2,
+            "duration": "10 + floor(%level% * 5)",
+            "apply-to-player": true
+          },
+          "triggers": [
+            "take_entity_damage"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Duración real0,75/1 s y chance2/4%, sin cambiar poción.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "veinminer",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "pickaxe"
+      ],
+      "conflicts": [
+        "blast_mining"
+      ],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "veinminer.yml",
+      "candidateSha256": "727b02ca0e0144430718965fb5334f16ca85ab7687f81f90c883019f003d274d",
+      "sourceTestPath": "veinminer.yml",
+      "sourceTestSha256": "4161b3b63e0525ada6cf7b36af6686592ed39c1b6f6b6a5e01a6ca2ef47baea1",
+      "effects": [
+        {
+          "id": "mine_vein",
+          "args": {
+            "limit": "2 + 3 * %level%",
+            "disable_on_sneak": true,
+            "blocks": [
+              "coal_ore",
+              "iron_ore",
+              "copper_ore",
+              "gold_ore",
+              "ancient_debris",
+              "lapis_ore",
+              "diamond_ore",
+              "redstone_ore",
+              "nether_quartz_ore",
+              "gilded_blackstone",
+              "nether_gold_ore",
+              "glowstone",
+              "deepslate_coal_ore",
+              "deepslate_iron_ore",
+              "deepslate_copper_ore",
+              "deepslate_gold_ore",
+              "deepslate_lapis_ore",
+              "deepslate_diamond_ore",
+              "deepslate_redstone_ore"
+            ]
+          },
+          "filters": {
+            "blocks": [
+              "coal_ore",
+              "iron_ore",
+              "copper_ore",
+              "gold_ore",
+              "ancient_debris",
+              "lapis_ore",
+              "diamond_ore",
+              "redstone_ore",
+              "nether_quartz_ore",
+              "gilded_blackstone",
+              "nether_gold_ore",
+              "glowstone",
+              "deepslate_coal_ore",
+              "deepslate_iron_ore",
+              "deepslate_copper_ore",
+              "deepslate_gold_ore",
+              "deepslate_lapis_ore",
+              "deepslate_diamond_ore",
+              "deepslate_redstone_ore"
+            ]
+          },
+          "triggers": [
+            "mine_block"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "velo_lunar",
+      "enchanting": 32,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "helmet"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "velo_lunar.yml",
+      "candidateSha256": "53a45986fc25368b47ff1e25ef306f59f3352c24318ce95be574457bd823d7c0",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "velo_lunar",
+            "percent": "3 + 2 * %level%"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vicious",
+      "enchanting": 26,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "melee"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "vicious.yml",
+      "candidateSha256": "ee3d7dfaa58e2c7f51412941d4ac380ae45a0451b18a509f5925a1dec4a4b9a4",
+      "sourceTestPath": "ecoskills/vicious.yml",
+      "sourceTestSha256": "19e9008eb609f9db3ae1c9c00e679a7ab40c8e977484da9615b84d4feb367ca2",
+      "effects": [
+        {
+          "id": "add_stat",
+          "args": {
+            "stat": "ferocity",
+            "amount": "5 + 5 * %level%"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vigilia",
+      "enchanting": 33,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "leggings"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "vigilia.yml",
+      "candidateSha256": "db34f8e592a8d1a36d8848e739fcf0e0f770fb413dd85c9a8bf9155cae5d1cd0",
+      "sourceTestPath": null,
+      "sourceTestSha256": null,
+      "effects": [
+        {
+          "id": "native_reactive",
+          "args": {
+            "family": "vigilia",
+            "percent": "3 + 2 * %level%"
+          },
+          "triggers": [
+            "native_reactive_action"
+          ]
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "wisdom",
+      "enchanting": 27,
+      "tiers": [
+        1,
+        2,
+        3
+      ],
+      "targets": [
+        "sword",
+        "axe",
+        "pickaxe",
+        "shovel",
+        "hoe",
+        "bow",
+        "crossbow",
+        "trident"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "wisdom.yml",
+      "candidateSha256": "ca7270627e60f25446809b6db16578cb8bc777d463389f5b5f3c25a41d2eb0dd",
+      "sourceTestPath": "disabled/wisdom.yml",
+      "sourceTestSha256": "f5965e463d5023c4833a86faf77be68ce46d859a86582fc1f415d7223b46eea7",
+      "effects": [
+        {
+          "id": "xp_multiplier",
+          "args": {
+            "multiplier": "1.0 + (%level% * 0.2)"
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "woodworker",
+      "enchanting": 10,
+      "tiers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "targets": [
+        "axe"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "not_applicable_or_passive_both",
+      "definitionPath": "woodworker.yml",
+      "candidateSha256": "449ddb42974ddf353886044ca9f6f88fc3a0d8f7a1bb43493eab16156e68a112",
+      "sourceTestPath": "ecoskills/woodworker.yml",
+      "sourceTestSha256": "46438a9863736191b0c7ec8c988d8b626ff218d1cd2c00ac6a6781be5d47cd67",
+      "effects": [
+        {
+          "id": "skill_xp_multiplier",
+          "args": {
+            "multiplier": "1 + 0.0625 * %level%",
+            "skills": [
+              "foraging"
+            ]
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "wound",
+      "enchanting": 18,
+      "tiers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "targets": [
+        "bow",
+        "crossbow"
+      ],
+      "conflicts": [
+        "sharpness"
+      ],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "wound.yml",
+      "candidateSha256": "0523eddb5712ac87a132b278fecbdb08a2a74f416442563752cf9d626519fe3a",
+      "sourceTestPath": "wound.yml",
+      "sourceTestSha256": "665bec3c4729c9de05312cb330f008f4dac33b93b481204dca252c51217c8895",
+      "effects": [
+        {
+          "id": "native_burst",
+          "args": {
+            "family": "wound",
+            "damage": 1,
+            "amount": "%level% + 2",
+            "interval": 15,
+            "chance": "3 * %level%"
+          },
+          "triggers": [
+            "confirmed_native_burst"
+          ]
+        }
+      ],
+      "note": "Pulsos reales con fuente y protecciones, en scheduler de procs existente; nunca fuerza kill antes de aplicar daño; conserva todos los tiers (Wound VII).",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "id": "wyvern",
+      "enchanting": 28,
+      "tiers": [
+        1,
+        2
+      ],
+      "targets": [
+        "elytra"
+      ],
+      "conflicts": [],
+      "type": "normal",
+      "combatMode": "both",
+      "definitionPath": "wyvern.yml",
+      "candidateSha256": "8362a99f25ff50674f49dcf030cd5a9c58728aa456a0a9c0afe0b5b7dd5f1be1",
+      "sourceTestPath": "wyvern.yml",
+      "sourceTestSha256": "b76c6e423ab6c1e676654d898ca6348f62a8587761d3da5334cd5c5faa3a43e2",
+      "effects": [
+        {
+          "id": "damage_multiplier",
+          "args": {
+            "multiplier": "1 + (0.15 * %level%)",
+            "damage_group": "ecoenchants_normal"
+          },
+          "triggers": [
+            "melee_attack"
+          ],
+          "filters": {
+            "enchant_combat_mode": true
+          }
+        }
+      ],
+      "note": "Ruta nativa revisada y conservada; ver contrato por lote o definición incluida, sin equivalencia Hypixel inventada.",
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    }
+  ],
+  "reserved": [
+    "bastion",
+    "crimson_slayer",
+    "dynamite",
+    "harvesting",
+    "indestructible",
+    "one_for_all",
+    "repairing",
+    "resguardo_arcano",
+    "soulbound",
+    "superior",
+    "ultimate_wise",
+    "warp_drive",
+    "xray"
+  ],
+  "validation": "Candidate definitions and reviewed native sources; build/JVM report separate. Paper registration, gameplay, transfer and measured performance pending."
+}

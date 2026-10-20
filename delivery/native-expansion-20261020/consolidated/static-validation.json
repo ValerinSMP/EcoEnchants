@@ -1,0 +1,225 @@
+{
+  "definitions": 117,
+  "effects": 128,
+  "conditions": 130,
+  "unresolved": [],
+  "sourceRegistryOnly": true,
+  "paperRegistrationVerified": false,
+  "resolvedInheritedEffectDeclarations": [
+    {
+      "kind": "effect",
+      "family": "angler",
+      "id": "skill_xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/auraskills/impl/EffectSkillXpMultiplier.kt",
+        "EcoSkills/eco-core/core-plugin/src/main/kotlin/com/willfp/ecoskills/libreforge/EffectSkillXpMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "blast_mining",
+      "id": "mine_radius",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMineRadius.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "caffeinated",
+      "id": "attack_speed_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectAttackSpeedMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "chemist",
+      "id": "skill_xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/auraskills/impl/EffectSkillXpMultiplier.kt",
+        "EcoSkills/eco-core/core-plugin/src/main/kotlin/com/willfp/ecoskills/libreforge/EffectSkillXpMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "combatant",
+      "id": "skill_xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/auraskills/impl/EffectSkillXpMultiplier.kt",
+        "EcoSkills/eco-core/core-plugin/src/main/kotlin/com/willfp/ecoskills/libreforge/EffectSkillXpMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "dexterity",
+      "id": "attack_speed_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectAttackSpeedMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "estela_cazador",
+      "id": "movement_speed_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMovementSpeedMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "excavation",
+      "id": "drill",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectDrill.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "getaway",
+      "id": "movement_speed_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMovementSpeedMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "green_thumb",
+      "id": "skill_xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/auraskills/impl/EffectSkillXpMultiplier.kt",
+        "EcoSkills/eco-core/core-plugin/src/main/kotlin/com/willfp/ecoskills/libreforge/EffectSkillXpMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "metabolism",
+      "id": "food_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectFoodMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "prospector",
+      "id": "skill_xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/auraskills/impl/EffectSkillXpMultiplier.kt",
+        "EcoSkills/eco-core/core-plugin/src/main/kotlin/com/willfp/ecoskills/libreforge/EffectSkillXpMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "rejuvenate",
+      "id": "regen_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectRegenMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "reposo",
+      "id": "regen_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectRegenMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "ritmo_minero",
+      "id": "mining_speed_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMiningSpeedMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "rocket_saver",
+      "id": "elytra_boost_save_chance",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/paper/impl/EffectElytraBoostSaveChance.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "slipstream",
+      "id": "movement_speed_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMovementSpeedMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "sorcery",
+      "id": "skill_xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/auraskills/impl/EffectSkillXpMultiplier.kt",
+        "EcoSkills/eco-core/core-plugin/src/main/kotlin/com/willfp/ecoskills/libreforge/EffectSkillXpMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "sparks",
+      "id": "particle_animation",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectParticleAnimation.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "stamina",
+      "id": "hunger_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectHungerMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "streamlining",
+      "id": "movement_speed_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMovementSpeedMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "thrive",
+      "id": "bonus_health",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectBonusHealth.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "timber",
+      "id": "mine_vein",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMineVein.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "veinminer",
+      "id": "mine_vein",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectMineVein.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "wisdom",
+      "id": "xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/effects/impl/EffectXpMultiplier.kt"
+      ]
+    },
+    {
+      "kind": "effect",
+      "family": "woodworker",
+      "id": "skill_xp_multiplier",
+      "declarationSources": [
+        "LibreForge/core/common/src/main/kotlin/com/willfp/libreforge/integrations/auraskills/impl/EffectSkillXpMultiplier.kt",
+        "EcoSkills/eco-core/core-plugin/src/main/kotlin/com/willfp/ecoskills/libreforge/EffectSkillXpMultiplier.kt"
+      ]
+    }
+  ]
+}

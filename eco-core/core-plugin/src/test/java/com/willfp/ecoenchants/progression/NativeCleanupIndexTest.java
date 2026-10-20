@@ -6,6 +6,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static com.willfp.ecoenchants.progression.OriginalProcEngine.*;
 class NativeCleanupIndexTest {
  Hit hit(UUID actor,UUID target,UUID item){return new Hit(UUID.randomUUID(),actor,item,target,UUID.randomUUID(),1,10,true,true,true,false,false,false,false,false,true,false,false,false);}
+ @org.junit.jupiter.api.Test void combatModesAreExplicitAndInvalidSettingsFailClosed(){
+  for(boolean player:new boolean[]{false,true}){
+   org.junit.jupiter.api.Assertions.assertTrue(ProcGuards.combatModeAllows(null,player));
+   org.junit.jupiter.api.Assertions.assertTrue(ProcGuards.combatModeAllows("both",player));
+   org.junit.jupiter.api.Assertions.assertEquals(player,ProcGuards.combatModeAllows(" PvP ",player));
+   org.junit.jupiter.api.Assertions.assertEquals(!player,ProcGuards.combatModeAllows("PvE",player));
+   org.junit.jupiter.api.Assertions.assertFalse(ProcGuards.combatModeAllows("invalid",player));
+   org.junit.jupiter.api.Assertions.assertFalse(ProcGuards.combatModeAllows("",player));
+  }
+ }
  @Test void unrelatedEntityCleanupPreservesCountersAndActorCleanupDropsAllItsLinks(){
   var clock=new AtomicLong();var engine=new OriginalProcEngine(1024,clock::get);UUID actor=UUID.randomUUID(),other=UUID.randomUUID();
   for(int i=0;i<500;i++)engine.record(Family.LEGADO_VALERIN,hit(actor,UUID.randomUUID(),UUID.randomUUID()));

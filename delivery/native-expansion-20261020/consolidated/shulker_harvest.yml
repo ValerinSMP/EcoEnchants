@@ -1,0 +1,29 @@
+display-name: Cosecha de Shulker
+description: Da un &a%placeholder%%&r de aumento en la caída de shulkers
+placeholder: 50 * (2 + %level%)
+type: normal
+targets:
+- melee
+conflicts:
+- looting
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: multiply_drops
+  args:
+    on_items:
+    - shulker_shell
+    fortune: 2 + %level%
+  triggers:
+  - entity_item_drop
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 24
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXIV'
+enabled: true

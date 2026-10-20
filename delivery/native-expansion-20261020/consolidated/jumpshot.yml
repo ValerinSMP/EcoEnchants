@@ -1,0 +1,32 @@
+enabled: true
+display-name: Salto Disparo
+description: Inflige &a%placeholder%%&r más daño en el aire
+placeholder: 10 * %level%
+type: normal
+targets:
+- bow
+- crossbow
+conflicts: []
+rarity: uncommon
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: damage_multiplier
+  args:
+    multiplier: 1 + 0.1 * %level%
+    damage_group: ecoenchants_normal
+  triggers:
+  - bow_attack
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 8
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVIII'
+- id: in_air
+combat-mode: both

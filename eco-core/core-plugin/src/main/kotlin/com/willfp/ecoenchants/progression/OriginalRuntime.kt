@@ -102,14 +102,27 @@ internal object OriginalRuntime : Listener {
         val snapshot=source(player,actual,OriginalProcEngine.Family.SELLO_GLACIAL,event.hand) ?: return
         shots.remember(event.projectile.uniqueId,player.uniqueId,snapshot)
     }
-    internal fun eligible(player: Player,victim: LivingEntity,allowDead: Boolean=false): Boolean {
-        if(victim !is Enemy||(!allowDead&&(!victim.isValid||victim.isDead))||victim.world!=player.world||!ProcGuards.mayAct(player.isOnline,player.isDead))return false
-        val reason=victim.entitySpawnReason.name
+    internal fun modeAllows(family:String,player:Player,target:LivingEntity,defensive:Boolean=false,allowDead:Boolean=false):Boolean {
+        val enchant=EcoEnchants.getByID(family)?:return false
+        if(!ProcGuards.combatModeAllows(enchant.config.getStringOrNull("combat-mode"),target is Player))return false
+        if(player.hasMetadata("NPC")||target.hasMetadata("NPC")||target.isInvulnerable||target.uniqueId==player.uniqueId||target is Tameable&&target.isTamed)return false
+        return if(target is Player)eligibleFor(family,player,target,allowDead,defensive)else
+            AntigriefManager.canInjure(player,target)
+    }
+    internal fun eligible(player: Player,victim: LivingEntity,allowDead: Boolean=false): Boolean = eligibleFor(null,player,victim,allowDead)
+    internal fun eligibleFor(family:String?,player: Player,victim: LivingEntity,allowDead: Boolean=false,defensive:Boolean=false): Boolean {
+        val playerTarget=victim is Player
+        if(family==null&&playerTarget)return false // Swarm's monster count and old callers remain PvE.
+        val enchant=family?.let{EcoEnchants.getByID(it)?:return false}
+        if(!ProcGuards.combatModeAllows(enchant?.config?.getStringOrNull("combat-mode"),playerTarget))return false
+        if((victim !is Enemy&&!playerTarget)||victim.uniqueId==player.uniqueId||(!allowDead&&(!victim.isValid||victim.isDead))||victim.world!=player.world||!ProcGuards.mayAct(player.isOnline,player.isDead))return false
+        if(playerTarget&&(!(victim as Player).isOnline||victim.gameMode in setOf(GameMode.CREATIVE,GameMode.SPECTATOR)||!victim.world.pvp))return false
+        val reason=if(playerTarget)"NATURAL" else victim.entitySpawnReason.name
         val boss=victim is Boss||victim.type in setOf(EntityType.WARDEN,EntityType.ELDER_GUARDIAN)
-        val marked=victim.persistentDataContainer.keys.isNotEmpty()||victim.scoreboardTags.isNotEmpty()||victim.hasMetadata("NPC")||victim.customName()!=null||victim is Tameable
+        val marked=victim.hasMetadata("NPC")||victim.scoreboardTags.isNotEmpty()||(!playerTarget&&(victim.persistentDataContainer.keys.isNotEmpty()||victim.customName()!=null||victim is Tameable))
         val allied=sequenceOf(player.scoreboard,Bukkit.getScoreboardManager()?.mainScoreboard).filterNotNull().any { board ->
             val team=board.getEntryTeam(player.name)
-            team!=null&&team==board.getEntryTeam(victim.uniqueId.toString())
+            team!=null&&team==board.getEntryTeam(if(victim is Player)victim.name else victim.uniqueId.toString())
         }
         // Reject known cheap exclusions before Mythic/protection integrations, including swarm scans.
         if(!ProcGuards.eligible(true,reason,boss,false,marked,allied,victim.isInvulnerable,false))return false
@@ -120,7 +133,7 @@ internal object OriginalRuntime : Listener {
         } catch(problem: RuntimeException) {
             mythicBroken=true;owner.logger.log(java.util.logging.Level.SEVERE,"Original procs blocked: MythicMobs identity query failed",problem);return false
         }
-        return !managed&&AntigriefManager.canInjure(player,victim)
+        return !managed&&(if(defensive&&victim is Player)AntigriefManager.canInjure(victim,player)else AntigriefManager.canInjure(player,victim))
     }
     // Preserve the old entry point while using one confirmation queue for all native combat.
     fun hit(event: EntityDamageByEntityEvent) = observe(event)
@@ -155,7 +168,7 @@ internal object OriginalRuntime : Listener {
             else -> null
         } ?: return null
         val player=Bukkit.getPlayer(context.player) ?: return null
-        return if(eligible(player,victim))Pair(context,arrowId) else null
+        return if(eligibleFor(if(context.family==OriginalProcEngine.Family.ECO_RESONANTE)"eco_resonante" else "sello_glacial",player,victim))Pair(context,arrowId) else null
     }
     private fun actor(candidate:Pending)=candidate.source?.player?:candidate.combat?.actor?:candidate.burst?.sources?.firstOrNull()?.player
     private fun linkPending(candidate:Pending){
@@ -186,7 +199,7 @@ internal object OriginalRuntime : Listener {
         candidate.burst?.let{NativeBurstProgression.confirm(it,candidate.event,victim,damage,candidate.eventId)}
         val source=candidate.source ?: return
         val player=Bukkit.getPlayer(source.player) ?: return
-        if(sessions[source.player]?.token!=source.token||player.world.uid!=source.world||!player.isOnline||!eligible(player,victim,true))return
+        if(sessions[source.player]?.token!=source.token||player.world.uid!=source.world||!player.isOnline||!eligibleFor(if(source.family==OriginalProcEngine.Family.ECO_RESONANTE)"eco_resonante" else "sello_glacial",player,victim,true))return
         if(candidate.arrow!=null&&!shots.claim(candidate.arrow,victim.uniqueId))return
         val id=if(source.family==OriginalProcEngine.Family.ECO_RESONANTE)"eco_resonante" else "sello_glacial"
         val enchant=EcoEnchants.getByID(id) ?: return
@@ -215,9 +228,9 @@ internal object OriginalRuntime : Listener {
         val player=Bukkit.getPlayer(src.player) ?: return false
         if(family==OriginalProcEngine.Family.ECO_RESONANTE){
             val origin=candidate.victim.location
-            val targets=NativeBurstProgression.targets(player,candidate.victim,2.0,2)
+            val targets=NativeBurstProgression.targets(player,candidate.victim,2.0,2,family="eco_resonante")
             targets.forEach { target ->
-                if(eligible(player,target)&&target.location.distanceSquared(origin)<=4&&candidate.victim.hasLineOfSight(target)&&target.noDamageTicks<=target.maximumNoDamageTicks/2){
+                if(eligibleFor("eco_resonante",player,target)&&target.location.distanceSquared(origin)<=4&&candidate.victim.hasLineOfSight(target)&&target.noDamageTicks<=target.maximumNoDamageTicks/2){
                     withSecondaryDamage {
                         com.willfp.libreforge.effects.impl.RepeatedDamage.run(player.uniqueId,player.uniqueId,target.uniqueId){
                             target.dealDamage(confirmed.damage*activation.value()/100,source=player,trueDamage=false,checkAntigrief=true)

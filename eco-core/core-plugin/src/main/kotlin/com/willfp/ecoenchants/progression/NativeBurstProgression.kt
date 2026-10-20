@@ -30,9 +30,18 @@ internal object EffectNativeBurst : Effect<NoCompileData>("native_burst") {
  override val parameters=ConfirmedNativeBurst.parameters
  override val arguments=arguments{
   require("family","Specify the native family.",description="Original progression family.",type=ArgType.STRING)
-  require("percent","Specify its tier percentage.",description="Approved tier percentage.",type=ArgType.EXPRESSION)
+  optional("percent",description="Tier percentage for percentage effects.",type=ArgType.EXPRESSION)
+  optional("damage",description="Flat damage for carve and damage-over-time effects.",type=ArgType.EXPRESSION)
+  optional("amount",description="Bounded damage-over-time pulse count (1..32).",type=ArgType.EXPRESSION)
+  optional("interval",description="Damage-over-time interval in ticks (1..1200).",type=ArgType.EXPRESSION)
  }
- override fun onTrigger(config:Config,data:TriggerData,compileData:NoCompileData)=NativeBurstProgression.execute(config.getString("family"),config.getDoubleFromExpression("percent",data),data)
+ override fun onTrigger(config:Config,data:TriggerData,compileData:NoCompileData):Boolean {
+  val key=if(config.has("damage"))"damage"else"percent"
+  if(!config.has(key))return false
+  return NativeBurstProgression.execute(config.getString("family"),config.getDoubleFromExpression(key,data),data,
+   if(config.has("amount"))config.getIntFromExpression("amount",data)else 3,
+   if(config.has("interval"))config.getIntFromExpression("interval",data)else 20)
+ }
 }
 internal object ConditionHuntersTrail : Condition<NoCompileData>("has_hunters_trail") {
  override val invalidatedBy=emptySet<HolderChange>()
@@ -49,8 +58,8 @@ internal object NativeBurstProgression : Listener {
  private var enabled=false
  private val itemKey=NamespacedKey("ecoenchants","original_item_id")
  private val familiesByKind=mapOf(
-  "melee" to setOf("brasa_errante","cicatriz_ignea","ruptura_sonica","tormenta_encadenada","legado_valerin","eclipse"),
-  "arrow" to setOf("rebote_prismatico","cometa","marca_celeste","aguja_aurora"),
+  "melee" to setOf("brasa_errante","cicatriz_ignea","ruptura_sonica","tormenta_encadenada","legado_valerin","eclipse","thunderbolt","combo","lifesteal","drain","carve","cleave","bleed"),
+  "arrow" to setOf("rebote_prismatico","cometa","marca_celeste","aguja_aurora","wound"),
   "trident" to setOf("pulso_abisal","constelacion"),
   "ranged_kill" to setOf("estela_cazador"),
   "protection" to setOf("ancla","guardia_cristal","velo_lunar","vigilia","paso_ceniza")
@@ -63,22 +72,26 @@ internal object NativeBurstProgression : Listener {
  private var proof:Proof?=null
  private data class Trail(val item:UUID,val tier:Int,val token:UUID,val world:UUID,val until:Long,var task:BukkitTask?=null,var visual:BukkitTask?=null,var emissions:Int=0)
  private val trails=mutableMapOf<UUID,Trail>()
- private data class Dot(val source:Context,val target:LivingEntity,val damage:Double,var remaining:Int=3,var task:BukkitTask?=null)
+ private data class Dot(val source:Context,val target:LivingEntity,val damage:Double,val family:String="cicatriz_ignea",var remaining:Int=3,val interval:Long=20,var task:BukkitTask?=null)
  private val dots=mutableMapOf<UUID,Dot>()
  private val dotEntities=mutableMapOf<UUID,MutableSet<UUID>>()
  private val queryBudget=SwarmQueryBudget()
+ private data class Recent(val token:UUID,val world:UUID,val expires:java.util.ArrayDeque<Long> = java.util.ArrayDeque())
+ private val recent=mutableMapOf<UUID,Recent>()
+ private val legacy=setOf("lifesteal","drain")
+ private val expandedTiers=legacy+setOf("thunderbolt","combo","carve","cleave","bleed","wound")
  private fun now()=System.nanoTime()/1_000_000L
  private fun limit()=(owner.configYml.getIntOrNull("original-procs.max-active-effects")?:512).coerceIn(1,1024)
  private fun id(item:ItemStack)=item.itemMeta?.persistentDataContainer?.get(itemKey,PersistentDataType.STRING)?.let{runCatching{UUID.fromString(it)}.getOrNull()}
  fun register(){Triggers.register(ConfirmedNativeBurst);Effects.register(EffectNativeBurst);Conditions.register(ConditionHuntersTrail)}
  fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true;Bukkit.getPluginManager().registerEvents(this,plugin)}
- fun reset(){shots.clear();dots.keys.toList().forEach{removeDot(it)};dotEntities.clear();trails.keys.toList().forEach{removeTrail(it)};queryBudget.reset();proof=null}
+ fun reset(){recent.clear();shots.clear();dots.keys.toList().forEach{removeDot(it)};dotEntities.clear();trails.keys.toList().forEach{removeTrail(it)};queryBudget.reset();proof=null}
  fun close(){reset();enabled=false;HandlerList.unregisterAll(this)}
- fun retire(uuid:UUID){shots.removeOwner(uuid);removeTrail(uuid);dotEntities[uuid]?.toList()?.forEach{removeDot(it)}}
+ fun retire(uuid:UUID){recent.remove(uuid);shots.removeOwner(uuid);removeTrail(uuid);dotEntities[uuid]?.toList()?.forEach{removeDot(it)}}
  private fun refresh(player:Player){player.clearEnchantmentCache();val d=player.toDispatcher();d.forceRefreshHolders();d.flushHolders()}
  internal fun itemContext(player:Player,item:ItemStack,kind:String,charged:Boolean,slot:EquipmentSlot?,projectile:Trident?=null):Context? {
   val allowed=familiesByKind[kind]?:return null
-  val tiers=EnchantFinder.find(item).filter{it.enchant.id in allowed&&it.level in 1..(if(it.enchant.id=="legado_valerin")1 else 3)&&it.enchant.targets.any{target->target.matches(item)}}.associate{it.enchant.id to it.level}
+  val tiers=EnchantFinder.find(item).filter{it.enchant.id in allowed&&it.level in 1..(if(it.enchant.id=="legado_valerin")1 else if(it.enchant.id in expandedTiers)it.enchant.maximumLevel.coerceIn(1,16) else 3)&&it.enchant.targets.any{target->target.matches(item)}}.associate{it.enchant.id to it.level}
   if(tiers.isEmpty())return null
   val token=OriginalRuntime.session(player)?:return null
   val frozen=NativeProcAdapters.capture(item,itemKey)?:return null
@@ -126,15 +139,17 @@ internal object NativeBurstProgression : Listener {
    else->return null
   }
   val player=Bukkit.getPlayer(sources.first().player)?:return null
-  if(!OriginalRuntime.eligible(player,victim))return null
+  if(sources.none{source->source.tiers.keys.any{if(it in legacy||it=="combo")OriginalRuntime.modeAllows(it,player,victim)else OriginalRuntime.eligibleFor(it,player,victim)}})return null
   return Capture(sources,(event.damager as? Projectile)?.uniqueId)
  }
  fun confirm(capture:Capture,event:EntityDamageEvent,victim:LivingEntity,damage:Double,eventId:UUID){
   if(!enabled||damage<=0||capture.projectile!=null&&!shots.claim(capture.projectile,victim.uniqueId))return
   for(source in capture.sources){
    val player=current(source)?:continue
-   if(!OriginalRuntime.eligible(player,victim,true))continue
    for((family,tier)in source.tiers){
+    if(family in legacy||family=="combo"){
+     if(!OriginalRuntime.modeAllows(family,player,victim,allowDead=true)||source.kind=="melee"&&id(player.inventory.itemInMainHand)!=source.itemId)continue
+    }else if(!OriginalRuntime.eligibleFor(family,player,victim,true))continue
     if(!accepts(family,source.kind,source.charged,source.submerged,victim.isDead||victim.health<=0))continue
     val enchant=EcoEnchants.getByID(family)?:continue
     val holder=ItemProvidedHolder(enchant.getLevel(tier),source.item.clone())
@@ -144,6 +159,9 @@ internal object NativeBurstProgression : Listener {
   }
  }
  internal fun accepts(family:String,kind:String,charged:Boolean,submerged:Boolean,killed:Boolean):Boolean=when(family){
+  "combo"->kind=="melee"&&killed
+  "lifesteal","drain","carve","cleave","bleed","thunderbolt"->kind=="melee"
+  "wound"->kind=="arrow"
   "brasa_errante"->kind=="melee"&&killed
   "estela_cazador"->kind=="ranged_kill"&&killed
   "pulso_abisal"->kind=="trident"&&submerged
@@ -154,49 +172,70 @@ internal object NativeBurstProgression : Listener {
   else->false
  }
  private fun current(source:Context):Player?=Bukkit.getPlayer(source.player)?.takeIf{it.isOnline&&!it.isDead&&it.world.uid==source.world&&OriginalRuntime.sameSession(source.player,source.token)}
- fun execute(family:String,percent:Double,data:TriggerData):Boolean {
+ fun execute(family:String,percent:Double,data:TriggerData)=execute(family,percent,data,3,20)
+ fun execute(family:String,percent:Double,data:TriggerData,pulses:Int,interval:Int):Boolean {
   val p=proof?:return false;val source=p.source;val tier=source.tiers[family]?:return false
   val level=data.holder.holder as? EcoEnchantLevel?:return false
   if(level.enchant.id!=family||level.level!=tier||data.event!==p.event||data.player?.uniqueId!=source.player||data.victim!==p.victim||data.item?.let{id(it)}!=source.itemId)return false
   val descriptor=try{OriginalProcEngine.Family.valueOf(family.uppercase())}catch(ignored:IllegalArgumentException){return false}
   if(!percent.isFinite()||percent<=0||!ProcGuards.arrivalReady(descriptor,OriginalRuntime.age(data.player!!)))return false
   if(family=="estela_cazador"&&(trails.size>=limit()&&source.player !in trails||id(data.player!!.inventory.boots?:return false)!=source.itemId))return false
-  if(family=="cicatriz_ignea"&&(dots.size>=limit()||!p.victim.isValid||p.victim.isDead))return false
+  if(family in setOf("cicatriz_ignea","bleed","wound")&&(dots.size>=limit()||!p.victim.isValid||p.victim.isDead||pulses !in 1..32||interval !in 1..1200))return false
   if(family in setOf("marca_celeste","eclipse")&&!NativeReactiveProgression.canArm(source,family))return false
   val activation=OriginalRuntime.recordNative(descriptor,OriginalProcEngine.Hit(p.eventId,source.player,source.itemId,p.victim.uniqueId,source.world,tier,p.damage,true,true,true,false,false,false,false,false,true,false,false,false)).orElse(null)?:return false
   val player=current(source)?:return false
   when(family){
+   "combo"->{
+    var state=recent[source.player]
+    if(state==null||state.token!=source.token||state.world!=source.world){if(recent.size>=limit()&&source.player !in recent)return false;state=Recent(source.token,source.world);recent[source.player]=state}
+    while(state.expires.isNotEmpty()&&state.expires.first<=now())state.expires.removeFirst()
+    while(state.expires.size>=7)state.expires.removeFirst()
+    state.expires.addLast(now()+(2+2*tier)*1000L)
+   }
    "marca_celeste","eclipse"->NativeReactiveProgression.arm(source,family,tier,percent,if(family=="marca_celeste")p.victim.uniqueId else null)
    "estela_cazador"->trail(player,source,tier)
-   "cicatriz_ignea"->{val key=UUID.randomUUID();val dot=Dot(source,p.victim,p.damage*percent/100);dots[key]=dot;for(entity in listOf(source.player,p.victim.uniqueId))dotEntities.getOrPut(entity){mutableSetOf()}.add(key);scheduleDot(key,dot)}
-   "cometa","legado_valerin"->damage(source,p.victim,p.damage*percent/100,true)
+   "cicatriz_ignea","bleed","wound"->{val key=UUID.randomUUID();val dot=Dot(source,p.victim,if(family=="cicatriz_ignea")p.damage*percent/100 else percent,family,if(family=="cicatriz_ignea")3 else pulses,if(family=="cicatriz_ignea")20 else interval.toLong());dots[key]=dot;for(entity in listOf(source.player,p.victim.uniqueId))dotEntities.getOrPut(entity){mutableSetOf()}.add(key);scheduleDot(key,dot)}
+   "cometa","legado_valerin"->damage(source,p.victim,p.damage*percent/100,true,family)
    "tormenta_encadenada"->{
     val visited=mutableSetOf(p.victim.uniqueId);var anchor=p.victim
     for(hop in 0 until 3){
-     val next=targets(player,anchor,3.0,1,visited).firstOrNull()?:break
-     visited.add(next.uniqueId);damage(source,next,p.damage*percent/100);anchor=next
+     val next=targets(player,anchor,3.0,1,visited,family).firstOrNull()?:break
+     visited.add(next.uniqueId);damage(source,next,p.damage*percent/100,family=family);anchor=next
     }
    }
-   else->{targets(player,p.victim,activation.radius(),activation.maxTargets()).forEach{damage(source,it,p.damage*percent/100)}}
+   else->{targets(player,p.victim,activation.radius(),activation.maxTargets(),family=family).forEach{damage(source,it,if(family=="carve")percent else p.damage*percent/100,family=family)}}
   }
-  if(family !in setOf("cicatriz_ignea","estela_cazador","marca_celeste","eclipse"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
+  if(family !in setOf("combo","cicatriz_ignea","bleed","wound","estela_cazador","marca_celeste","eclipse"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
   return true
  }
- private fun damage(source:Context,target:LivingEntity,amount:Double,fresh:Boolean=false){
+ internal fun offerCombo(data:TriggerData):Boolean {
+  val player=data.player?:return false;val victim=data.victim?:return false
+  val level=data.holder.holder as? EcoEnchantLevel?:return false
+  val event=data.event as? EntityDamageByEntityEvent?:return false
+  if(level.enchant.id!="combo"||level.level !in 1..5||event.damager!==player||event.entity!==victim||event.cause!=EntityDamageEvent.DamageCause.ENTITY_ATTACK||!NativeCombatProgression.gameplay()||DamageMultiplierBypass.current!=null||!OriginalRuntime.modeAllows("combo",player,victim))return false
+  val state=recent[player.uniqueId]?:return false
+  if(state.token!=OriginalRuntime.session(player)||state.world!=player.world.uid){recent.remove(player.uniqueId);return false}
+  // Different tiers give different deadlines: remove expired entries throughout this seven-entry bound.
+  state.expires.removeIf{it<=now()}
+  if(state.expires.isEmpty()){recent.remove(player.uniqueId);return false}
+  return AdditiveDamageGroups.offer("ecoenchants_normal",data,1+minOf(state.expires.size,2+level.level)*level.level/100.0)
+ }
+ private fun damage(source:Context,target:LivingEntity,amount:Double,fresh:Boolean=false,family:String){
   val player=current(source)?:return
-  if(!amount.isFinite()||amount<=0||!OriginalRuntime.eligible(player,target)||!fresh&&target.noDamageTicks>target.maximumNoDamageTicks/2)return
+  if(!amount.isFinite()||amount<=0||!OriginalRuntime.eligibleFor(family,player,target)||!fresh&&target.noDamageTicks>target.maximumNoDamageTicks/2)return
   OriginalRuntime.withSecondaryDamage{RepeatedDamage.run(player.uniqueId,player.uniqueId,target.uniqueId){
    if(fresh)freshDamageWindow(target){target.dealDamage(amount,source=player,trueDamage=false,checkAntigrief=true)}
    else target.dealDamage(amount,source=player,trueDamage=false,checkAntigrief=true)
   }}
  }
- internal fun targets(player:Player,anchor:LivingEntity,radius:Double,maximum:Int,excluded:Set<UUID> = emptySet()):List<LivingEntity>{
+ internal fun targets(player:Player,anchor:LivingEntity,radius:Double,maximum:Int,excluded:Set<UUID> = emptySet()):List<LivingEntity> = targets(player,anchor,radius,maximum,excluded,null)
+ internal fun targets(player:Player,anchor:LivingEntity,radius:Double,maximum:Int,excluded:Set<UUID> = emptySet(),family:String?):List<LivingEntity>{
   val perTick=(owner.configYml.getIntOrNull("original-procs.queries-per-tick")?:8).coerceIn(0,32)
   if(!queryBudget.take(Bukkit.getCurrentTick(),perTick))return emptyList()
   val location=anchor.location;val scan=(owner.configYml.getIntOrNull("original-procs.max-candidate-scan")?:32).coerceIn(1,64)
   val result=BoundedLivingQueries.nearby(location,radius,scan)
   if(result.availability()!=BoundedLivingQueries.Availability.AVAILABLE)return emptyList()
-  return result.candidates().filter{it!==anchor&&it.uniqueId !in excluded&&it.location.distanceSquared(location)<=radius*radius&&it.noDamageTicks<=it.maximumNoDamageTicks/2&&OriginalRuntime.eligible(player,it)&&anchor.hasLineOfSight(it)}.sortedBy{it.location.distanceSquared(location)}.take(maximum)
+  return result.candidates().filter{it!==anchor&&it.uniqueId !in excluded&&it.location.distanceSquared(location)<=radius*radius&&it.noDamageTicks<=it.maximumNoDamageTicks/2&&OriginalRuntime.eligibleFor(family,player,it)&&anchor.hasLineOfSight(it)}.sortedBy{it.location.distanceSquared(location)}.take(maximum)
  }
  private fun removeDot(key:UUID){
   val dot=dots.remove(key)?:return;dot.task?.cancel()
@@ -206,10 +245,10 @@ internal object NativeBurstProgression : Listener {
   dot.task=Bukkit.getScheduler().runTaskLater(owner,Runnable{
    if(dots[key]!==dot)return@Runnable
    val player=current(dot.source)
-   if(player==null||!OriginalRuntime.eligible(player,dot.target)){removeDot(key);return@Runnable}
-   damage(dot.source,dot.target,dot.damage,true);OriginalRuntime.procVisual(player,dot.target.location,3);if(dots[key]!==dot)return@Runnable;dot.remaining--
+   if(player==null||!OriginalRuntime.eligibleFor(dot.family,player,dot.target)){removeDot(key);return@Runnable}
+   damage(dot.source,dot.target,dot.damage,true,dot.family);OriginalRuntime.procVisual(player,dot.target.location,3);if(dots[key]!==dot)return@Runnable;dot.remaining--
    if(dot.remaining>0)scheduleDot(key,dot)else removeDot(key)
-  },20L)
+  },dot.interval)
  }
  fun activeTrail(player:Player,item:ItemStack,tier:Int):Boolean { return trails[player.uniqueId]?.let{it.tier==tier&&it.until>now()&&it.token==OriginalRuntime.session(player)&&it.world==player.world.uid&&id(item)==it.item&&id(player.inventory.boots?:return false)==it.item}?:false }
  private fun trail(player:Player,source:Context,tier:Int){

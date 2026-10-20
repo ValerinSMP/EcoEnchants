@@ -1,0 +1,29 @@
+display-name: Triple Disparo
+description:
+- Dispara 3 flechas en lugar de 1
+type: normal
+targets:
+- bow
+- crossbow
+conflicts: []
+rarity: rare
+max-level: 1
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 19
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXIX'
+effects:
+- id: run_chain
+  args:
+    chain: shoot_extra_arrows
+    chain-args:
+      arrows: 1
+  triggers:
+  - shoot_bow
+enabled: true

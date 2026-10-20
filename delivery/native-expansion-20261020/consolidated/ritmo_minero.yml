@@ -1,0 +1,27 @@
+enabled: true
+type: normal
+conflicts: []
+rarity: rare
+tradeable: true
+discoverable: true
+enchantable: true
+display-name: Ritmo minero
+description: '&7Minar 10 bloques seguidos aumenta un &a%placeholder%% &7tu velocidad minera hasta parar 10 s.'
+max-level: 3
+targets:
+- pickaxe
+effects:
+- id: mining_speed_multiplier
+  args:
+    multiplier: 1 + 0.05 * %level%
+    transient: true
+  conditions:
+  - id: has_mining_rhythm
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 15
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXV'
+placeholder: 5 * %level%

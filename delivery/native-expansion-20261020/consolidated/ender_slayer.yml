@@ -1,0 +1,37 @@
+display-name: Asesino del End
+description:
+- Aumenta el daño &a+%placeholder%%&r contra Endermen, Endermites y Dragons del End
+placeholder: 5 * %level% + 5 * max(0, %level% - 4)
+type: normal
+targets:
+- melee
+conflicts:
+- sculk_slayer
+- crimson_slayer
+rarity: uncommon
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 11
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXI'
+effects:
+- id: damage_multiplier
+  args:
+    multiplier: 1 + (5 * %level% + 5 * max(0, %level% - 4)) / 100
+    damage_group: ecoenchants_normal
+  triggers:
+  - melee_attack
+  filters:
+    entities:
+    - enderman
+    - endermite
+    - ender_dragon
+    enchant_combat_mode: true
+enabled: true
+combat-mode: pve

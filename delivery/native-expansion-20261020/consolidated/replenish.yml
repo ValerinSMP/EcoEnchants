@@ -1,0 +1,22 @@
+display-name: Reabastecimiento
+description: Replanta los cultivos automáticamente
+type: normal
+targets:
+- hoe
+conflicts: []
+rarity: legendary
+max-level: 1
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 7
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVII'
+consume-seeds: true
+only-fully-grown: false
+replant-per-tick: 64
+enabled: true

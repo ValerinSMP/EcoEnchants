@@ -1,0 +1,28 @@
+enabled: true
+display-name: Espectralidad
+description: Al morir, genera una nube dañina durante &a%placeholder%&r segundos
+placeholder: 1 + %level%
+type: normal
+targets:
+- helmet
+conflicts: []
+rarity: epic
+max-level: 2
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: spawn_potion_cloud
+  args:
+    effect: harm
+    level: 1
+    duration: 20 + %level% * 20
+  triggers:
+  - death
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 18
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXVIII'

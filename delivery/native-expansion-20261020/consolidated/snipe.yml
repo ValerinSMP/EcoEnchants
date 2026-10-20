@@ -1,0 +1,33 @@
+display-name: Francotirador
+description: Inflige &a%damage%%&r más daño por cada &a%blocks%&r bloques de distancia actual al objetivo.
+placeholders:
+  damage: 1 * %level%
+  blocks: 11 - ceil(%level% / 2)
+type: normal
+targets:
+- bow
+- crossbow
+conflicts: []
+rarity: epic
+max-level: 4
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: damage_multiplier
+  args:
+    multiplier: 1 + (%distance% / (11 - ceil(%level% / 2))) * 0.01 * %level%
+    damage_group: ecoenchants_normal
+  triggers:
+  - bow_attack
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 6
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVI'
+enabled: true
+combat-mode: both

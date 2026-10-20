@@ -1,0 +1,36 @@
+display-name: Asesino de Titanes
+description: '&7Añade &a%placeholder%%&7 de daño por cada 100 de Defensa del jugador, hasta &a%cap%%&7.'
+placeholder: 2 * %level% + 2 * max(0, %level% - 4)
+type: normal
+targets:
+- melee
+conflicts:
+- giant_killer
+rarity: legendary
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 28
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXVIII'
+effects:
+- id: damage_multiplier
+  args:
+    multiplier: 1 + min(max(0, %victim_ecoskills_defense%) / 100 * (0.02 * %level% + 0.02 * max(0, %level% - 4)), 0.06 * %level%
+      + 0.10 * max(0, %level% - 4))
+    damage_group: ecoenchants_normal
+  triggers:
+  - melee_attack
+  filters:
+    entities:
+    - player
+    enchant_combat_mode: true
+combat-mode: pvp
+placeholders:
+  cap: 6 * %level% + 10 * max(0, %level% - 4)
+enabled: true

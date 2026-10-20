@@ -1,0 +1,36 @@
+enabled: true
+display-name: Eclipse
+description: '&7Tras seis golpes al mismo objetivo en 8 s, aumenta un &a%placeholder%%&7 el daño de tu siguiente golpe durante
+  3 s (25 s).'
+placeholder: 4 + 2 * %level%
+type: normal
+targets:
+- sword
+conflicts:
+- combo
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_reactive
+  args:
+    family: eclipse
+    percent: 4 + 2 * %level%
+  triggers:
+  - native_reactive_action
+- id: native_burst
+  args:
+    family: eclipse
+    percent: 4 + 2 * %level%
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 35
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXXV'
+combat-mode: both

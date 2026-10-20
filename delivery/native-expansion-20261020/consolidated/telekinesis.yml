@@ -1,0 +1,36 @@
+display-name: Telequinesis
+description: '&7Recoge directamente los objetos y la experiencia.'
+type: normal
+targets:
+- melee
+- pickaxe
+- axe
+- shovel
+- hoe
+- bow
+- crossbow
+- trident
+- fishing_rod
+- shield
+- elytra
+- helmet
+- chestplate
+- leggings
+- boots
+conflicts: []
+rarity: common
+max-level: 1
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 16
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXVI'
+effects:
+- id: telekinesis
+  triggers: []
+enabled: true

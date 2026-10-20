@@ -1,0 +1,69 @@
+display-name: Minería de Veta
+description: '&7Mina hasta &a%placeholder% &7bloques de mineral conectados.'
+type: normal
+targets:
+- pickaxe
+enchantable: true
+max-level: 4
+tradeable: true
+discoverable: true
+rarity: common
+conflicts:
+- blast_mining
+placeholder: 2 + 3 * %level%
+effects:
+- id: mine_vein
+  args:
+    limit: 2 + 3 * %level%
+    disable_on_sneak: true
+    blocks:
+    - coal_ore
+    - iron_ore
+    - copper_ore
+    - gold_ore
+    - ancient_debris
+    - lapis_ore
+    - diamond_ore
+    - redstone_ore
+    - nether_quartz_ore
+    - gilded_blackstone
+    - nether_gold_ore
+    - glowstone
+    - deepslate_coal_ore
+    - deepslate_iron_ore
+    - deepslate_copper_ore
+    - deepslate_gold_ore
+    - deepslate_lapis_ore
+    - deepslate_diamond_ore
+    - deepslate_redstone_ore
+  filters:
+    blocks:
+    - coal_ore
+    - iron_ore
+    - copper_ore
+    - gold_ore
+    - ancient_debris
+    - lapis_ore
+    - diamond_ore
+    - redstone_ore
+    - nether_quartz_ore
+    - gilded_blackstone
+    - nether_gold_ore
+    - glowstone
+    - deepslate_coal_ore
+    - deepslate_iron_ore
+    - deepslate_copper_ore
+    - deepslate_gold_ore
+    - deepslate_lapis_ore
+    - deepslate_diamond_ore
+    - deepslate_redstone_ore
+  triggers:
+  - mine_block
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 28
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXVIII'
+enabled: true

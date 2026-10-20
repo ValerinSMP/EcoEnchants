@@ -22,6 +22,33 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitTask
 import java.util.UUID
 
+/** Per-effect opt-in reuses the native filter pipeline and the enchant's own root setting. */
+internal object FilterEnchantCombatMode : com.willfp.libreforge.filters.Filter<NoCompileData,Boolean>("enchant_combat_mode") {
+ override val valueType=ArgType.BOOLEAN
+ override val isValueCacheable=true
+ override fun getValue(config:Config,data:TriggerData?,key:String)=config.getBool(key)
+ override fun isMet(data:TriggerData,value:Boolean,compileData:NoCompileData):Boolean {
+  if(!value)return true
+  val family=(data.holder.holder as? com.willfp.ecoenchants.enchant.EcoEnchantLevel)?.enchant?.id?:return false
+  val player=data.player?:return false
+  val event=data.event as? EntityDamageByEntityEvent
+  val opponent=if(event?.entity===player)when(val source=event.damager){is LivingEntity->source;is Projectile->source.shooter as? LivingEntity;else->null}else data.victim as? LivingEntity
+  return opponent?.let{OriginalRuntime.modeAllows(family,player,it,event?.entity===player,allowDead=true)}?:true
+ }
+}
+/** Forced legacy kill notifications do not prove an actual, uncancelled death. */
+internal object FilterGenuineKill : com.willfp.libreforge.filters.Filter<NoCompileData,Boolean>("genuine_kill") {
+ override val valueType=ArgType.BOOLEAN
+ override val isValueCacheable=true
+ override fun getValue(config:Config,data:TriggerData?,key:String)=config.getBool(key)
+ public override fun isMet(data:TriggerData,value:Boolean,compileData:NoCompileData):Boolean {
+  if(!value)return true
+  val event=data.event as? com.willfp.eco.core.events.EntityDeathByEntityEvent?:return false
+  if(event.victim!==data.victim||event.deathEvent.isCancelled)return false
+  val actor=when(val killer=event.killer){is Player->killer;is Projectile->killer.shooter as? Player;else->null}
+  return actor!=null&&actor===data.player
+ }
+}
 internal object ConfirmedNativeCombat : Trigger("confirmed_native_combat") {
  override val parameters=setOf(TriggerParameter.PLAYER,TriggerParameter.VICTIM,TriggerParameter.ITEM,TriggerParameter.EVENT,TriggerParameter.VALUE)
 }
@@ -76,7 +103,7 @@ internal object NativeCombatProgression : Listener {
   }
   return frozen.item
  }
- fun register(){Triggers.register(ConfirmedNativeCombat);Effects.register(NativeCombatEffect("lethality_stack"));Effects.register(NativeCombatEffect("last_resort"));Effects.register(NativeCombatEffect("mana_recovery"));Conditions.register(ConditionRested)}
+ fun register(){com.willfp.libreforge.filters.Filters.register(FilterEnchantCombatMode);com.willfp.libreforge.filters.Filters.register(FilterGenuineKill);Triggers.register(ConfirmedNativeCombat);Effects.register(NativeCombatEffect("lethality_stack"));Effects.register(NativeCombatEffect("last_resort"));Effects.register(NativeCombatEffect("mana_recovery"));Conditions.register(ConditionRested)}
  fun enable(plugin:EcoEnchantsPlugin){if(enabled)return;owner=plugin;enabled=true;NativeMagicRecovery.enable(plugin){cap()};NativeSwarm.enable(plugin){cap()}
   commandGuard=try{CommandDamageGuard.resolve()}catch(problem:ReflectiveOperationException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:RuntimeException){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}catch(problem:LinkageError){owner.logger.log(java.util.logging.Level.SEVERE,"Letalidad/Último recurso/ecoenchants_normal disabled: native command damage guard unavailable",problem);null}
   Bukkit.getPluginManager().registerEvents(this,plugin);Bukkit.getOnlinePlayers().forEach{arrival(it)}}
@@ -110,9 +137,9 @@ internal object NativeCombatProgression : Listener {
   if(actor!=null&&!AntigriefManager.canInjure(actor,victim))return null
   if(actor!=null&&(!actor.isOnline||actor.isDead)||receiver!=null&&(!receiver.isOnline||receiver.isDead))return null
   val aToken=actor?.let{OriginalRuntime.session(it)?:return null};val vToken=receiver?.let{OriginalRuntime.session(it)?:return null}
-  val sword=if(primary&&commandGuard?.gameplay()==true&&actor!=null&&event.damager===actor&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK&&tier(actor.inventory.itemInMainHand,"letalidad") in 1..5&&OriginalRuntime.eligible(actor,victim))snapshot(actor,actor.inventory.itemInMainHand,"letalidad",false) else null
-  val chest=if(primary&&receiver!=null&&commandGuard?.gameplay()==true)snapshot(receiver,receiver.inventory.chestplate,"ultimo_recurso",true) else null
-  val mana=if(primary&&actor!=null&&event.damager===actor&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK&&commandGuard?.gameplay()==true)snapshot(actor,actor.inventory.itemInMainHand,"mana_steal",false) else null
+  val sword=if(primary&&commandGuard?.gameplay()==true&&actor!=null&&event.damager===actor&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK&&tier(actor.inventory.itemInMainHand,"letalidad") in 1..5&&OriginalRuntime.eligibleFor("letalidad",actor,victim))snapshot(actor,actor.inventory.itemInMainHand,"letalidad",false) else null
+  val chest=if(primary&&receiver!=null&&commandGuard?.gameplay()==true&&OriginalRuntime.modeAllows("ultimo_recurso",receiver,damager,true))snapshot(receiver,receiver.inventory.chestplate,"ultimo_recurso",true) else null
+  val mana=if(primary&&actor!=null&&event.damager===actor&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK&&commandGuard?.gameplay()==true&&OriginalRuntime.modeAllows("mana_steal",actor,victim))snapshot(actor,actor.inventory.itemInMainHand,"mana_steal",false) else null
   return Capture(actor?.uniqueId,aToken,vToken,victim.world.uid,sword,chest,victim.getAttribute(Attribute.MAX_HEALTH)?.value?:0.0,primary,mana)
  }
  fun uncertain(c:Capture,victim:LivingEntity){
@@ -130,7 +157,7 @@ internal object NativeCombatProgression : Listener {
   actor?.takeIf{!it.isDead}?.let{quiet(it,now())};receiver?.takeIf{!it.isDead}?.let{quiet(it,now())}
   val old=proof;proof=Proof(c,event,victim,before,damage)
   try {
-   if(actor!=null&&c.weapon!=null&&id(actor.inventory.itemInMainHand)==id(c.weapon)&&OriginalRuntime.eligible(actor,victim,true))dispatch(actor,victim,c.weapon,"letalidad",event,damage)
+   if(actor!=null&&c.weapon!=null&&id(actor.inventory.itemInMainHand)==id(c.weapon)&&OriginalRuntime.eligibleFor("letalidad",actor,victim,true))dispatch(actor,victim,c.weapon,"letalidad",event,damage)
    if(actor!=null&&c.mana!=null&&id(actor.inventory.itemInMainHand)==id(c.mana))dispatch(actor,victim,c.mana,"mana_steal",event,damage)
    if(receiver!=null&&c.chest!=null&&c.primary&&!receiver.isDead&&receiver.health>0&&receiver.getAttribute(Attribute.MAX_HEALTH)?.value==c.maximum&&
     NativeCombatRules.crossed(before,receiver.health,c.maximum)&&id(receiver.inventory.chestplate)==id(c.chest))dispatch(receiver,receiver,c.chest,"ultimo_recurso",event,damage)
@@ -146,7 +173,7 @@ internal object NativeCombatProgression : Listener {
   if(data.event!==p.event||data.victim?.uniqueId!=p.victim.uniqueId||!percent.isFinite())return false
   if(family=="lethality_stack"){
    val item=p.capture.weapon?:return false;val t=tier(item,"letalidad")
-   if(player.uniqueId!=p.capture.actor||id(supplied)!=id(item)||t !in 1..5||percent!=t.toDouble()||!OriginalRuntime.eligible(player,p.victim))return false
+   if(player.uniqueId!=p.capture.actor||id(supplied)!=id(item)||t !in 1..5||percent!=t.toDouble()||!OriginalRuntime.eligibleFor("letalidad",player,p.victim))return false
    val attribute=p.victim.getAttribute(Attribute.ARMOR)?:return false;if(attribute.value<=0)return false
    var armor=armors[p.victim.uniqueId]
    if(armor==null){if(armors.size>=cap())return false;armor=Armor(p.victim);armors[p.victim.uniqueId]=armor}
@@ -205,6 +232,7 @@ internal object NativeCombatProgression : Listener {
   if(now()>=buff.until||player.isDead||player.isInvulnerable||id(item)!=buff.item||tier(item,"ultimo_recurso")!=buff.tier){buffs.remove(player.uniqueId);return}
   if(commandGuard?.gameplay()!=true||!NativeCombatRules.physical(event.cause)||com.willfp.libreforge.effects.impl.DamageMultiplierBypass.current!=null)return
   val source=when(val entity=event.damager){is LivingEntity->entity;is Projectile->entity.shooter as? LivingEntity;else->null}?:return
+  if(!OriginalRuntime.modeAllows("ultimo_recurso",player,source,true))return
   if(source is Player&&!AntigriefManager.canInjure(source,player))return
   val enchant=EcoEnchants.getByID("ultimo_recurso")?:return;val holder=ItemProvidedHolder(enchant.getLevel(buff.tier),item!!)
   if(!holder.holder.conditions.areMet(player.toDispatcher(),holder)){buffs.remove(player.uniqueId);return}

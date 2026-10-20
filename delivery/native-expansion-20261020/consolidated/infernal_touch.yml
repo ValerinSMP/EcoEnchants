@@ -1,0 +1,26 @@
+display-name: Toque Infernal
+description: '&7Funde automáticamente los objetos obtenidos al minar.'
+type: normal
+targets:
+- pickaxe
+conflicts:
+- silk_touch
+rarity: legendary
+max-level: 1
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: autosmelt
+  args:
+    drop_xp: true
+  triggers:
+  - block_item_drop
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 12
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXII'
+enabled: true

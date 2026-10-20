@@ -1,0 +1,29 @@
+enabled: true
+display-name: Cicatriz ígnea
+description: '&7Tras tres golpes al mismo objetivo en 5 s, inflige un &a%placeholder%%&7 del tercer golpe cada segundo durante
+  3 s (12 s).'
+placeholder: 2 + 1 * %level%
+type: normal
+targets:
+- axe
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_burst
+  args:
+    family: cicatriz_ignea
+    percent: 2 + 1 * %level%
+  triggers:
+  - confirmed_native_burst
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 32
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXXII'
+combat-mode: both

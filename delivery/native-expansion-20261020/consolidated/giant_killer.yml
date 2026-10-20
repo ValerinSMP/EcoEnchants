@@ -1,0 +1,33 @@
+display-name: Asesino de Gigantes
+description: '&7Da &a%rate%% &7más daño por cada 1% de vida máxima adicional del objetivo (máximo &a%cap%%&7).'
+type: normal
+targets:
+- melee
+conflicts:
+- titan_killer
+rarity: epic
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 15
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXV'
+effects:
+- id: damage_multiplier
+  args:
+    multiplier: 1 + min(max(%victim_max_health% / %player_max_health% - 1, 0) * 0.1 * %level%, 0.05 * %level%)
+    damage_group: ecoenchants_normal
+  triggers:
+  - melee_attack
+  filters:
+    enchant_combat_mode: true
+placeholders:
+  rate: 0.1 * %level%
+  cap: 5 * %level%
+enabled: true
+combat-mode: both

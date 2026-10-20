@@ -1,0 +1,24 @@
+display-name: Prosperar
+description: '&7Aumenta tu vida máxima en &a%placeholder% puntos&7.'
+placeholder: '%level% * 2'
+type: normal
+targets:
+- armor
+conflicts: []
+rarity: legendary
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: bonus_health
+  args:
+    health: '%level% * 2'
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 5
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lV'
+enabled: true

@@ -35,4 +35,33 @@ class FirstHitsLedgerTest {
   repeat(2){val id=UUID.randomUUID();assertTrue(ledger.reserve(id,fresh));ledger.resolve(id,FirstHitResolution.CONFIRMED)}
   assertFalse(ledger.reserve(UUID.randomUUID(),fresh));ledger.clear();assertTrue(ledger.reserve(UUID.randomUUID(),fresh))
  }
+ @org.junit.jupiter.api.Test fun `cyclic ledger requires two confirmed hits and rejects overlapping pending attempts`() {
+  val ledger=FirstHitsLedger(cyclic=true)
+  val key=FirstHitsLedger.Key(java.util.UUID.randomUUID(),java.util.UUID.randomUUID(),java.util.UUID.randomUUID(),java.util.UUID.randomUUID())
+  repeat(3){cycle->
+   for(position in 1..3){
+    val attempt=java.util.UUID.randomUUID()
+    org.junit.jupiter.api.Assertions.assertTrue(ledger.reserve(attempt,key))
+    org.junit.jupiter.api.Assertions.assertEquals(position,ledger.position(attempt))
+    org.junit.jupiter.api.Assertions.assertFalse(ledger.reserve(java.util.UUID.randomUUID(),key))
+    ledger.resolve(attempt,FirstHitResolution.CONFIRMED)
+   }
+  }
+ }
+ @org.junit.jupiter.api.Test fun `uncertain cycle consumes the attempt but never authorizes a third hit bonus`() {
+  val ledger=FirstHitsLedger(cyclic=true)
+  val key=FirstHitsLedger.Key(java.util.UUID.randomUUID(),java.util.UUID.randomUUID(),java.util.UUID.randomUUID(),java.util.UUID.randomUUID())
+  val first=java.util.UUID.randomUUID();org.junit.jupiter.api.Assertions.assertTrue(ledger.reserve(first,key));ledger.resolve(first,FirstHitResolution.UNCERTAIN)
+  repeat(2){val id=java.util.UUID.randomUUID();org.junit.jupiter.api.Assertions.assertTrue(ledger.reserve(id,key));org.junit.jupiter.api.Assertions.assertNull(ledger.position(id));ledger.resolve(id,FirstHitResolution.CONFIRMED)}
+  val next=java.util.UUID.randomUUID();org.junit.jupiter.api.Assertions.assertTrue(ledger.reserve(next,key));org.junit.jupiter.api.Assertions.assertEquals(1,ledger.position(next))
+ }
+ @org.junit.jupiter.api.Test fun `rejected cycle preserves position and retirement fences late outcomes`() {
+  val ledger=FirstHitsLedger(cyclic=true)
+  val key=FirstHitsLedger.Key(java.util.UUID.randomUUID(),java.util.UUID.randomUUID(),java.util.UUID.randomUUID(),java.util.UUID.randomUUID())
+  val first=java.util.UUID.randomUUID();ledger.reserve(first,key);ledger.resolve(first,FirstHitResolution.CONFIRMED)
+  val rejected=java.util.UUID.randomUUID();ledger.reserve(rejected,key);ledger.resolve(rejected,FirstHitResolution.REJECTED)
+  val next=java.util.UUID.randomUUID();ledger.reserve(next,key);org.junit.jupiter.api.Assertions.assertEquals(2,ledger.position(next))
+  ledger.retire(key.actor);ledger.resolve(next,FirstHitResolution.CONFIRMED)
+  val fresh=java.util.UUID.randomUUID();ledger.reserve(fresh,key);org.junit.jupiter.api.Assertions.assertEquals(1,ledger.position(fresh))
+ }
 }

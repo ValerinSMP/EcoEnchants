@@ -96,7 +96,7 @@ internal object NativeReactiveProgression : Listener {
   val player=victim as? Player?:return null;if(!active(player))return null
   val token=OriginalRuntime.session(player)?:return null
   val source=attacker(event)
-  val guard=if(primary&&NativeCombatProgression.gameplay()&&NativeCombatRules.physical(event.cause)&&source!=null&&candidate(player,"guardia_cristal")&&OriginalRuntime.eligible(player,source))snapshot(player,"guardia_cristal")else null
+  val guard=if(primary&&NativeCombatProgression.gameplay()&&NativeCombatRules.physical(event.cause)&&source!=null&&candidate(player,"guardia_cristal")&&OriginalRuntime.eligibleFor("guardia_cristal",player,source,defensive=true))snapshot(player,"guardia_cristal")else null
   return Capture(player.uniqueId,token,player.world.uid,guard,source,primary)
  }
  fun confirm(capture:Capture,event:EntityDamageEvent,victim:LivingEntity,damage:Double,eventId:UUID){
@@ -105,7 +105,7 @@ internal object NativeReactiveProgression : Listener {
   val last=taken[player.uniqueId]
   if(last!=null&&last.token==capture.token&&last.world==capture.world)last.time=now() else arrival(player)
   val source=capture.guard?:return;val enemy=capture.attacker?:return
-  if(!capture.primary||!OriginalRuntime.eligible(player,enemy)||id(player.inventory.chestplate)!=source.itemId)return
+  if(!capture.primary||!OriginalRuntime.eligibleFor("guardia_cristal",player,enemy,defensive=true)||id(player.inventory.chestplate)!=source.itemId)return
   force(source,"guardia_cristal",event,enemy,"confirmed",damage,eventId)
  }
  fun canArm(source:NativeBurstProgression.Context,family:String)=current(source)!=null&&arms.canArm(Key(source.player,family))
@@ -137,11 +137,11 @@ internal object NativeReactiveProgression : Listener {
    if(player!=null&&active(player)){
     if(event.damager===player&&event.cause==EntityDamageEvent.DamageCause.ENTITY_ATTACK){
      val eligibleArms=listOf("marca_celeste","eclipse").mapNotNull{family->readyArm(player,family)?.takeIf{state->(family!="marca_celeste"||state.value.target==target.uniqueId)&&(family!="eclipse"||id(player.inventory.itemInMainHand)==state.value.source.itemId)}}
-     if(eligibleArms.isNotEmpty()&&OriginalRuntime.eligible(player,target))for(state in eligibleArms)force(state.value.source,state.value.family,event,target,"bonus")
+     for(state in eligibleArms)if(OriginalRuntime.eligibleFor(state.value.family,player,target))force(state.value.source,state.value.family,event,target,"bonus")
     }else if(event.cause==EntityDamageEvent.DamageCause.PROJECTILE){
      val projectile=event.damager as? Projectile
      if(projectile!=null)NativeBurstProgression.projectileSource(projectile,player,"aguja_aurora")?.let{source->
-      if(source.item.type==Material.CROSSBOW&&source.charged&&source.origin.world==target.world&&source.origin.distanceSquared(target.location)>225&&OriginalRuntime.eligible(player,target))force(source,"aguja_aurora",event,target,"bonus")
+      if(source.item.type==Material.CROSSBOW&&source.charged&&source.origin.world==target.world&&source.origin.distanceSquared(target.location)>225&&OriginalRuntime.eligibleFor("aguja_aurora",player,target))force(source,"aguja_aurora",event,target,"bonus")
      }
     }
    }
@@ -151,16 +151,16 @@ internal object NativeReactiveProgression : Listener {
   if(monster!=null&&NativeCombatRules.physical(event.cause)){
    val families=listOf("velo_lunar","vigilia").filter{candidate(player,it)}
    val guard=readyArm(player,"guardia_cristal")?.takeIf{id(player.inventory.chestplate)==it.value.source.itemId}
-   if((families.isNotEmpty()||guard!=null)&&OriginalRuntime.eligible(player,monster)){
-    for(family in families)snapshot(player,family)?.let{force(it,family,event,monster,"guard")}
-    guard?.let{force(it.value.source,"guardia_cristal",event,monster,"guard")}
+   if(families.isNotEmpty()||guard!=null){
+    for(family in families)if(OriginalRuntime.eligibleFor(family,player,monster,defensive=true))snapshot(player,family)?.let{force(it,family,event,monster,"guard")}
+    guard?.takeIf{OriginalRuntime.eligibleFor("guardia_cristal",player,monster,defensive=true)}?.let{force(it.value.source,"guardia_cristal",event,monster,"guard")}
    }
   }
   if(event.cause in setOf(EntityDamageEvent.DamageCause.FIRE,EntityDamageEvent.DamageCause.FIRE_TICK,EntityDamageEvent.DamageCause.LAVA,EntityDamageEvent.DamageCause.HOT_FLOOR)){
    val state=readyArm(player,"paso_ceniza")?:return
    if(id(player.inventory.boots)!=state.value.source.itemId)return
    val causing=event.damageSource.causingEntity
-   if(causing!=null){val living=when(causing){is LivingEntity->causing;is Projectile->causing.shooter as? LivingEntity;else->null}?:return;if(!OriginalRuntime.eligible(player,living))return}
+   if(causing!=null){val living=when(causing){is LivingEntity->causing;is Projectile->causing.shooter as? LivingEntity;else->null}?:return;if(!OriginalRuntime.eligibleFor("paso_ceniza",player,living,defensive=true))return}
    force(state.value.source,"paso_ceniza",event,player,"fire")
   }
  }
@@ -169,7 +169,7 @@ internal object NativeReactiveProgression : Listener {
   if(!enabled||!NativeCombatProgression.gameplay()||DamageMultiplierBypass.current!=null||event.cause !in setOf(EntityKnockbackEvent.Cause.ENTITY_ATTACK,EntityKnockbackEvent.Cause.DAMAGE,EntityKnockbackEvent.Cause.SWEEP_ATTACK))return
   val player=event.entity as? Player?:return;if(!active(player)||!player.isOnGround||impulses.size>=cap())return
   val enemy=when(val entity=event.pushedBy){is LivingEntity->entity;is Projectile->entity.shooter as? LivingEntity;else->null}?:return
-  if(!candidate(player,"ancla")||!OriginalRuntime.eligible(player,enemy))return
+  if(!candidate(player,"ancla")||!OriginalRuntime.eligibleFor("ancla",player,enemy,defensive=true))return
   val source=snapshot(player,"ancla")?:return;force(source,"ancla",event,enemy,"impulse")
  }
  @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)

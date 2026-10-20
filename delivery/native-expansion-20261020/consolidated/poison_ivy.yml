@@ -1,0 +1,35 @@
+display-name: Hiedra Venenosa
+description: '&7Envenena al atacante &a%seconds% s &7por corazón recibido, hasta &a%limit% s&7.'
+placeholders:
+  seconds: 0.5 * %level%
+  limit: 4 + %level%
+type: normal
+targets:
+- leggings
+conflicts:
+- thorns
+rarity: epic
+max-level: 2
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: potion_effect
+  args:
+    effect: poison
+    level: 1
+    duration: min(5 * %level% * %v%, 80 + 20 * %level%)
+    apply-to-player: false
+  triggers:
+  - take_entity_damage
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 11
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXI'
+enabled: true
+combat-mode: both

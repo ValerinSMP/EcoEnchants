@@ -1,0 +1,28 @@
+display-name: Excavación
+description: Excava &a%placeholder%&r bloques extra
+placeholder: '%level%'
+type: normal
+targets:
+- shovel
+conflicts: []
+rarity: legendary
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: drill
+  args:
+    amount: '%level%'
+    check-hardness: true
+    disable-on-sneak: true
+  triggers:
+  - mine_block
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 18
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXVIII'
+enabled: true

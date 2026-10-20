@@ -19,7 +19,7 @@ import java.util.UUID
 internal object EffectSwarmMultiplier : Effect<NoCompileData>("swarm_multiplier") {
  override val supportsDelay=false
  override val parameters=setOf(TriggerParameter.PLAYER,TriggerParameter.VICTIM,TriggerParameter.EVENT)
- override val arguments=arguments{require("percent_per_monster","Specify the percentage per monster.",description="Additive bonus per eligible nearby monster, up to ten.",type=ArgType.EXPRESSION)}
+ override val arguments=arguments{require("percent_per_monster","Specify the percentage per monster.",description="Additive bonus per eligible nearby opponent, up to ten.",type=ArgType.EXPRESSION)}
  override fun onTrigger(config:Config,data:TriggerData,compileData:NoCompileData):Boolean = NativeSwarm.offer(data,config.getDoubleFromExpression("percent_per_monster",data))
 }
 internal class SwarmQueryBudget {
@@ -37,7 +37,7 @@ internal object NativeSwarm {
  fun enable(plugin:EcoEnchantsPlugin,limit:()->Int){owner=plugin;capacity=limit}
  fun clear(){cache.clear();budget.reset()}
  fun retire(uuid:UUID){cache.remove(uuid)}
- private fun eligible(player:Player,origin:org.bukkit.Location,entity:LivingEntity)=entity.world==origin.world&&entity.location.distanceSquared(origin)<=100.0&&OriginalRuntime.eligible(player,entity)
+ private fun eligible(player:Player,origin:org.bukkit.Location,entity:LivingEntity)=entity.world==origin.world&&entity.location.distanceSquared(origin)<=100.0&&OriginalRuntime.eligibleFor("swarm",player,entity)
  private fun count(player:Player):Int? {
   val token=OriginalRuntime.session(player)?:return null
   val origin=player.location

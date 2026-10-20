@@ -1,0 +1,38 @@
+display-name: Robavida
+description: '&7Cura &a%placeholder%%&7 del daño real, hasta &a%heal_cap%%&7 de tu vida máxima por golpe.'
+placeholder: '%level% * 10'
+type: normal
+targets:
+- melee
+conflicts:
+- drain
+rarity: rare
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 15
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXV'
+effects:
+- id: give_health
+  args:
+    amount: min(%v% * %level% * 0.1, %player_max_health% * 0.005 * %level%)
+    trigger_heal: true
+  triggers:
+  - confirmed_native_burst
+- id: spawn_particle
+  args:
+    particle: heart
+    amount: 3
+    chance: 50
+  triggers:
+  - confirmed_native_burst
+placeholders:
+  heal_cap: 0.5 * %level%
+enabled: true
+combat-mode: both

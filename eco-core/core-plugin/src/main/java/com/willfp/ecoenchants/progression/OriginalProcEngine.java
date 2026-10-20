@@ -28,7 +28,14 @@ public final class OriginalProcEngine {
         VIGILIA(1,1_000,20_000,new double[]{5,7,9}),
         AGUJA_AURORA(1,1_000,12_000,new double[]{4,6,8}),
         PASO_CENIZA(1,1_000,20_000,new double[]{5,7,9}),
-        ECLIPSE(6,8_000,25_000,new double[]{6,8,10});
+        ECLIPSE(6,8_000,25_000,new double[]{6,8,10}),
+        THUNDERLORD(3,10_000,10_000,new double[]{8,16,24,32,40}),
+        THUNDERBOLT(3,10_000,10_000,new double[]{4,8,12,16,20}),
+        COMBO(1,1_000,0,new double[]{1,2,3,4,5}),
+        CLEAVE(1,1_000,3_000,new double[]{5,10,15,20,25,30}),
+        CARVE(1,1_000,0,new double[]{2,4,6,8,10}),
+        BLEED(1,1_000,4_000,new double[]{1,1,1,1,1}),
+        WOUND(1,1_000,0,new double[]{1,1,1,1,1,1,1});
         final int hits;final long window,cooldown;final double[] values;
         Family(int hits,long window,long cooldown,double[]values){this.hits=hits;this.window=window;this.cooldown=cooldown;this.values=values;}
     }
@@ -60,7 +67,7 @@ public final class OriginalProcEngine {
     private void main(){if(Thread.currentThread()!=owner)throw new IllegalStateException("MAIN required");}
     private boolean valid(Hit h){
         return h!=null&&h.event()!=null&&h.player()!=null&&h.item()!=null&&h.target()!=null&&h.world()!=null
-            &&h.tier()>=1&&h.tier()<=3&&Double.isFinite(h.finalDamage())&&h.finalDamage()>0
+            &&h.tier()>=1&&Double.isFinite(h.finalDamage())&&h.finalDamage()>0
             &&h.damageConfirmed()&&h.direct()&&h.monster()&&!h.cancelled()&&!h.protectedTarget()
             &&!h.npc()&&!h.pet()&&!h.ally()&&h.bossExcluded()&&!h.spawner()&&!h.invulnerable()&&!h.secondary();
     }
@@ -83,8 +90,8 @@ public final class OriginalProcEngine {
         if(cd.size()>=capacity)return Optional.empty();
         map.remove(key);if(old!=null)unlinkWindow(family,key);cd.put(h.player(),new Lease(h.event(),now+family.cooldown));
         return Optional.of(new Activation(family,family.values[h.tier()-1],h.finalDamage(),
-            switch(family){case ECO_RESONANTE,PULSO_ABISAL,CONSTELACION->2;case RUPTURA_SONICA,TORMENTA_ENCADENADA->3;default->1;},
-            switch(family){case ECO_RESONANTE,PULSO_ABISAL->2;case BRASA_ERRANTE,REBOTE_PRISMATICO,RUPTURA_SONICA,TORMENTA_ENCADENADA,CONSTELACION->3;default->0;},
+            switch(family){case ECO_RESONANTE,PULSO_ABISAL,CONSTELACION->2;case RUPTURA_SONICA,TORMENTA_ENCADENADA->3;case THUNDERBOLT->10;case CLEAVE,CARVE->12;default->1;},
+            switch(family){case CLEAVE->3.3+0.2*h.tier();case CARVE->0.5*h.tier();case ECO_RESONANTE,PULSO_ABISAL,THUNDERBOLT->2;case BRASA_ERRANTE,REBOTE_PRISMATICO,RUPTURA_SONICA,TORMENTA_ENCADENADA,CONSTELACION->3;default->0;},
             switch(family){case SELLO_GLACIAL->40;case ESTELA_CAZADOR,CICATRIZ_IGNEA->60;default->0;},family==Family.ECO_RESONANTE||family==Family.LEGADO_VALERIN?16:12));
     }
     /** Explicit reversible cooldown reservation for a native pre-damage/impulse boundary. No confirmed hit is fabricated. */

@@ -1,0 +1,30 @@
+display-name: Rayo Trueno
+description: '&7Cada tres golpes confirmados reparte &a%placeholder%%&7 del daño a hasta 10 objetivos en 2 bloques, cada 10
+  s.'
+placeholder: 4 * %level%
+type: normal
+targets:
+- melee
+conflicts:
+- thunderlord
+rarity: epic
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 20
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXX'
+effects:
+- id: native_burst
+  args:
+    family: thunderbolt
+    percent: 4 * %level%
+  triggers:
+  - confirmed_native_burst
+enabled: true
+combat-mode: both

@@ -12,7 +12,9 @@ class NativeBurstEngineTest {
    var time=new AtomicLong();var engine=new OriginalProcEngine(64,time::get);
    for(int n=1;n<f.hits;n++)assertTrue(engine.record(f,hit(UUID.randomUUID(),tier)).isEmpty(),f.name());
    var result=engine.record(f,hit(UUID.randomUUID(),tier)).orElseThrow();assertEquals(f.values[tier-1],result.value());assertEquals(100,result.sourceFinalDamage());
-   engine.clearEntity(player);assertTrue(engine.record(f,hit(UUID.randomUUID(),tier)).isEmpty());time.set(f.cooldown);
+   engine.clearEntity(player);
+   if(f.cooldown==0){assertTrue(engine.record(f,hit(UUID.randomUUID(),tier)).isPresent(),f.name());continue;}
+   assertTrue(engine.record(f,hit(UUID.randomUUID(),tier)).isEmpty());time.set(f.cooldown);
    for(int n=1;n<f.hits;n++)assertTrue(engine.record(f,hit(UUID.randomUUID(),tier)).isEmpty());assertTrue(engine.record(f,hit(UUID.randomUUID(),tier)).isPresent());
   }
  }

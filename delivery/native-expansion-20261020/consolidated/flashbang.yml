@@ -1,0 +1,43 @@
+display-name: Granada Cegadora
+description: Da un &a%placeholder%%&r de probabilidad de cegar al enemigo
+placeholder: '%level%'
+type: normal
+targets:
+- bow
+- crossbow
+conflicts: []
+rarity: rare
+max-level: 6
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- triggers:
+  - bow_attack
+  args:
+    chance: '%level%'
+  effects:
+  - id: potion_effect
+    args:
+      effect: blindness
+      level: 3
+      duration: 50
+      apply_to_player: false
+  - id: play_sound
+    args:
+      sound: entity_dragon_fireball_explode
+      pitch: 1.5
+      volume: 4
+    mutators:
+    - id: victim_as_player
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 10
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lX'
+enabled: true
+combat-mode: both

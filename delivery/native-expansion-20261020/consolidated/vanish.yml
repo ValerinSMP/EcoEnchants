@@ -1,0 +1,35 @@
+display-name: Desvanecer
+description: Da un &a%chance%%&r de probabilidad de desaparecer por &a%seconds%&r segundos tras recibir daño
+placeholders:
+  chance: 2 * %level%
+  seconds: (10 + floor(%level% * 5)) / 20
+type: normal
+targets:
+- armor
+conflicts: []
+rarity: rare
+max-level: 2
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: potion_effect
+  args:
+    chance: '%level% * 2'
+    effect: invisibility
+    level: 2
+    duration: 10 + floor(%level% * 5)
+    apply-to-player: true
+  triggers:
+  - take_entity_damage
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 9
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lIX'
+enabled: true
+combat-mode: both

@@ -4,7 +4,8 @@ import java.util.UUID
 
 internal enum class FirstHitResolution { CONFIRMED, REJECTED, UNCERTAIN }
 /** Reservation budget: uncertain already-offered damage consumes quota instead of granting a retry. */
-internal class FirstHitsLedger(private val maxPairs:Int=32768,private val maxPerActor:Int=256) {
+internal class FirstHitsLedger(private val maxPairs:Int=32768,private val maxPerActor:Int=256,private val cyclic:Boolean=false) {
+ constructor(maxPairs:Int,maxPerActor:Int):this(maxPairs,maxPerActor,false)
  data class Key(val actor:UUID,val session:UUID,val world:UUID,val target:UUID)
  private class Record(var confirmed:Int=0,var uncertain:Int=0,val pending:MutableSet<UUID> = mutableSetOf())
  private val records=mutableMapOf<Key,Record>()
@@ -20,14 +21,20 @@ internal class FirstHitsLedger(private val maxPairs:Int=32768,private val maxPer
    record=Record();records[key]=record
    actors.getOrPut(key.actor){mutableSetOf()}.add(key);targets.getOrPut(key.target){mutableSetOf()}.add(key)
   }
+  if(cyclic&&record.pending.isNotEmpty())return false
   if(record.confirmed+record.uncertain+record.pending.size>=3)return false
   record.pending.add(attempt);attempts[attempt]=key;return true
+ }
+ fun position(attempt:UUID):Int? {
+  val key=attempts[attempt]?:return null;val record=records[key]?:return null
+  if(cyclic&&record.uncertain>0)return null
+  return record.confirmed+record.uncertain+record.pending.indexOf(attempt)+1
  }
  fun resolve(attempt:UUID,resolution:FirstHitResolution){
   val key=attempts.remove(attempt)?:return;val record=records[key]?:return
   record.pending.remove(attempt)
   when(resolution){FirstHitResolution.CONFIRMED->record.confirmed++;FirstHitResolution.UNCERTAIN->record.uncertain++;FirstHitResolution.REJECTED->Unit}
-  if(record.confirmed+record.uncertain==0&&record.pending.isEmpty())remove(key)
+  if(record.pending.isEmpty()&&(record.confirmed+record.uncertain==0||cyclic&&record.confirmed+record.uncertain>=3))remove(key)
  }
  private fun remove(key:Key){
   val record=records.remove(key)?:return;record.pending.forEach{attempts.remove(it)}

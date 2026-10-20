@@ -1,0 +1,32 @@
+display-name: Perforacráneos
+description: Aumenta el daño a la cabeza un &a%placeholder%%
+placeholder: 10 * %level%
+type: normal
+targets:
+- bow
+- crossbow
+- trident
+conflicts: []
+rarity: rare
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: damage_multiplier
+  args:
+    multiplier: 1 + 0.1 * %level%
+    damage_group: ecoenchants_normal
+  triggers:
+  - headshot
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 16
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXVI'
+enabled: true
+combat-mode: both

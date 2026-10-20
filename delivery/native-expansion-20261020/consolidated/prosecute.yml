@@ -1,0 +1,31 @@
+display-name: Enjuiciamiento
+description: Aumenta el daño hasta un &a%placeholder%%&r según la proporción de vida restante del enemigo.
+placeholder: 5 * %level%
+type: normal
+targets:
+- melee
+conflicts:
+- finishing
+rarity: epic
+max-level: 5
+tradeable: true
+discoverable: true
+enchantable: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 25
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXV'
+effects:
+- id: damage_multiplier
+  args:
+    multiplier: 1 + ((%victim_health% / %victim_max_health%) * 0.05 * %level%)
+    damage_group: ecoenchants_normal
+  triggers:
+  - melee_attack
+  filters:
+    enchant_combat_mode: true
+enabled: true
+combat-mode: both

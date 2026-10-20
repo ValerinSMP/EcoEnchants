@@ -1,0 +1,33 @@
+display-name: Escape
+description: '&7Obtienes &a%placeholder%%&7 de velocidad durante 1,5 s tras recibir un ataque.'
+placeholder: 20 * %level%
+type: normal
+targets:
+- boots
+conflicts:
+- streamlining
+rarity: epic
+max-level: 2
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: potion_effect
+  args:
+    effect: speed
+    level: '%level%'
+    duration: 30
+    apply_to_player: true
+  triggers:
+  - take_entity_damage
+  filters:
+    enchant_combat_mode: true
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 6
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lVI'
+enabled: true
+combat-mode: both

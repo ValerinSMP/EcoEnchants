@@ -1,0 +1,64 @@
+display-name: Sustento
+description:
+- '&7Recupera &a1 🍖 &7al matar monstruos cuerpo a cuerpo (&f20 s&7).'
+type: normal
+targets:
+- sword
+conflicts: []
+rarity: uncommon
+max-level: 1
+tradeable: true
+discoverable: false
+enchantable: false
+dependencies:
+- EcoSkills
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 1
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lI'
+effects:
+- id: give_food
+  args:
+    amount: 1
+    cooldown: 20
+    cooldown_group: ecoenchants_sustento
+    send_cooldown_message: false
+  triggers:
+  - skill_mob_kill
+  filters:
+    text:
+    - melee
+    from_spawner: false
+    entities:
+    - zombie
+    - husk
+    - drowned
+    - skeleton
+    - stray
+    - bogged
+    - wither_skeleton
+    - creeper
+    - spider
+    - cave_spider
+    - witch
+    - slime
+    - magma_cube
+    - blaze
+    - ghast
+    - guardian
+    - pillager
+    - vindicator
+    - evoker
+    - ravager
+    - silverfish
+    - endermite
+    - phantom
+    - breeze
+  conditions:
+  - id: below_hunger_percent
+    args:
+      percent: 95
+enabled: true

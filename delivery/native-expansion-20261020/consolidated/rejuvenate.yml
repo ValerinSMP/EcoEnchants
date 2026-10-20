@@ -1,0 +1,27 @@
+display-name: Rejuvenecimiento
+description: '&7Aumenta un &a%placeholder%% &7la regeneración natural.'
+placeholder: '%level%'
+type: normal
+targets:
+- armor
+conflicts:
+- reposo
+rarity: rare
+max-level: 5
+tradeable: true
+discoverable: false
+enchantable: false
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 10
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lX'
+effects:
+- id: regen_multiplier
+  args:
+    multiplier: 1 + 0.01 * %level%
+    reason:
+    - satiated
+enabled: true

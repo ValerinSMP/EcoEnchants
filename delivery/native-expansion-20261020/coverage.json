@@ -1,13 +1,9 @@
 {
   "schema": 1,
-  "scope": "130 familias; estado por evidencia, no habilita compras ni modifica config activa",
+  "scope": "130 familias:117 candidatos de fuente/YAML,13 reservados; sin instalación ni registro Paper probado",
   "counts": {
-    "pending_implementation_or_audit": 39,
-    "candidate_native_implemented_JVM": 27,
-    "previous_test_selection": 23,
-    "reserved_excluded": 13,
-    "candidate_yaml_reviewed": 26,
-    "candidate_balance_native_route_JVM": 2
+    "candidate_consolidated_source_yaml_reviewed": 117,
+    "reserved_excluded": 13
   },
   "rows": [
     {
@@ -16,9 +12,11 @@
       "enchanting": 22,
       "maxLevel": 2,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "adrenaline",
@@ -26,9 +24,11 @@
       "enchanting": 18,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "aguja_aurora",
@@ -36,9 +36,11 @@
       "enchanting": 30,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "ancla",
@@ -46,9 +48,11 @@
       "enchanting": 22,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "angler",
@@ -56,9 +60,11 @@
       "enchanting": 4,
       "maxLevel": 2,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "arcane_defence",
@@ -66,9 +72,11 @@
       "enchanting": 12,
       "maxLevel": 5,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "bastion",
@@ -86,9 +94,11 @@
       "enchanting": 14,
       "maxLevel": 4,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "blast_mining",
@@ -96,9 +106,11 @@
       "enchanting": 22,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "bleed",
@@ -106,9 +118,11 @@
       "enchanting": 17,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "block_breather",
@@ -116,9 +130,11 @@
       "enchanting": 5,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "boss_hunter",
@@ -126,9 +142,11 @@
       "enchanting": 30,
       "maxLevel": 8,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "brasa_errante",
@@ -136,9 +154,11 @@
       "enchanting": 21,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "caffeinated",
@@ -146,9 +166,11 @@
       "enchanting": 10,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "carve",
@@ -156,9 +178,11 @@
       "enchanting": 8,
       "maxLevel": 4,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "chemist",
@@ -166,9 +190,11 @@
       "enchanting": 10,
       "maxLevel": 4,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "cicatriz_ignea",
@@ -176,9 +202,11 @@
       "enchanting": 32,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "cleave",
@@ -186,9 +214,11 @@
       "enchanting": 4,
       "maxLevel": 6,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "combatant",
@@ -196,9 +226,11 @@
       "enchanting": 9,
       "maxLevel": 3,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "combo",
@@ -206,9 +238,11 @@
       "enchanting": 24,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "cometa",
@@ -216,9 +250,11 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "constelacion",
@@ -226,9 +262,11 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "contagion",
@@ -236,9 +274,11 @@
       "enchanting": 18,
       "maxLevel": 2,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "crimson_slayer",
@@ -256,9 +296,11 @@
       "enchanting": 9,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "criticals",
@@ -266,9 +308,11 @@
       "enchanting": 14,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "cubism",
@@ -276,9 +320,11 @@
       "enchanting": 3,
       "maxLevel": 5,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "cuidado",
@@ -286,9 +332,11 @@
       "enchanting": 7,
       "maxLevel": 1,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "dexterity",
@@ -296,9 +344,11 @@
       "enchanting": 18,
       "maxLevel": 2,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "drain",
@@ -306,9 +356,11 @@
       "enchanting": 15,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "dynamite",
@@ -326,9 +378,11 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "eco_resonante",
@@ -336,9 +390,11 @@
       "enchanting": 16,
       "maxLevel": 3,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "end_affinity",
@@ -346,9 +402,11 @@
       "enchanting": 12,
       "maxLevel": 4,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "ender_slayer",
@@ -356,9 +414,11 @@
       "enchanting": 11,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "escape",
@@ -366,9 +426,11 @@
       "enchanting": 6,
       "maxLevel": 2,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "estela_cazador",
@@ -376,9 +438,11 @@
       "enchanting": 28,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "excavation",
@@ -386,9 +450,11 @@
       "enchanting": 18,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "experience",
@@ -396,9 +462,11 @@
       "enchanting": 8,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "feather_step",
@@ -406,9 +474,11 @@
       "enchanting": 7,
       "maxLevel": 1,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "finishing",
@@ -416,9 +486,11 @@
       "enchanting": 14,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "first_strike",
@@ -426,9 +498,11 @@
       "enchanting": 16,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "flashbang",
@@ -436,9 +510,11 @@
       "enchanting": 10,
       "maxLevel": 6,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "foraging",
@@ -446,9 +522,11 @@
       "enchanting": 8,
       "maxLevel": 4,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "forceful_crit",
@@ -456,9 +534,11 @@
       "enchanting": 20,
       "maxLevel": 6,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "fortitude",
@@ -466,9 +546,11 @@
       "enchanting": 16,
       "maxLevel": 2,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "frost",
@@ -476,9 +558,11 @@
       "enchanting": 12,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "getaway",
@@ -486,9 +570,11 @@
       "enchanting": 7,
       "maxLevel": 2,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "giant_killer",
@@ -496,9 +582,11 @@
       "enchanting": 15,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_balance_native_route_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_balance_native_route_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "goliath",
@@ -506,9 +594,11 @@
       "enchanting": 25,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_balance_native_route_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_balance_native_route_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "green_thumb",
@@ -516,9 +606,11 @@
       "enchanting": 9,
       "maxLevel": 2,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "guardia_cristal",
@@ -526,9 +618,11 @@
       "enchanting": 25,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "harvesting",
@@ -546,9 +640,11 @@
       "enchanting": 18,
       "maxLevel": 2,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "indestructible",
@@ -566,9 +662,11 @@
       "enchanting": 12,
       "maxLevel": 1,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "introversion",
@@ -576,9 +674,11 @@
       "enchanting": 12,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "jumpshot",
@@ -586,9 +686,11 @@
       "enchanting": 8,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "legado_valerin",
@@ -596,9 +698,11 @@
       "enchanting": 35,
       "maxLevel": 1,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "letalidad",
@@ -606,9 +710,11 @@
       "enchanting": 14,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "lifesteal",
@@ -616,9 +722,11 @@
       "enchanting": 15,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "mana_steal",
@@ -626,9 +734,11 @@
       "enchanting": 20,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "marca_celeste",
@@ -636,9 +746,11 @@
       "enchanting": 21,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "metabolism",
@@ -646,9 +758,11 @@
       "enchanting": 10,
       "maxLevel": 2,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "might",
@@ -656,9 +770,11 @@
       "enchanting": 18,
       "maxLevel": 4,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "neptune",
@@ -666,9 +782,11 @@
       "enchanting": 33,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "nether_affinity",
@@ -676,9 +794,11 @@
       "enchanting": 15,
       "maxLevel": 4,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "nether_prospector",
@@ -686,9 +806,11 @@
       "enchanting": 28,
       "maxLevel": 2,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "one_for_all",
@@ -706,9 +828,11 @@
       "enchanting": 33,
       "maxLevel": 7,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "paso_ceniza",
@@ -716,9 +840,11 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "poison_ivy",
@@ -726,9 +852,11 @@
       "enchanting": 11,
       "maxLevel": 2,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "prosecute",
@@ -736,9 +864,11 @@
       "enchanting": 25,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "prospector",
@@ -746,9 +876,11 @@
       "enchanting": 10,
       "maxLevel": 5,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "pulso_abisal",
@@ -756,9 +888,11 @@
       "enchanting": 28,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "rapid",
@@ -766,9 +900,11 @@
       "enchanting": 22,
       "maxLevel": 6,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "rebote_prismatico",
@@ -776,9 +912,11 @@
       "enchanting": 30,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "rebounding",
@@ -786,9 +924,11 @@
       "enchanting": 14,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "rejuvenate",
@@ -796,9 +936,11 @@
       "enchanting": 10,
       "maxLevel": 5,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "repairing",
@@ -816,9 +958,11 @@
       "enchanting": 7,
       "maxLevel": 1,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "reposo",
@@ -826,9 +970,11 @@
       "enchanting": 23,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "resguardo_arcano",
@@ -846,9 +992,11 @@
       "enchanting": 15,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "rocket_saver",
@@ -856,9 +1004,11 @@
       "enchanting": 10,
       "maxLevel": 3,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "ruptura_sonica",
@@ -866,9 +1016,11 @@
       "enchanting": 33,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "sculk_slayer",
@@ -876,9 +1028,11 @@
       "enchanting": 5,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "sello_glacial",
@@ -886,9 +1040,11 @@
       "enchanting": 18,
       "maxLevel": 3,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "shulker_harvest",
@@ -896,9 +1052,11 @@
       "enchanting": 24,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "shura",
@@ -906,9 +1064,11 @@
       "enchanting": 26,
       "maxLevel": 2,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "skull_puncture",
@@ -916,9 +1076,11 @@
       "enchanting": 16,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "slaughter",
@@ -926,9 +1088,11 @@
       "enchanting": 12,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "slipstream",
@@ -936,9 +1100,11 @@
       "enchanting": 9,
       "maxLevel": 3,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "smoldering",
@@ -946,9 +1112,11 @@
       "enchanting": 23,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "snipe",
@@ -956,9 +1124,11 @@
       "enchanting": 6,
       "maxLevel": 4,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "sorcery",
@@ -966,9 +1136,11 @@
       "enchanting": 10,
       "maxLevel": 5,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "soulbound",
@@ -986,9 +1158,11 @@
       "enchanting": 16,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "stamina",
@@ -996,9 +1170,11 @@
       "enchanting": 5,
       "maxLevel": 4,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "steel_string",
@@ -1006,9 +1182,11 @@
       "enchanting": 17,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "streamlining",
@@ -1016,9 +1194,11 @@
       "enchanting": 7,
       "maxLevel": 4,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "strongarm",
@@ -1026,9 +1206,11 @@
       "enchanting": 16,
       "maxLevel": 2,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "stun",
@@ -1036,9 +1218,11 @@
       "enchanting": 13,
       "maxLevel": 3,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "superior",
@@ -1056,9 +1240,11 @@
       "enchanting": 1,
       "maxLevel": 1,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "swarm",
@@ -1066,9 +1252,11 @@
       "enchanting": 35,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "telekinesis",
@@ -1076,9 +1264,11 @@
       "enchanting": 16,
       "maxLevel": 1,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "thor",
@@ -1086,9 +1276,11 @@
       "enchanting": 24,
       "maxLevel": 6,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "thrive",
@@ -1096,9 +1288,11 @@
       "enchanting": 5,
       "maxLevel": 5,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "thunderbolt",
@@ -1106,9 +1300,11 @@
       "enchanting": 20,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "thunderlord",
@@ -1116,9 +1312,11 @@
       "enchanting": 20,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "timber",
@@ -1126,9 +1324,11 @@
       "enchanting": 20,
       "maxLevel": 5,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "titan_killer",
@@ -1136,9 +1336,11 @@
       "enchanting": 28,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "tormenta_encadenada",
@@ -1146,9 +1348,11 @@
       "enchanting": 35,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "triple_strike",
@@ -1156,9 +1360,11 @@
       "enchanting": 19,
       "maxLevel": 5,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "tripleshot",
@@ -1166,9 +1372,11 @@
       "enchanting": 19,
       "maxLevel": 1,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "ultimate_wise",
@@ -1186,9 +1394,11 @@
       "enchanting": 30,
       "maxLevel": 5,
       "type": "ultimate",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "vampirism",
@@ -1196,9 +1406,11 @@
       "enchanting": 15,
       "maxLevel": 5,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "vanish",
@@ -1206,9 +1418,11 @@
       "enchanting": 9,
       "maxLevel": 2,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "veinminer",
@@ -1216,9 +1430,11 @@
       "enchanting": 28,
       "maxLevel": 4,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "velo_lunar",
@@ -1226,9 +1442,11 @@
       "enchanting": 32,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "vicious",
@@ -1236,9 +1454,11 @@
       "enchanting": 26,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "vigilia",
@@ -1246,9 +1466,11 @@
       "enchanting": 33,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_native_implemented_JVM",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_native_implemented_JVM",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "warp_drive",
@@ -1266,9 +1488,11 @@
       "enchanting": 27,
       "maxLevel": 3,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "woodworker",
@@ -1276,9 +1500,11 @@
       "enchanting": 10,
       "maxLevel": 4,
       "type": "normal",
-      "status": "previous_test_selection",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "previous_test_selection",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "wound",
@@ -1286,9 +1512,11 @@
       "enchanting": 18,
       "maxLevel": 7,
       "type": "normal",
-      "status": "pending_implementation_or_audit",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "pending_implementation_or_audit",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "wyvern",
@@ -1296,9 +1524,11 @@
       "enchanting": 28,
       "maxLevel": 2,
       "type": "normal",
-      "status": "candidate_yaml_reviewed",
+      "status": "candidate_consolidated_source_yaml_reviewed",
       "installedByThisTask": false,
-      "gameplayVerifiedByThisTask": false
+      "gameplayVerifiedByThisTask": false,
+      "previousStatus": "candidate_yaml_reviewed",
+      "definitionManifest": "consolidated/manifest.json"
     },
     {
       "id": "xray",

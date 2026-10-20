@@ -1,0 +1,30 @@
+enabled: true
+display-name: Velo lunar
+description: '&7De noche, al recibir daño de un objetivo reduce un &a%placeholder%%&7 ese golpe si tienes menos del 40% de
+  salud (20 s).'
+placeholder: 3 + 2 * %level%
+type: normal
+targets:
+- helmet
+conflicts: []
+rarity: epic
+max-level: 3
+tradeable: true
+discoverable: true
+enchantable: true
+effects:
+- id: native_reactive
+  args:
+    family: velo_lunar
+    percent: 3 + 2 * %level%
+  triggers:
+  - native_reactive_action
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 32
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXXII'
+- id: is_night
+combat-mode: both
