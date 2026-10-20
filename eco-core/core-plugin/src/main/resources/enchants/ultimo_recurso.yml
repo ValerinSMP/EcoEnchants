@@ -1,0 +1,26 @@
+enabled: true
+type: ultimate
+conflicts: []
+rarity: epic
+tradeable: true
+discoverable: true
+enchantable: true
+display-name: Último recurso
+description: '&7Al caer por debajo del 40% de vida, reduce un &a%placeholder%% &7el daño de golpes posteriores durante 5 s (30 s).'
+max-level: 5
+targets:
+- chestplate
+placeholder: '3 * %level%'
+effects:
+- id: last_resort
+  args:
+    percent: '3 * %level%'
+  triggers:
+  - confirmed_native_combat
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 30
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXX'

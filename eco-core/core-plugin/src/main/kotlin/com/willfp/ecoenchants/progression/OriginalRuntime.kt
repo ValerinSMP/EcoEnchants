@@ -38,9 +38,9 @@ internal object OriginalRuntime : Listener {
     private data class Source(val player: UUID,val world: UUID,val token: UUID,val family: OriginalProcEngine.Family,
                               val itemId: UUID,val item: ItemStack,val tier: Int)
     private var shots = ShotLedger<Source>(4096,30_000) { now() }
-    private data class Pending(val event: EntityDamageByEntityEvent,val source: Source,val victim: LivingEntity,
+    private data class Pending(val event: EntityDamageEvent,val source: Source?,val combat: NativeCombatProgression.Capture?,val victim: LivingEntity,
                                val before: Double,val eventId: UUID,val arrow: UUID?,var task: BukkitTask? = null)
-    private val pending = IdentityHashMap<EntityDamageByEntityEvent,Pending>()
+    private val pending = IdentityHashMap<EntityDamageEvent,Pending>()
     private data class Proof(val pending: Pending,val damage: Double)
     private var proof: Proof? = null
     private var secondary = 0
@@ -97,7 +97,7 @@ internal object OriginalRuntime : Listener {
         val snapshot=source(player,live,OriginalProcEngine.Family.SELLO_GLACIAL,event.hand) ?: return
         shots.remember(event.projectile.uniqueId,player.uniqueId,snapshot)
     }
-    private fun eligible(player: Player,victim: LivingEntity,allowDead: Boolean=false): Boolean {
+    internal fun eligible(player: Player,victim: LivingEntity,allowDead: Boolean=false): Boolean {
         if(victim !is Enemy||(!allowDead&&(!victim.isValid||victim.isDead))||victim.world!=player.world||!ProcGuards.mayAct(player.isOnline,player.isDead))return false
         val mythic=Bukkit.getPluginManager().getPlugin("MythicMobs")
         if(mythicBroken||(mythic!=null&&!mythic.isEnabled))return false
@@ -116,39 +116,52 @@ internal object OriginalRuntime : Listener {
                 victim.customName()!=null||victim is Tameable,
             allied,victim.isInvulnerable,!AntigriefManager.canInjure(player,victim))
     }
+    // Preserve the old entry point while using one confirmation queue for all native combat.
+    fun hit(event: EntityDamageByEntityEvent) = observe(event)
     @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
-    fun hit(event: EntityDamageByEntityEvent) {
-        if(secondary>0||DamageMultiplierBypass.current!=null||pending.containsKey(event)||event.finalDamage<=0)return
+    fun observe(event: EntityDamageEvent) {
+        if(pending.containsKey(event)||event.finalDamage<=0)return
         val victim=event.entity as? LivingEntity ?: return
-        var arrowId: UUID?=null
-        val context=when(val damager=event.damager){
-            is Player -> {
-                if(event.cause!=EntityDamageEvent.DamageCause.ENTITY_ATTACK)return
-                val item=damager.inventory.itemInMainHand
-                if(!item.type.name.endsWith("_SWORD"))return
-                source(damager,item,OriginalProcEngine.Family.ECO_RESONANTE,EquipmentSlot.HAND)
-            }
-            is AbstractArrow -> {
-                val found=shots.source(damager.uniqueId) ?: return
-                if(damager.shooter !is Player||(damager.shooter as Player).uniqueId!=found.player)return
-                arrowId=damager.uniqueId;found
-            }
-            else -> null
-        } ?: return
-        val player=Bukkit.getPlayer(context.player) ?: return
-        if(!eligible(player,victim)||pending.size>=limit("max-pending-hits",512,1024))return
-        val candidate=Pending(event,context,victim,victim.health,UUID.randomUUID(),arrowId)
+        val original=if(secondary==0&&DamageMultiplierBypass.current==null&&event is EntityDamageByEntityEvent) originalSource(event,victim) else null
+        val combat=NativeCombatProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
+        if(original==null&&combat==null)return
+        if(pending.size>=limit("max-pending-hits",512,1024)){combat?.let{NativeCombatProgression.uncertain(it,victim)};return}
+        val candidate=Pending(event,original?.first,combat,victim,victim.health,UUID.randomUUID(),original?.second)
         pending[event]=candidate
         candidate.task=Bukkit.getScheduler().runTask(owner,Runnable { confirm(candidate) })
     }
+    private fun originalSource(event: EntityDamageByEntityEvent,victim: LivingEntity): Pair<Source,UUID?>? {
+        var arrowId: UUID?=null
+        val context=when(val damager=event.damager){
+            is Player -> {
+                if(event.cause!=EntityDamageEvent.DamageCause.ENTITY_ATTACK)return null
+                val item=damager.inventory.itemInMainHand
+                if(!item.type.name.endsWith("_SWORD"))return null
+                source(damager,item,OriginalProcEngine.Family.ECO_RESONANTE,EquipmentSlot.HAND)
+            }
+            is AbstractArrow -> {
+                val found=shots.source(damager.uniqueId) ?: return null
+                if(damager.shooter !is Player||(damager.shooter as Player).uniqueId!=found.player)return null
+                arrowId=damager.uniqueId;found
+            }
+            else -> null
+        } ?: return null
+        val player=Bukkit.getPlayer(context.player) ?: return null
+        return if(eligible(player,victim))Pair(context,arrowId) else null
+    }
+    internal fun session(player: Player): UUID? = token(player)
+    internal fun age(player: Player): Long = sessions[player.uniqueId]?.let { now()-it.arrived } ?: -1
+    internal fun sameSession(id: UUID,expected: UUID): Boolean = sessions[id]?.token==expected
     private fun confirm(candidate: Pending) {
         if(pending.remove(candidate.event)!==candidate)return
         candidate.task?.cancel()
-        val source=candidate.source;val player=Bukkit.getPlayer(source.player) ?: return
-        if(sessions[source.player]?.token!=source.token||player.world.uid!=source.world||!player.isOnline)return
         val victim=candidate.victim
         val damage=NativeProcAdapters.confirmed(candidate.event,victim,candidate.before)
-        if(damage<=0||!eligible(player,victim,true))return
+        if(damage<=0)return
+        candidate.combat?.let { NativeCombatProgression.confirm(it,candidate.event,victim,candidate.before,damage) }
+        val source=candidate.source ?: return
+        val player=Bukkit.getPlayer(source.player) ?: return
+        if(sessions[source.player]?.token!=source.token||player.world.uid!=source.world||!player.isOnline||!eligible(player,victim,true))return
         if(candidate.arrow!=null&&!shots.claim(candidate.arrow,victim.uniqueId))return
         val id=if(source.family==OriginalProcEngine.Family.ECO_RESONANTE)"eco_resonante" else "sello_glacial"
         val enchant=EcoEnchants.getByID(id) ?: return
@@ -162,7 +175,7 @@ internal object OriginalRuntime : Listener {
     }
     fun execute(family: OriginalProcEngine.Family,amount: Double,data: TriggerData): Boolean {
         val confirmed=proof ?: return false
-        val candidate=confirmed.pending;val src=candidate.source
+        val candidate=confirmed.pending;val src=candidate.source ?: return false
         if(src.family!=family||data.event!==candidate.event||data.player?.uniqueId!=src.player||data.victim?.uniqueId!=candidate.victim.uniqueId)return false
         val expected=if(family==OriginalProcEngine.Family.ECO_RESONANTE)2.0+src.tier*2 else 5.0+src.tier*5
         if(!amount.isFinite()||abs(amount-expected)>1e-9)return false
@@ -233,15 +246,16 @@ internal object OriginalRuntime : Listener {
     @EventHandler(priority=EventPriority.HIGHEST)
     fun noSecondaryProcs(event: TriggerDispatchEvent){if(secondary>0)event.isCancelled=true}
     private fun retire(id: UUID) {
+        NativeCombatProgression.retire(id)
         sessions.remove(id);engine.clearEntity(id)
-        pending.values.filter { it.source.player==id||it.victim.uniqueId==id }.toList().forEach { pending.remove(it.event);it.task?.cancel() }
+        pending.values.filter { it.source?.player==id||it.victim.uniqueId==id||it.combat?.actor==id }.toList().forEach { pending.remove(it.event);it.task?.cancel() }
         shots.removeOwner(id)
         slows.filter { it.value.source==id||it.key==id }.keys.toList().forEach { removeSlow(it) }
     }
-    @EventHandler fun join(event: PlayerJoinEvent){token(event.player)}
-    @EventHandler fun respawn(event: PlayerRespawnEvent){token(event.player)}
+    @EventHandler fun join(event: PlayerJoinEvent){token(event.player);NativeCombatProgression.arrival(event.player)}
+    @EventHandler fun respawn(event: PlayerRespawnEvent){token(event.player);NativeCombatProgression.arrival(event.player)}
     @EventHandler fun quit(event: PlayerQuitEvent){retire(event.player.uniqueId)}
-    @EventHandler fun world(event: PlayerChangedWorldEvent){retire(event.player.uniqueId);token(event.player)}
+    @EventHandler fun world(event: PlayerChangedWorldEvent){retire(event.player.uniqueId);token(event.player);NativeCombatProgression.arrival(event.player)}
     @EventHandler(priority=EventPriority.MONITOR)
     fun death(event: EntityDeathEvent) {
         // Death is a real post-damage boundary and may confirm the third hit immediately.

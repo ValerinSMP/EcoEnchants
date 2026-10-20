@@ -5,6 +5,7 @@ import org.bukkit.attribute.AttributeInstance
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import java.util.UUID
@@ -22,7 +23,10 @@ internal object NativeProcAdapters {
     }
     fun confirmed(event: EntityDamageByEntityEvent,victim: LivingEntity,before: Double): Double =
         ProcGuards.confirmedDamage(event.isCancelled,victim.lastDamageCause===event,event.finalDamage,before,victim.health)
-    fun slow(attribute: AttributeInstance,key: NamespacedKey,fraction: Double): AttributeModifier {
+    fun confirmed(event: EntityDamageEvent,victim: LivingEntity,before: Double): Double =
+        ProcGuards.confirmedDamage(event.isCancelled,victim.lastDamageCause===event,event.finalDamage,before,victim.health)
+    fun slow(attribute: AttributeInstance,key: NamespacedKey,fraction: Double): AttributeModifier = temporaryReduction(attribute,key,fraction)
+    fun temporaryReduction(attribute: AttributeInstance,key: NamespacedKey,fraction: Double): AttributeModifier {
         require(fraction.isFinite()&&fraction>0&&fraction<=0.20)
         attribute.modifiers.filter { it.key==key }.forEach { attribute.removeModifier(it) }
         return AttributeModifier(key,-fraction,AttributeModifier.Operation.MULTIPLY_SCALAR_1).also { attribute.addTransientModifier(it) }

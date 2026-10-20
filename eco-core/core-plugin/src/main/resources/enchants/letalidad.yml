@@ -1,0 +1,26 @@
+enabled: true
+type: normal
+conflicts: []
+rarity: rare
+tradeable: true
+discoverable: true
+enchantable: true
+display-name: Letalidad
+description: '&7Cada golpe reduce un &a%placeholder%% &7la armadura del monstruo durante 4 s (máximo 4 acumulaciones).'
+max-level: 5
+targets:
+- sword
+placeholder: '%level%'
+effects:
+- id: lethality_stack
+  args:
+    percent: '%level%'
+  triggers:
+  - confirmed_native_combat
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 14
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXIV'

@@ -1,0 +1,29 @@
+enabled: true
+type: normal
+conflicts:
+- rejuvenate
+rarity: rare
+tradeable: true
+discoverable: true
+enchantable: true
+display-name: Reposo
+description: '&7Aumenta un &a%placeholder%% &7la regeneración natural tras 10 s sin combatir.'
+max-level: 5
+targets:
+- chestplate
+placeholder: '3 * %level%'
+effects:
+- id: regen_multiplier
+  args:
+    multiplier: '1 + 0.03 * %level%'
+    reason:
+    - SATIATED
+  conditions:
+  - id: out_of_confirmed_combat
+conditions:
+- id: has_skill_level
+  args:
+    skill: enchanting
+    level: 23
+    not-met-lines:
+    - '&cRequiere Nivel de Encantador &lXXIII'
