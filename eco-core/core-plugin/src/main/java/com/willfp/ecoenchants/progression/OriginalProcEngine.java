@@ -71,7 +71,9 @@ public final class OriginalProcEngine {
             &&h.damageConfirmed()&&h.direct()&&h.monster()&&!h.cancelled()&&!h.protectedTarget()
             &&!h.npc()&&!h.pet()&&!h.ally()&&h.bossExcluded()&&!h.spawner()&&!h.invulnerable()&&!h.secondary();
     }
-    public Optional<Activation> record(Family family,Hit h){
+    public Optional<Activation> record(Family family,Hit h){return record(family,h,null); }
+    /** Cosmetic observation only, after native acceptance; never recomputes or changes counters. */
+    public Optional<Activation> record(Family family,Hit h,java.util.function.IntConsumer observer){
         main();Objects.requireNonNull(family);if(!valid(h)||h.tier()>family.values.length)return Optional.empty();
         long now=millis.getAsLong();expire(now);
         var eventKey=new EventKey(family,h.event());
@@ -85,15 +87,16 @@ public final class OriginalProcEngine {
         if(old==null&&(map.size()>=capacity||cd.size()>=capacity))return Optional.empty();
         events.put(eventKey,now+1000);
         int hits=old==null?1:old.hits()+1;
-        if(hits<family.hits){if(old==null)linkWindow(family,key);map.put(key,new Window(hits,old==null?now+family.window:old.expires()));return Optional.empty();}
+        if(hits<family.hits){if(old==null)linkWindow(family,key);map.put(key,new Window(hits,old==null?now+family.window:old.expires()));observe(observer,hits);return Optional.empty();}
         // At capacity, deny instead of evicting an active cooldown and permitting a bypass.
         if(cd.size()>=capacity)return Optional.empty();
-        map.remove(key);if(old!=null)unlinkWindow(family,key);cd.put(h.player(),new Lease(h.event(),now+family.cooldown));
+        map.remove(key);if(old!=null)unlinkWindow(family,key);cd.put(h.player(),new Lease(h.event(),now+family.cooldown));observe(observer,hits);
         return Optional.of(new Activation(family,family.values[h.tier()-1],h.finalDamage(),
             switch(family){case ECO_RESONANTE,PULSO_ABISAL,CONSTELACION->2;case RUPTURA_SONICA,TORMENTA_ENCADENADA->3;case THUNDERBOLT->10;case CLEAVE,CARVE->12;default->1;},
             switch(family){case CLEAVE->3.3+0.2*h.tier();case CARVE->0.5*h.tier();case ECO_RESONANTE,PULSO_ABISAL,THUNDERBOLT->2;case BRASA_ERRANTE,REBOTE_PRISMATICO,RUPTURA_SONICA,TORMENTA_ENCADENADA,CONSTELACION->3;default->0;},
             switch(family){case SELLO_GLACIAL->40;case ESTELA_CAZADOR,CICATRIZ_IGNEA->60;default->0;},family==Family.ECO_RESONANTE||family==Family.LEGADO_VALERIN?16:12));
     }
+    private static void observe(java.util.function.IntConsumer observer,int hits){if(observer!=null)try{observer.accept(hits);}catch(RuntimeException|LinkageError cosmeticFailure){/* Never change native resolution. */}}
     /** Explicit reversible cooldown reservation for a native pre-damage/impulse boundary. No confirmed hit is fabricated. */
     Optional<Lease> reserve(Family family,UUID player,UUID attempt){
         main();Objects.requireNonNull(family);Objects.requireNonNull(player);Objects.requireNonNull(attempt);

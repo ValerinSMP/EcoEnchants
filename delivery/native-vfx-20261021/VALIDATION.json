@@ -1,0 +1,15 @@
+{
+  "unitTests": {
+    "tests": 138,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "bootstrapMethods": 1291,
+  "bootstrapReferences": 9374,
+  "bootstrapExecution": "actual handleLoad with simulated registry storage; old artifact rejected, candidate passes",
+  "installed": false,
+  "active": false,
+  "gameplayVerified": false,
+  "measuredPerformance": false
+}

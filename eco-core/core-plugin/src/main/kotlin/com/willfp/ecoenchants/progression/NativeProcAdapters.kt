@@ -25,6 +25,11 @@ internal object NativeProcAdapters {
         ProcGuards.confirmedDamage(event.isCancelled,victim.lastDamageCause===event,event.finalDamage,before,victim.health)
     fun confirmed(event: EntityDamageEvent,victim: LivingEntity,before: Double): Double =
         ProcGuards.confirmedDamage(event.isCancelled,victim.lastDamageCause===event,event.finalDamage,before,victim.health)
+    /** Read-only post-damage witness; no synthetic event and no replay of the mechanic. */
+    fun resolvedBy(player: org.bukkit.entity.Player,target: LivingEntity,before: Double,previous: EntityDamageEvent?): Boolean {
+        val event=target.lastDamageCause as? EntityDamageByEntityEvent ?: return false
+        return event!==previous&&event.damager===player&&confirmed(event,target,before)>0
+    }
     fun slow(attribute: AttributeInstance,key: NamespacedKey,fraction: Double): AttributeModifier = temporaryReduction(attribute,key,fraction)
     fun temporaryReduction(attribute: AttributeInstance,key: NamespacedKey,fraction: Double): AttributeModifier {
         require(fraction.isFinite()&&fraction>0&&fraction<=0.20)

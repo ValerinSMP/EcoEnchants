@@ -50,6 +50,97 @@ internal object OriginalRuntime : Listener {
     private data class Slow(val source: UUID,val entity: LivingEntity,val modifier: AttributeModifier,var task: BukkitTask? = null)
     private val slows = mutableMapOf<UUID,Slow>()
     private val slowsBySource=mutableMapOf<UUID,MutableSet<UUID>>()
+    private var visualProfiles=emptyMap<String,VfxProfiles.Profile>()
+    private data class VisualScene(val id:UUID,val profile:String,val phase:VfxProfiles.Phase,val actor:UUID,val token:UUID,
+        val origin:Location,val receivers:List<LivingEntity>,val observers:List<UUID>,val radius:Double,val progress:Int,
+        val sourceEvent:UUID,val phaseKey:String,var age:Int=0,val sent:MutableMap<UUID,Int> = mutableMapOf(),val sounded:MutableSet<UUID> = mutableSetOf())
+    private val visualScenes=linkedMapOf<UUID,VisualScene>()
+    private val visualEntities=mutableMapOf<UUID,MutableSet<UUID>>()
+    private var visualTask:BukkitTask?=null
+    private val visualFailures=mutableSetOf<String>()
+    private fun prepareVisuals(){
+        visualTask?.cancel();visualTask=null;visualScenes.clear();visualEntities.clear();visualFailures.clear()
+        visualProfiles=if(config().getBoolOrNull("original-procs.visuals.enabled")==false)emptyMap() else
+            VfxProfiles.compile(config().getSubsection("original-procs.visuals.profiles"),{ sound ->
+                NamespacedKey.fromString(sound)?.let { org.bukkit.Registry.SOUNDS.get(it)!=null }?:false
+            },{owner.logger.warning(it)})
+    }
+    internal fun procVisualProfile(player:Player,origin:Location,key:String,phase:String,receivers:List<LivingEntity>,
+                                   sourceEvent:UUID,radius:Double,progress:Int=0){
+        // This is cosmetic only; never let validation/emission failures change a resolved effect.
+        if(!Bukkit.isPrimaryThread())return
+        try{visual(player,origin,key,phase,receivers,sourceEvent,radius,progress)}
+        catch(problem:RuntimeException){visualFailure(key,problem)}catch(problem:LinkageError){visualFailure(key,problem)}
+    }
+    private fun visualFailure(key:String,problem:Throwable){
+        if(visualFailures.size<16&&visualFailures.add(key))owner.logger.log(java.util.logging.Level.WARNING,"Native visual $key suppressed",problem)
+    }
+    private fun visual(player:Player,origin:Location,key:String,phase:String,receivers:List<LivingEntity>,event:UUID,radius:Double,progress:Int){
+        val prepared=visualProfiles[key]?.phases?.get(phase)?:return
+        if(!radius.isFinite()||radius<0||!player.isOnline||player.isDead||player.world!=origin.world||receivers.isEmpty())return
+        if(visualScenes.size>=limit("visuals.max-scenes",32,64)||
+            (visualEntities[player.uniqueId]?.count{visualScenes[it]?.actor==player.uniqueId}?:0)>=limit("visuals.per-source-scenes",4,8))return
+        if(visualScenes.values.any{it.sourceEvent==event&&it.profile==key&&it.phaseKey==phase&&it.receivers.map{e->e.uniqueId}==receivers.map{e->e.uniqueId}})return
+        val targets=receivers.take(2).filter{it.isValid&&!it.isDead&&it.world==origin.world&&it.location.distanceSquared(origin)<=32*32}
+        if(targets.isEmpty())return
+        val observerRadius=limit("visuals.observer-radius",24,32).toDouble()
+        val observers=origin.world.players.asSequence().filter{it.location.distanceSquared(origin)<=observerRadius*observerRadius&&it.canSee(player)&&targets.all{target->it.canSee(target)}}
+            .take(limit("visuals.max-observers",16,32)).map{it.uniqueId}.toList()
+        if(observers.isEmpty())return
+        val scene=VisualScene(UUID.randomUUID(),key,prepared,player.uniqueId,session(player)?:return,origin.clone(),targets,observers,minOf(radius,2.0),progress.coerceIn(0,3),event,phase)
+        visualScenes[scene.id]=scene
+        for(id in targets.map{it.uniqueId}+player.uniqueId)visualEntities.getOrPut(id){mutableSetOf()}.add(scene.id)
+        try{if(!renderVisual(scene))removeVisual(scene.id)}catch(problem:RuntimeException){removeVisual(scene.id);throw problem}catch(problem:LinkageError){removeVisual(scene.id);throw problem}
+        if(visualScenes.isNotEmpty()&&visualTask==null)visualTask=Bukkit.getScheduler().runTaskTimer(owner,Runnable{
+            for(current in visualScenes.values.toList())try{
+                if(!renderVisual(current))removeVisual(current.id)
+            }catch(problem:RuntimeException){removeVisual(current.id);visualFailure(current.profile,problem)}
+             catch(problem:LinkageError){removeVisual(current.id);visualFailure(current.profile,problem)}
+            if(visualScenes.isEmpty()){visualTask?.cancel();visualTask=null}
+        },1L,1L)
+    }
+    private fun renderVisual(scene:VisualScene):Boolean {
+        if(scene.age>=scene.phase.ticks||!sameSession(scene.actor,scene.token))return false
+        val actor=Bukkit.getPlayer(scene.actor)?:return false
+        val world=scene.origin.world
+        if(!actor.isOnline||actor.isDead||actor.world!=world||!world.isChunkLoaded(scene.origin.blockX shr 4,scene.origin.blockZ shr 4))return false
+        if(scene.receivers.any{!it.isValid||it.isDead||it.world!=world||it.location.distanceSquared(scene.origin)>32*32})return false
+        val origin=VfxProfiles.Point(scene.origin.x,scene.origin.y,scene.origin.z)
+        val location=scene.receivers.first().location
+        if(!world.isChunkLoaded(location.blockX shr 4,location.blockZ shr 4))return false
+        val target=VfxProfiles.Point(location.x,location.y,location.z)
+        val observerRadius=limit("visuals.observer-radius",24,32).toDouble()
+        val frames=scene.phase.steps.map{it to VfxProfiles.points(it,scene.age,origin,target,scene.radius,scene.progress)}
+        val perScene=limit("visuals.per-activation",16,16)
+        for(observerId in scene.observers){
+            val observer=Bukkit.getPlayer(observerId)?:continue
+            if(!observer.isOnline||observer.world!=world||observer.location.distanceSquared(scene.origin)>observerRadius*observerRadius||!observer.canSee(actor)||scene.receivers.any{!observer.canSee(it)})continue
+            for((step,points) in frames){
+                val remaining=perScene-(scene.sent[observerId]?:0)
+                val count=budget.take(observerId,minOf(points.size,remaining.coerceAtLeast(0)),perScene,limit("visuals.per-observer-per-second",64,256),limit("visuals.global-per-second",256,4096))
+                for(point in points.take(count))observer.spawnParticle(step.particle,point.x,point.y,point.z,1,0.0,0.0,0.0,0.0,step.data)
+                if(count>0){
+                    scene.sent[observerId]=(scene.sent[observerId]?:0)+count
+                    if(scene.phase.sound.isNotEmpty()&&scene.age>=scene.phase.soundTick&&scene.sounded.add(observerId))
+                        observer.playSound(if(scene.phase.soundAtTarget)location else scene.origin,scene.phase.sound,SoundCategory.PLAYERS,scene.phase.volume,scene.phase.pitch)
+                }
+            }
+        }
+        scene.age++
+        return scene.age<scene.phase.ticks&&scene.observers.any{(scene.sent[it]?:0)<perScene}
+    }
+    private fun removeVisual(id:UUID){
+        val scene=visualScenes.remove(id)?:return
+        for(entity in scene.receivers.map{it.uniqueId}+scene.actor)visualEntities[entity]?.let{it.remove(id);if(it.isEmpty())visualEntities.remove(entity)}
+        if(visualScenes.isEmpty()){visualTask?.cancel();visualTask=null}
+    }
+    @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
+    fun visualWorldUnload(event:org.bukkit.event.world.WorldUnloadEvent){visualScenes.values.filter{it.origin.world==event.world}.map{it.id}.forEach{removeVisual(it)}}
+    @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
+    fun visualChunkUnload(event:org.bukkit.event.world.ChunkUnloadEvent){
+        visualScenes.values.filter{scene->(listOf(scene.origin)+scene.receivers.map{it.location}).any{it.world==event.world&&(it.blockX shr 4)==event.chunk.x&&(it.blockZ shr 4)==event.chunk.z}}.map{it.id}.forEach{removeVisual(it)}
+    }
+
     private fun now() = System.nanoTime()/1_000_000L
     private fun config() = owner.configYml
     private fun limit(key: String,default: Int,max: Int): Int = (config().getIntOrNull("original-procs.$key") ?: default).coerceIn(0,max)
@@ -65,11 +156,12 @@ internal object OriginalRuntime : Listener {
         slows.keys.toList().forEach { removeSlow(it) };slowsBySource.clear()
         shots.clear();sessions.clear();engine.clear();budget.clear();proof=null;mythicBroken=false
         if(::owner.isInitialized){
+            prepareVisuals()
             shots=ShotLedger(limit("max-shots",4096,4096).coerceAtLeast(1),limit("shot-ttl-seconds",30,60).coerceAtLeast(1)*1000L) { now() }
             Bukkit.getOnlinePlayers().forEach { token(it) }
         }
     }
-    fun close(){reset();sessions.clear();HandlerList.unregisterAll(this);registered=false}
+    fun close(){reset();visualProfiles=emptyMap();sessions.clear();HandlerList.unregisterAll(this);registered=false}
     private fun token(player: Player): UUID? {
         sessions[player.uniqueId]?.let { return it.token }
         if(sessions.size>=1024)return null
@@ -224,22 +316,28 @@ internal object OriginalRuntime : Listener {
             (!candidate.victim.isValid||candidate.victim.isDead||candidate.victim.getAttribute(Attribute.MOVEMENT_SPEED)==null||
                 (!slows.containsKey(candidate.victim.uniqueId)&&slows.size>=limit("max-active-slows",512,1024))))return false
         val activation=engine.record(family,OriginalProcEngine.Hit(candidate.eventId,src.player,src.itemId,
-            candidate.victim.uniqueId,src.world,src.tier,confirmed.damage,true,true,true,false,false,false,false,false,true,false,false,false)).orElse(null) ?: return false
+            candidate.victim.uniqueId,src.world,src.tier,confirmed.damage,true,true,true,false,false,false,false,false,true,false,false,false), { accepted ->
+                if(family==OriginalProcEngine.Family.ECO_RESONANTE&&accepted<3)procVisualProfile(data.player!!,candidate.victim.location,"eco_resonante","progress",listOf(candidate.victim),candidate.eventId,2.0,accepted)
+            }).orElse(null) ?: return false
         val player=Bukkit.getPlayer(src.player) ?: return false
         if(family==OriginalProcEngine.Family.ECO_RESONANTE){
             val origin=candidate.victim.location
             val targets=NativeBurstProgression.targets(player,candidate.victim,2.0,2,family="eco_resonante")
+            val resolved=mutableListOf<LivingEntity>()
             targets.forEach { target ->
                 if(eligibleFor("eco_resonante",player,target)&&target.location.distanceSquared(origin)<=4&&candidate.victim.hasLineOfSight(target)&&target.noDamageTicks<=target.maximumNoDamageTicks/2){
+                    val before=target.health;val previousDamage=target.lastDamageCause
                     withSecondaryDamage {
                         com.willfp.libreforge.effects.impl.RepeatedDamage.run(player.uniqueId,player.uniqueId,target.uniqueId){
                             target.dealDamage(confirmed.damage*activation.value()/100,source=player,trueDamage=false,checkAntigrief=true)
                         }
                     }
+                    if(NativeProcAdapters.resolvedBy(player,target,before,previousDamage))resolved.add(target)
                 }
             }
+            if(resolved.isNotEmpty())procVisualProfile(player,origin,"eco_resonante","resolved",resolved,candidate.eventId,2.0)
         } else applySlow(player,candidate.victim,activation.value()/100)
-        visual(player,candidate.victim.location,family,activation.maxParticles())
+        if(family!=OriginalProcEngine.Family.ECO_RESONANTE)visual(player,candidate.victim.location,family,activation.maxParticles())
         return true
     }
     internal fun recordNative(family:OriginalProcEngine.Family,hit:OriginalProcEngine.Hit)=engine.record(family,hit)
@@ -292,6 +390,7 @@ internal object OriginalRuntime : Listener {
         if(secondary>0&&event.trigger.trigger.id in setOf("melee_attack","bow_attack","trident_attack","headshot"))event.isCancelled=true
     }
     private fun retire(id: UUID) {
+        visualEntities[id]?.toList()?.forEach { removeVisual(it) }
         NativeReactiveProgression.retire(id)
         NativeBurstProgression.retire(id)
         NativeCombatProgression.retire(id)

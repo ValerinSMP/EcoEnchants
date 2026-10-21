@@ -10,7 +10,7 @@ extra=$(find /root/.gradle/caches/modules-2/files-2.1/com.google.guava/guava /ro
 eco="$w/eco-2026.28-native-utility-all.jar"
 lf="$w/LibreForge-2026.27-native-consolidated-all.jar"
 skills=/root/development/artifacts/eco-suite/requirement-lore-20261020/EcoSkills-2026.27-all-requirement-views.jar
-ee="$w/EcoEnchants-2026.27-native-consolidated-all.jar"
+ee=${3:-"$w/EcoEnchants-2026.27-native-consolidated-all.jar"}
 cp="$eco:$lf:$skills:$paper:$kyori:$extra"
 javac --release 21 -cp "$asm" -d "$work/classes" tools/VerifyBootstrapClosure.java
 # This must reject the actual previously delivered artifact, not a synthetic fixture.

@@ -203,9 +203,12 @@ internal object NativeBurstProgression : Listener {
      visited.add(next.uniqueId);damage(source,next,p.damage*percent/100,family=family);anchor=next
     }
    }
-   else->{targets(player,p.victim,activation.radius(),activation.maxTargets(),family=family).forEach{damage(source,it,if(family=="carve")percent else p.damage*percent/100,family=family)}}
+   else->{targets(player,p.victim,activation.radius(),activation.maxTargets(),family=family).forEach{target ->
+    damage(source,target,if(family=="carve")percent else p.damage*percent/100,family=family,
+      onResolved=if(family=="brasa_errante")({ receiver -> OriginalRuntime.procVisualProfile(player,p.victim.location,"brasa_errante","link",listOf(receiver),p.eventId,activation.radius()) }) else null)
+   }}
   }
-  if(family !in setOf("combo","cicatriz_ignea","bleed","wound","estela_cazador","marca_celeste","eclipse"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
+  if(family !in setOf("brasa_errante","combo","cicatriz_ignea","bleed","wound","estela_cazador","marca_celeste","eclipse"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
   return true
  }
  internal fun offerCombo(data:TriggerData):Boolean {
@@ -220,13 +223,15 @@ internal object NativeBurstProgression : Listener {
   if(state.expires.isEmpty()){recent.remove(player.uniqueId);return false}
   return AdditiveDamageGroups.offer("ecoenchants_normal",data,1+minOf(state.expires.size,2+level.level)*level.level/100.0)
  }
- private fun damage(source:Context,target:LivingEntity,amount:Double,fresh:Boolean=false,family:String){
+ private fun damage(source:Context,target:LivingEntity,amount:Double,fresh:Boolean=false,family:String,onResolved:((LivingEntity)->Unit)?=null){
   val player=current(source)?:return
   if(!amount.isFinite()||amount<=0||!OriginalRuntime.eligibleFor(family,player,target)||!fresh&&target.noDamageTicks>target.maximumNoDamageTicks/2)return
+  val before=if(onResolved!=null)target.health else 0.0;val previous=if(onResolved!=null)target.lastDamageCause else null
   OriginalRuntime.withSecondaryDamage{RepeatedDamage.run(player.uniqueId,player.uniqueId,target.uniqueId){
    if(fresh)freshDamageWindow(target){target.dealDamage(amount,source=player,trueDamage=false,checkAntigrief=true)}
    else target.dealDamage(amount,source=player,trueDamage=false,checkAntigrief=true)
   }}
+  if(onResolved!=null&&NativeProcAdapters.resolvedBy(player,target,before,previous))onResolved(target)
  }
  internal fun targets(player:Player,anchor:LivingEntity,radius:Double,maximum:Int,excluded:Set<UUID> = emptySet()):List<LivingEntity> = targets(player,anchor,radius,maximum,excluded,null)
  internal fun targets(player:Player,anchor:LivingEntity,radius:Double,maximum:Int,excluded:Set<UUID> = emptySet(),family:String?):List<LivingEntity>{

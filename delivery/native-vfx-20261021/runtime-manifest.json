@@ -1,0 +1,34 @@
+{
+  "file": "EcoEnchants-2026.27-vfx-pilot-all.jar",
+  "sha256": "78eff168d845d1bf6ab2fb1709f9da33da2564833388ca82da6b187e9c9d3e50",
+  "baselineSha256": "1d7a0ca87822f38be5dbb9e2aae528cdb4e7895a301d179394e25ba34e64152c",
+  "changedEntries": [
+    "com/willfp/ecoenchants/progression/NativeBurstProgression$targets$$inlined$sortedBy$1.class",
+    "com/willfp/ecoenchants/progression/NativeBurstProgression.class",
+    "com/willfp/ecoenchants/progression/NativeProcAdapters.class",
+    "com/willfp/ecoenchants/progression/OriginalProcEngine.class",
+    "com/willfp/ecoenchants/progression/OriginalRuntime$VisualScene.class",
+    "com/willfp/ecoenchants/progression/OriginalRuntime.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles$Motion.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles$Phase.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles$Point.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles$Primitive.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles$Profile.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles$Step.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles$WhenMappings.class",
+    "com/willfp/ecoenchants/progression/VfxProfiles.class",
+    "config.yml"
+  ],
+  "removedObsoleteOwnedClasses": [
+    "com/willfp/ecoenchants/progression/OriginalRuntime$execute$$inlined$sortedBy$1.class"
+  ],
+  "profiles": [
+    "eco_resonante",
+    "brasa_errante"
+  ],
+  "sdkByteIdentical": true,
+  "enchantDefinitionsByteIdentical": true,
+  "installed": false,
+  "active": false,
+  "gameplayVerified": false
+}
