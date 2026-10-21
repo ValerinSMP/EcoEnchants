@@ -212,8 +212,9 @@ internal object OriginalRuntime : Listener {
         eligibleFor(family,player,target,allowDead,defensive)
     internal fun eligible(player:Player,victim:LivingEntity,allowDead:Boolean=false):Boolean = eligibleFor("swarm",player,victim,allowDead)
     internal fun eligibleFor(family:String?,player:Player,victim:LivingEntity,allowDead:Boolean=false,defensive:Boolean=false):Boolean {
-        val enchant=EcoEnchants.getByID(family?:"swarm") as? com.willfp.ecoenchants.enchant.impl.EcoEnchantBase ?: return false
-        return enchant.combatTargetPolicy.allows(player,victim,allowDead,defensive)
+        val enchant=EcoEnchants.getByID(family?:"swarm") ?: return false
+        // Modern registrars expose EcoEnchant by delegation. Its native level retains the owning base.
+        return enchant.getLevel(1).allowsCombatTarget(player,victim,allowDead,defensive)
     }
     // Preserve the old entry point while using one confirmation queue for all native combat.
     fun hit(event: EntityDamageByEntityEvent) = observe(event)

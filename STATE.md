@@ -1,3 +1,25 @@
+# Política de combate del wrapper: corregida, sin instalar · 2026-10-21
+
+- Causa contrastada con captura interna y bytecode19317460: objeto registrado
+  EcoEnchant delegado no hereda EcoEnchantBase; el cast rechazaba todo antes
+  de evaluar política. El holder además comparaba wrapper/base por identidad.
+- Fix mínimo: eligibleFor usa getLevel(1).allowsCombatTarget existente; holder
+  comprueba registered.getLevel(level) === this. Sin API/registro paralelo,
+  reflexión de wrapper ni YAML por golpe. Vivos y post mortem rechazan holders
+  obsoletos tras sustitución/eliminación. Política y mecánicas preservadas.
+-159 pruebas JVM pasan,0fallos/errores/omitidas. Cinco nuevas cubren wrapper real
+  delegado, aceptación/rechazo/reemplazo y observe→confirm→forceHolders→requisito→
+  placeholder→efecto→contador. Límites simulados detallados en el contrato.
+- JAR compuesto cambia únicamente OriginalRuntime.class y EcoEnchantLevel.class;
+  ABI/cierre verificados. YAML, SDK y todo lo demás idénticos a211d27c6.
+- SHA256 candidato0b17315c911f87d5695a7c754f258dd11096f3ea7cb56f163666ec998c84d677.
+  Personal staging/ecosuite-policy-wrapper-fix-20261021. Diagnóstico opt-in
+  anterior conservado. vEnchanting/vPets/otros módulos intactos.
+- No instalado/activo ni lifecycle; hashes EE de ambos Dev siguen19317460.
+  Pendiente integración y prueba visual/daño de área/PvP real por chat vEnchanting.
+- Contrato y límites: docs/COMBAT-POLICY-WRAPPER-FIX-20261021.md. No confundir las
+  entradas anteriores de diagnóstico pendiente con el estado de esta corrección.
+
 # Eco resonante: candidato de diagnóstico, causa pendiente · 2026-10-21
 
 - Runtime18afd5dc contrastado con Dev y captura externa leída. Daño real positivo

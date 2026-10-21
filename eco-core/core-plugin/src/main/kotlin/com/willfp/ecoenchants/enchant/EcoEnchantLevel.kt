@@ -16,11 +16,11 @@ class EcoEnchantLevel(
         com.willfp.ecoenchants.progression.OriginalRuntime.observedSession(actor)
 
     override fun allowsCombatTarget(actor: org.bukkit.entity.Player, target: org.bukkit.entity.LivingEntity, allowDead: Boolean, defensive: Boolean): Boolean =
-        EcoEnchants.getByID(enchant.id) === enchant && enchant.plugin.isEnabled &&
+        EcoEnchants.getByID(enchant.id)?.getLevel(level) === this && enchant.plugin.isEnabled &&
             (enchant as? com.willfp.ecoenchants.enchant.impl.EcoEnchantBase)?.combatTargetPolicy?.allows(actor, target, allowDead, defensive) == true
 
     override fun allowsPosthumousCombatTarget(actor: org.bukkit.entity.Player, target: org.bukkit.entity.LivingEntity): Boolean =
-        EcoEnchants.getByID(enchant.id) === enchant && enchant.plugin.isEnabled &&
+        EcoEnchants.getByID(enchant.id)?.getLevel(level) === this && enchant.plugin.isEnabled &&
             (enchant as? com.willfp.ecoenchants.enchant.impl.EcoEnchantBase)?.combatTargetPolicy?.allows(actor, target, posthumous = true) == true
 
     override val id = plugin.createNamespacedKey("${enchant.id}_$level")

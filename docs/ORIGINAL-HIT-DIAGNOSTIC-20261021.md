@@ -1,3 +1,8 @@
+> Actualización posterior: la captura interna localizó el cast del wrapper.
+> Corrección y estado vigente: COMBAT-POLICY-WRAPPER-FIX-20261021.md.
+> El diagnóstico descrito aquí se conserva opt-in; el bloqueo de causa pendiente
+> pertenece a la entrega anterior, no al candidato corregido.
+
 # Eco resonante: observación interna limitada
 
 ## Estado real

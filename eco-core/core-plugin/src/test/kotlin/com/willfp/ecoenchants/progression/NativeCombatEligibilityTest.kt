@@ -18,11 +18,17 @@ import org.mockito.Mockito.*
 import java.util.UUID
 
 class NativeCombatEligibilityTest {
+ private fun <T> match(type:Class<T>):T = org.mockito.Mockito.any(type)
  private fun fixture(body:(Player,Player,Config,Scoreboard)->Unit){
   val enchant=mock(com.willfp.ecoenchants.enchant.impl.EcoEnchantBase::class.java);val config=mock(Config::class.java)
   `when`(enchant.getID()).thenReturn("sello_glacial");`when`(enchant.id).thenReturn("sello_glacial");`when`(enchant.config).thenReturn(config)
   // This fixture recompiles on policy access to simulate category replacement for each legacy mode assertion.
   `when`(enchant.combatTargetPolicy).thenAnswer { CombatTargetPolicy.compile(config) { } }
+  val level=mock(com.willfp.ecoenchants.enchant.EcoEnchantLevel::class.java)
+  `when`(enchant.getLevel(1)).thenReturn(level)
+  `when`(level.allowsCombatTarget(match(Player::class.java),match(LivingEntity::class.java),anyBoolean(),anyBoolean())).thenAnswer {
+   enchant.combatTargetPolicy.allows(it.getArgument(0),it.getArgument(1),it.getArgument(2),it.getArgument(3))
+  }
   val field=EcoEnchants.javaClass.superclass.getDeclaredField("registry").apply{isAccessible=true}
   @Suppress("UNCHECKED_CAST") val registry=field.get(EcoEnchants) as Registry<EcoEnchant>
   registry.register(enchant)
