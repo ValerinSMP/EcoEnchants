@@ -32,6 +32,19 @@ internal object OriginalRuntime : Listener {
     private val slowKey = NamespacedKey("ecoenchants","glacial_seal")
     private val engine = OriginalProcEngine(4096) { now() }
     private val budget = ParticleBudget { now() }
+    private val diagnostic = OriginalHitDiagnostic { now() }
+    private var diagnosticExpiry: BukkitTask? = null
+    internal fun startDiagnostic(player: UUID) {
+        stopDiagnostic(); diagnostic.start(player) { owner.logger.info(it) }
+        diagnosticExpiry=Bukkit.getScheduler().runTaskLater(owner,Runnable { diagnostic.clear(); diagnosticExpiry=null },600L)
+    }
+    internal fun stopDiagnostic() { diagnosticExpiry?.cancel(); diagnosticExpiry=null; diagnostic.clear() }
+    internal fun diagnostic(data: TriggerData, stage: String, detail: () -> String) { data.event?.let { diagnostic.note(it,stage,detail) } }
+    @EventHandler(priority=EventPriority.MONITOR)
+    fun diagnosticDispatch(event: TriggerDispatchEvent) {
+        if(event.trigger.trigger !== ConfirmedOriginalHit)return
+        diagnostic(event.trigger.data,"native_dispatch") { "cancelled=${event.isCancelled}" }
+    }
     private data class Session(val token: UUID,val arrived: Long)
     private val sessions = mutableMapOf<UUID,Session>()
     private data class Source(val player: UUID,val world: UUID,val token: UUID,val family: OriginalProcEngine.Family,
@@ -67,6 +80,7 @@ internal object OriginalRuntime : Listener {
                                    sourceEvent:UUID,radius:Double,progress:Int=0){
         // This is cosmetic only; never let validation/emission failures change a resolved effect.
         if(!Bukkit.isPrimaryThread())return
+        proof?.pending?.event?.let { diagnostic.note(it,"visual_entry") { "profile=$key phase=$phase prepared=${visualProfiles[key]?.phases?.containsKey(phase)==true} receivers=${receivers.size}" } }
         try{visual(player,origin,key,phase,receivers,sourceEvent,radius,progress)}
         catch(problem:RuntimeException){visualFailure(key,problem)}catch(problem:LinkageError){visualFailure(key,problem)}
     }
@@ -124,6 +138,7 @@ internal object OriginalRuntime : Listener {
                 }
             }
         }
+        proof?.pending?.event?.let { diagnostic.note(it,"visual_frame") { "profile=${scene.profile} phase=${scene.phaseKey} sent=${scene.sent.values.sum()} observers=${scene.observers.size}" } }
         scene.age++
         return scene.age<scene.phase.ticks&&scene.observers.any{(scene.sent[it]?:0)<perScene}
     }
@@ -150,6 +165,7 @@ internal object OriginalRuntime : Listener {
         registered=true
     }
     fun reset() {
+        stopDiagnostic()
         pending.values.toList().forEach { it.task?.cancel() };pending.clear();pendingEntities.clear()
         slows.keys.toList().forEach { removeSlow(it) };slowsBySource.clear()
         shots.clear();sessions.clear();engine.clear();budget.clear();proof=null
@@ -203,9 +219,13 @@ internal object OriginalRuntime : Listener {
     fun hit(event: EntityDamageByEntityEvent) = observe(event)
     @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
     fun observe(event: EntityDamageEvent) {
+        val actor = (event as? EntityDamageByEntityEvent)?.damager.let { it as? Player ?: (it as? Projectile)?.shooter as? Player }
+        diagnostic.observe(actor?.uniqueId,event)
+        diagnostic.note(event,"observe") { "cancelled=${event.isCancelled} finalDamage=${event.finalDamage} duplicate=${pending.containsKey(event)} secondary=$secondary provenance=${DamageMultiplierBypass.current?.origin}" }
         if(pending.containsKey(event)||event.finalDamage<=0)return
         val victim=event.entity as? LivingEntity ?: return
         val original=if(secondary==0&&DamageMultiplierBypass.current==null&&event is EntityDamageByEntityEvent) originalSource(event,victim) else null
+        diagnostic.note(event,"source") { "captured=${original!=null} family=${original?.first?.family} tier=${original?.first?.tier}" }
         val combat=NativeCombatProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
         val burst=NativeBurstProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
         val reactive=NativeReactiveProgression.capture(event,victim,secondary==0&&DamageMultiplierBypass.current==null)
@@ -221,6 +241,7 @@ internal object OriginalRuntime : Listener {
             is Player -> {
                 if(event.cause!=EntityDamageEvent.DamageCause.ENTITY_ATTACK)return null
                 val item=damager.inventory.itemInMainHand
+                diagnostic.note(event,"weapon") { "type=${item.type} amount=${item.amount} tier=${EcoEnchants.getByID("eco_resonante")?.let { item.getEnchantmentLevel(it.enchantment) }}" }
                 if(!item.type.name.endsWith("_SWORD"))return null
                 source(damager,item,OriginalProcEngine.Family.ECO_RESONANTE,EquipmentSlot.HAND)
             }
@@ -232,7 +253,9 @@ internal object OriginalRuntime : Listener {
             else -> null
         } ?: return null
         val player=Bukkit.getPlayer(context.player) ?: return null
-        return if(eligibleFor(if(context.family==OriginalProcEngine.Family.ECO_RESONANTE)"eco_resonante" else "sello_glacial",player,victim))Pair(context,arrowId) else null
+        val eligible=eligibleFor(if(context.family==OriginalProcEngine.Family.ECO_RESONANTE)"eco_resonante" else "sello_glacial",player,victim)
+        diagnostic.note(event,"eligibility") { "allowed=$eligible family=${context.family} tier=${context.tier}" }
+        return if(eligible)Pair(context,arrowId) else null
     }
     private fun actor(candidate:Pending)=candidate.source?.player?:candidate.combat?.actor?:candidate.burst?.sources?.firstOrNull()?.player
     private fun linkPending(candidate:Pending){
@@ -258,6 +281,7 @@ internal object OriginalRuntime : Listener {
         val victim=candidate.victim
         val damage=NativeProcAdapters.confirmed(candidate.event,victim,candidate.before)
         observedDamage=damage
+        diagnostic.note(candidate.event,"confirm") { "acceptedDamage=$damage cancelled=${candidate.event.isCancelled} sameLastCause=${victim.lastDamageCause===candidate.event} before=${candidate.before} after=${victim.health} finalDamage=${candidate.event.finalDamage}" }
         if(damage<=0)return
         candidate.combat?.let { NativeCombatProgression.confirm(it,candidate.event,victim,candidate.before,damage) }
         candidate.reactive?.let{NativeReactiveProgression.confirm(it,candidate.event,victim,damage,candidate.eventId)}
@@ -268,34 +292,42 @@ internal object OriginalRuntime : Listener {
         if(candidate.arrow!=null&&!shots.claim(candidate.arrow,victim.uniqueId))return
         val id=if(source.family==OriginalProcEngine.Family.ECO_RESONANTE)"eco_resonante" else "sello_glacial"
         val enchant=EcoEnchants.getByID(id) ?: return
+        diagnostic.note(candidate.event,"confirmed_source") { "family=${source.family} tier=${source.tier}" }
         val itemCopy=source.item.clone()
         val holder=ItemProvidedHolder(enchant.getLevel(source.tier),itemCopy)
         val previous=proof;proof=Proof(candidate,damage)
         try {
+            diagnostic.note(candidate.event,"dispatch") { "triggerEnabled=${ConfirmedOriginalHit.isEnabled} holder=${holder.holder.id}" }
             ConfirmedOriginalHit.dispatch(player.toDispatcher(),TriggerData(player=player,victim=victim,item=itemCopy,
                 location=victim.location,event=candidate.event,value=damage),listOf(holder))
+            diagnostic.note(candidate.event,"dispatch_returned")
         } finally { proof=previous }
         } finally { NativeFirstHits.finish(candidate.eventId,observedDamage,candidate.event);NativeReactiveProgression.finish(candidate.event) }
     }
     fun execute(family: OriginalProcEngine.Family,amount: Double,data: TriggerData): Boolean {
+        data.event?.let { event -> diagnostic.note(event,"execute") { "family=$family amount=$amount proof=${proof!=null}" } }
         val confirmed=proof ?: return false
         val candidate=confirmed.pending;val src=candidate.source ?: return false
         if(src.family!=family||data.event!==candidate.event||data.player?.uniqueId!=src.player||data.victim?.uniqueId!=candidate.victim.uniqueId)return false
         val expected=if(family==OriginalProcEngine.Family.ECO_RESONANTE)2.0+src.tier*2 else 5.0+src.tier*5
         if(!amount.isFinite()||abs(amount-expected)>1e-9)return false
         val arrived=sessions[src.player]?.arrived ?: return false
+        diagnostic.note(candidate.event,"arrival") { "ageMillis=${now()-arrived} ready=${ProcGuards.arrivalReady(family,now()-arrived)}" }
         if(!ProcGuards.arrivalReady(family,now()-arrived))return false
         if(family==OriginalProcEngine.Family.SELLO_GLACIAL &&
             (!candidate.victim.isValid||candidate.victim.isDead||candidate.victim.getAttribute(Attribute.MOVEMENT_SPEED)==null||
                 (!slows.containsKey(candidate.victim.uniqueId)&&slows.size>=limit("max-active-slows",512,1024))))return false
         val activation=engine.record(family,OriginalProcEngine.Hit(candidate.eventId,src.player,src.itemId,
             candidate.victim.uniqueId,src.world,src.tier,confirmed.damage,true,true,true,false,false,false,false,false,true,false,false,false), { accepted ->
+                diagnostic.note(candidate.event,"accepted_hit") { "count=$accepted" }
                 if(family==OriginalProcEngine.Family.ECO_RESONANTE&&accepted<3)procVisualProfile(data.player!!,candidate.victim.location,"eco_resonante","progress",listOf(candidate.victim),candidate.eventId,2.0,accepted)
             }).orElse(null) ?: return false
+        diagnostic.note(candidate.event,"activation") { "family=$family value=${activation.value()}" }
         val player=Bukkit.getPlayer(src.player) ?: return false
         if(family==OriginalProcEngine.Family.ECO_RESONANTE){
             val origin=candidate.victim.location
             val targets=NativeBurstProgression.targets(player,candidate.victim,2.0,2,family="eco_resonante")
+            diagnostic.note(candidate.event,"area_candidates") { "count=${targets.size}" }
             val resolved=mutableListOf<LivingEntity>()
             targets.forEach { target ->
                 if(eligibleFor("eco_resonante",player,target)&&target.location.distanceSquared(origin)<=4&&candidate.victim.hasLineOfSight(target)&&target.noDamageTicks<=target.maximumNoDamageTicks/2){

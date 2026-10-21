@@ -1,3 +1,17 @@
+# Eco resonante: candidato de diagnóstico, causa pendiente · 2026-10-21
+
+- Runtime18afd5dc contrastado con Dev y captura externa leída. Daño real positivo
+  confirmado externamente; punto de rechazo interno aún no observado.
+- Solo EcoEnchants: diagnóstico opt-in por jugador30s/8impactos, sin polling,
+  con cleanup/stop/reset y fallo aislado. Contratos, YAML, XP y otros plugins intactos.
+- No corrección funcional ni regresión del fallo completo demostradas. No anunciar
+  Eco resonante arreglado. No instalar/lifecycle desde este chat.
+- Docs/contrato: docs/ORIGINAL-HIT-DIAGNOSTIC-20261021.md. Candidato/runtime-manifest
+  y ABI: /root/development/staging/ecosuite-original-hit-diagnostic-20261021/.
+- Tests JVM: {'tests': 154, 'failures': 0, 'errors': 0, 'skipped': 0}. Compilado limitado personal; arranque/gameplay no ejecutados.
+- Siguiente: el chat vEnchanting integra candidato y captura por primera vez las
+  etapas internas; entonces se corrige y añade regresión reproducible del rechazo.
+
 # Lore de requisitos — 2026-10-20
 
 - Entrega implementada/compilada y validada estáticamente; sin instalación/lifecycle ni prueba visual. Detalle y límites: docs/REQUIREMENT-LORE-STATE.md y docs/REQUIREMENT-LORE.md.

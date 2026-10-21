@@ -25,8 +25,9 @@ internal class OriginalProcEffect(private val family: OriginalProcEngine.Family,
     }
     override fun onTrigger(config: Config,data: TriggerData,compileData: NoCompileData): Boolean {
         val resonance=family==OriginalProcEngine.Family.ECO_RESONANTE
-        if(config.getInt("hits")!=(if(resonance)3 else 2)||config.getInt("window")!=(if(resonance)5 else 4)||
-            config.getInt("proc_cooldown")!=(if(resonance)8 else 10))return false
+        val hits=config.getInt("hits");val window=config.getInt("window");val cooldown=config.getInt("proc_cooldown")
+        OriginalRuntime.diagnostic(data,"effect_entry") { "family=$family hits=$hits window=$window cooldown=$cooldown" }
+        if(hits!=(if(resonance)3 else 2)||window!=(if(resonance)5 else 4)||cooldown!=(if(resonance)8 else 10))return false
         return OriginalRuntime.execute(family,config.getDoubleFromExpression("amount",data),data)
     }
 }
