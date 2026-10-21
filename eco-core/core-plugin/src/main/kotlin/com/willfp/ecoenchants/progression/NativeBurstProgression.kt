@@ -33,6 +33,7 @@ internal object EffectNativeBurst : Effect<NoCompileData>("native_burst") {
   optional("percent",description="Tier percentage for percentage effects.",type=ArgType.EXPRESSION)
   optional("damage",description="Flat damage for carve and damage-over-time effects.",type=ArgType.EXPRESSION)
   optional("amount",description="Bounded damage-over-time pulse count (1..32).",type=ArgType.EXPRESSION)
+  optional("visual_profile",description="Shared Mythic visual phase profile (cosmetic only).",type=ArgType.STRING)
   optional("interval",description="Damage-over-time interval in ticks (1..1200).",type=ArgType.EXPRESSION)
  }
  override fun onTrigger(config:Config,data:TriggerData,compileData:NoCompileData):Boolean {
@@ -40,7 +41,7 @@ internal object EffectNativeBurst : Effect<NoCompileData>("native_burst") {
   if(!config.has(key))return false
   return NativeBurstProgression.execute(config.getString("family"),config.getDoubleFromExpression(key,data),data,
    if(config.has("amount"))config.getIntFromExpression("amount",data)else 3,
-   if(config.has("interval"))config.getIntFromExpression("interval",data)else 20)
+   if(config.has("interval"))config.getIntFromExpression("interval",data)else 20,config.getStringOrNull("visual_profile"))
  }
 }
 internal object ConditionHuntersTrail : Condition<NoCompileData>("has_hunters_trail") {
@@ -173,7 +174,8 @@ internal object NativeBurstProgression : Listener {
  }
  private fun current(source:Context):Player?=Bukkit.getPlayer(source.player)?.takeIf{it.isOnline&&!it.isDead&&it.world.uid==source.world&&OriginalRuntime.sameSession(source.player,source.token)}
  fun execute(family:String,percent:Double,data:TriggerData)=execute(family,percent,data,3,20)
- fun execute(family:String,percent:Double,data:TriggerData,pulses:Int,interval:Int):Boolean {
+ fun execute(family:String,percent:Double,data:TriggerData,pulses:Int,interval:Int):Boolean = execute(family,percent,data,pulses,interval,null)
+ fun execute(family:String,percent:Double,data:TriggerData,pulses:Int,interval:Int,visualProfile:String?):Boolean {
   val p=proof?:return false;val source=p.source;val tier=source.tiers[family]?:return false
   val level=data.holder.holder as? EcoEnchantLevel?:return false
   if(level.enchant.id!=family||level.level!=tier||data.event!==p.event||data.player?.uniqueId!=source.player||data.victim!==p.victim||data.item?.let{id(it)}!=source.itemId)return false
@@ -184,6 +186,9 @@ internal object NativeBurstProgression : Listener {
   if(family in setOf("marca_celeste","eclipse")&&!NativeReactiveProgression.canArm(source,family))return false
   val activation=OriginalRuntime.recordNative(descriptor,OriginalProcEngine.Hit(p.eventId,source.player,source.itemId,p.victim.uniqueId,source.world,tier,p.damage,true,true,true,false,false,false,false,false,true,false,false,false)).orElse(null)?:return false
   val player=current(source)?:return false
+  val visual=visualProfile?.takeIf{owner.configYml.getBoolOrNull("original-procs.visuals.enabled")!=false}?.let { com.willfp.libreforge.visual.VisualPhases.open(it,com.willfp.libreforge.visual.VisualContext(
+   UUID.randomUUID(),"EcoEnchants",family,tier,player.uniqueId,player.eyeLocation,player.eyeLocation.direction,1200,0,source.itemId,activation.radius())) }
+  visual?.emit(com.willfp.libreforge.visual.VisualPhase.ACTIVATE,receiver=p.victim.uniqueId,location=p.victim.location)
   when(family){
    "combo"->{
     var state=recent[source.player]
@@ -204,11 +209,11 @@ internal object NativeBurstProgression : Listener {
     }
    }
    else->{targets(player,p.victim,activation.radius(),activation.maxTargets(),family=family).forEach{target ->
-    damage(source,target,if(family=="carve")percent else p.damage*percent/100,family=family,
-      onResolved=if(family=="brasa_errante")({ receiver -> OriginalRuntime.procVisualProfile(player,p.victim.location,"brasa_errante","link",listOf(receiver),p.eventId,activation.radius()) }) else null)
+    damage(source,target,if(family=="carve")percent else p.damage*percent/100,family=family,visual=visual,
+      onResolved=if(family=="brasa_errante" && visualProfile==null)({ receiver -> OriginalRuntime.procVisualProfile(player,p.victim.location,"brasa_errante","link",listOf(receiver),p.eventId,activation.radius()) }) else null)
    }}
   }
-  if(family !in setOf("brasa_errante","combo","cicatriz_ignea","bleed","wound","estela_cazador","marca_celeste","eclipse"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
+  if(visualProfile==null && family !in setOf("brasa_errante","combo","cicatriz_ignea","bleed","wound","estela_cazador","marca_celeste","eclipse"))OriginalRuntime.procVisual(player,p.victim.location,if(family=="legado_valerin")16 else 12)
   return true
  }
  internal fun offerCombo(data:TriggerData):Boolean {
@@ -223,15 +228,20 @@ internal object NativeBurstProgression : Listener {
   if(state.expires.isEmpty()){recent.remove(player.uniqueId);return false}
   return AdditiveDamageGroups.offer("ecoenchants_normal",data,1+minOf(state.expires.size,2+level.level)*level.level/100.0)
  }
- private fun damage(source:Context,target:LivingEntity,amount:Double,fresh:Boolean=false,family:String,onResolved:((LivingEntity)->Unit)?=null){
+ private fun damage(source:Context,target:LivingEntity,amount:Double,fresh:Boolean=false,family:String,onResolved:((LivingEntity)->Unit)?=null,visual:com.willfp.libreforge.visual.VisualSession?=null){
   val player=current(source)?:return
   if(!amount.isFinite()||amount<=0||!OriginalRuntime.eligibleFor(family,player,target)||!fresh&&target.noDamageTicks>target.maximumNoDamageTicks/2)return
-  val before=if(onResolved!=null)target.health else 0.0;val previous=if(onResolved!=null)target.lastDamageCause else null
+  val before=if(onResolved!=null || visual!=null)target.health else 0.0;val previous=if(onResolved!=null || visual!=null)target.lastDamageCause else null
   OriginalRuntime.withSecondaryDamage{RepeatedDamage.run(player.uniqueId,player.uniqueId,target.uniqueId){
    if(fresh)freshDamageWindow(target){target.dealDamage(amount,source=player,trueDamage=false,checkAntigrief=true)}
    else target.dealDamage(amount,source=player,trueDamage=false,checkAntigrief=true)
   }}
-  if(onResolved!=null&&NativeProcAdapters.resolvedBy(player,target,before,previous))onResolved(target)
+  if((onResolved!=null || visual!=null) && NativeProcAdapters.resolvedBy(player,target,before,previous)) {
+   onResolved?.invoke(target)
+   val event=target.lastDamageCause
+   if(event!=null)visual?.emit(com.willfp.libreforge.visual.VisualPhase.DAMAGE_CONFIRMED,receiver=target.uniqueId,
+    location=target.location,confirmedDamage=NativeProcAdapters.confirmed(event,target,before))
+  }
  }
  internal fun targets(player:Player,anchor:LivingEntity,radius:Double,maximum:Int,excluded:Set<UUID> = emptySet()):List<LivingEntity> = targets(player,anchor,radius,maximum,excluded,null)
  internal fun targets(player:Player,anchor:LivingEntity,radius:Double,maximum:Int,excluded:Set<UUID> = emptySet(),family:String?):List<LivingEntity>{
