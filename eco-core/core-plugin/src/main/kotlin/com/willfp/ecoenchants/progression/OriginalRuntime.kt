@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.progression
 
 import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.integrations.antigrief.AntigriefManager
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.libreforge.ItemProvidedHolder
@@ -45,7 +44,6 @@ internal object OriginalRuntime : Listener {
     private data class Proof(val pending: Pending,val damage: Double)
     private var proof: Proof? = null
     private var secondary = 0
-    private var mythicBroken = false
     private var registered = false
     private data class Slow(val source: UUID,val entity: LivingEntity,val modifier: AttributeModifier,var task: BukkitTask? = null)
     private val slows = mutableMapOf<UUID,Slow>()
@@ -154,7 +152,7 @@ internal object OriginalRuntime : Listener {
     fun reset() {
         pending.values.toList().forEach { it.task?.cancel() };pending.clear();pendingEntities.clear()
         slows.keys.toList().forEach { removeSlow(it) };slowsBySource.clear()
-        shots.clear();sessions.clear();engine.clear();budget.clear();proof=null;mythicBroken=false
+        shots.clear();sessions.clear();engine.clear();budget.clear();proof=null
         if(::owner.isInitialized){
             prepareVisuals()
             shots=ShotLedger(limit("max-shots",4096,4096).coerceAtLeast(1),limit("shot-ttl-seconds",30,60).coerceAtLeast(1)*1000L) { now() }
@@ -194,38 +192,12 @@ internal object OriginalRuntime : Listener {
         val snapshot=source(player,actual,OriginalProcEngine.Family.SELLO_GLACIAL,event.hand) ?: return
         shots.remember(event.projectile.uniqueId,player.uniqueId,snapshot)
     }
-    internal fun modeAllows(family:String,player:Player,target:LivingEntity,defensive:Boolean=false,allowDead:Boolean=false):Boolean {
-        val enchant=EcoEnchants.getByID(family)?:return false
-        if(!ProcGuards.combatModeAllows(enchant.config.getStringOrNull("combat-mode"),target is Player))return false
-        if(player.hasMetadata("NPC")||target.hasMetadata("NPC")||target.isInvulnerable||target.uniqueId==player.uniqueId||target is Tameable&&target.isTamed)return false
-        return if(target is Player)eligibleFor(family,player,target,allowDead,defensive)else
-            AntigriefManager.canInjure(player,target)
-    }
-    internal fun eligible(player: Player,victim: LivingEntity,allowDead: Boolean=false): Boolean = eligibleFor(null,player,victim,allowDead)
-    internal fun eligibleFor(family:String?,player: Player,victim: LivingEntity,allowDead: Boolean=false,defensive:Boolean=false): Boolean {
-        val playerTarget=victim is Player
-        if(family==null&&playerTarget)return false // Swarm's monster count and old callers remain PvE.
-        val enchant=family?.let{EcoEnchants.getByID(it)?:return false}
-        if(!ProcGuards.combatModeAllows(enchant?.config?.getStringOrNull("combat-mode"),playerTarget))return false
-        if((victim !is Enemy&&!playerTarget)||victim.uniqueId==player.uniqueId||(!allowDead&&(!victim.isValid||victim.isDead))||victim.world!=player.world||!ProcGuards.mayAct(player.isOnline,player.isDead))return false
-        if(playerTarget&&(!(victim as Player).isOnline||victim.gameMode in setOf(GameMode.CREATIVE,GameMode.SPECTATOR)||!victim.world.pvp))return false
-        val reason=if(playerTarget)"NATURAL" else victim.entitySpawnReason.name
-        val boss=victim is Boss||victim.type in setOf(EntityType.WARDEN,EntityType.ELDER_GUARDIAN)
-        val marked=victim.hasMetadata("NPC")||victim.scoreboardTags.isNotEmpty()||(!playerTarget&&(victim.persistentDataContainer.keys.isNotEmpty()||victim.customName()!=null||victim is Tameable))
-        val allied=sequenceOf(player.scoreboard,Bukkit.getScoreboardManager()?.mainScoreboard).filterNotNull().any { board ->
-            val team=board.getEntryTeam(player.name)
-            team!=null&&team==board.getEntryTeam(if(victim is Player)victim.name else victim.uniqueId.toString())
-        }
-        // Reject known cheap exclusions before Mythic/protection integrations, including swarm scans.
-        if(!ProcGuards.eligible(true,reason,boss,false,marked,allied,victim.isInvulnerable,false))return false
-        val mythic=Bukkit.getPluginManager().getPlugin("MythicMobs")
-        if(mythicBroken||(mythic!=null&&!mythic.isEnabled))return false
-        val managed=if(mythic==null)false else try { MythicExclusion.isManaged(victim) } catch(problem: LinkageError) {
-            mythicBroken=true;owner.logger.log(java.util.logging.Level.SEVERE,"Original procs blocked: MythicMobs identity API unavailable",problem);return false
-        } catch(problem: RuntimeException) {
-            mythicBroken=true;owner.logger.log(java.util.logging.Level.SEVERE,"Original procs blocked: MythicMobs identity query failed",problem);return false
-        }
-        return !managed&&(if(defensive&&victim is Player)AntigriefManager.canInjure(victim,player)else AntigriefManager.canInjure(player,victim))
+    internal fun modeAllows(family:String,player:Player,target:LivingEntity,defensive:Boolean=false,allowDead:Boolean=false):Boolean =
+        eligibleFor(family,player,target,allowDead,defensive)
+    internal fun eligible(player:Player,victim:LivingEntity,allowDead:Boolean=false):Boolean = eligibleFor("swarm",player,victim,allowDead)
+    internal fun eligibleFor(family:String?,player:Player,victim:LivingEntity,allowDead:Boolean=false,defensive:Boolean=false):Boolean {
+        val enchant=EcoEnchants.getByID(family?:"swarm") as? com.willfp.ecoenchants.enchant.impl.EcoEnchantBase ?: return false
+        return enchant.combatTargetPolicy.allows(player,victim,allowDead,defensive)
     }
     // Preserve the old entry point while using one confirmation queue for all native combat.
     fun hit(event: EntityDamageByEntityEvent) = observe(event)
@@ -273,6 +245,7 @@ internal object OriginalRuntime : Listener {
         observe(event)
         return pending[event]?.eventId
     }
+    internal fun observedSession(player: Player): UUID? = sessions[player.uniqueId]?.token
     internal fun session(player: Player): UUID? = token(player)
     internal fun age(player: Player): Long = sessions[player.uniqueId]?.let { now()-it.arrived } ?: -1
     internal fun sameSession(id: UUID,expected: UUID): Boolean = sessions[id]?.token==expected

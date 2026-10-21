@@ -29,11 +29,7 @@ internal object FilterEnchantCombatMode : com.willfp.libreforge.filters.Filter<N
  override fun getValue(config:Config,data:TriggerData?,key:String)=config.getBool(key)
  override fun isMet(data:TriggerData,value:Boolean,compileData:NoCompileData):Boolean {
   if(!value)return true
-  val family=(data.holder.holder as? com.willfp.ecoenchants.enchant.EcoEnchantLevel)?.enchant?.id?:return false
-  val player=data.player?:return false
-  val event=data.event as? EntityDamageByEntityEvent
-  val opponent=if(event?.entity===player)when(val source=event.damager){is LivingEntity->source;is Projectile->source.shooter as? LivingEntity;else->null}else data.victim as? LivingEntity
-  return opponent?.let{OriginalRuntime.modeAllows(family,player,it,event?.entity===player,allowDead=true)}?:true
+  return com.willfp.libreforge.CombatTargets.anchor(data)
  }
 }
 /** Forced legacy kill notifications do not prove an actual, uncancelled death. */

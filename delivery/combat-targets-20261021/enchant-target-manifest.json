@@ -1,0 +1,5536 @@
+{
+  "date": "2026-10-21",
+  "source": "Read-only actual Dev configuration; active YAML never overwritten",
+  "definitionCount": 129,
+  "nodes": {
+    "dev-custom": {
+      "adrenaline": {
+        "source": "adrenaline.yml",
+        "sha256": "ea426e0f73b7c7af242f2090dff0084261bc4675f9464e048113e4f22ab6a109"
+      },
+      "aguja_aurora": {
+        "source": "aguja_aurora.yml",
+        "sha256": "393ba985ffd93d14568ae9b04bbfa533bc1ef1b7409610149a20efe9f6d07bc8"
+      },
+      "ancla": {
+        "source": "ancla.yml",
+        "sha256": "42ad6d4cb80f79e5cf64b47131bd4e2cf9f50516a14931de0cf56b777401e8ab"
+      },
+      "arcane_defence": {
+        "source": "arcane_defence.yml",
+        "sha256": "1c91e4511495deff1d03346ac8f0d14886fb6744d14e8d1a1d8f6eff1db72b45"
+      },
+      "bastion": {
+        "source": "bastion.yml",
+        "sha256": "6d5cb9860fb154e5198ca964310732a92870b6156836019e0198eb5aff37d986"
+      },
+      "blackout": {
+        "source": "blackout.yml",
+        "sha256": "18c804f14fd675004f0fdda4f7563f6e5ecac574785a6a9b989e47c5c1c9b977"
+      },
+      "blast_mining": {
+        "source": "blast_mining.yml",
+        "sha256": "48457505b779032c75a92ba4345d11c2f0886bec475206d85a09938534d13118"
+      },
+      "bleed": {
+        "source": "bleed.yml",
+        "sha256": "9c68dd5dfe4785f652ded72e445dbd88a0581eb0adafe6c8af1a3cbef1dd6adb"
+      },
+      "block_breather": {
+        "source": "block_breather.yml",
+        "sha256": "55e4fcc48e115991776d1e4a149442ba4dfbcf7367f332f4b06a1efca49a842e"
+      },
+      "boss_hunter": {
+        "source": "boss_hunter.yml",
+        "sha256": "579a5792b446e1d8f8218edaf48738ce3ad1480ddf6bd6efeeca443d2a70e4f8"
+      },
+      "brasa_errante": {
+        "source": "brasa_errante.yml",
+        "sha256": "4599f9aa4823f924dda1a4b0771a94a3fcc9ce1efc1453a830cfcd2046752ee1"
+      },
+      "caffeinated": {
+        "source": "caffeinated.yml",
+        "sha256": "c04a02e41e869d574b759aea796ad88bd8eefc4b58f5b389d84eda43518d5a67"
+      },
+      "carve": {
+        "source": "carve.yml",
+        "sha256": "cdb07bda61f4e87e80854da5774d49084f78871dcc6d8bb66975656c46db0d3e"
+      },
+      "cicatriz_ignea": {
+        "source": "cicatriz_ignea.yml",
+        "sha256": "5c2b98385a78a7a5814155bc81e3732d6416319dc3c5dc30431ab7fe17220256"
+      },
+      "cleave": {
+        "source": "cleave.yml",
+        "sha256": "7eecd3ff47ae7bce2cc35a837b61293911d5bd15ef70f2cc35acf393058faf0a"
+      },
+      "combo": {
+        "source": "combo.yml",
+        "sha256": "9acac8ef80c28b4a188ea77a0ae950ac2b6b35751392df2ce6d63f1c8c8845ea"
+      },
+      "cometa": {
+        "source": "cometa.yml",
+        "sha256": "91a3c5bc2632d4af2e6f50f9d82e1f0fe51f3adbe889c24553ab7109b6799627"
+      },
+      "constelacion": {
+        "source": "constelacion.yml",
+        "sha256": "55e5e16d388018d991557c2b80fd571ed88e0d3cacef7db29386b7e9b1de6d0c"
+      },
+      "contagion": {
+        "source": "contagion.yml",
+        "sha256": "a39dedf31947346d6b931fe6372904730bf1839376338ce10b2bfdf4a2472504"
+      },
+      "crimson_slayer": {
+        "source": "crimson_slayer.yml",
+        "sha256": "6d08cc660d103f5a02d83ba0f5bfb1639852fd0698cc602d35f49bb81696a999"
+      },
+      "criticals": {
+        "source": "criticals.yml",
+        "sha256": "4109b4aba5e90c12d8eb5965a2db5c7d5081eada0b0eeb95ffe097202b91bd8a"
+      },
+      "cubism": {
+        "source": "cubism.yml",
+        "sha256": "92cd09e6cab885e082c411b2b2e97bee675f1d493c89207de455e6bfc18470c4"
+      },
+      "cuidado": {
+        "source": "cuidado.yml",
+        "sha256": "624570ae8ff5a14c6f4211da96fbd68b668765c78f5f2d527e1e1c3bea9ba7be"
+      },
+      "dexterity": {
+        "source": "dexterity.yml",
+        "sha256": "092ccd27ae009880fb97c6fd250c9afda672ac57c17a44af9e04bc56f18152d6"
+      },
+      "abrasion": {
+        "source": "disabled/abrasion.yml",
+        "sha256": "b37aaf16b76dabfb16b3da91305d3f8d213e17d436bee849d1eecf8efe39007c"
+      },
+      "wisdom": {
+        "source": "disabled/wisdom.yml",
+        "sha256": "d828097ec72f98fce6cedb7f481ef5120161bc416d22cef589885fa54a58f560"
+      },
+      "drain": {
+        "source": "drain.yml",
+        "sha256": "6c698acf2870c899148d7c7a14e34591a3976955937e64329e137f3e72358553"
+      },
+      "dynamite": {
+        "source": "dynamite.yml",
+        "sha256": "8a374c2108e20644b1543953bd5a30474458249403cdcfd0881664f23da35b7c"
+      },
+      "eclipse": {
+        "source": "eclipse.yml",
+        "sha256": "93138f35c43d99cb23df18a5c53583c0eac070e543428cf18a235af173fc5521"
+      },
+      "eco_resonante": {
+        "source": "eco_resonante.yml",
+        "sha256": "1fa98f076054ba4bac92c618cbac84fa6ff179563a5ecdfc3c8577a18a5c2325"
+      },
+      "angler": {
+        "source": "ecoskills/angler.yml",
+        "sha256": "f423ad35b4a753b3b53ee3bf5dcd3c676a67317b1efcc5410f1b3d9aba7d66eb"
+      },
+      "chemist": {
+        "source": "ecoskills/chemist.yml",
+        "sha256": "109b43c57903abcb0a39fb4523418f5278a9637251466e1c78108c4689ffaddb"
+      },
+      "combatant": {
+        "source": "ecoskills/combatant.yml",
+        "sha256": "d37ce2144c2edc4c93f871c4b17652f8b1b472fee94613e539b4cea66ed93a18"
+      },
+      "crit_luck": {
+        "source": "ecoskills/crit_luck.yml",
+        "sha256": "cabe71948dad2afc697b1306b3fb1a3032a0585f066ff36c7805ef68ddc9ebe6"
+      },
+      "forceful_crit": {
+        "source": "ecoskills/forceful_crit.yml",
+        "sha256": "d8a425372228cddb90679f758253935c056c8cc1ae98dcfc62f522925eb1c24b"
+      },
+      "green_thumb": {
+        "source": "ecoskills/green_thumb.yml",
+        "sha256": "ef2849282f7dfbcbc254cbf2947a89c9baa693b85a55564e8a61f8d8ed57903d"
+      },
+      "might": {
+        "source": "ecoskills/might.yml",
+        "sha256": "ec642f3370330c19bd22eab18d9ca2ff8d13f70762682e906992fea178ef4274"
+      },
+      "neptune": {
+        "source": "ecoskills/neptune.yml",
+        "sha256": "7679a89c988c42427c92240e99f9258a4ed35f0d856a619db1c488fe6b053ed9"
+      },
+      "overload": {
+        "source": "ecoskills/overload.yml",
+        "sha256": "342413820c806ce343cda478951a0bb1fcfce0331132082ea3e42cdb786b5d4f"
+      },
+      "prospector": {
+        "source": "ecoskills/prospector.yml",
+        "sha256": "9d474e164a55b23b174ff78dd2de85019cb43837a7cfb5e4fcc55a64a4c3cc43"
+      },
+      "sorcery": {
+        "source": "ecoskills/sorcery.yml",
+        "sha256": "223e0b02e9001671570bfa56e10efb285a80dd9c4d43aeeb5fdcd1c6d582a69d"
+      },
+      "steel_string": {
+        "source": "ecoskills/steel_string.yml",
+        "sha256": "a1a1c2b8e2d0f09fce6387678d9518c5da10d39ac25005ce222f52e8a51d5fe2"
+      },
+      "strongarm": {
+        "source": "ecoskills/strongarm.yml",
+        "sha256": "2fff15a7eeead76ecdd234b311a80db3fcee1411c1235d0140c398455bd54799"
+      },
+      "superior": {
+        "source": "ecoskills/superior.yml",
+        "sha256": "6b35610a91a5505f4544d395c65f7ae6fce93e2f2885784a9246971cb6802e19"
+      },
+      "vicious": {
+        "source": "ecoskills/vicious.yml",
+        "sha256": "818e7fce0e5264cb933b2075ca66fc71e237736079b0925d789e556f9623e9ca"
+      },
+      "woodworker": {
+        "source": "ecoskills/woodworker.yml",
+        "sha256": "449ddb42974ddf353886044ca9f6f88fc3a0d8f7a1bb43493eab16156e68a112"
+      },
+      "end_affinity": {
+        "source": "end_affinity.yml",
+        "sha256": "b6515135590abd9cf7acf1fab9fe3e7548a8367f9058c51a20f7cc1b0790f653"
+      },
+      "ender_slayer": {
+        "source": "ender_slayer.yml",
+        "sha256": "1e52920f01aa6a86a400649fd86df230caad4b9302b0bb3c22b36b656249e005"
+      },
+      "escape": {
+        "source": "escape.yml",
+        "sha256": "adcf6051a93e01dbabbc31e2a0ff9ba106d3dd114ddbfd8870117ca03b63d265"
+      },
+      "estela_cazador": {
+        "source": "estela_cazador.yml",
+        "sha256": "0f2ff4afd0e8da558f4a6efcf485383de18ebeb6e68a425f3f54ac8c5df8092c"
+      },
+      "excavation": {
+        "source": "excavation.yml",
+        "sha256": "be100af2f78cdbddcbd19192fc0721748a814eeac41829eb2a6f28277b38c1fe"
+      },
+      "experience": {
+        "source": "experience.yml",
+        "sha256": "7275fee5ae9c0fac713b6ebca7fdc2f0851c28e2344cd85403b352aa3619a394"
+      },
+      "feather_step": {
+        "source": "feather_step.yml",
+        "sha256": "bce45d60547e11d83ab4f20bd564e03ac4e06bb819784074fed5faa48e23121e"
+      },
+      "finishing": {
+        "source": "finishing.yml",
+        "sha256": "dbded3994a290db57f1c97f10a649bc07e4ff2b059fc249d1bb06253df34b7ee"
+      },
+      "first_strike": {
+        "source": "first_strike.yml",
+        "sha256": "d59e73b69d4cc67c3291d747d139a05b5f019eb3d109198f2b970ac09097a5fa"
+      },
+      "flashbang": {
+        "source": "flashbang.yml",
+        "sha256": "e9e9da39dec603c0f7f8264418a62499500edcda4daa42de9fd5578bb3bd0293"
+      },
+      "foraging": {
+        "source": "foraging.yml",
+        "sha256": "c70f70977b8048ed4d4a64811fa12ce0eeeb00f4162f6cd970bd7ae1da7437b2"
+      },
+      "fortitude": {
+        "source": "fortitude.yml",
+        "sha256": "01916bbe103f24280c55bf9f0f8e7b8913346806aa39677e43336d0d1fa25982"
+      },
+      "frost": {
+        "source": "frost.yml",
+        "sha256": "57d785ff6e074ff25e8d38b64480cd0729f8d6ffaebddd84dc1d7b63bbd423f1"
+      },
+      "getaway": {
+        "source": "getaway.yml",
+        "sha256": "dafca8651c2da16b220dcc7bb9cfc1ed3db50a47b982c5ebd2f1a69c3767fb71"
+      },
+      "giant_killer": {
+        "source": "giant_killer.yml",
+        "sha256": "39a2d6a60d1ee37dd37f1f4cf10d702691f7746fef893c2bcaef10959eba183b"
+      },
+      "goliath": {
+        "source": "goliath.yml",
+        "sha256": "3c88e334dadb0c12aedd6d39a2df2ba452b515b1fdeacd127a4006f2ae70cb6c"
+      },
+      "guardia_cristal": {
+        "source": "guardia_cristal.yml",
+        "sha256": "3db2a3ed7a36d2ebbfb724200f2aa714f3123b916bc42322410624aabb5e29fc"
+      },
+      "harvesting": {
+        "source": "harvesting.yml",
+        "sha256": "d8edff0f87a0c7124b93e043aac8bc010fc0ef38b72e712b0e193a5e5e44be59"
+      },
+      "haunting": {
+        "source": "haunting.yml",
+        "sha256": "7384a40f1b7d82ca3b27de2d3fe973d15de2eb00c68fc7203083d514d4bab927"
+      },
+      "indestructible": {
+        "source": "indestructible.yml",
+        "sha256": "2159e74ea93ca2b1c046020f7a7b384883c8333ef2e6b889eb2d7d29aa366136"
+      },
+      "infernal_touch": {
+        "source": "infernal_touch.yml",
+        "sha256": "494f55b3d02f662b7134b47a6bd716b272102f3978236154b694b956305bfee1"
+      },
+      "introversion": {
+        "source": "introversion.yml",
+        "sha256": "d6e2dd323d969d1080717cb2ca356bd6b6b3c9fbedb4412b28a7dbc779b44964"
+      },
+      "jumpshot": {
+        "source": "jumpshot.yml",
+        "sha256": "77c251226f0f33aca496c4efd47adb7296b034717173f5077fd37faa60b85003"
+      },
+      "legado_valerin": {
+        "source": "legado_valerin.yml",
+        "sha256": "bd703acba28d40fecd1682042a2da6fba9b76c1abce72d24467652c6854f675b"
+      },
+      "letalidad": {
+        "source": "letalidad.yml",
+        "sha256": "8f2c256d9d85f979eac14d30df91b918a621b0a240e5035aeb3249af2fa786ef"
+      },
+      "lifesteal": {
+        "source": "lifesteal.yml",
+        "sha256": "2a896b142470e504f0fc7012cf3b8c6c9e9b8ea8a510a9c2883fa658b4988c0f"
+      },
+      "mana_steal": {
+        "source": "mana_steal.yml",
+        "sha256": "ae71889a9658851acb794cfec02d4ee2343d436b709a68ab98bf6721c5cbe7d6"
+      },
+      "marca_celeste": {
+        "source": "marca_celeste.yml",
+        "sha256": "f9de834d443f40e5b5a104fc26fa44656dab5d8ff09e43956e50ed3519408a58"
+      },
+      "metabolism": {
+        "source": "metabolism.yml",
+        "sha256": "110d62a3496c8db539580355f52a7e5aee47259ea9e44b953219ed887fa82aa8"
+      },
+      "nether_affinity": {
+        "source": "nether_affinity.yml",
+        "sha256": "7e409421f807a80d68d401ff93d6ecd967ed143c2671023098632bc9a3fc8099"
+      },
+      "nether_prospector": {
+        "source": "nether_prospector.yml",
+        "sha256": "98d519b05df26bda99fde933cc42484381cef98dfcc7a1aa1aa78ab7196b329e"
+      },
+      "one_for_all": {
+        "source": "one_for_all.yml",
+        "sha256": "0c14bec3bbf6942f05e61f1d210074caf47d1cd2929c3de48f6ae4ed88e27d90"
+      },
+      "paso_ceniza": {
+        "source": "paso_ceniza.yml",
+        "sha256": "c80375f252179e653101155e820a1742f8bdb806d2f7e27810bfd52a01ca7b6d"
+      },
+      "poison_ivy": {
+        "source": "poison_ivy.yml",
+        "sha256": "8f22942d19bfe570299ff685c52d26b89fb8783472e41052c91e4a44991d8a1c"
+      },
+      "prosecute": {
+        "source": "prosecute.yml",
+        "sha256": "0b6cadfa780f2bf4ee77f480791677e25dd95a7dd868d8dc5c197520c7d8af5b"
+      },
+      "pulso_abisal": {
+        "source": "pulso_abisal.yml",
+        "sha256": "d994d49f83d5a97482e885b6f55e8a3abd07c6a7efee297255cc0683ae642bb5"
+      },
+      "rapid": {
+        "source": "rapid.yml",
+        "sha256": "9928d5fd20169685290a39cdfbf07a57e364d780ef1b40239f9ade8b0b1b0f92"
+      },
+      "rebote_prismatico": {
+        "source": "rebote_prismatico.yml",
+        "sha256": "a961d77dd841694d18834e63fd02cc5de6ce39069393c677047e6b6d9efdaf34"
+      },
+      "rebounding": {
+        "source": "rebounding.yml",
+        "sha256": "f8238452bda95119ce1aaeba278c109ea3fc36f8dc28a9741f9082eefb62b1cf"
+      },
+      "rejuvenate": {
+        "source": "rejuvenate.yml",
+        "sha256": "34bbebea4f3aabfa9b75b0c58ae61f450dd3252f39e717f3d6a13597d44047d5"
+      },
+      "repairing": {
+        "source": "repairing.yml",
+        "sha256": "8feec5378662734635a9ac3b40440b31f146f7ef4abe8991f1607e6986c0403b"
+      },
+      "replenish": {
+        "source": "replenish.yml",
+        "sha256": "2df8d661a181103b474d618256cc852642dccc8615094a085bb5d8a796ad402a"
+      },
+      "reposo": {
+        "source": "reposo.yml",
+        "sha256": "89a3413e08fe35db417e0079b3533f6b6cc011ac5595026be9cf806ba10c7d3d"
+      },
+      "resguardo_arcano": {
+        "source": "resguardo_arcano.yml",
+        "sha256": "49fd9b04efac38abcbbc95932279018ccf345727606e601d9ed049af03d16221"
+      },
+      "ritmo_minero": {
+        "source": "ritmo_minero.yml",
+        "sha256": "1cc1f1f56ea265ce9241acf432a1c5515fcc2ed3c83cb4ec0cb5f4fc2f182a22"
+      },
+      "rocket_saver": {
+        "source": "rocket_saver.yml",
+        "sha256": "f858497c95af620e4ae54026292f550498ac8ec308b6ff0558e00b6f921f013b"
+      },
+      "ruptura_sonica": {
+        "source": "ruptura_sonica.yml",
+        "sha256": "4dcd3bfe6c2a00bd857cd76bf1c25761efb96572968bb3aaafd868ee2fa7ac3d"
+      },
+      "sculk_slayer": {
+        "source": "sculk_slayer.yml",
+        "sha256": "1d942ae84b2eb64d72c9e5d40dca2e6501915c0721fca297bd57a2cfdd795180"
+      },
+      "sello_glacial": {
+        "source": "sello_glacial.yml",
+        "sha256": "e8cfd0bd57acd1ad6eb1de7a2e5ca09942050484ba470b22ddb59e126157f253"
+      },
+      "shulker_harvest": {
+        "source": "shulker_harvest.yml",
+        "sha256": "c94aeb52a741f2458e7f76fed46057372a9a6f39adca8474b2fea255f2ffde20"
+      },
+      "shura": {
+        "source": "shura.yml",
+        "sha256": "10f02b89a9c8079025d0421307577142ff87ab1a321727d0eeda415d5e3d599d"
+      },
+      "skull_puncture": {
+        "source": "skull_puncture.yml",
+        "sha256": "ba78a0d742caa4129a57bf44a8f4a80559d25258af83e17826cb920ecc18c36e"
+      },
+      "slaughter": {
+        "source": "slaughter.yml",
+        "sha256": "30179a62d9c57068803cd80970bd1c50a6124f027035bb37b6345d12f3cac305"
+      },
+      "slipstream": {
+        "source": "slipstream.yml",
+        "sha256": "18704d4d7e7b34ad6e8bf3ea63bd68c96fa79880381c59eab8e8b917e03ae5c7"
+      },
+      "smoldering": {
+        "source": "smoldering.yml",
+        "sha256": "ab47a9d6e2ba1f3be49f597a439e8e70245c2b56df181efcd8aaed7cbb666482"
+      },
+      "snipe": {
+        "source": "snipe.yml",
+        "sha256": "778c8f865b1dacb1de4ce90a576bf476f129fe10b1c1a476264430297415648f"
+      },
+      "soulbound": {
+        "source": "soulbound.yml",
+        "sha256": "5a4ce2900ef991df08c7efb3821ec12252ce8359bc78f6a5cbe78af4a716e536"
+      },
+      "sparks": {
+        "source": "sparks.yml",
+        "sha256": "7812d4515aa451946b7081fcfd417769ce9ef27df7d5ebc8ed6fa6e4025018de"
+      },
+      "stamina": {
+        "source": "stamina.yml",
+        "sha256": "38d8b934b55a8ccc4db4aa1f7c706558843f54c19898ceff958209f6a85ac98b"
+      },
+      "streamlining": {
+        "source": "streamlining.yml",
+        "sha256": "b5b6f2b4cfb55188859f4705b6125bfe2f34c768283d3a4223848105ff560f72"
+      },
+      "stun": {
+        "source": "stun.yml",
+        "sha256": "ee953eb21dd87db5faf17bdb84a5c0127e2f35cfc0025b0f472f4c64ecd415ad"
+      },
+      "sustento": {
+        "source": "sustento.yml",
+        "sha256": "6cdcd547b5269a6b5a178a8208b0e13a858328924ec630f8bf225e5292734c07"
+      },
+      "swarm": {
+        "source": "swarm.yml",
+        "sha256": "ad10591a7f0a87b97b0a949b7c6d6bfc2d2c4e917edc0872ca37001eb43cfb13"
+      },
+      "telekinesis": {
+        "source": "telekinesis.yml",
+        "sha256": "896dec29b943d86aa8b1afe6d52a9cc99b9f9a187ba19f2f2df8ea6b2d2d6f32"
+      },
+      "thor": {
+        "source": "thor.yml",
+        "sha256": "3777bef6d0b28ba89eecb1f1bc72cc7114b0ebdb2bd5496c8a0c5955276a7cd9"
+      },
+      "thrive": {
+        "source": "thrive.yml",
+        "sha256": "26e60bf3380a21557eb3ddda06432d9f4a8cc94dce175b9d20ec95d4738c370c"
+      },
+      "thunderbolt": {
+        "source": "thunderbolt.yml",
+        "sha256": "051bd2fdc1ce4e050cf4dc54e0cbdcab5ce309cca735028dfbb2d8b2f0654726"
+      },
+      "thunderlord": {
+        "source": "thunderlord.yml",
+        "sha256": "02b6b7c6e9e5565aa3035d8895b8609b8a85fe7c90a930e15829b58b50ccc8f8"
+      },
+      "timber": {
+        "source": "timber.yml",
+        "sha256": "813fea0e09326f7061196d715c77e6852c3fc386689b85147ad1e6a25864271a"
+      },
+      "titan_killer": {
+        "source": "titan_killer.yml",
+        "sha256": "82f6cf6120e0aca35b6f254a5c433b8a34cc1528f03e8db29e33287eb108f2de"
+      },
+      "tormenta_encadenada": {
+        "source": "tormenta_encadenada.yml",
+        "sha256": "f3c88e436073c7b216ef5343cc592ff50cbde1aeac5075c94b198ba379cd97d8"
+      },
+      "triple_strike": {
+        "source": "triple_strike.yml",
+        "sha256": "10ba3af7a1727249db0b1cf98de6aa347707bd0138e7eba7621c853513613d2c"
+      },
+      "tripleshot": {
+        "source": "tripleshot.yml",
+        "sha256": "e97154b37ebd117ca40defec2af9b224186d5bfad015c99d933263170fd2871d"
+      },
+      "ultimate_wise": {
+        "source": "ultimate_wise.yml",
+        "sha256": "32c2b71d35cd655915a6d04713438a2d13970fadc1f8ef61c76ee1b903fa3536"
+      },
+      "ultimo_recurso": {
+        "source": "ultimo_recurso.yml",
+        "sha256": "26ee248096b397c718de880a66f8fd6ab05fe88fc352c66cf37879bb60ab7d7e"
+      },
+      "vampirism": {
+        "source": "vampirism.yml",
+        "sha256": "af1bd6de5ee06fd86dc22206f2bfb764aff240224fa391a6e95975eabaf2e898"
+      },
+      "vanish": {
+        "source": "vanish.yml",
+        "sha256": "5eb43af0ea93b2fceb9d0f82e2cd36cd09c772700c9e320293078d1308798024"
+      },
+      "veinminer": {
+        "source": "veinminer.yml",
+        "sha256": "727b02ca0e0144430718965fb5334f16ca85ab7687f81f90c883019f003d274d"
+      },
+      "velo_lunar": {
+        "source": "velo_lunar.yml",
+        "sha256": "53a45986fc25368b47ff1e25ef306f59f3352c24318ce95be574457bd823d7c0"
+      },
+      "vigilia": {
+        "source": "vigilia.yml",
+        "sha256": "db34f8e592a8d1a36d8848e739fcf0e0f770fb413dd85c9a8bf9155cae5d1cd0"
+      },
+      "wound": {
+        "source": "wound.yml",
+        "sha256": "0523eddb5712ac87a132b278fecbdb08a2a74f416442563752cf9d626519fe3a"
+      },
+      "wyvern": {
+        "source": "wyvern.yml",
+        "sha256": "ab8c6ef76febc57ce02b781c03ff88e2ae05b0a844e1ed59368b120f0b34129e"
+      },
+      "xray": {
+        "source": "xray.yml",
+        "sha256": "dc540768a99a4ee14922ac2f4f66ff19db8ddf21f2f27ad1838e564ff8c24fca"
+      }
+    },
+    "dev-sync": {
+      "adrenaline": {
+        "source": "adrenaline.yml",
+        "sha256": "ea426e0f73b7c7af242f2090dff0084261bc4675f9464e048113e4f22ab6a109"
+      },
+      "aguja_aurora": {
+        "source": "aguja_aurora.yml",
+        "sha256": "393ba985ffd93d14568ae9b04bbfa533bc1ef1b7409610149a20efe9f6d07bc8"
+      },
+      "ancla": {
+        "source": "ancla.yml",
+        "sha256": "42ad6d4cb80f79e5cf64b47131bd4e2cf9f50516a14931de0cf56b777401e8ab"
+      },
+      "arcane_defence": {
+        "source": "arcane_defence.yml",
+        "sha256": "1c91e4511495deff1d03346ac8f0d14886fb6744d14e8d1a1d8f6eff1db72b45"
+      },
+      "bastion": {
+        "source": "bastion.yml",
+        "sha256": "6d5cb9860fb154e5198ca964310732a92870b6156836019e0198eb5aff37d986"
+      },
+      "blackout": {
+        "source": "blackout.yml",
+        "sha256": "18c804f14fd675004f0fdda4f7563f6e5ecac574785a6a9b989e47c5c1c9b977"
+      },
+      "blast_mining": {
+        "source": "blast_mining.yml",
+        "sha256": "48457505b779032c75a92ba4345d11c2f0886bec475206d85a09938534d13118"
+      },
+      "bleed": {
+        "source": "bleed.yml",
+        "sha256": "9c68dd5dfe4785f652ded72e445dbd88a0581eb0adafe6c8af1a3cbef1dd6adb"
+      },
+      "block_breather": {
+        "source": "block_breather.yml",
+        "sha256": "55e4fcc48e115991776d1e4a149442ba4dfbcf7367f332f4b06a1efca49a842e"
+      },
+      "boss_hunter": {
+        "source": "boss_hunter.yml",
+        "sha256": "579a5792b446e1d8f8218edaf48738ce3ad1480ddf6bd6efeeca443d2a70e4f8"
+      },
+      "brasa_errante": {
+        "source": "brasa_errante.yml",
+        "sha256": "4599f9aa4823f924dda1a4b0771a94a3fcc9ce1efc1453a830cfcd2046752ee1"
+      },
+      "caffeinated": {
+        "source": "caffeinated.yml",
+        "sha256": "c04a02e41e869d574b759aea796ad88bd8eefc4b58f5b389d84eda43518d5a67"
+      },
+      "carve": {
+        "source": "carve.yml",
+        "sha256": "cdb07bda61f4e87e80854da5774d49084f78871dcc6d8bb66975656c46db0d3e"
+      },
+      "cicatriz_ignea": {
+        "source": "cicatriz_ignea.yml",
+        "sha256": "5c2b98385a78a7a5814155bc81e3732d6416319dc3c5dc30431ab7fe17220256"
+      },
+      "cleave": {
+        "source": "cleave.yml",
+        "sha256": "7eecd3ff47ae7bce2cc35a837b61293911d5bd15ef70f2cc35acf393058faf0a"
+      },
+      "combo": {
+        "source": "combo.yml",
+        "sha256": "9acac8ef80c28b4a188ea77a0ae950ac2b6b35751392df2ce6d63f1c8c8845ea"
+      },
+      "cometa": {
+        "source": "cometa.yml",
+        "sha256": "91a3c5bc2632d4af2e6f50f9d82e1f0fe51f3adbe889c24553ab7109b6799627"
+      },
+      "constelacion": {
+        "source": "constelacion.yml",
+        "sha256": "55e5e16d388018d991557c2b80fd571ed88e0d3cacef7db29386b7e9b1de6d0c"
+      },
+      "contagion": {
+        "source": "contagion.yml",
+        "sha256": "a39dedf31947346d6b931fe6372904730bf1839376338ce10b2bfdf4a2472504"
+      },
+      "crimson_slayer": {
+        "source": "crimson_slayer.yml",
+        "sha256": "6d08cc660d103f5a02d83ba0f5bfb1639852fd0698cc602d35f49bb81696a999"
+      },
+      "criticals": {
+        "source": "criticals.yml",
+        "sha256": "4109b4aba5e90c12d8eb5965a2db5c7d5081eada0b0eeb95ffe097202b91bd8a"
+      },
+      "cubism": {
+        "source": "cubism.yml",
+        "sha256": "92cd09e6cab885e082c411b2b2e97bee675f1d493c89207de455e6bfc18470c4"
+      },
+      "cuidado": {
+        "source": "cuidado.yml",
+        "sha256": "624570ae8ff5a14c6f4211da96fbd68b668765c78f5f2d527e1e1c3bea9ba7be"
+      },
+      "dexterity": {
+        "source": "dexterity.yml",
+        "sha256": "092ccd27ae009880fb97c6fd250c9afda672ac57c17a44af9e04bc56f18152d6"
+      },
+      "abrasion": {
+        "source": "disabled/abrasion.yml",
+        "sha256": "b37aaf16b76dabfb16b3da91305d3f8d213e17d436bee849d1eecf8efe39007c"
+      },
+      "wisdom": {
+        "source": "disabled/wisdom.yml",
+        "sha256": "d828097ec72f98fce6cedb7f481ef5120161bc416d22cef589885fa54a58f560"
+      },
+      "drain": {
+        "source": "drain.yml",
+        "sha256": "6c698acf2870c899148d7c7a14e34591a3976955937e64329e137f3e72358553"
+      },
+      "dynamite": {
+        "source": "dynamite.yml",
+        "sha256": "8a374c2108e20644b1543953bd5a30474458249403cdcfd0881664f23da35b7c"
+      },
+      "eclipse": {
+        "source": "eclipse.yml",
+        "sha256": "93138f35c43d99cb23df18a5c53583c0eac070e543428cf18a235af173fc5521"
+      },
+      "eco_resonante": {
+        "source": "eco_resonante.yml",
+        "sha256": "1fa98f076054ba4bac92c618cbac84fa6ff179563a5ecdfc3c8577a18a5c2325"
+      },
+      "angler": {
+        "source": "ecoskills/angler.yml",
+        "sha256": "f423ad35b4a753b3b53ee3bf5dcd3c676a67317b1efcc5410f1b3d9aba7d66eb"
+      },
+      "chemist": {
+        "source": "ecoskills/chemist.yml",
+        "sha256": "109b43c57903abcb0a39fb4523418f5278a9637251466e1c78108c4689ffaddb"
+      },
+      "combatant": {
+        "source": "ecoskills/combatant.yml",
+        "sha256": "d37ce2144c2edc4c93f871c4b17652f8b1b472fee94613e539b4cea66ed93a18"
+      },
+      "crit_luck": {
+        "source": "ecoskills/crit_luck.yml",
+        "sha256": "cabe71948dad2afc697b1306b3fb1a3032a0585f066ff36c7805ef68ddc9ebe6"
+      },
+      "forceful_crit": {
+        "source": "ecoskills/forceful_crit.yml",
+        "sha256": "d8a425372228cddb90679f758253935c056c8cc1ae98dcfc62f522925eb1c24b"
+      },
+      "green_thumb": {
+        "source": "ecoskills/green_thumb.yml",
+        "sha256": "ef2849282f7dfbcbc254cbf2947a89c9baa693b85a55564e8a61f8d8ed57903d"
+      },
+      "might": {
+        "source": "ecoskills/might.yml",
+        "sha256": "ec642f3370330c19bd22eab18d9ca2ff8d13f70762682e906992fea178ef4274"
+      },
+      "neptune": {
+        "source": "ecoskills/neptune.yml",
+        "sha256": "7679a89c988c42427c92240e99f9258a4ed35f0d856a619db1c488fe6b053ed9"
+      },
+      "overload": {
+        "source": "ecoskills/overload.yml",
+        "sha256": "342413820c806ce343cda478951a0bb1fcfce0331132082ea3e42cdb786b5d4f"
+      },
+      "prospector": {
+        "source": "ecoskills/prospector.yml",
+        "sha256": "9d474e164a55b23b174ff78dd2de85019cb43837a7cfb5e4fcc55a64a4c3cc43"
+      },
+      "sorcery": {
+        "source": "ecoskills/sorcery.yml",
+        "sha256": "223e0b02e9001671570bfa56e10efb285a80dd9c4d43aeeb5fdcd1c6d582a69d"
+      },
+      "steel_string": {
+        "source": "ecoskills/steel_string.yml",
+        "sha256": "a1a1c2b8e2d0f09fce6387678d9518c5da10d39ac25005ce222f52e8a51d5fe2"
+      },
+      "strongarm": {
+        "source": "ecoskills/strongarm.yml",
+        "sha256": "2fff15a7eeead76ecdd234b311a80db3fcee1411c1235d0140c398455bd54799"
+      },
+      "superior": {
+        "source": "ecoskills/superior.yml",
+        "sha256": "6b35610a91a5505f4544d395c65f7ae6fce93e2f2885784a9246971cb6802e19"
+      },
+      "vicious": {
+        "source": "ecoskills/vicious.yml",
+        "sha256": "818e7fce0e5264cb933b2075ca66fc71e237736079b0925d789e556f9623e9ca"
+      },
+      "woodworker": {
+        "source": "ecoskills/woodworker.yml",
+        "sha256": "449ddb42974ddf353886044ca9f6f88fc3a0d8f7a1bb43493eab16156e68a112"
+      },
+      "end_affinity": {
+        "source": "end_affinity.yml",
+        "sha256": "b6515135590abd9cf7acf1fab9fe3e7548a8367f9058c51a20f7cc1b0790f653"
+      },
+      "ender_slayer": {
+        "source": "ender_slayer.yml",
+        "sha256": "1e52920f01aa6a86a400649fd86df230caad4b9302b0bb3c22b36b656249e005"
+      },
+      "escape": {
+        "source": "escape.yml",
+        "sha256": "adcf6051a93e01dbabbc31e2a0ff9ba106d3dd114ddbfd8870117ca03b63d265"
+      },
+      "estela_cazador": {
+        "source": "estela_cazador.yml",
+        "sha256": "0f2ff4afd0e8da558f4a6efcf485383de18ebeb6e68a425f3f54ac8c5df8092c"
+      },
+      "excavation": {
+        "source": "excavation.yml",
+        "sha256": "be100af2f78cdbddcbd19192fc0721748a814eeac41829eb2a6f28277b38c1fe"
+      },
+      "experience": {
+        "source": "experience.yml",
+        "sha256": "7275fee5ae9c0fac713b6ebca7fdc2f0851c28e2344cd85403b352aa3619a394"
+      },
+      "feather_step": {
+        "source": "feather_step.yml",
+        "sha256": "bce45d60547e11d83ab4f20bd564e03ac4e06bb819784074fed5faa48e23121e"
+      },
+      "finishing": {
+        "source": "finishing.yml",
+        "sha256": "dbded3994a290db57f1c97f10a649bc07e4ff2b059fc249d1bb06253df34b7ee"
+      },
+      "first_strike": {
+        "source": "first_strike.yml",
+        "sha256": "d59e73b69d4cc67c3291d747d139a05b5f019eb3d109198f2b970ac09097a5fa"
+      },
+      "flashbang": {
+        "source": "flashbang.yml",
+        "sha256": "e9e9da39dec603c0f7f8264418a62499500edcda4daa42de9fd5578bb3bd0293"
+      },
+      "foraging": {
+        "source": "foraging.yml",
+        "sha256": "c70f70977b8048ed4d4a64811fa12ce0eeeb00f4162f6cd970bd7ae1da7437b2"
+      },
+      "fortitude": {
+        "source": "fortitude.yml",
+        "sha256": "01916bbe103f24280c55bf9f0f8e7b8913346806aa39677e43336d0d1fa25982"
+      },
+      "frost": {
+        "source": "frost.yml",
+        "sha256": "57d785ff6e074ff25e8d38b64480cd0729f8d6ffaebddd84dc1d7b63bbd423f1"
+      },
+      "getaway": {
+        "source": "getaway.yml",
+        "sha256": "dafca8651c2da16b220dcc7bb9cfc1ed3db50a47b982c5ebd2f1a69c3767fb71"
+      },
+      "giant_killer": {
+        "source": "giant_killer.yml",
+        "sha256": "39a2d6a60d1ee37dd37f1f4cf10d702691f7746fef893c2bcaef10959eba183b"
+      },
+      "goliath": {
+        "source": "goliath.yml",
+        "sha256": "3c88e334dadb0c12aedd6d39a2df2ba452b515b1fdeacd127a4006f2ae70cb6c"
+      },
+      "guardia_cristal": {
+        "source": "guardia_cristal.yml",
+        "sha256": "3db2a3ed7a36d2ebbfb724200f2aa714f3123b916bc42322410624aabb5e29fc"
+      },
+      "harvesting": {
+        "source": "harvesting.yml",
+        "sha256": "d8edff0f87a0c7124b93e043aac8bc010fc0ef38b72e712b0e193a5e5e44be59"
+      },
+      "haunting": {
+        "source": "haunting.yml",
+        "sha256": "7384a40f1b7d82ca3b27de2d3fe973d15de2eb00c68fc7203083d514d4bab927"
+      },
+      "indestructible": {
+        "source": "indestructible.yml",
+        "sha256": "2159e74ea93ca2b1c046020f7a7b384883c8333ef2e6b889eb2d7d29aa366136"
+      },
+      "infernal_touch": {
+        "source": "infernal_touch.yml",
+        "sha256": "494f55b3d02f662b7134b47a6bd716b272102f3978236154b694b956305bfee1"
+      },
+      "introversion": {
+        "source": "introversion.yml",
+        "sha256": "d6e2dd323d969d1080717cb2ca356bd6b6b3c9fbedb4412b28a7dbc779b44964"
+      },
+      "jumpshot": {
+        "source": "jumpshot.yml",
+        "sha256": "77c251226f0f33aca496c4efd47adb7296b034717173f5077fd37faa60b85003"
+      },
+      "legado_valerin": {
+        "source": "legado_valerin.yml",
+        "sha256": "bd703acba28d40fecd1682042a2da6fba9b76c1abce72d24467652c6854f675b"
+      },
+      "letalidad": {
+        "source": "letalidad.yml",
+        "sha256": "8f2c256d9d85f979eac14d30df91b918a621b0a240e5035aeb3249af2fa786ef"
+      },
+      "lifesteal": {
+        "source": "lifesteal.yml",
+        "sha256": "2a896b142470e504f0fc7012cf3b8c6c9e9b8ea8a510a9c2883fa658b4988c0f"
+      },
+      "mana_steal": {
+        "source": "mana_steal.yml",
+        "sha256": "ae71889a9658851acb794cfec02d4ee2343d436b709a68ab98bf6721c5cbe7d6"
+      },
+      "marca_celeste": {
+        "source": "marca_celeste.yml",
+        "sha256": "f9de834d443f40e5b5a104fc26fa44656dab5d8ff09e43956e50ed3519408a58"
+      },
+      "metabolism": {
+        "source": "metabolism.yml",
+        "sha256": "110d62a3496c8db539580355f52a7e5aee47259ea9e44b953219ed887fa82aa8"
+      },
+      "nether_affinity": {
+        "source": "nether_affinity.yml",
+        "sha256": "7e409421f807a80d68d401ff93d6ecd967ed143c2671023098632bc9a3fc8099"
+      },
+      "nether_prospector": {
+        "source": "nether_prospector.yml",
+        "sha256": "98d519b05df26bda99fde933cc42484381cef98dfcc7a1aa1aa78ab7196b329e"
+      },
+      "one_for_all": {
+        "source": "one_for_all.yml",
+        "sha256": "0c14bec3bbf6942f05e61f1d210074caf47d1cd2929c3de48f6ae4ed88e27d90"
+      },
+      "paso_ceniza": {
+        "source": "paso_ceniza.yml",
+        "sha256": "c80375f252179e653101155e820a1742f8bdb806d2f7e27810bfd52a01ca7b6d"
+      },
+      "poison_ivy": {
+        "source": "poison_ivy.yml",
+        "sha256": "8f22942d19bfe570299ff685c52d26b89fb8783472e41052c91e4a44991d8a1c"
+      },
+      "prosecute": {
+        "source": "prosecute.yml",
+        "sha256": "0b6cadfa780f2bf4ee77f480791677e25dd95a7dd868d8dc5c197520c7d8af5b"
+      },
+      "pulso_abisal": {
+        "source": "pulso_abisal.yml",
+        "sha256": "d994d49f83d5a97482e885b6f55e8a3abd07c6a7efee297255cc0683ae642bb5"
+      },
+      "rapid": {
+        "source": "rapid.yml",
+        "sha256": "9928d5fd20169685290a39cdfbf07a57e364d780ef1b40239f9ade8b0b1b0f92"
+      },
+      "rebote_prismatico": {
+        "source": "rebote_prismatico.yml",
+        "sha256": "a961d77dd841694d18834e63fd02cc5de6ce39069393c677047e6b6d9efdaf34"
+      },
+      "rebounding": {
+        "source": "rebounding.yml",
+        "sha256": "f8238452bda95119ce1aaeba278c109ea3fc36f8dc28a9741f9082eefb62b1cf"
+      },
+      "rejuvenate": {
+        "source": "rejuvenate.yml",
+        "sha256": "34bbebea4f3aabfa9b75b0c58ae61f450dd3252f39e717f3d6a13597d44047d5"
+      },
+      "repairing": {
+        "source": "repairing.yml",
+        "sha256": "8feec5378662734635a9ac3b40440b31f146f7ef4abe8991f1607e6986c0403b"
+      },
+      "replenish": {
+        "source": "replenish.yml",
+        "sha256": "2df8d661a181103b474d618256cc852642dccc8615094a085bb5d8a796ad402a"
+      },
+      "reposo": {
+        "source": "reposo.yml",
+        "sha256": "89a3413e08fe35db417e0079b3533f6b6cc011ac5595026be9cf806ba10c7d3d"
+      },
+      "resguardo_arcano": {
+        "source": "resguardo_arcano.yml",
+        "sha256": "49fd9b04efac38abcbbc95932279018ccf345727606e601d9ed049af03d16221"
+      },
+      "ritmo_minero": {
+        "source": "ritmo_minero.yml",
+        "sha256": "1cc1f1f56ea265ce9241acf432a1c5515fcc2ed3c83cb4ec0cb5f4fc2f182a22"
+      },
+      "rocket_saver": {
+        "source": "rocket_saver.yml",
+        "sha256": "f858497c95af620e4ae54026292f550498ac8ec308b6ff0558e00b6f921f013b"
+      },
+      "ruptura_sonica": {
+        "source": "ruptura_sonica.yml",
+        "sha256": "4dcd3bfe6c2a00bd857cd76bf1c25761efb96572968bb3aaafd868ee2fa7ac3d"
+      },
+      "sculk_slayer": {
+        "source": "sculk_slayer.yml",
+        "sha256": "1d942ae84b2eb64d72c9e5d40dca2e6501915c0721fca297bd57a2cfdd795180"
+      },
+      "sello_glacial": {
+        "source": "sello_glacial.yml",
+        "sha256": "e8cfd0bd57acd1ad6eb1de7a2e5ca09942050484ba470b22ddb59e126157f253"
+      },
+      "shulker_harvest": {
+        "source": "shulker_harvest.yml",
+        "sha256": "c94aeb52a741f2458e7f76fed46057372a9a6f39adca8474b2fea255f2ffde20"
+      },
+      "shura": {
+        "source": "shura.yml",
+        "sha256": "10f02b89a9c8079025d0421307577142ff87ab1a321727d0eeda415d5e3d599d"
+      },
+      "skull_puncture": {
+        "source": "skull_puncture.yml",
+        "sha256": "ba78a0d742caa4129a57bf44a8f4a80559d25258af83e17826cb920ecc18c36e"
+      },
+      "slaughter": {
+        "source": "slaughter.yml",
+        "sha256": "30179a62d9c57068803cd80970bd1c50a6124f027035bb37b6345d12f3cac305"
+      },
+      "slipstream": {
+        "source": "slipstream.yml",
+        "sha256": "18704d4d7e7b34ad6e8bf3ea63bd68c96fa79880381c59eab8e8b917e03ae5c7"
+      },
+      "smoldering": {
+        "source": "smoldering.yml",
+        "sha256": "ab47a9d6e2ba1f3be49f597a439e8e70245c2b56df181efcd8aaed7cbb666482"
+      },
+      "snipe": {
+        "source": "snipe.yml",
+        "sha256": "778c8f865b1dacb1de4ce90a576bf476f129fe10b1c1a476264430297415648f"
+      },
+      "soulbound": {
+        "source": "soulbound.yml",
+        "sha256": "5a4ce2900ef991df08c7efb3821ec12252ce8359bc78f6a5cbe78af4a716e536"
+      },
+      "sparks": {
+        "source": "sparks.yml",
+        "sha256": "7812d4515aa451946b7081fcfd417769ce9ef27df7d5ebc8ed6fa6e4025018de"
+      },
+      "stamina": {
+        "source": "stamina.yml",
+        "sha256": "38d8b934b55a8ccc4db4aa1f7c706558843f54c19898ceff958209f6a85ac98b"
+      },
+      "streamlining": {
+        "source": "streamlining.yml",
+        "sha256": "b5b6f2b4cfb55188859f4705b6125bfe2f34c768283d3a4223848105ff560f72"
+      },
+      "stun": {
+        "source": "stun.yml",
+        "sha256": "ee953eb21dd87db5faf17bdb84a5c0127e2f35cfc0025b0f472f4c64ecd415ad"
+      },
+      "sustento": {
+        "source": "sustento.yml",
+        "sha256": "6cdcd547b5269a6b5a178a8208b0e13a858328924ec630f8bf225e5292734c07"
+      },
+      "swarm": {
+        "source": "swarm.yml",
+        "sha256": "ad10591a7f0a87b97b0a949b7c6d6bfc2d2c4e917edc0872ca37001eb43cfb13"
+      },
+      "telekinesis": {
+        "source": "telekinesis.yml",
+        "sha256": "896dec29b943d86aa8b1afe6d52a9cc99b9f9a187ba19f2f2df8ea6b2d2d6f32"
+      },
+      "thor": {
+        "source": "thor.yml",
+        "sha256": "3777bef6d0b28ba89eecb1f1bc72cc7114b0ebdb2bd5496c8a0c5955276a7cd9"
+      },
+      "thrive": {
+        "source": "thrive.yml",
+        "sha256": "26e60bf3380a21557eb3ddda06432d9f4a8cc94dce175b9d20ec95d4738c370c"
+      },
+      "thunderbolt": {
+        "source": "thunderbolt.yml",
+        "sha256": "051bd2fdc1ce4e050cf4dc54e0cbdcab5ce309cca735028dfbb2d8b2f0654726"
+      },
+      "thunderlord": {
+        "source": "thunderlord.yml",
+        "sha256": "02b6b7c6e9e5565aa3035d8895b8609b8a85fe7c90a930e15829b58b50ccc8f8"
+      },
+      "timber": {
+        "source": "timber.yml",
+        "sha256": "813fea0e09326f7061196d715c77e6852c3fc386689b85147ad1e6a25864271a"
+      },
+      "titan_killer": {
+        "source": "titan_killer.yml",
+        "sha256": "82f6cf6120e0aca35b6f254a5c433b8a34cc1528f03e8db29e33287eb108f2de"
+      },
+      "tormenta_encadenada": {
+        "source": "tormenta_encadenada.yml",
+        "sha256": "f3c88e436073c7b216ef5343cc592ff50cbde1aeac5075c94b198ba379cd97d8"
+      },
+      "triple_strike": {
+        "source": "triple_strike.yml",
+        "sha256": "10ba3af7a1727249db0b1cf98de6aa347707bd0138e7eba7621c853513613d2c"
+      },
+      "tripleshot": {
+        "source": "tripleshot.yml",
+        "sha256": "e97154b37ebd117ca40defec2af9b224186d5bfad015c99d933263170fd2871d"
+      },
+      "ultimate_wise": {
+        "source": "ultimate_wise.yml",
+        "sha256": "32c2b71d35cd655915a6d04713438a2d13970fadc1f8ef61c76ee1b903fa3536"
+      },
+      "ultimo_recurso": {
+        "source": "ultimo_recurso.yml",
+        "sha256": "26ee248096b397c718de880a66f8fd6ab05fe88fc352c66cf37879bb60ab7d7e"
+      },
+      "vampirism": {
+        "source": "vampirism.yml",
+        "sha256": "af1bd6de5ee06fd86dc22206f2bfb764aff240224fa391a6e95975eabaf2e898"
+      },
+      "vanish": {
+        "source": "vanish.yml",
+        "sha256": "5eb43af0ea93b2fceb9d0f82e2cd36cd09c772700c9e320293078d1308798024"
+      },
+      "veinminer": {
+        "source": "veinminer.yml",
+        "sha256": "727b02ca0e0144430718965fb5334f16ca85ab7687f81f90c883019f003d274d"
+      },
+      "velo_lunar": {
+        "source": "velo_lunar.yml",
+        "sha256": "53a45986fc25368b47ff1e25ef306f59f3352c24318ce95be574457bd823d7c0"
+      },
+      "vigilia": {
+        "source": "vigilia.yml",
+        "sha256": "db34f8e592a8d1a36d8848e739fcf0e0f770fb413dd85c9a8bf9155cae5d1cd0"
+      },
+      "wound": {
+        "source": "wound.yml",
+        "sha256": "0523eddb5712ac87a132b278fecbdb08a2a74f416442563752cf9d626519fe3a"
+      },
+      "wyvern": {
+        "source": "wyvern.yml",
+        "sha256": "ab8c6ef76febc57ce02b781c03ff88e2ae05b0a844e1ed59368b120f0b34129e"
+      },
+      "xray": {
+        "source": "xray.yml",
+        "sha256": "dc540768a99a4ee14922ac2f4f66ff19db8ddf21f2f27ad1838e564ff8c24fca"
+      }
+    }
+  },
+  "differences": [],
+  "policyPrecedence": "intrinsic mechanic and combat-mode; per-enchant entity selection; denials/protections always win",
+  "entries": [
+    {
+      "id": "abrasion",
+      "effects": [
+        "damage_armor"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 22,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "adrenaline",
+      "effects": [
+        "potion_effect"
+      ],
+      "triggers": [
+        "shield_block"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "aguja_aurora",
+      "effects": [
+        "native_reactive"
+      ],
+      "triggers": [
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 30,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ancla",
+      "effects": [
+        "native_reactive"
+      ],
+      "triggers": [
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 22,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "angler",
+      "effects": [
+        "skill_xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 4,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "arcane_defence",
+      "effects": [
+        "cancel_event"
+      ],
+      "triggers": [
+        "take_damage"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "damage_cause": [
+            "poison",
+            "magic"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 12,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "bastion",
+      "effects": [
+        "total_damage_multiplier"
+      ],
+      "triggers": [
+        "active_ability_shield_block"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "blackout",
+      "effects": [
+        "potion_effect"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 14,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "blast_mining",
+      "effects": [
+        "create_explosion",
+        "mine_radius"
+      ],
+      "triggers": [
+        "mine_block"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 22,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards",
+        "deferred explosion captures original context; actual entity damage is filtered; block/XP mechanics unchanged"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "bleed",
+      "effects": [
+        "native_burst",
+        "potion_effect"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 17,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "block_breather",
+      "effects": [
+        "cancel_event"
+      ],
+      "triggers": [
+        "take_damage"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "damage_cause": [
+            "suffocation"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 5,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "boss_hunter",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "is_boss": true,
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 30,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "brasa_errante",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 21,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "caffeinated",
+      "effects": [
+        "attack_speed_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        },
+        {
+          "id": "is_sprinting"
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "carve",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 8,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "chemist",
+      "effects": [
+        "skill_xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cicatriz_ignea",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 32,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cleave",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 4,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "combatant",
+      "effects": [
+        "skill_xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 9,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "combo",
+      "effects": [
+        "native_burst",
+        "recent_kills_multiplier"
+      ],
+      "triggers": [
+        "confirmed_native_burst",
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 24,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cometa",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 35,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "constelacion",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 35,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "contagion",
+      "effects": [
+        "play_sound",
+        "spawn_potion_cloud"
+      ],
+      "triggers": [
+        "projectile_hit"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "cloud application per actual recipient; original session or explicit death-context; respawn/world/quit/removal cleanup"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "crimson_slayer",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 30,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXX"
+            ]
+          }
+        },
+        {
+          "id": "in_world",
+          "args": {
+            "world": "world_crimson"
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "crit_luck",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 9,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "criticals",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 14,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cubism",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack",
+        "melee_attack"
+      ],
+      "combatMode": "pve",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "entities": [
+            "slime",
+            "magma_cube"
+          ],
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 3,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "cuidado",
+      "effects": [
+        "guard_immature_crops"
+      ],
+      "triggers": [
+        "manual_crop_guard"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 7,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "dexterity",
+      "effects": [
+        "attack_speed_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "drain",
+      "effects": [
+        "give_health"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 15,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "eligible opponent anchors healing to wearer; genuine_kill retained where configured"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "dynamite",
+      "effects": [
+        "break_block",
+        "create_explosion",
+        "mine_radius",
+        "play_sound"
+      ],
+      "triggers": [
+        "alt_click"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "blocks": [
+            "stone",
+            "granite",
+            "diorite",
+            "andesite",
+            "deepslate",
+            "tuff",
+            "calcite",
+            "dripstone_block",
+            "netherrack",
+            "blackstone",
+            "basalt",
+            "smooth_basalt",
+            "end_stone",
+            "cobblestone",
+            "cobbled_deepslate",
+            "coal_ore",
+            "deepslate_coal_ore",
+            "copper_ore",
+            "deepslate_copper_ore",
+            "iron_ore",
+            "deepslate_iron_ore",
+            "gold_ore",
+            "deepslate_gold_ore",
+            "redstone_ore",
+            "deepslate_redstone_ore",
+            "lapis_ore",
+            "deepslate_lapis_ore",
+            "diamond_ore",
+            "deepslate_diamond_ore",
+            "emerald_ore",
+            "deepslate_emerald_ore",
+            "nether_gold_ore",
+            "nether_quartz_ore",
+            "ancient_debris",
+            "nexo:enderita_primordial_remnants",
+            "nexo:crimson_ore",
+            "nexo:pyrite_ore",
+            "nexo:galena_ore"
+          ]
+        },
+        {
+          "blocks": [
+            "stone",
+            "granite",
+            "diorite",
+            "andesite",
+            "deepslate",
+            "tuff",
+            "calcite",
+            "dripstone_block",
+            "netherrack",
+            "blackstone",
+            "basalt",
+            "smooth_basalt",
+            "end_stone",
+            "cobblestone",
+            "cobbled_deepslate",
+            "coal_ore",
+            "deepslate_coal_ore",
+            "copper_ore",
+            "deepslate_copper_ore",
+            "iron_ore",
+            "deepslate_iron_ore",
+            "gold_ore",
+            "deepslate_gold_ore",
+            "redstone_ore",
+            "deepslate_redstone_ore",
+            "lapis_ore",
+            "deepslate_lapis_ore",
+            "diamond_ore",
+            "deepslate_diamond_ore",
+            "emerald_ore",
+            "deepslate_emerald_ore",
+            "nether_gold_ore",
+            "nether_quartz_ore",
+            "ancient_debris",
+            "nexo:enderita_primordial_remnants",
+            "nexo:crimson_ore",
+            "nexo:pyrite_ore",
+            "nexo:galena_ore"
+          ],
+          "not_blocks": [
+            "obsidian",
+            "barrier",
+            "bedrock",
+            "end_gateway",
+            "end_portal",
+            "end_portal_frame",
+            "#containers"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "id": "is_sneaking"
+        },
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 24,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards",
+        "deferred explosion captures original context; actual entity damage is filtered; block/XP mechanics unchanged"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "eclipse",
+      "effects": [
+        "native_burst",
+        "native_reactive"
+      ],
+      "triggers": [
+        "confirmed_native_burst",
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 35,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "eco_resonante",
+      "effects": [
+        "resonant_pulse"
+      ],
+      "triggers": [
+        "confirmed_original_hit"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 16,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "end_affinity",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack",
+        "melee_attack",
+        "trident_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "in_world",
+          "args": {
+            "world": "world_the_end"
+          }
+        },
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 12,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ender_slayer",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "pve",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "entities": [
+            "enderman",
+            "endermite",
+            "ender_dragon"
+          ],
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 11,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "escape",
+      "effects": [
+        "potion_effect"
+      ],
+      "triggers": [
+        "take_entity_damage"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 6,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "estela_cazador",
+      "effects": [
+        "movement_speed_multiplier",
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 28,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVIII"
+            ]
+          }
+        },
+        {
+          "id": "has_hunters_trail"
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "excavation",
+      "effects": [
+        "drill"
+      ],
+      "triggers": [
+        "mine_block"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "experience",
+      "effects": [
+        "double_mob_xp"
+      ],
+      "triggers": [
+        "entity_xp_drop"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 8,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "feather_step",
+      "effects": [
+        "feather_step"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 7,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "finishing",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 14,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "first_strike",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "on_max_health": true,
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 16,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "flashbang",
+      "effects": [
+        "play_sound",
+        "potion_effect"
+      ],
+      "triggers": [
+        "bow_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [
+        {
+          "id": "victim_as_player"
+        }
+      ],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "foraging",
+      "effects": [
+        "multiply_drops"
+      ],
+      "triggers": [
+        "block_item_drop"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 8,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "forceful_crit",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 20,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "fortitude",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack",
+        "melee_attack",
+        "trident_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 16,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "frost",
+      "effects": [
+        "set_freeze_ticks"
+      ],
+      "triggers": [
+        "bow_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 12,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "getaway",
+      "effects": [
+        "movement_speed_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 7,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVII"
+            ]
+          }
+        },
+        {
+          "id": "below_health_percent",
+          "args": {
+            "percent": 20
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "giant_killer",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 15,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "goliath",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "green_thumb",
+      "effects": [
+        "skill_xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 9,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "guardia_cristal",
+      "effects": [
+        "native_reactive"
+      ],
+      "triggers": [
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "harvesting",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 8,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "haunting",
+      "effects": [
+        "spawn_potion_cloud"
+      ],
+      "triggers": [
+        "death"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "cloud application per actual recipient; original session or explicit death-context; respawn/world/quit/removal cleanup"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "indestructible",
+      "effects": [],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 30,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "infernal_touch",
+      "effects": [
+        "autosmelt"
+      ],
+      "triggers": [
+        "block_item_drop"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 12,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "introversion",
+      "effects": [
+        "add_damage"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "pvp",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "entities": [
+            "player"
+          ],
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 12,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "jumpshot",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 8,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVIII"
+            ]
+          }
+        },
+        {
+          "id": "in_air"
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "legado_valerin",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 35,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "letalidad",
+      "effects": [
+        "lethality_stack"
+      ],
+      "triggers": [
+        "confirmed_native_combat"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 14,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "lifesteal",
+      "effects": [
+        "give_health",
+        "spawn_particle"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 15,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "eligible opponent anchors healing to wearer; genuine_kill retained where configured"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "mana_steal",
+      "effects": [
+        "mana_recovery"
+      ],
+      "triggers": [
+        "confirmed_native_combat"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 20,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "marca_celeste",
+      "effects": [
+        "native_burst",
+        "native_reactive"
+      ],
+      "triggers": [
+        "confirmed_native_burst",
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 21,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "metabolism",
+      "effects": [
+        "food_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "might",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "neptune",
+      "effects": [
+        "add_stat",
+        "multiply_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 33,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "nether_affinity",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack",
+        "melee_attack",
+        "trident_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "in_world",
+          "args": {
+            "world": "world_nether"
+          }
+        },
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 15,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "nether_prospector",
+      "effects": [
+        "multiply_drops"
+      ],
+      "triggers": [
+        "block_item_drop"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "player_placed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 28,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "one_for_all",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 20,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "overload",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 33,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "paso_ceniza",
+      "effects": [
+        "native_reactive"
+      ],
+      "triggers": [
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 35,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "poison_ivy",
+      "effects": [
+        "potion_effect"
+      ],
+      "triggers": [
+        "take_entity_damage"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 11,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "prosecute",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "prospector",
+      "effects": [
+        "skill_xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "pulso_abisal",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 28,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rapid",
+      "effects": [
+        "rapid_bows"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 22,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rebote_prismatico",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 30,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rebounding",
+      "effects": [
+        "damage_victim"
+      ],
+      "triggers": [
+        "shield_block"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 14,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "actual recipient guarded in dealDamage even without use_source"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rejuvenate",
+      "effects": [
+        "regen_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "repairing",
+      "effects": [],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 15,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "replenish",
+      "effects": [],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 7,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "reposo",
+      "effects": [
+        "regen_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 23,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXIII"
+            ]
+          }
+        },
+        {
+          "id": "out_of_confirmed_combat"
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "resguardo_arcano",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "take_damage"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ritmo_minero",
+      "effects": [
+        "mining_speed_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 15,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXV"
+            ]
+          }
+        },
+        {
+          "id": "has_mining_rhythm"
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "rocket_saver",
+      "effects": [
+        "elytra_boost_save_chance"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ruptura_sonica",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 33,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sculk_slayer",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack",
+        "melee_attack",
+        "trident_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 5,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lV"
+            ]
+          }
+        },
+        {
+          "id": "in_world",
+          "args": {
+            "world": "world_warden"
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sello_glacial",
+      "effects": [
+        "glacial_seal"
+      ],
+      "triggers": [
+        "confirmed_original_hit"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "shulker_harvest",
+      "effects": [
+        "multiply_drops"
+      ],
+      "triggers": [
+        "entity_item_drop"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 24,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "shura",
+      "effects": [
+        "crit_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 26,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVI"
+            ]
+          }
+        },
+        {
+          "id": "below_health_percent",
+          "args": {
+            "percent": 50
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "skull_puncture",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "headshot"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 16,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "slaughter",
+      "effects": [
+        "add_damage"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "pve",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "entities": [
+            "cow",
+            "sheep",
+            "pig",
+            "horse",
+            "parrot",
+            "cat",
+            "ocelot",
+            "fox",
+            "villager",
+            "axolotl",
+            "chicken"
+          ],
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 12,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "slipstream",
+      "effects": [
+        "movement_speed_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 9,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "smoldering",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "pve",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "entities": [
+            "blaze"
+          ],
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 23,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "snipe",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "bow_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 6,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sorcery",
+      "effects": [
+        "skill_xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "soulbound",
+      "effects": [],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sparks",
+      "effects": [
+        "particle_animation",
+        "smite"
+      ],
+      "triggers": [
+        "catch_entity"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 16,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVI"
+            ]
+          }
+        },
+        {
+          "id": "is_storm"
+        }
+      ],
+      "mutators": [
+        {
+          "id": "location_to_victim"
+        }
+      ],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "stamina",
+      "effects": [
+        "hunger_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 5,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "steel_string",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 17,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "streamlining",
+      "effects": [
+        "movement_speed_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 7,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lVII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "strongarm",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 16,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "stun",
+      "effects": [
+        "strip_ai"
+      ],
+      "triggers": [
+        "bow_attack",
+        "melee_attack",
+        "trident_attack"
+      ],
+      "combatMode": "pve",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 13,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "superior",
+      "effects": [
+        "multiply_all_stats"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "sustento",
+      "effects": [
+        "give_food"
+      ],
+      "triggers": [
+        "skill_mob_kill"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "text": [
+            "melee"
+          ],
+          "from_spawner": false,
+          "entities": [
+            "zombie",
+            "husk",
+            "drowned",
+            "skeleton",
+            "stray",
+            "bogged",
+            "wither_skeleton",
+            "creeper",
+            "spider",
+            "cave_spider",
+            "witch",
+            "slime",
+            "magma_cube",
+            "blaze",
+            "ghast",
+            "guardian",
+            "pillager",
+            "vindicator",
+            "evoker",
+            "ravager",
+            "silverfish",
+            "endermite",
+            "phantom",
+            "breeze"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 1,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lI"
+            ]
+          }
+        },
+        {
+          "id": "below_hunger_percent",
+          "args": {
+            "percent": 95
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "swarm",
+      "effects": [
+        "swarm_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 35,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "telekinesis",
+      "effects": [
+        "telekinesis"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 16,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thor",
+      "effects": [
+        "strike_lightning"
+      ],
+      "triggers": [
+        "bow_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 24,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXIV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "delayed original context; bind lightning and filter actual entity damage"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thrive",
+      "effects": [
+        "bonus_health"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 5,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thunderbolt",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 20,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "thunderlord",
+      "effects": [
+        "third_hit_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 20,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "timber",
+      "effects": [
+        "mine_vein"
+      ],
+      "triggers": [
+        "mine_block"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "blocks": [
+            "oak_wood",
+            "dark_oak_wood",
+            "acacia_wood",
+            "jungle_wood",
+            "birch_wood",
+            "mangrove_wood",
+            "crimson_stem",
+            "spruce_wood",
+            "warped_stem",
+            "oak_log",
+            "dark_oak_log",
+            "acacia_log",
+            "jungle_log",
+            "birch_log",
+            "spruce_log",
+            "mangrove_log",
+            "cherry_log",
+            "MUSHROOM_STEM",
+            "BROWN_MUSHROOM_BLOCK",
+            "RED_MUSHROOM_BLOCK",
+            "pale_oak_log"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 20,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "titan_killer",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "pvp",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "entities": [
+            "player"
+          ],
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 28,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "tormenta_encadenada",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 35,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "triple_strike",
+      "effects": [
+        "first_hits_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 19,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "tripleshot",
+      "effects": [
+        "run_chain"
+      ],
+      "triggers": [
+        "shoot_bow"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 19,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXIX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ultimate_wise",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 20,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "ultimo_recurso",
+      "effects": [
+        "last_resort"
+      ],
+      "triggers": [
+        "confirmed_native_combat"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 30,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vampirism",
+      "effects": [
+        "give_health"
+      ],
+      "triggers": [
+        "kill"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "genuine_kill": true,
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 15,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "eligible opponent anchors healing to wearer; genuine_kill retained where configured"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vanish",
+      "effects": [
+        "potion_effect"
+      ],
+      "triggers": [
+        "take_entity_damage"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 9,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lIX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "control/status root policy; intrinsic Mob-only AI restriction retained"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "veinminer",
+      "effects": [
+        "mine_vein"
+      ],
+      "triggers": [
+        "mine_block"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "blocks": [
+            "coal_ore",
+            "iron_ore",
+            "copper_ore",
+            "gold_ore",
+            "ancient_debris",
+            "lapis_ore",
+            "diamond_ore",
+            "redstone_ore",
+            "nether_quartz_ore",
+            "gilded_blackstone",
+            "nether_gold_ore",
+            "glowstone",
+            "deepslate_coal_ore",
+            "deepslate_iron_ore",
+            "deepslate_copper_ore",
+            "deepslate_gold_ore",
+            "deepslate_lapis_ore",
+            "deepslate_diamond_ore",
+            "deepslate_redstone_ore"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 28,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "velo_lunar",
+      "effects": [
+        "native_reactive"
+      ],
+      "triggers": [
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 32,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXII"
+            ]
+          }
+        },
+        {
+          "id": "is_night"
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vicious",
+      "effects": [
+        "add_stat"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 26,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVI"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "Permanent bonus to wearer; no entity target. Stats/attributes and their native consumers are unchanged."
+      ],
+      "scope": "wearer_bonus_not_recipient_effect",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "vigilia",
+      "effects": [
+        "native_reactive"
+      ],
+      "triggers": [
+        "native_reactive_action"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 33,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXXIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "wisdom",
+      "effects": [
+        "xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 27,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "woodworker",
+      "effects": [
+        "skill_xp_multiplier"
+      ],
+      "triggers": [],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 10,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lX"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "wound",
+      "effects": [
+        "native_burst"
+      ],
+      "triggers": [
+        "confirmed_native_burst"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 18,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "OriginalRuntime shared policy at capture/confirmation/recipient and native scheduled revalidation"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "wyvern",
+      "effects": [
+        "damage_multiplier"
+      ],
+      "triggers": [
+        "melee_attack"
+      ],
+      "combatMode": "both",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [
+        {
+          "enchant_combat_mode": true
+        }
+      ],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 28,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXVIII"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary"
+      ],
+      "scope": "entity_combat_policy_connected",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    },
+    {
+      "id": "xray",
+      "effects": [
+        "glow_nearby_blocks",
+        "play_sound"
+      ],
+      "triggers": [
+        "alt_click"
+      ],
+      "combatMode": "both (inherited)",
+      "combatTargets": "any attackable living entity (inherited)",
+      "intrinsicFilters": [],
+      "conditions": [
+        {
+          "id": "has_skill_level",
+          "args": {
+            "skill": "enchanting",
+            "level": 25,
+            "not-met-lines": [
+              "&cRequiere Nivel de Encantador &lXXV"
+            ]
+          }
+        }
+      ],
+      "mutators": [],
+      "routes": [
+        "holder-policy at common entity-combat effect boundary",
+        "utility/reward trigger and its existing restrictions retained; no new XP or rewards"
+      ],
+      "scope": "utility_or_reward_intrinsic_route_preserved",
+      "definitionExamined": true,
+      "gameplayVerified": false
+    }
+  ],
+  "pending": [
+    "Real Dev activation by owner chat",
+    "Per-ID gameplay including secondary recipients, region plugins, NPC/pets, Mythic/boss real immunities, transfer/reconnect/reload",
+    "Spark under 60-100 users; no measured performance claim"
+  ],
+  "installed": false
+}

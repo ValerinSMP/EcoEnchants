@@ -1,0 +1,62 @@
+{
+  "buildHost": "personal",
+  "limitedExecutor": true,
+  "toolchain": "Existing wrappers/module JVM targets preserved; JDK25 build executor; no HomeSV build",
+  "unitTests": {
+    "EcoEnchants": {
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "LibreForge": {
+      "tests": 174,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "actualComposedJar": {
+    "abi": {
+      "LibreForgeExistingMethods": 5999,
+      "EcoEnchantsExistingMethods": 1210,
+      "passed": true
+    },
+    "reviewedClosure": {
+      "methods": 591,
+      "memberReferences": 4485,
+      "passed": true
+    },
+    "bootstrapClosure": {
+      "methods": 1304,
+      "memberReferences": 9454,
+      "passed": true
+    },
+    "policyAndScopeRuntime": {
+      "passed": true,
+      "configAndEntities": "simulated",
+      "selectionsWithoutConfigReads": 10000
+    },
+    "actualHandleLoad": true,
+    "registryStorage": "simulated",
+    "oldBrokenJarRejected": true
+  },
+  "preserved": {
+    "allSdkEntriesByteIdentical": true,
+    "allNonClassEntriesByteIdentical": true,
+    "foreignItemTargetsAndCountersExcluded": true,
+    "ecoAndEcoSkillsUnchanged": true
+  },
+  "configuredIDsExamined": 129,
+  "liveYamlModified": false,
+  "installed": false,
+  "active": false,
+  "gameplayVerified": false,
+  "sparkMeasured": false,
+  "pending": [
+    "Actual Paper enable/listener registration on Dev",
+    "Gameplay coverage per ID including protections, posthumous cloud/respawn, reload, transfer and reconnect",
+    "Real end-to-end purchases/XP, although their SDK and implementations remain byte-identical",
+    "Representative 60-100 user, 30-40 active load measurement"
+  ]
+}

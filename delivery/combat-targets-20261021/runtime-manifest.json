@@ -1,0 +1,69 @@
+{
+  "artifacts": [
+    {
+      "repo": "LibreForge",
+      "file": "LibreForge-2026.27-combat-targets.jar",
+      "sha256": "1035c2610a8dd91c4fd6425a809ed2f64d0369c2c9c8b100bebcbc22082c2368",
+      "baseline": "cc3a4c063e8f286aba82cf7469756d079c18b3ac245bd50e912840516bb25426",
+      "changes": [
+        "com/willfp/libreforge/CombatTargetHolder$DefaultImpls.class",
+        "com/willfp/libreforge/CombatTargetHolder.class",
+        "com/willfp/libreforge/CombatTargets$Bound.class",
+        "com/willfp/libreforge/CombatTargets$Context.class",
+        "com/willfp/libreforge/CombatTargets.class",
+        "com/willfp/libreforge/DamageUtilsKt.class",
+        "com/willfp/libreforge/effects/Effect.class",
+        "com/willfp/libreforge/effects/ElementLike.class",
+        "com/willfp/libreforge/effects/impl/EffectAOE.class",
+        "com/willfp/libreforge/effects/impl/EffectBleed.class",
+        "com/willfp/libreforge/effects/impl/EffectChainLightning.class",
+        "com/willfp/libreforge/effects/impl/EffectCreateExplosion.class",
+        "com/willfp/libreforge/effects/impl/EffectDamageNearbyEntities.class",
+        "com/willfp/libreforge/effects/impl/EffectFrostNova.class",
+        "com/willfp/libreforge/effects/impl/EffectSetVelocity.class",
+        "com/willfp/libreforge/effects/impl/EffectSetVictimVelocity.class",
+        "com/willfp/libreforge/effects/impl/EffectShockwave.class",
+        "com/willfp/libreforge/effects/impl/EffectSoulRip.class",
+        "com/willfp/libreforge/effects/impl/EffectSpawnPotionCloud.class",
+        "com/willfp/libreforge/effects/impl/EffectStrikeLightning.class",
+        "com/willfp/libreforge/effects/impl/EffectStun.class",
+        "com/willfp/libreforge/effects/impl/EffectSwarm.class",
+        "com/willfp/libreforge/effects/impl/EffectTimeBomb.class",
+        "com/willfp/libreforge/effects/impl/EffectVortex.class",
+        "com/willfp/libreforge/triggers/TriggerData.class"
+      ],
+      "removedObsoleteNestedClasses": [],
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    },
+    {
+      "repo": "EcoEnchants",
+      "file": "EcoEnchants-2026.27-combat-targets-all.jar",
+      "sha256": "5c56242290c5683c9baf2853908fa90accde19f1418fa117f007130819629ca5",
+      "baseline": "78eff168d845d1bf6ab2fb1709f9da33da2564833388ca82da6b187e9c9d3e50",
+      "changes": [
+        "com/willfp/ecoenchants/enchant/EcoEnchantLevel.class",
+        "com/willfp/ecoenchants/enchant/impl/EcoEnchantBase.class",
+        "com/willfp/ecoenchants/progression/CombatTargetPolicy$Companion.class",
+        "com/willfp/ecoenchants/progression/CombatTargetPolicy.class",
+        "com/willfp/ecoenchants/progression/FilterEnchantCombatMode.class",
+        "com/willfp/ecoenchants/progression/OriginalRuntime$Pending.class",
+        "com/willfp/ecoenchants/progression/OriginalRuntime$Proof.class",
+        "com/willfp/ecoenchants/progression/OriginalRuntime$Session.class",
+        "com/willfp/ecoenchants/progression/OriginalRuntime$Slow.class",
+        "com/willfp/ecoenchants/progression/OriginalRuntime$Source.class",
+        "com/willfp/ecoenchants/progression/OriginalRuntime$VisualScene.class",
+        "com/willfp/ecoenchants/progression/OriginalRuntime.class"
+      ],
+      "removedObsoleteNestedClasses": [],
+      "installed": false,
+      "active": false,
+      "gameplayVerified": false
+    }
+  ],
+  "requiresUnchanged": {
+    "eco": "5ca36aa859cef009156cef5e821ad7907e62f11006c8cde7382130799542544f",
+    "EcoSkills": "0c936eecdc0557244ea0546d5e4e8d3f84b6d37fe2b0743e64f876a21999f4ca"
+  }
+}

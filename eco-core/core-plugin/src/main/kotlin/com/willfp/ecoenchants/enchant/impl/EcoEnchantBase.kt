@@ -34,6 +34,10 @@ abstract class EcoEnchantBase(
 
     final override val config by lazy { _config ?: loadConfig()!! }
 
+    internal val combatTargetPolicy = com.willfp.ecoenchants.progression.CombatTargetPolicy.compile(config) {
+        plugin.logger.warning("Enchantment $id: $it")
+    }
+
     override lateinit var enchantment: Enchantment
         @Internal set
 

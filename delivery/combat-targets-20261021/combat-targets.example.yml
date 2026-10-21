@@ -1,0 +1,9 @@
+# Añadir opcionalmente en la raíz de UN enchant; targets sigue describiendo el objeto compatible.
+combat-mode: both
+combat-targets:
+  pvp: true
+  pve: true
+  # Omitir include-types para admitir cualquier especie viva atacable.
+  # include-types: [COW, SHEEP, ZOMBIE, PLAYER]
+  exclude-types: [VILLAGER]
+# Los filtros propios, condiciones, PvP/protecciones y exclusiones de mascotas/NPC prevalecen.
