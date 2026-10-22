@@ -34,4 +34,23 @@ class EnchantUpgradeTest {
         assertFalse(isPurchaseUnlock("below_health_percent"))
         assertFalse(isPurchaseUnlock("is_sneaking"))
     }
+    @Test fun `replacement never silently removes reserved or special enchants`() {
+        for(id in listOf("indestructible","soulbound","one_for_all","ultimate_wise","repairing","bastion","crimson_slayer")) assertTrue(reservedReplacementConflict(id,true,"normal"))
+        assertTrue(reservedReplacementConflict("other_special",true,"special"))
+        assertFalse(reservedReplacementConflict("sharpness",false,"normal"))
+        assertFalse(reservedReplacementConflict("smite",false,"normal"))
+    }
+    @Test fun `exact removal list and complete expected item remain defensive copies`() {
+        val first=org.mockito.Mockito.mock(org.bukkit.inventory.ItemStack::class.java)
+        val captured=org.mockito.Mockito.mock(org.bukkit.inventory.ItemStack::class.java)
+        val exported=org.mockito.Mockito.mock(org.bukkit.inventory.ItemStack::class.java)
+        org.mockito.Mockito.`when`(first.clone()).thenReturn(captured)
+        org.mockito.Mockito.`when`(captured.clone()).thenReturn(exported)
+        val removals=mutableListOf(EnchantUpgradeAPI.Removal("minecraft:sharpness",5,false))
+        val plan=EnchantUpgradeAPI.ReplacementPlan(java.util.UUID.randomUUID(),0,first,"minecraft:smite",0,5,EnchantUpgradeAPI.LevelPolicy.NATIVE_MAXIMUM,java.util.UUID.randomUUID(),removals)
+        removals.clear();assertEquals(listOf(EnchantUpgradeAPI.Removal("minecraft:sharpness",5,false)),plan.removals)
+        assertSame(exported,plan.getExpectedItem());assertNotSame(first,plan.getExpectedItem())
+        assertThrows(UnsupportedOperationException::class.java){(plan.removals as MutableList).clear()}
+        assertEquals(0,plan.currentLevel);assertEquals(5,plan.targetLevel)
+    }
 }
