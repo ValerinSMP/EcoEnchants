@@ -17,6 +17,7 @@ import java.util.UUID
 object EnchantUpgradeAPI {
     const val CONTRACT_VERSION = 1
     const val REPLACEMENT_CONTRACT_VERSION = 1
+    const val REMOVAL_CONTRACT_VERSION = 1
     enum class LevelPolicy { NATIVE_MAXIMUM, VANILLA_ONE_ABOVE }
     enum class Status { APPLIED, APPLIED_CALLBACK_REVIEW, UNKNOWN_APPLY_REVIEW, DENIED, ITEM_CHANGED, CANCELLED }
     data class Validation(val allowed: Boolean, val reason: String?, val currentLevel: Int, val targetLevel: Int)
@@ -171,6 +172,86 @@ object EnchantUpgradeAPI {
         return Result(outcome.first,outcome.second,plan.operationId)
     }
 
+    /** Session-bound, defensive before image. operationId correlates; it is not durable proof. */
+    class RemovalPlan internal constructor(
+        private val connection: Player, val slot: Int, expected: ItemStack,
+        val removal: Removal, val operationId: UUID
+    ) {
+        val playerId: UUID = connection.uniqueId
+        private val original = expected.clone()
+        fun getExpectedItem(): ItemStack = original.clone()
+        internal fun matchesSession(player: Player): Boolean =
+            player === connection && Bukkit.getPlayer(playerId) === connection
+    }
+    data class RemovalValidation(val allowed: Boolean, val reason: String?, val plan: RemovalPlan?)
+
+    /** No skill unlock/payment/XP check: only native removal restrictions and remaining prerequisites. */
+    @JvmStatic fun planRemoval(player: Player, slot: Int, expectedItem: ItemStack,
+        enchantment: Enchantment, expectedLevel: Int, operationId: UUID): RemovalValidation {
+        check(Bukkit.isPrimaryThread())
+        fun deny(reason: String) = RemovalValidation(false,reason,null)
+        if (!player.isOnline || player.isDead || Bukkit.getPlayer(player.uniqueId) !== player) return deny("player_session_unavailable")
+        if (slot !in 0 until player.inventory.storageContents.size) return deny("invalid_storage_slot")
+        if (expectedItem.type.isAir || expectedItem.amount != 1) return deny("single_item_unavailable")
+        if (player.inventory.getItem(slot) != expectedItem) return deny("original_item_changed")
+        val meta = expectedItem.itemMeta ?: return deny("metadata_absent")
+        val direct = meta.getEnchantLevel(enchantment)
+        val stored = (meta as? EnchantmentStorageMeta)?.getStoredEnchantLevel(enchantment) ?: 0
+        if (direct > 0 && stored > 0) return deny("ambiguous_enchantment_storage")
+        val current = if (stored > 0) stored else direct
+        if (expectedLevel <= 0 || current != expectedLevel) return deny("original_level_changed_or_absent")
+        if (Enchantment.getByKey(enchantment.key) == null) return deny("enchantment_unavailable")
+        val native = enchantment.wrap()
+        if (reservedReplacementConflict(enchantment.key.key,native is EcoEnchant,native.type.id)) return deny("reserved_removal:${enchantment.key}")
+        val candidate = removalCandidate(expectedItem,enchantment,stored > 0) ?: return deny("native_metadata_not_changed")
+        val remainingMeta = candidate.itemMeta ?: return deny("metadata_absent")
+        val remaining = (remainingMeta.enchants.keys +
+            if (remainingMeta is EnchantmentStorageMeta) remainingMeta.storedEnchants.keys else emptySet()).distinctBy { it.key }
+        for (existing in remaining) {
+            val remainingNative = existing.wrap()
+            if (remainingNative is EcoEnchant && !remainingNative.hasRequiredEnchantments(remaining))
+                return deny("remaining_prerequisite_missing:${existing.key}")
+        }
+        return RemovalValidation(true,null,RemovalPlan(player,slot,expectedItem,Removal(enchantment.key.toString(),current,stored > 0),operationId))
+    }
+
+    /** Revalidates after the cancellable removal event; never emits upgrade/purchase/XP callbacks. */
+    @JvmStatic fun applyRemoval(player: Player, plan: RemovalPlan): Result {
+        check(Bukkit.isPrimaryThread())
+        if (!plan.matchesSession(player)) return Result(Status.DENIED,"plan_session_changed",plan.operationId)
+        if (plan.slot !in 0 until player.inventory.storageContents.size) return Result(Status.DENIED,"invalid_storage_slot",plan.operationId)
+        val key = org.bukkit.NamespacedKey.fromString(plan.removal.enchantmentKey)
+        val enchantment = key?.let { Enchantment.getByKey(it) } ?: return Result(Status.DENIED,"enchantment_unavailable",plan.operationId)
+        val original = plan.getExpectedItem()
+        val removed = removalCandidate(original,enchantment,plan.removal.stored)
+            ?: return Result(Status.DENIED,"native_metadata_not_changed",plan.operationId)
+        val outcome = try {
+            executeUpgrade(
+                unchanged = { plan.matchesSession(player) && player.inventory.getItem(plan.slot) == original },
+                validate = {
+                    if (!plan.matchesSession(player)) "plan_session_changed" else {
+                        val fresh = planRemoval(player,plan.slot,original,enchantment,plan.removal.level,plan.operationId)
+                        if (!fresh.allowed) fresh.reason else if (fresh.plan?.removal != plan.removal) "removal_plan_changed" else null
+                    }
+                },
+                before = {
+                    val event = EnchantRemovalPrepareEvent(player,plan.operationId,plan.removal,original)
+                    Bukkit.getPluginManager().callEvent(event)
+                    !event.isCancelled
+                },
+                replace = { player.inventory.setItem(plan.slot,removed) },
+                after = {
+                    player.toDispatcher().refreshHolders()
+                    Bukkit.getPluginManager().callEvent(EnchantRemovalAppliedEvent(player,plan.operationId,plan.removal,original,removed))
+                    check(plan.matchesSession(player) && player.inventory.getItem(plan.slot) == removed) { "Removal delivery changed; review without reapplying" }
+                }
+            )
+        } catch (_: Exception) {
+            Status.UNKNOWN_APPLY_REVIEW to "removal_validation_or_prepare_uncertain_do_not_reapply"
+        }
+        return Result(outcome.first,outcome.second,plan.operationId)
+    }
+
     private fun cachedSkillRequirementsKnown(player: Player,enchant: EcoEnchant): Boolean {
         val skills = enchant.config.getSubsections("conditions").filter { it.getString("id") == "has_skill_level" }.map { it.getString("args.skill") }.toSet()
         if (skills.isEmpty()) return true
@@ -202,3 +283,11 @@ internal fun executeUpgrade(unchanged: () -> Boolean,validate: () -> String?,bef
 
 internal fun reservedReplacementConflict(id: String, custom: Boolean, type: String): Boolean =
     id in setOf("indestructible","soulbound","one_for_all","ultimate_wise","repairing","bastion","crimson_slayer") || custom && type != "normal"
+
+/** Clone the complete item; mutate exactly the selected native metadata entry. */
+internal fun removalCandidate(original: ItemStack,enchantment: Enchantment,stored: Boolean): ItemStack? {
+    val candidate = original.clone()
+    val meta = candidate.itemMeta ?: return null
+    val changed = if (stored) (meta as? EnchantmentStorageMeta)?.removeStoredEnchant(enchantment) == true else meta.removeEnchant(enchantment)
+    return if (changed && candidate.setItemMeta(meta)) candidate else null
+}
