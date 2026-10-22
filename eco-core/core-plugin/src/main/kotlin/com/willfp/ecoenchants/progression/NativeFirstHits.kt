@@ -15,8 +15,11 @@ import java.util.UUID
 internal object EffectFirstHitsMultiplier : Effect<NoCompileData>("first_hits_multiplier") {
  override val supportsDelay=false
  override val parameters=setOf(TriggerParameter.PLAYER,TriggerParameter.VICTIM,TriggerParameter.EVENT)
- override val arguments=arguments{require("multiplier","Specify the damage multiplier.",description="Additive native multiplier during the first three attempts.",type=ArgType.EXPRESSION)}
- override fun onTrigger(config:Config,data:TriggerData,compileData:NoCompileData):Boolean = NativeFirstHits.offer(data,config.getDoubleFromExpression("multiplier",data))
+ override val arguments=arguments{
+  require("multiplier","Specify the damage multiplier.",description="Additive native first-hit multiplier.",type=ArgType.EXPRESSION)
+  optional("hits",description="Approved budget: first_strike=1, triple_strike=3 (legacy default).",type=ArgType.INT)
+ }
+ override fun onTrigger(config:Config,data:TriggerData,compileData:NoCompileData):Boolean = NativeFirstHits.offer(data,config.getDoubleFromExpression("multiplier",data),config.getIntOrNull("hits")?:3)
 }
 internal object EffectThirdHitMultiplier : Effect<NoCompileData>("third_hit_multiplier") {
  override val supportsDelay=false
@@ -63,22 +66,26 @@ internal object NativeFirstHits {
   leases[attempt]=ThirdLease(player.uniqueId,victim.uniqueId,lease)
   return true
  }
- fun offer(data:TriggerData,multiplier:Double):Boolean {
+ fun offer(data:TriggerData,multiplier:Double):Boolean = offer(data,multiplier,3)
+ fun offer(data:TriggerData,multiplier:Double,hits:Int):Boolean {
   val player=data.player?:return false;val victim=data.victim?:return false
   val event=data.event as? EntityDamageByEntityEvent?:return false
   val level=data.holder.holder as? EcoEnchantLevel?:return false
-  if(level.enchant.id!="triple_strike"||level.enchant.type.id!="normal"||level.level !in 1..5||
+  if(!firstHitBudgetAllowed(level.enchant.id,hits)||level.enchant.type.id!="normal"||level.level !in 1..5||
    event.damager!==player||event.entity!==victim||victim !is LivingEntity||player===victim||
    event.cause!=EntityDamageEvent.DamageCause.ENTITY_ATTACK||event.isCancelled||!NativeCombatProgression.gameplay()||
-   DamageMultiplierBypass.current!=null||!multiplier.isFinite()||multiplier<1)return false
+   DamageMultiplierBypass.current!=null||!multiplier.isFinite()||multiplier<1||!OriginalRuntime.modeAllows(level.enchant.id,player,victim))return false
   val held=player.inventory.itemInMainHand
   if(held.getEnchantmentLevel(level.enchant.enchantment)!=level.level||!level.enchant.targets.any{it.matches(held)})return false
   val attempt=OriginalRuntime.track(event)?:return false
   val session=OriginalRuntime.session(player)?:return false
   val key=FirstHitsLedger.Key(player.uniqueId,session,player.world.uid,victim.uniqueId)
-  if(!ledger.reserve(attempt,key))return false
+  if(!ledger.reserve(attempt,key,hits))return false
   val accepted=AdditiveDamageGroups.offer("ecoenchants_normal",data,multiplier)
   if(!accepted)ledger.resolve(attempt,FirstHitResolution.REJECTED)
   return accepted
  }
 }
+
+internal fun firstHitBudgetAllowed(id:String,hits:Int):Boolean =
+ (id=="first_strike"&&hits==1)||(id=="triple_strike"&&hits==3)

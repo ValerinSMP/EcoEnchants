@@ -20,5 +20,8 @@ fun Enchantment.wrap(): EcoEnchantLike {
 }
 
 fun Enchantment.conflictsWithDeep(other: Enchantment): Boolean {
-    return this.conflictsWith(other) || other.conflictsWith(this)
+    return effectiveConflict(key.toString(), other.key.toString(),
+        { plugin.configYml.getBoolOrNull("compatibility.sharpness-smite") == true }) {
+        this.conflictsWith(other) || other.conflictsWith(this)
+    }
 }

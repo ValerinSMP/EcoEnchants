@@ -430,3 +430,7 @@ original-procs:
     sound: block.amethyst_block.chime
     volume: 0.25
     pitch: 1.2
+
+# Exact native exception; enabled only by an explicitly approved deployment.
+compatibility:
+  sharpness-smite: false

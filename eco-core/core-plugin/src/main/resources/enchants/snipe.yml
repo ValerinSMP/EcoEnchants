@@ -1,8 +1,8 @@
 display-name: "Snipe"
-description: "Arrows deal &a%damage%%&r more damage for each &a%blocks%&r blocks travelled"
+description: "Arrows deal &a%damage%%&r more damage for each &a%blocks%&r blocks from launch to impact"
 placeholders:
   damage: "1 * %level%"
-  blocks: "11 - ceil(%level% / 2)"
+  blocks: "10"
 type: normal
 
 targets:
@@ -17,10 +17,11 @@ discoverable: true
 enchantable: true
 
 effects:
-  - id: damage_multiplier
+  - id: native_reactive
     args:
-      multiplier: "1 + (%distance% / (11 - ceil(%level% / 2))) * 0.01 * %level%"
+      family: snipe
+      percent: "%level%"
     triggers:
-      - bow_attack
+      - native_reactive_action
 
 conditions: [ ]

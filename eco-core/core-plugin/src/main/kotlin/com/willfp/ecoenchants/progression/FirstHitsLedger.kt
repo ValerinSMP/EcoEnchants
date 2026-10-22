@@ -12,8 +12,10 @@ internal class FirstHitsLedger(private val maxPairs:Int=32768,private val maxPer
  private val attempts=mutableMapOf<UUID,Key>()
  private val actors=mutableMapOf<UUID,MutableSet<Key>>()
  private val targets=mutableMapOf<UUID,MutableSet<Key>>()
- fun reserve(attempt:UUID,key:Key):Boolean {
-  attempts[attempt]?.let{return it==key}
+ fun reserve(attempt:UUID,key:Key):Boolean = reserve(attempt,key,3)
+ fun reserve(attempt:UUID,key:Key,hits:Int):Boolean {
+  if(hits !in 1..3)return false
+  attempts[attempt]?.let{return it==key&&(hits==3||(position(attempt)?:Int.MAX_VALUE)<=hits)}
   if(attempts.size>=1024)return false
   var record=records[key]
   if(record==null){
@@ -22,7 +24,7 @@ internal class FirstHitsLedger(private val maxPairs:Int=32768,private val maxPer
    actors.getOrPut(key.actor){mutableSetOf()}.add(key);targets.getOrPut(key.target){mutableSetOf()}.add(key)
   }
   if(cyclic&&record.pending.isNotEmpty())return false
-  if(record.confirmed+record.uncertain+record.pending.size>=3)return false
+  if(record.confirmed+record.uncertain+record.pending.size>=hits)return false
   record.pending.add(attempt);attempts[attempt]=key;return true
  }
  fun position(attempt:UUID):Int? {

@@ -72,6 +72,18 @@ object EnchantUpgradeAPI {
         )
         return Result(outcome.first,outcome.second,operationId)
     }
+    /** MAIN-only item-in-custody inspection; empty conflicts do not authorize an upgrade. */
+    @JvmStatic fun getEffectiveConflicts(item: ItemStack, target: Enchantment): List<Removal> {
+        check(Bukkit.isPrimaryThread())
+        val meta = item.itemMeta ?: return emptyList()
+        val entries = meta.enchants.map { Triple(it.key, it.value, false) } +
+            if (meta is EnchantmentStorageMeta) meta.storedEnchants.map { Triple(it.key, it.value, true) } else emptyList()
+        val conflicts = entries.filter { it.first.key != target.key && it.first.conflictsWithDeep(target) }
+            .map { Removal(it.first.key.toString(), it.second, it.third) }
+            .sortedWith(compareBy({ it.enchantmentKey }, { it.stored }, { it.level }))
+        return java.util.Collections.unmodifiableList(ArrayList(conflicts))
+    }
+
     /** Exact removal list computed by EcoEnchants, never a caller bypass/ignore flag. */
     data class Removal(val enchantmentKey: String, val level: Int, val stored: Boolean)
     class ReplacementPlan internal constructor(
@@ -96,14 +108,14 @@ object EnchantUpgradeAPI {
         val meta = expectedItem.itemMeta ?: return deny("metadata_absent")
         val entries = meta.enchants.map { Triple(it.key,it.value,false) } +
             if(meta is EnchantmentStorageMeta) meta.storedEnchants.map { Triple(it.key,it.value,true) } else emptyList()
-        val conflicts = entries.filter { (existing, _, _) -> existing.key != enchantment.key && existing.conflictsWithDeep(enchantment) }
+        val removals = getEffectiveConflicts(expectedItem, enchantment)
+        val removedEntries = removals.toSet()
+        val conflicts = entries.filter { Removal(it.first.key.toString(), it.second, it.third) in removedEntries }
         for ((existing, _, _) in conflicts) {
             val wrapped = existing.wrap()
             if (reservedReplacementConflict(existing.key.key, wrapped is EcoEnchant, wrapped.type.id))
                 return deny("reserved_conflict:${existing.key}")
         }
-        val removals = conflicts.map { Removal(it.first.key.toString(),it.second,it.third) }
-            .sortedWith(compareBy({it.enchantmentKey},{it.stored},{it.level}))
         val candidate = expectedItem.clone()
         val clean = candidate.itemMeta ?: return deny("metadata_absent")
         for ((existing, _, stored) in conflicts) {

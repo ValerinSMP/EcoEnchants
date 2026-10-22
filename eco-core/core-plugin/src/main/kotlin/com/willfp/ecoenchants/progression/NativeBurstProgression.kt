@@ -60,14 +60,14 @@ internal object NativeBurstProgression : Listener {
  private val itemKey=NamespacedKey("ecoenchants","original_item_id")
  private val familiesByKind=mapOf(
   "melee" to setOf("brasa_errante","cicatriz_ignea","ruptura_sonica","tormenta_encadenada","legado_valerin","eclipse","thunderbolt","combo","lifesteal","drain","carve","cleave","bleed"),
-  "arrow" to setOf("rebote_prismatico","cometa","marca_celeste","aguja_aurora","wound"),
+  "arrow" to setOf("rebote_prismatico","cometa","marca_celeste","aguja_aurora","wound","snipe"),
   "trident" to setOf("pulso_abisal","constelacion"),
   "ranged_kill" to setOf("estela_cazador"),
   "protection" to setOf("ancla","guardia_cristal","velo_lunar","vigilia","paso_ceniza")
  )
  internal data class Context(val player:UUID,val token:UUID,val world:UUID,val item:ItemStack,val itemId:UUID,val tiers:Map<String,Int>,val kind:String,val charged:Boolean,val submerged:Boolean,val origin:Location)
  internal data class Capture(val sources:List<Context>,val projectile:UUID?)
- private data class Shot(val sources:List<Context>)
+ private data class Shot(val sources:List<Context>) { var origin:Location?=null }
  private val shots=ShotLedger<Shot>(4096,30_000){now()}
  private data class Proof(val capture:Capture,val source:Context,val event:EntityDamageEvent,val victim:LivingEntity,val damage:Double,val eventId:UUID)
  private var proof:Proof?=null
@@ -80,7 +80,7 @@ internal object NativeBurstProgression : Listener {
  private data class Recent(val token:UUID,val world:UUID,val expires:java.util.ArrayDeque<Long> = java.util.ArrayDeque())
  private val recent=mutableMapOf<UUID,Recent>()
  private val legacy=setOf("lifesteal","drain")
- private val expandedTiers=legacy+setOf("thunderbolt","combo","carve","cleave","bleed","wound")
+ private val expandedTiers=legacy+setOf("thunderbolt","combo","carve","cleave","bleed","wound","snipe")
  private fun now()=System.nanoTime()/1_000_000L
  private fun limit()=(owner.configYml.getIntOrNull("original-procs.max-active-effects")?:512).coerceIn(1,1024)
  private fun id(item:ItemStack)=item.itemMeta?.persistentDataContainer?.get(itemKey,PersistentDataType.STRING)?.let{runCatching{UUID.fromString(it)}.getOrNull()}
@@ -117,11 +117,22 @@ internal object NativeBurstProgression : Listener {
   val sources=mutableListOf<Context>()
   itemContext(player,live,"arrow",event.force>=.99f,event.hand)?.let{sources.add(it)}
   trailContext(player)?.let{sources.add(it)}
-  if(sources.isNotEmpty())shots.remember(event.projectile.uniqueId,player.uniqueId,Shot(sources))
+  if(sources.isNotEmpty()) {
+   val shot=Shot(sources);shot.origin=event.projectile.location.clone()
+   shots.remember(event.projectile.uniqueId,player.uniqueId,shot)
+  }
  }
  internal fun projectileSource(projectile:Projectile,player:Player,family:String):Context? {
   if(projectile.shooter!==player)return null
   return shots.source(projectile.uniqueId)?.sources?.firstOrNull{family in it.tiers&&it.player==player.uniqueId&&it.world==player.world.uid&&OriginalRuntime.sameSession(it.player,it.token)}
+ }
+ /** Authenticated launch-to-target-location displacement at this real damage attempt, not player distance/path length. */
+ internal fun projectileDistance(projectile:Projectile,player:Player,impact:Location):Double? {
+  val source=projectileSource(projectile,player,"snipe")?:return null
+  if(projectile.world.uid!=source.world)return null
+  val origin=shots.source(projectile.uniqueId)?.origin?:return null
+  if(origin.world?.uid!=source.world)return null
+  return launchDisplacement(origin,impact)
  }
  @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
  fun launch(event:ProjectileLaunchEvent){
@@ -284,4 +295,14 @@ internal object NativeBurstProgression : Listener {
 internal fun <T> freshDamageWindow(target:LivingEntity,body:()->T):T {
  val previous=target.noDamageTicks;target.noDamageTicks=0
  try{return body()}finally{target.noDamageTicks=maxOf(previous,target.noDamageTicks)}
+}
+
+/** Straight 3D displacement from the frozen projectile launch point to the victim location at impact. */
+internal fun launchDisplacement(origin:Location?,impact:Location):Double? {
+ val world=origin?.world?.uid?:return null
+ if(impact.world?.uid!=world)return null
+ val coordinates=listOf(origin.x,origin.y,origin.z,impact.x,impact.y,impact.z)
+ if(coordinates.any{!it.isFinite()})return null
+ return StrictMath.hypot(StrictMath.hypot(impact.x-origin.x,impact.y-origin.y),impact.z-origin.z)
+  .takeIf{it.isFinite()}
 }

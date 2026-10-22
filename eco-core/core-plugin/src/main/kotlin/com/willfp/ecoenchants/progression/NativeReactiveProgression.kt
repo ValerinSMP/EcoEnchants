@@ -26,7 +26,7 @@ import java.util.IdentityHashMap
 import java.util.UUID
 
 internal object NativeReactiveAction : Trigger("native_reactive_action") {
- override val parameters=setOf(TriggerParameter.PLAYER,TriggerParameter.VICTIM,TriggerParameter.ITEM,TriggerParameter.EVENT,TriggerParameter.VALUE,TriggerParameter.LOCATION)
+ override val parameters=setOf(TriggerParameter.PLAYER,TriggerParameter.VICTIM,TriggerParameter.ITEM,TriggerParameter.EVENT,TriggerParameter.VALUE,TriggerParameter.LOCATION,TriggerParameter.ALT_VALUE)
 }
 internal object EffectNativeReactive : Effect<NoCompileData>("native_reactive") {
  override val supportsDelay=false
@@ -55,7 +55,7 @@ internal object NativeReactiveProgression : Listener {
  private val impulses=mutableMapOf<UUID,Impulse>()
  private data class Move(val source:NativeBurstProgression.Context,val event:PlayerMoveEvent,var task:BukkitTask?=null)
  private val moves=mutableMapOf<UUID,Move>()
- private data class Proof(val source:NativeBurstProgression.Context,val family:String,val event:Event,val victim:LivingEntity,val phase:String,val damage:Double=0.0,val eventId:UUID?=null,var used:Boolean=false)
+ private data class Proof(val source:NativeBurstProgression.Context,val family:String,val event:Event,val victim:LivingEntity,val phase:String,val damage:Double=0.0,val eventId:UUID?=null,var used:Boolean=false) { var travelDistance:Double?=null }
  private var proof:Proof?=null
  private fun now()=System.nanoTime()/1_000_000L
  private fun cap()=(owner.configYml.getIntOrNull("original-procs.max-active-effects")?:512).coerceIn(1,1024)
@@ -122,10 +122,10 @@ internal object NativeReactiveProgression : Listener {
   if(current(state.value.source)==null){removeArm(key);return null}
   return state
  }
- private fun force(source:NativeBurstProgression.Context,family:String,event:Event,victim:LivingEntity,phase:String,damage:Double=0.0,eventId:UUID?=null):Boolean {
+ private fun force(source:NativeBurstProgression.Context,family:String,event:Event,victim:LivingEntity,phase:String,damage:Double=0.0,eventId:UUID?=null,travelDistance:Double?=null):Boolean {
   val player=current(source)?:return false;val tier=source.tiers[family]?:return false;val enchant=EcoEnchants.getByID(family)?:return false
-  val invocation=Proof(source,family,event,victim,phase,damage,eventId);val before=proof;proof=invocation
-  try{NativeReactiveAction.dispatch(player.toDispatcher(),TriggerData(player=player,victim=victim,item=source.item.clone(),event=event,location=victim.location,value=damage),listOf(ItemProvidedHolder(enchant.getLevel(tier),source.item.clone())))}finally{proof=before}
+  val invocation=Proof(source,family,event,victim,phase,damage,eventId);invocation.travelDistance=travelDistance;val before=proof;proof=invocation
+  try{NativeReactiveAction.dispatch(player.toDispatcher(),TriggerData(player=player,victim=victim,item=source.item.clone(),event=event,location=victim.location,value=damage,altValue=travelDistance?:1.0),listOf(ItemProvidedHolder(enchant.getLevel(tier),source.item.clone())))}finally{proof=before}
   return invocation.used
  }
  @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
@@ -140,6 +140,11 @@ internal object NativeReactiveProgression : Listener {
      for(state in eligibleArms)if(OriginalRuntime.eligibleFor(state.value.family,player,target))force(state.value.source,state.value.family,event,target,"bonus")
     }else if(event.cause==EntityDamageEvent.DamageCause.PROJECTILE){
      val projectile=event.damager as? Projectile
+     if(projectile!=null)NativeBurstProgression.projectileSource(projectile,player,"snipe")?.let{source->
+      val distance=NativeBurstProgression.projectileDistance(projectile,player,target.location)
+      if(distance!=null&&(source.tiers["snipe"]?:0) in 1..4&&OriginalRuntime.modeAllows("snipe",player,target))
+       force(source,"snipe",event,target,"bonus",damage=event.finalDamage,travelDistance=distance)
+     }
      if(projectile!=null)NativeBurstProgression.projectileSource(projectile,player,"aguja_aurora")?.let{source->
       if(source.item.type==Material.CROSSBOW&&source.charged&&source.origin.world==target.world&&source.origin.distanceSquared(target.location)>225&&OriginalRuntime.eligibleFor("aguja_aurora",player,target))force(source,"aguja_aurora",event,target,"bonus")
      }
@@ -206,6 +211,12 @@ internal object NativeReactiveProgression : Listener {
  fun execute(family:String,percent:Double,data:TriggerData):Boolean {
   val p=proof?:return false;val player=current(p.source)?:return false;val level=data.holder.holder as? EcoEnchantLevel?:return false
   if(p.used||p.family!=family||level.enchant.id!=family||level.level!=p.source.tiers[family]||data.event!==p.event||data.victim!==p.victim||data.player!==player||id(data.item)!=p.source.itemId||!percent.isFinite()||percent<=0)return false
+  if(family=="snipe") {
+   if(p.phase!="bonus"||level.level !in 1..4||!OriginalRuntime.modeAllows("snipe",player,p.victim))return false
+   val multiplier=snipeMultiplier(percent,p.travelDistance?:return false)?:return false
+   p.used=AdditiveDamageGroups.offer("ecoenchants_normal",data,multiplier)
+   return p.used
+  }
   val descriptor=try{OriginalProcEngine.Family.valueOf(family.uppercase())}catch(ignored:IllegalArgumentException){return false}
   if(!ProcGuards.arrivalReady(descriptor,OriginalRuntime.age(player)))return false
   if(p.phase=="confirmed"&&family=="guardia_cristal"){
@@ -272,3 +283,9 @@ internal object NativeReactiveProgression : Listener {
 /** Invalid/nonfinite outcome is uncertain, never permission to repeat a pre-applied bonus. */
 internal fun explicitlyRejectedDamage(event:EntityDamageEvent)=event.isCancelled||(event.finalDamage.isFinite()&&event.finalDamage<=0)
 internal fun finiteNativeImpulse(vector:org.bukkit.util.Vector)=vector.x.isFinite()&&vector.y.isFinite()&&vector.z.isFinite()&&vector.lengthSquared().isFinite()&&vector.lengthSquared()>0
+
+/** Continuous +percent% per ten blocks; no rounding into bands and no shared %distance% mutation. */
+internal fun snipeMultiplier(percent:Double,distance:Double):Double? {
+ if(!percent.isFinite()||percent<=0||!distance.isFinite()||distance<0)return null
+ return (1.0+(percent/100.0)*(distance/10.0)).takeIf{it.isFinite()&&it>=1.0}
+}
